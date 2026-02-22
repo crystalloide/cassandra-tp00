@@ -430,43 +430,43 @@ DESCRIBE TABLE formation.imdb;
 ```sql
 -- Film 1
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (1, 'The Shawshank Redemption', 1994, 'Drama', 'Frank Darabont', 9.3, 2500000, 25000000, 142);
+VALUES (1, 'The Shawshank Redemption', 1994, 'Drama', 'Frank Darabont', 9.3, 2500000, '25000000', 142);
 
 -- Film 2
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (2, 'The Godfather', 1972, 'Crime', 'Francis Ford Coppola', 9.2, 1800000, 6000000, 175);
+VALUES (2, 'The Godfather', 1972, 'Crime', 'Francis Ford Coppola', 9.2, 1800000, '6000000', 175);
 
 -- Film 3
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (3, 'The Dark Knight', 2008, 'Action', 'Christopher Nolan', 9.0, 2600000, 185000000, 152);
+VALUES (3, 'The Dark Knight', 2008, 'Action', 'Christopher Nolan', 9.0, 2600000, '185000000', 152);
 
 -- Film 4
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (4, 'Pulp Fiction', 1994, 'Crime', 'Quentin Tarantino', 8.9, 2000000, 8000000, 154);
+VALUES (4, 'Pulp Fiction', 1994, 'Crime', 'Quentin Tarantino', 8.9, 2000000, '8000000', 154);
 
 -- Film 5
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (5, 'Forrest Gump', 1994, 'Drama', 'Robert Zemeckis', 8.8, 2100000, 55000000, 142);
+VALUES (5, 'Forrest Gump', 1994, 'Drama', 'Robert Zemeckis', 8.8, 2100000, '55000000', 142);
 
 -- Film 6
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (6, 'Inception', 2010, 'Sci-Fi', 'Christopher Nolan', 8.8, 2300000, 160000000, 148);
+VALUES (6, 'Inception', 2010, 'Sci-Fi', 'Christopher Nolan', 8.8, 2300000, '160000000', 148);
 
 -- Film 7
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (7, 'The Matrix', 1999, 'Sci-Fi', 'Wachowski Brothers', 8.7, 1900000, 63000000, 136);
+VALUES (7, 'The Matrix', 1999, 'Sci-Fi', 'Wachowski Brothers', 8.7, 1900000, '63000000', 136);
 
 -- Film 8
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (8, 'Goodfellas', 1990, 'Crime', 'Martin Scorsese', 8.7, 1200000, 25000000, 146);
+VALUES (8, 'Goodfellas', 1990, 'Crime', 'Martin Scorsese', 8.7, 1200000, '25000000', 146);
 
 -- Film 9
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (9, 'Fight Club', 1999, 'Drama', 'David Fincher', 8.8, 2100000, 63000000, 139);
+VALUES (9, 'Fight Club', 1999, 'Drama', 'David Fincher', 8.8, 2100000, '63000000', 139);
 
 -- Film 10
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (10, 'Interstellar', 2014, 'Sci-Fi', 'Christopher Nolan', 8.6, 1800000, 165000000, 169);
+VALUES (10, 'Interstellar', 2014, 'Sci-Fi', 'Christopher Nolan', 8.6, 1800000, '165000000', 169);
 ```
 
 
