@@ -6,14 +6,17 @@
 
 #### Installation en 3 étapes
 
+```bash
 cd  ~/cassandra-tp00
 
 sudo rm -Rf veterinary-app*
-
+```
 #### On récupère l'application : veterinary-app.tar
+```bash
 gdown 1nVQRPSP-jRu_5M-Lsr-4dvxZFt2aXejm
 ls 
 tar -xvf veterinary-app.tar
+```
 #### Affichage en retour : 
 	veterinary-app/
 	veterinary-app/QUICKSTART.md
@@ -30,12 +33,13 @@ tar -xvf veterinary-app.tar
 
 
 #### Regardons le modèle de donnée proposé : 
+```bash
 cat ~/cassandra-tp00/veterinary-app/schema.cql
-
+```
 #### Affichage en retour : 
 -- Schéma Cassandra pour l'application de gestion vétérinaire
 -- À exécuter sur le cluster Cassandra
-
+```SQL
 DROP KEYSPACE IF EXISTS veterinary;
 
 -- Créer le keyspace avec réplication sur les 4 nœuds
@@ -116,7 +120,8 @@ VALUES (uuid(), 'Lapin', 'Lagomorphe');
 INSERT INTO especes (id, nom, description)
 VALUES (uuid(), 'Oiseau', 'Volatiles divers');
 
-
+EXIT;
+```
 
 
 #### 1️⃣ Initialiser Cassandra
