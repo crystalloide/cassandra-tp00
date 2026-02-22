@@ -1,8 +1,12 @@
-# TP00 - Cassandra 5.0 avec Docker Compose (Cluster 4 nœuds)
+## TP00 - Cassandra 5.0 avec Docker Compose (Cluster 4 nœuds)
 
-TP00 pour utiliser un cluster Cassandra déployé via Docker Compose avec 4 nœuds sur 4 racks différents dans un seul datacenter DC1.
+Cassandra 5.0 avec Docker Compose (Cluster 4 nœuds)
 
-## Vue d'ensemble du cluster
+https://github.com/crystalloide/cassandra-tp00
+
+Cluster Cassandra déployé via Docker Compose avec 4 nœuds sur 4 racks différents dans un seul datacenter DC1.
+
+#### Vue d'ensemble du cluster
 
 Le fichier `Cluster_4_noeuds_4_racks_1_DC.yml` déploie :
 
@@ -13,31 +17,31 @@ Le fichier `Cluster_4_noeuds_4_racks_1_DC.yml` déploie :
 - **Réseau** : 192.168.100.0/24
 
 
-## Prérequis
+#### Prérequis
 
 - Docker et Docker Compose installés
 - Au minimum 4 GB RAM disponible (1 GB par nœud)
 - 2 CPU cores disponibles
 
 
-## Démarrage du cluster
+#### Démarrage du cluster
 
-### Étape 1 : Préparation de l'environnement
+#### Étape 1 : Préparation de l'environnement
 
 ```bash
 cd ~
-# Créer le répertoire de travail
-mkdir -p ~/cassandra-tp00
+sudo rm -Rf ~/cassandra-tp00
+
+#### Ici, on va simpleemnt cloner le projet :
+git clone https://github.com/crystalloide/cassandra-tp00
+
 cd ~/cassandra-tp00
 
-# On nettoie s'il y a eu des essais passés :
-sudo rm -Rf docker/*
+# Vérifier le contenu ou créer le fichier docker compose de notre cluster 4 noeuds cassandra :
 
-# Créer ou récupérer le fichier docker compose de notre cluster 4 noeuds cassandra :
+cat Cluster_4_noeuds_4_racks_1_DC.yml
 
-gedit Cluster_4_noeuds_4_racks_1_DC.yml
-
-# Copier le contenu suivant et sortir en sauvegardant : 
+# Le fichier doit avoir le contenu suivant : 
 
 networks:
   cassandra_network:
@@ -210,10 +214,9 @@ services:
 sudo rm docker-compose.yml
 cp Cluster_4_noeuds_4_racks_1_DC.yml docker-compose.yml
 
-# Créer les répertoires de volumes (optionnel si vous voulez nettoyer)
+# Créer les répertoires de volumes (optionnel)
 sudo rm -Rf docker/cassanda*
 mkdir -p docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra04
-
 
 # On affiche les répertoires créés : 
 ls ~/cassandra-tp00/docker
@@ -222,17 +225,19 @@ ls ~/cassandra-tp00/docker
 ```
 
 
-### Étape 2 : Démarrage du cluster avec Docker Compose
+#### Étape 2 : Démarrage du cluster avec Docker Compose
 
 ```bash
 # Démarrer le cluster en arrière-plan
 docker compose -f docker-compose.yml up  -d
 
-# Suivre les logs pour vérifier le démarrage (dans un autre terminal si besoin)
+#### Suivre les logs pour vérifier le démarrage (dans un autre terminal si besoin)
+cd ~/cassandra-tp00
 docker compose logs -f
+# Faire <CTRL>+>C> pour sortir
 
 
-# Dans un autre terminal, pour suivre  :
+#### Dans un autre terminal, pour suivre  :
 bash
 cd ~
 docker ps -a 
@@ -254,14 +259,17 @@ docker ps -a
 4. cassandra04 (attend cassandra03 healthy)
 
 
-# Pour visualiser les logs de cassandra01 : 
+#### Pour visualiser les logs de cassandra01 : 
 docker logs cassandra01
 
 
 
-### Étape 3 : Vérification du cluster (après 5-10 minutes)
+#### Étape 3 : Vérification du cluster (après 5-10 minutes)
 
 ```bash
+# Regarder les ports à l'écoute :
+netstat -anl | grep 0:
+
 # Vérifier que les 4 conteneurs sont UP sinon attendre (non listé ou encore en train de joindre : 'UJ') 
 cd /home/user/cassandra-tp00
 docker compose ps 
@@ -287,20 +295,23 @@ UN  192.168.100.153  80.03 KiB   16      50.7%             21b3ae41-1e2a-4c7d-97
 ```
 
 
-## Accès à cqlsh
+#### Accès à cqlsh
 
-### Option 1 : Via Docker exec (recommandé)
+#### Option 1 : Via Docker exec (recommandé)
 
 ```bash
 # Se connecter à cqlsh sur cassandra01 :
 docker exec -it cassandra01 cqlsh
+
+# Pour sortir du shell : 
+exit 
 
 # Ou spécifier l'adresse IP :
 docker exec -it cassandra01 cqlsh 192.168.100.151 9042
 ```
 
 
-### Option 2 : Depuis l'hôte (via ports exposés)
+#### Option 2 : Depuis l'hôte (via ports exposés)
 
 Les ports CQL sont exposés sur l'hôte :
 
@@ -314,55 +325,63 @@ Les ports CQL sont exposés sur l'hôte :
 cqlsh localhost 9142
 ```
 
-## Si on veut absolument accéder via CQLSH à partir de la machine hôte sans passer par docker :
-# Installer pyenv si ce n'est pas déjà fait
+#### Si on veut absolument accéder via CQLSH à partir de la machine hôte sans passer par docker :
+#### Installer pyenv si ce n'est pas déjà fait
+```bash
 curl https://pyenv.run | bash
 
-# Ajouter pyenv au PATH (ajouter à ~/.bashrc)
+#### Ajouter pyenv au PATH (ajouter à ~/.bashrc)
 gedit ~/.bashrc
-## Ajouter tout à la fin : 
+#### Ajouter tout à la fin : 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# Sauvegarder et quitter
+#### Sauvegarder et quitter
 
-# Recharger le shell
+#### Recharger le shell
 source ~/.bashrc
 
-# Installer Python 3.11
+#### Installer Python 3.11
 pyenv install 3.11.7
 
-# Vérification 
+#### Vérification 
 python --version
-## Affichge en retour :  
+#### Affichge en retour :  
 Python 3.11.7
 
-# Créer un environnement virtuel pour cqlsh
+#### Créer un environnement virtuel pour cqlsh
 pyenv virtualenv 3.11.7 cqlsh-env
 pyenv activate cqlsh-env
 
-# Installer cqlsh dans cet environnement
-pip install cqlsh
-
-# Maintenant lancer cqlsh
-cqlsh localhost 9142
-
+#### Actualisation versions
 python -m pip install --upgrade pip
 
-# Et pour les prochaines fois, il n'y aura besoin que de faire  : 
-# Activer l'environnement
-pyenv activate cqlsh-env
+#### Installer cqlsh dans cet environnement
+pip install cqlsh
 
-# Lancer cqlsh
+#### Maintenant lancer cqlsh
 cqlsh localhost 9142
 
+```
 
-## Exercices CQL avec données IMDB
+#### Et pour les prochaines fois, il n'y aura besoin que de faire  : 
+#### Activer l'environnement
+```bash
+pyenv activate cqlsh-env
 
-### 1. Création du keyspace formation
+#### Lancer cqlsh
+cqlsh localhost 9142
+
+```
+
+#### Exercices CQL avec données IMDB
+
+#### 1. Création du keyspace formation
 
 ```sql
+DROP KEYSPACE IF EXISTS formation;
+
 CREATE KEYSPACE formation 
 WITH replication = {
   'class': 'NetworkTopologyStrategy', 
@@ -370,13 +389,19 @@ WITH replication = {
 };
 
 USE formation;
+
+DESCRIBE formation;
+
 ```
+
+#### la commande DESCRIBE devrait afficher :  
+CREATE KEYSPACE formation WITH replication = {'class': 'NetworkTopologyStrategy', 'dc1': '3'}  AND durable_writes = true;
 
 **Note** : 
 Nous utilisons `NetworkTopologyStrategy`, avec un facteur de réplication de 3 pour le datacenter "dc1", 
 `NetworkTopologyStrategy` est conseillé en production (cluster multi-rack et multi-datacenter)
 
-### 2. Création de la TABLE formation.imdb
+#### 2. Création de la TABLE formation.imdb
 
 ```sql
 DROP TABLE IF EXISTS formation.imdb;
@@ -399,50 +424,53 @@ DESCRIBE TABLE formation.imdb;
 
 
 
-### 3. Chargement de films
+#### 3. Chargement de films
 
 #### Insertion manuelle de quelques films
 
 ```sql
 -- Film 1
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (1, 'The Shawshank Redemption', 1994, 'Drama', 'Frank Darabont', 9.3, 2500000, 25000000, 142);
+VALUES ('1', 'The Shawshank Redemption', 1994, 'Drama', 'Frank Darabont', 9.3, 2500000, '25000000', 142);
 
 -- Film 2
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (2, 'The Godfather', 1972, 'Crime', 'Francis Ford Coppola', 9.2, 1800000, 6000000, 175);
+VALUES ('2', 'The Godfather', 1972, 'Crime', 'Francis Ford Coppola', 9.2, 1800000, '6000000', 175);
 
 -- Film 3
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (3, 'The Dark Knight', 2008, 'Action', 'Christopher Nolan', 9.0, 2600000, 185000000, 152);
+VALUES ('3', 'The Dark Knight', 2008, 'Action', 'Christopher Nolan', 9.0, 2600000, '185000000', 152);
 
 -- Film 4
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (4, 'Pulp Fiction', 1994, 'Crime', 'Quentin Tarantino', 8.9, 2000000, 8000000, 154);
+VALUES ('4', 'Pulp Fiction', 1994, 'Crime', 'Quentin Tarantino', 8.9, 2000000, '8000000', 154);
 
 -- Film 5
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (5, 'Forrest Gump', 1994, 'Drama', 'Robert Zemeckis', 8.8, 2100000, 55000000, 142);
+VALUES ('5', 'Forrest Gump', 1994, 'Drama', 'Robert Zemeckis', 8.8, 2100000, '55000000', 142);
 
 -- Film 6
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (6, 'Inception', 2010, 'Sci-Fi', 'Christopher Nolan', 8.8, 2300000, 160000000, 148);
+VALUES ('6', 'Inception', 2010, 'Sci-Fi', 'Christopher Nolan', 8.8, 2300000, '160000000', 148);
 
 -- Film 7
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (7, 'The Matrix', 1999, 'Sci-Fi', 'Wachowski Brothers', 8.7, 1900000, 63000000, 136);
+VALUES ('7', 'The Matrix', 1999, 'Sci-Fi', 'Wachowski Brothers', 8.7, 1900000, '63000000', 136);
 
 -- Film 8
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (8, 'Goodfellas', 1990, 'Crime', 'Martin Scorsese', 8.7, 1200000, 25000000, 146);
+VALUES ('8', 'Goodfellas', 1990, 'Crime', 'Martin Scorsese', 8.7, 1200000, '25000000', 146);
 
 -- Film 9
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (9, 'Fight Club', 1999, 'Drama', 'David Fincher', 8.8, 2100000, 63000000, 139);
+VALUES ('9', 'Fight Club', 1999, 'Drama', 'David Fincher', 8.8, 2100000, '63000000', 139);
 
 -- Film 10
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
-VALUES (10, 'Interstellar', 2014, 'Sci-Fi', 'Christopher Nolan', 8.6, 1800000, 165000000, 169);
+VALUES ('10', 'Interstellar', 2014, 'Sci-Fi', 'Christopher Nolan', 8.6, 1800000, '165000000', 169);
+
+-- On sort de CQLSH pour le moment : 
+EXIT;
 ```
 
 
@@ -452,29 +480,33 @@ Pour charger des films, récupérer les fichiers CSV sur votre machine hôte :
 
 **Fichier : imdb_movies.csv**   https://www.kaggle.com/datasets/hoomch/imdb-full-dataset
 
-## Conseil : on utilise gdown : 
+#### Conseil : on utilise gdown : 
+```bash
 pip install gdown
+```
+#### Les fichiers sont disponibles aussi dans Google Drive : 
 
-## Les fichiers sont disponibles dans mon Google Drive : 
-
-## imdb_movies_extrait.csv (14,3 Ko)
+#### imdb_movies_extrait.csv (14,3 Ko)
+```bash
 gdown 1KZdUmJkw-dlihqlrQWrR56qVcqzmUrmI
-
-## IMDB_movies.zip (197 Mo)
+```
+#### IMDB_movies.zip (197 Mo)
+```bash
 gdown 1q6v-PEHu8UYfDONajVujqoTTGhRUAPHl
-
-## imdb_movies.csv (362 Mo)
+```
+#### imdb_movies.csv (362 Mo)
+```bash
 gdown 16uJWq5N465U9rYvTCR1lKIBPHeNfd-oK
-
-## Extrait de imdb_movies.csv :
+```
+#### Extrait de imdb_movies.csv :
 ```csv
 movie_id,title,year,genre,director,rating,votes,budget,length
-11,"The Lord of the Rings",2001,"Fantasy","Peter Jackson",8.8,1800000,93000000,178
-12,"Star Wars",1977,"Sci-Fi","George Lucas",8.6,1400000,11000000,121
+"11","The Lord of the Rings",2001,"Fantasy","Peter Jackson",8.8,1800000,"93000000",178
+"12","Star Wars",1977,"Sci-Fi","George Lucas",8.6,1400000,"11000000",121
 ...
 ```
 
-Nous allons charger des fichiers de données en .csv dans un des 4 conteneurs et ensuite charger ces données dans le cluster cassandra :
+#### Nous allons charger des fichiers de données en .csv dans un des 4 conteneurs et ensuite charger ces données dans le cluster cassandra :
 
 ```bash
 
@@ -523,7 +555,7 @@ FROM '/tmp/imdb_movies_extrait.csv'
 WITH HEADER = TRUE AND DELIMITER = ',';
 ```
 
-### 4. Lecture de films
+#### 4. Lecture de films
 
 ```sql
 -- Compter le nombre total de films
@@ -533,8 +565,8 @@ SELECT COUNT(*) FROM formation.imdb;
 SELECT * FROM formation.imdb LIMIT 100;
 
 -- Requêter un film avec un id précis  :
-SELECT * FROM formation.imdb WHERE movie_id = 1;
-SELECT * FROM formation.imdb WHERE movie_id = 200;
+SELECT * FROM formation.imdb WHERE movie_id = '1';
+SELECT * FROM formation.imdb WHERE movie_id = '200';
 
 -- Afficher seulement certaines colonnes
 SELECT title, year, rating, director FROM formation.imdb LIMIT 10;
@@ -579,55 +611,55 @@ ALLOW FILTERING;
 ```
 
 
-### 5. Modification de films
+#### 5. Modification de films
 
 ```sql
 -- Mise à jour du rating d'un film
-UPDATE formation.imdb SET rating = 9.4 WHERE movie_id = 1;
+UPDATE formation.imdb SET rating = 9.4 WHERE movie_id = '1';
 
 -- Vérification de la modification
-SELECT title, rating FROM formation.imdb WHERE movie_id = 1;
+SELECT title, rating FROM formation.imdb WHERE movie_id = '1';
 
 -- Mise à jour de plusieurs colonnes
 UPDATE formation.imdb 
 SET rating = 9.1, votes = 2700000 
-WHERE movie_id = 3;
+WHERE movie_id = '3';
 
 -- Ajout d'une nouvelle colonne à la table
 ALTER TABLE formation.imdb ADD country TEXT;
 
 -- Mise à jour avec la nouvelle colonne
-UPDATE formation.imdb SET country = 'USA' WHERE movie_id = 1;
-UPDATE formation.imdb SET country = 'USA' WHERE movie_id = 2;
-UPDATE formation.imdb SET country = 'UK' WHERE movie_id = 3;
+UPDATE formation.imdb SET country = 'USA' WHERE movie_id = '1';
+UPDATE formation.imdb SET country = 'USA' WHERE movie_id = '2';
+UPDATE formation.imdb SET country = 'UK' WHERE movie_id = '3';
 
 -- Vérification
-SELECT title, country FROM formation.imdb WHERE movie_id IN (1,2,3) ALLOW FILTERING;
+SELECT title, country FROM formation.imdb WHERE movie_id IN ('1','2','3') ALLOW FILTERING;
 ```
 
 
-### 6. Suppression de films
+#### 6. Suppression de films
 
 ```sql
 -- Suppression d'un film spécifique
-DELETE FROM formation.imdb WHERE movie_id = 4;
+DELETE FROM formation.imdb WHERE movie_id = '4';
 
 -- Vérification de la suppression
-SELECT * FROM formation.imdb WHERE movie_id = 4;
+SELECT * FROM formation.imdb WHERE movie_id = '4';
 
 -- Suppression de plusieurs films (une par une en Cassandra)
-DELETE FROM formation.imdb WHERE movie_id = 6;
-DELETE FROM formation.imdb WHERE movie_id = 7;
+DELETE FROM formation.imdb WHERE movie_id = '6';
+DELETE FROM formation.imdb WHERE movie_id = '7';
 
 -- Suppression d'une colonne spécifique (mise à NULL)
-UPDATE formation.imdb SET budget = NULL WHERE movie_id = 1;
+UPDATE formation.imdb SET budget = NULL WHERE movie_id = '1';
 
 -- Vérification
-SELECT title, budget FROM formation.imdb WHERE movie_id = 1;
+SELECT title, budget FROM formation.imdb WHERE movie_id = '1';
 ```
 
 
-### 7. Requêtes avancées et statistiques
+#### 7. Requêtes avancées et statistiques
 
 ```sql
 -- Comptage total de films
@@ -656,7 +688,7 @@ ALLOW FILTERING;
 ```
 
 
-### 8. Commandes de maintenance et diagnostic
+#### 8. Commandes de maintenance et diagnostic
 
 ```sql
 -- Afficher la structure de la table
@@ -681,7 +713,7 @@ CONSISTENCY ALL;
 
 -- Active le tracing sur le noeud où est connecté le client CQLSH pour voir le détail des étapes d'exécution des requêtes
 TRACING ON;
-SELECT * FROM formation.imdb WHERE movie_id = 1;
+SELECT * FROM formation.imdb WHERE movie_id = '1';
 TRACING OFF;
 
 -- Afficher les informations de pagination
@@ -690,7 +722,7 @@ SELECT * FROM formation.imdb;
 ```
 
 
-### 9. Exercices supplémentaires avec le cluster
+#### 9. Exercices supplémentaires avec le cluster
 
 #### Tester la réplication et la tolérance aux pannes
 ```bash
@@ -699,28 +731,28 @@ docker stop cassandra02
 ```
 
 
-# Retourner dans cqlsh 
+#### Retourner dans cqlsh 
 ```bash
 docker exec -it cassandra01 cqlsh
 
 ```
 
-# et vérifier que les requêtes fonctionnent toujours
-# (avec CONSISTENCY QUORUM ou ONE)
+#### et vérifier que les requêtes fonctionnent toujours
+#### (avec CONSISTENCY QUORUM ou ONE)
 
 
 ```sql
 CONSISTENCY QUORUM;
-SELECT * FROM formation.imdb WHERE movie_id = 1;
+SELECT * FROM formation.imdb WHERE movie_id = '1';
 
 CONSISTENCY ALL;
-SELECT * FROM formation.imdb WHERE movie_id = 1;
+SELECT * FROM formation.imdb WHERE movie_id = '1';
 
 CONSISTENCY QUORUM;
 
 ```
 
-## Vérifier le statut du cluster
+#### Vérifier le statut du cluster
 
 ```bash
 docker exec -it cassandra01 nodetool status
@@ -751,11 +783,12 @@ docker exec -it cassandra01 nodetool tablestats formation.imdb
 ```
 
 
-## Commandes Docker Compose utiles ( à ne pas faire ici, juste pour montrer)
+#### Commandes Docker Compose utiles ( à ne pas faire ici, juste pour montrer)
 
 ```bash
 # Afficher les logs d'un nœud spécifique
 docker compose logs -f cassandra01
+# Faire <CTRL>+>C> pour sortir
 
 # Arrêter le cluster
 docker compose down
@@ -775,9 +808,9 @@ docker exec -it cassandra01 /bin/bash
 
 
 
-## Exercice avancé : on travaille désormais avec le fichier le plus complet : imdb_movies.csv
+#### Exercice avancé : on travaille désormais avec le fichier le plus complet : imdb_movies.csv
 
-## 1. Identifier les colonnes du fichier CSV
+#### 1. Identifier les colonnes du fichier CSV
 ```bash
 # Afficher la première ligne du fichier imdb_movies.csv
 docker exec -it cassandra01 head -1 /tmp/imdb_movies.csv
@@ -930,7 +963,7 @@ nodetool settimeout range
 ```
 
 
-# Poursuivons :  
+#### Poursuivons :  
 
 ```bash
 docker exec -it cassandra01 cat /etc/cassandra/cassandra.yaml | grep 'read_request_timeout'
@@ -942,7 +975,7 @@ read_request_timeout: 5000ms
 docker exec -it cassandra01 cqlsh
 
 ```
-# Nouvelles requêtes :  
+#### Nouvelles requêtes :  
 
 ```sql
 
@@ -950,14 +983,10 @@ docker exec -it cassandra01 cqlsh
 SELECT COUNT(*) FROM formation.imdb ALLOW FILTERING;
 
 
-docker exec -it cassandra01 cat /etc/cassandra/cassandra.yaml | grep 'read_request_timeout'
-read_request_timeout: 5000ms
-
-
 SELECT movie_id, title, rating FROM formation.imdb LIMIT 5;
 
 
--- Films avec les meilleures notes (> 9.8
+-- Films avec les meilleures notes (> 9.8)
 SELECT title, rating, year, genre 
 FROM formation.imdb 
 WHERE rating > 9.8
@@ -983,7 +1012,7 @@ ALLOW FILTERING;
 
 
 
-# Nettoyage de l'environnement
+#### Nettoyage de l'environnement
 
 ```bash
 # Arrêter et supprimer tous les conteneurs et volumes
@@ -994,7 +1023,7 @@ rm -rf docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra
 ```
 
 
-## Exercices pratiques recommandés
+#### Exercices pratiques recommandés
 
 1. **Test de cohérence** : Insérer des données avec différents niveaux de cohérence (ONE, QUORUM, ALL) et observer les différences
 2. **Tolérance aux pannes** : Arrêter progressivement 1, 2, puis 3 nœuds et observer le comportement
@@ -1002,7 +1031,7 @@ rm -rf docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra
 4. **Index secondaires** : Créer différents index et comparer les performances de requêtes
 5. **Modélisation de données** : Créer une table supplémentaire pour les acteurs avec une clé composite
 
-## Ressources additionnelles
+#### Ressources additionnelles
 
 - Documentation officielle Cassandra : https://cassandra.apache.org/doc/latest/
 - Guide CQL : https://cassandra.apache.org/doc/latest/cassandra/cql/
@@ -1020,6 +1049,4 @@ rm -rf docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra
 
 Bon travail avec Cassandra ! 🚀
 
-<div align="center">⁂</div>
-
-
+<div align="center">:-)</div>
