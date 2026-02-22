@@ -139,7 +139,7 @@ cqlsh localhost 9142
 # En copiant le fichier dans le conteneur ou sur un répertoire partagé , on pourrait exécuter le fichier schema.cql dans le shell CQL :
 SOURCE '~/cassandra-tp00/veterinary-app/schema.cql';
 
-# MAis ici on sva faire plus simple : directement depuis l'extérieur (en terminal de commande linux) : 
+# Mais ici on va faire plus simple : directement depuis l'extérieur (en terminal de commande linux) : 
 docker exec -i cassandra01 cqlsh < ~/cassandra-tp00/veterinary-app/schema.cql
 ```
 
