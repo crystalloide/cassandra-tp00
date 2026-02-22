@@ -225,18 +225,18 @@ ls ~/cassandra-tp00/docker
 ```
 
 
-### Étape 2 : Démarrage du cluster avec Docker Compose
+#### Étape 2 : Démarrage du cluster avec Docker Compose
 
 ```bash
 # Démarrer le cluster en arrière-plan
 docker compose -f docker-compose.yml up  -d
 
-# Suivre les logs pour vérifier le démarrage (dans un autre terminal si besoin)
+#### Suivre les logs pour vérifier le démarrage (dans un autre terminal si besoin)
 cd ~/cassandra-tp00
 docker compose logs -f
 
 
-# Dans un autre terminal, pour suivre  :
+#### Dans un autre terminal, pour suivre  :
 bash
 cd ~
 docker ps -a 
@@ -258,12 +258,12 @@ docker ps -a
 4. cassandra04 (attend cassandra03 healthy)
 
 
-# Pour visualiser les logs de cassandra01 : 
+#### Pour visualiser les logs de cassandra01 : 
 docker logs cassandra01
 
 
 
-### Étape 3 : Vérification du cluster (après 5-10 minutes)
+#### Étape 3 : Vérification du cluster (après 5-10 minutes)
 
 ```bash
 # Regarder les ports à l'écoute :
@@ -294,9 +294,9 @@ UN  192.168.100.153  80.03 KiB   16      50.7%             21b3ae41-1e2a-4c7d-97
 ```
 
 
-## Accès à cqlsh
+#### Accès à cqlsh
 
-### Option 1 : Via Docker exec (recommandé)
+#### Option 1 : Via Docker exec (recommandé)
 
 ```bash
 # Se connecter à cqlsh sur cassandra01 :
@@ -310,7 +310,7 @@ docker exec -it cassandra01 cqlsh 192.168.100.151 9042
 ```
 
 
-### Option 2 : Depuis l'hôte (via ports exposés)
+#### Option 2 : Depuis l'hôte (via ports exposés)
 
 Les ports CQL sont exposés sur l'hôte :
 
@@ -324,53 +324,53 @@ Les ports CQL sont exposés sur l'hôte :
 cqlsh localhost 9142
 ```
 
-## Si on veut absolument accéder via CQLSH à partir de la machine hôte sans passer par docker :
-# Installer pyenv si ce n'est pas déjà fait
+#### Si on veut absolument accéder via CQLSH à partir de la machine hôte sans passer par docker :
+#### Installer pyenv si ce n'est pas déjà fait
 curl https://pyenv.run | bash
 
-# Ajouter pyenv au PATH (ajouter à ~/.bashrc)
+#### Ajouter pyenv au PATH (ajouter à ~/.bashrc)
 gedit ~/.bashrc
-## Ajouter tout à la fin : 
+#### Ajouter tout à la fin : 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# Sauvegarder et quitter
+#### Sauvegarder et quitter
 
-# Recharger le shell
+#### Recharger le shell
 source ~/.bashrc
 
-# Installer Python 3.11
+#### Installer Python 3.11
 pyenv install 3.11.7
 
-# Vérification 
+#### Vérification 
 python --version
-## Affichge en retour :  
+#### Affichge en retour :  
 Python 3.11.7
 
-# Créer un environnement virtuel pour cqlsh
+#### Créer un environnement virtuel pour cqlsh
 pyenv virtualenv 3.11.7 cqlsh-env
 pyenv activate cqlsh-env
 
-# Installer cqlsh dans cet environnement
+#### Installer cqlsh dans cet environnement
 pip install cqlsh
 
-# Maintenant lancer cqlsh
+#### Maintenant lancer cqlsh
 cqlsh localhost 9142
 
 python -m pip install --upgrade pip
 
-# Et pour les prochaines fois, il n'y aura besoin que de faire  : 
-# Activer l'environnement
+#### Et pour les prochaines fois, il n'y aura besoin que de faire  : 
+#### Activer l'environnement
 pyenv activate cqlsh-env
 
-# Lancer cqlsh
+#### Lancer cqlsh
 cqlsh localhost 9142
 
 
-## Exercices CQL avec données IMDB
+#### Exercices CQL avec données IMDB
 
-### 1. Création du keyspace formation
+#### 1. Création du keyspace formation
 
 ```sql
 CREATE KEYSPACE formation 
@@ -386,7 +386,7 @@ USE formation;
 Nous utilisons `NetworkTopologyStrategy`, avec un facteur de réplication de 3 pour le datacenter "dc1", 
 `NetworkTopologyStrategy` est conseillé en production (cluster multi-rack et multi-datacenter)
 
-### 2. Création de la TABLE formation.imdb
+#### 2. Création de la TABLE formation.imdb
 
 ```sql
 DROP TABLE IF EXISTS formation.imdb;
@@ -409,7 +409,7 @@ DESCRIBE TABLE formation.imdb;
 
 
 
-### 3. Chargement de films
+#### 3. Chargement de films
 
 #### Insertion manuelle de quelques films
 
@@ -462,21 +462,21 @@ Pour charger des films, récupérer les fichiers CSV sur votre machine hôte :
 
 **Fichier : imdb_movies.csv**   https://www.kaggle.com/datasets/hoomch/imdb-full-dataset
 
-## Conseil : on utilise gdown : 
+#### Conseil : on utilise gdown : 
 pip install gdown
 
-## Les fichiers sont disponibles dans mon Google Drive : 
+#### Les fichiers sont disponibles aussi dans Google Drive : 
 
-## imdb_movies_extrait.csv (14,3 Ko)
+#### imdb_movies_extrait.csv (14,3 Ko)
 gdown 1KZdUmJkw-dlihqlrQWrR56qVcqzmUrmI
 
-## IMDB_movies.zip (197 Mo)
+#### IMDB_movies.zip (197 Mo)
 gdown 1q6v-PEHu8UYfDONajVujqoTTGhRUAPHl
 
-## imdb_movies.csv (362 Mo)
+#### imdb_movies.csv (362 Mo)
 gdown 16uJWq5N465U9rYvTCR1lKIBPHeNfd-oK
 
-## Extrait de imdb_movies.csv :
+#### Extrait de imdb_movies.csv :
 ```csv
 movie_id,title,year,genre,director,rating,votes,budget,length
 11,"The Lord of the Rings",2001,"Fantasy","Peter Jackson",8.8,1800000,93000000,178
@@ -533,7 +533,7 @@ FROM '/tmp/imdb_movies_extrait.csv'
 WITH HEADER = TRUE AND DELIMITER = ',';
 ```
 
-### 4. Lecture de films
+#### 4. Lecture de films
 
 ```sql
 -- Compter le nombre total de films
@@ -589,7 +589,7 @@ ALLOW FILTERING;
 ```
 
 
-### 5. Modification de films
+#### 5. Modification de films
 
 ```sql
 -- Mise à jour du rating d'un film
@@ -616,7 +616,7 @@ SELECT title, country FROM formation.imdb WHERE movie_id IN (1,2,3) ALLOW FILTER
 ```
 
 
-### 6. Suppression de films
+#### 6. Suppression de films
 
 ```sql
 -- Suppression d'un film spécifique
@@ -637,7 +637,7 @@ SELECT title, budget FROM formation.imdb WHERE movie_id = 1;
 ```
 
 
-### 7. Requêtes avancées et statistiques
+#### 7. Requêtes avancées et statistiques
 
 ```sql
 -- Comptage total de films
@@ -666,7 +666,7 @@ ALLOW FILTERING;
 ```
 
 
-### 8. Commandes de maintenance et diagnostic
+#### 8. Commandes de maintenance et diagnostic
 
 ```sql
 -- Afficher la structure de la table
@@ -700,7 +700,7 @@ SELECT * FROM formation.imdb;
 ```
 
 
-### 9. Exercices supplémentaires avec le cluster
+#### 9. Exercices supplémentaires avec le cluster
 
 #### Tester la réplication et la tolérance aux pannes
 ```bash
@@ -709,14 +709,14 @@ docker stop cassandra02
 ```
 
 
-# Retourner dans cqlsh 
+#### Retourner dans cqlsh 
 ```bash
 docker exec -it cassandra01 cqlsh
 
 ```
 
-# et vérifier que les requêtes fonctionnent toujours
-# (avec CONSISTENCY QUORUM ou ONE)
+#### et vérifier que les requêtes fonctionnent toujours
+#### (avec CONSISTENCY QUORUM ou ONE)
 
 
 ```sql
@@ -730,7 +730,7 @@ CONSISTENCY QUORUM;
 
 ```
 
-## Vérifier le statut du cluster
+#### Vérifier le statut du cluster
 
 ```bash
 docker exec -it cassandra01 nodetool status
@@ -761,7 +761,7 @@ docker exec -it cassandra01 nodetool tablestats formation.imdb
 ```
 
 
-## Commandes Docker Compose utiles ( à ne pas faire ici, juste pour montrer)
+#### Commandes Docker Compose utiles ( à ne pas faire ici, juste pour montrer)
 
 ```bash
 # Afficher les logs d'un nœud spécifique
@@ -785,9 +785,9 @@ docker exec -it cassandra01 /bin/bash
 
 
 
-## Exercice avancé : on travaille désormais avec le fichier le plus complet : imdb_movies.csv
+#### Exercice avancé : on travaille désormais avec le fichier le plus complet : imdb_movies.csv
 
-## 1. Identifier les colonnes du fichier CSV
+#### 1. Identifier les colonnes du fichier CSV
 ```bash
 # Afficher la première ligne du fichier imdb_movies.csv
 docker exec -it cassandra01 head -1 /tmp/imdb_movies.csv
@@ -940,7 +940,7 @@ nodetool settimeout range
 ```
 
 
-# Poursuivons :  
+#### Poursuivons :  
 
 ```bash
 docker exec -it cassandra01 cat /etc/cassandra/cassandra.yaml | grep 'read_request_timeout'
@@ -952,7 +952,7 @@ read_request_timeout: 5000ms
 docker exec -it cassandra01 cqlsh
 
 ```
-# Nouvelles requêtes :  
+#### Nouvelles requêtes :  
 
 ```sql
 
@@ -993,7 +993,7 @@ ALLOW FILTERING;
 
 
 
-# Nettoyage de l'environnement
+#### Nettoyage de l'environnement
 
 ```bash
 # Arrêter et supprimer tous les conteneurs et volumes
@@ -1004,7 +1004,7 @@ rm -rf docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra
 ```
 
 
-## Exercices pratiques recommandés
+#### Exercices pratiques recommandés
 
 1. **Test de cohérence** : Insérer des données avec différents niveaux de cohérence (ONE, QUORUM, ALL) et observer les différences
 2. **Tolérance aux pannes** : Arrêter progressivement 1, 2, puis 3 nœuds et observer le comportement
@@ -1012,7 +1012,7 @@ rm -rf docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra
 4. **Index secondaires** : Créer différents index et comparer les performances de requêtes
 5. **Modélisation de données** : Créer une table supplémentaire pour les acteurs avec une clé composite
 
-## Ressources additionnelles
+#### Ressources additionnelles
 
 - Documentation officielle Cassandra : https://cassandra.apache.org/doc/latest/
 - Guide CQL : https://cassandra.apache.org/doc/latest/cassandra/cql/
@@ -1030,6 +1030,6 @@ rm -rf docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra
 
 Bon travail avec Cassandra ! 🚀
 
-<div align="center">⁂</div>
+<div align="center">:-)</div>
 
 
