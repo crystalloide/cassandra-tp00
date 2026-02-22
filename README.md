@@ -386,7 +386,13 @@ WITH replication = {
 };
 
 USE formation;
+
+DESCRIBE formation;
+
 ```
+
+#### Devrait afficher :  
+CREATE KEYSPACE formation WITH replication = {'class': 'NetworkTopologyStrategy', 'dc1': '3'}  AND durable_writes = true;
 
 **Note** : 
 Nous utilisons `NetworkTopologyStrategy`, avec un facteur de réplication de 3 pour le datacenter "dc1", 
