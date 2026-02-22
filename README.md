@@ -214,7 +214,7 @@ services:
 sudo rm docker-compose.yml
 cp Cluster_4_noeuds_4_racks_1_DC.yml docker-compose.yml
 
-# Créer les répertoires de volumes (optionnel si vous voulez nettoyer)
+# Créer les répertoires de volumes (optionnel)
 sudo rm -Rf docker/cassanda*
 mkdir -p docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra04
 
