@@ -232,6 +232,7 @@ ls ~/cassandra-tp00/docker
 docker compose -f docker-compose.yml up  -d
 
 # Suivre les logs pour vérifier le démarrage (dans un autre terminal si besoin)
+cd ~/cassandra-tp00
 docker compose logs -f
 
 
