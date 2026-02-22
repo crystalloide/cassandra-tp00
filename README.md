@@ -467,6 +467,9 @@ VALUES ('9', 'Fight Club', 1999, 'Drama', 'David Fincher', 8.8, 2100000, '630000
 -- Film 10
 INSERT INTO formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
 VALUES ('10', 'Interstellar', 2014, 'Sci-Fi', 'Christopher Nolan', 8.6, 1800000, '165000000', 169);
+
+-- On sort de CQLSH pour le moment : 
+EXIT;
 ```
 
 
