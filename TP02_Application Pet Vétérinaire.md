@@ -11,7 +11,8 @@ cd  ~/cassandra-tp00
 sudo rm -Rf veterinary-app*
 
 ## On récupère l'application : https://drive.google.com/file/d/1nVQRPSP-jRu_5M-Lsr-4dvxZFt2aXejm/view?usp=drive_link
-wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1nVQRPSP-jRu_5M-Lsr-4dvxZFt2aXejm' -O veterinary-app.tar
+## wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1nVQRPSP-jRu_5M-Lsr-4dvxZFt2aXejm' -O veterinary-app.tar
+gdown 1nVQRPSP-jRu_5M-Lsr-4dvxZFt2aXejm
 ls 
 tar -xvf veterinary-app.tar
 # Affichage en retour : 
