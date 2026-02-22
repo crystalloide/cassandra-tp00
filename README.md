@@ -326,6 +326,7 @@ cqlsh localhost 9142
 
 #### Si on veut absolument accéder via CQLSH à partir de la machine hôte sans passer par docker :
 #### Installer pyenv si ce n'est pas déjà fait
+```bash
 curl https://pyenv.run | bash
 
 #### Ajouter pyenv au PATH (ajouter à ~/.bashrc)
@@ -359,14 +360,17 @@ pip install cqlsh
 cqlsh localhost 9142
 
 python -m pip install --upgrade pip
+```
 
 #### Et pour les prochaines fois, il n'y aura besoin que de faire  : 
 #### Activer l'environnement
+```bash
 pyenv activate cqlsh-env
 
 #### Lancer cqlsh
 cqlsh localhost 9142
 
+```
 
 #### Exercices CQL avec données IMDB
 
