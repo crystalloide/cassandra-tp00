@@ -266,6 +266,9 @@ docker logs cassandra01
 ### Étape 3 : Vérification du cluster (après 5-10 minutes)
 
 ```bash
+# Regarder les ports à l'écoute :
+netstat -anl | grep 0:
+
 # Vérifier que les 4 conteneurs sont UP sinon attendre (non listé ou encore en train de joindre : 'UJ') 
 cd /home/user/cassandra-tp00
 docker compose ps 
