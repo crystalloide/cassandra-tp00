@@ -1,8 +1,8 @@
-# TP00 - Cassandra 5.0 avec Docker Compose (Cluster 4 nœuds)
+## TP00 - Cassandra 5.0 avec Docker Compose (Cluster 4 nœuds)
 
 TP00 pour utiliser un cluster Cassandra déployé via Docker Compose avec 4 nœuds sur 4 racks différents dans un seul datacenter DC1.
 
-## Vue d'ensemble du cluster
+#### Vue d'ensemble du cluster
 
 Le fichier `Cluster_4_noeuds_4_racks_1_DC.yml` déploie :
 
@@ -13,31 +13,25 @@ Le fichier `Cluster_4_noeuds_4_racks_1_DC.yml` déploie :
 - **Réseau** : 192.168.100.0/24
 
 
-## Prérequis
+#### Prérequis
 
 - Docker et Docker Compose installés
 - Au minimum 4 GB RAM disponible (1 GB par nœud)
 - 2 CPU cores disponibles
 
 
-## Démarrage du cluster
+#### Démarrage du cluster
 
-### Étape 1 : Préparation de l'environnement
+#### Étape 1 : Préparation de l'environnement
 
 ```bash
 cd ~
 sudo rm -Rf ~/cassandra-tp00
 
-### Ici, on va simpleemnt cloner le projet :
+#### Ici, on va simpleemnt cloner le projet :
 git clone https://github.com/crystalloide/cassandra-tp00
-cd 
-
-# Créer le répertoire de travail
-# mkdir -p ~/cassandra-tp00
 
 cd ~/cassandra-tp00
-
-
 
 # Vérifier le contenu ou créer le fichier docker compose de notre cluster 4 noeuds cassandra :
 
