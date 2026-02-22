@@ -145,16 +145,17 @@ docker exec -i cassandra01 cqlsh < ~/cassandra-tp00/veterinary-app/schema.cql
 
 
 #### En CQL, on regarde le keyspace et les tables créées : 
-
+```SQL
 cqlsh> describe keyspaces
-
+```
 #### Affichage en retour : 
 	system       system_distributed  system_traces  system_virtual_schema
 	system_auth  system_schema       system_views   veterinary
 
 #### Plus en détail : 
+```SQL
 describe keyspace veterinary
-
+```
 #### Affichage en retour : 
 ... > Remarquez les différences avec le CQL d'origine utilisé pour la création ( schema.cql)
 
