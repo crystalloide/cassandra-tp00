@@ -1,0 +1,201 @@
+movie_id,title,year,genre,director,rating,votes,budget,length
+1,The Shawshank Redemption,1994,Drama,Frank Darabont,9.3,2500000,25000000,142
+2,The Godfather,1972,Crime,Francis Ford Coppola,9.2,1800000,6000000,175
+3,The Dark Knight,2008,Action,Christopher Nolan,9.0,2600000,185000000,152
+4,Pulp Fiction,1994,Crime,Quentin Tarantino,8.9,2000000,8000000,154
+5,Forrest Gump,1994,Drama,Robert Zemeckis,8.8,2100000,55000000,142
+6,Inception,2010,Sci-Fi,Christopher Nolan,8.8,2300000,160000000,148
+7,The Matrix,1999,Sci-Fi,Wachowski Brothers,8.7,1900000,63000000,136
+8,Goodfellas,1990,Crime,Martin Scorsese,8.7,1200000,25000000,146
+9,Fight Club,1999,Drama,David Fincher,8.8,2100000,63000000,139
+10,Interstellar,2014,Sci-Fi,Christopher Nolan,8.6,1800000,165000000,169
+11,The Lord of the Rings: The Return of the King,2003,Fantasy,Peter Jackson,8.9,1800000,94000000,201
+12,Star Wars: Episode V,1980,Sci-Fi,Irvin Kershner,8.7,1300000,18000000,124
+13,The Lord of the Rings: The Fellowship of the Ring,2001,Fantasy,Peter Jackson,8.8,1800000,93000000,178
+14,Schindler's List,1993,Drama,Steven Spielberg,8.9,1400000,22000000,195
+15,12 Angry Men,1957,Drama,Sidney Lumet,9.0,800000,350000,96
+16,The Lord of the Rings: The Two Towers,2002,Fantasy,Peter Jackson,8.7,1600000,94000000,179
+17,"The Good, the Bad and the Ugly",1966,Western,Sergio Leone,8.8,750000,1200000,178
+18,One Flew Over the Cuckoo's Nest,1975,Drama,Milos Forman,8.7,1000000,3000000,133
+19,Parasite,2019,Thriller,Bong Joon Ho,8.6,800000,11400000,132
+20,Spider-Man: No Way Home,2021,Action,Jon Watts,8.2,900000,200000000,148
+21,The Silence of the Lambs,1991,Thriller,Jonathan Demme,8.6,1400000,19000000,118
+22,Saving Private Ryan,1998,War,Steven Spielberg,8.6,1400000,70000000,169
+23,Seven Samurai,1954,Action,Akira Kurosawa,8.6,350000,500000,207
+24,Se7en,1995,Thriller,David Fincher,8.6,1600000,33000000,127
+25,It's a Wonderful Life,1946,Drama,Frank Capra,8.6,470000,3200000,130
+26,The Usual Suspects,1995,Crime,Bryan Singer,8.5,1100000,6000000,106
+27,Life Is Beautiful,1997,Comedy,Roberto Benigni,8.6,700000,20000000,116
+28,Léon: The Professional,1994,Action,Luc Besson,8.5,1200000,16000000,110
+29,Gladiator,2000,Action,Ridley Scott,8.5,1500000,103000000,155
+30,The Departed,2006,Crime,Martin Scorsese,8.5,1300000,90000000,151
+31,The Prestige,2006,Drama,Christopher Nolan,8.5,1300000,40000000,130
+32,Whiplash,2014,Drama,Damien Chazelle,8.5,900000,3300000,106
+33,Casablanca,1942,Romance,Michael Curtiz,8.5,580000,950000,102
+34,The Green Mile,1999,Drama,Frank Darabont,8.6,1300000,60000000,189
+35,Harakiri,1962,Drama,Masaki Kobayashi,8.6,58000,100000,133
+36,The Intouchables,2011,Comedy,Olivier Nakache,8.5,890000,10800000,112
+37,Modern Times,1936,Comedy,Charlie Chaplin,8.5,250000,1500000,87
+38,City Lights,1931,Romance,Charlie Chaplin,8.5,190000,1500000,87
+39,Spirited Away,2001,Animation,Hayao Miyazaki,8.6,760000,19000000,125
+40,Psycho,1960,Horror,Alfred Hitchcock,8.5,680000,806000,109
+41,Rear Window,1954,Thriller,Alfred Hitchcock,8.5,510000,1000000,112
+42,Alien,1979,Horror,Ridley Scott,8.5,880000,11000000,117
+43,Apocalypse Now,1979,War,Francis Ford Coppola,8.4,670000,31500000,147
+44,Django Unchained,2012,Western,Quentin Tarantino,8.4,1500000,100000000,165
+45,Memento,2000,Thriller,Christopher Nolan,8.4,1200000,9000000,113
+46,The Lives of Others,2006,Drama,Florian Henckel,8.4,390000,2000000,137
+47,The Great Dictator,1940,Comedy,Charlie Chaplin,8.4,230000,2000000,125
+48,Cinema Paradiso,1988,Drama,Giuseppe Tornatore,8.5,260000,5000000,155
+49,The Pianist,2002,Drama,Roman Polanski,8.5,840000,35000000,150
+50,Grave of the Fireflies,1988,Animation,Isao Takahata,8.5,280000,3700000,89
+51,Avengers: Infinity War,2018,Action,Russo Brothers,8.4,1100000,321000000,149
+52,Once Upon a Time in the West,1968,Western,Sergio Leone,8.5,340000,5000000,165
+53,Paths of Glory,1957,War,Stanley Kubrick,8.4,200000,935000,88
+54,Witness for the Prosecution,1957,Drama,Billy Wilder,8.4,130000,3000000,116
+55,The Shining,1980,Horror,Stanley Kubrick,8.4,1000000,19000000,146
+56,WALL-E,2008,Animation,Andrew Stanton,8.4,1100000,180000000,98
+57,Sunset Boulevard,1950,Drama,Billy Wilder,8.4,230000,1750000,110
+58,Dr. Strangelove,1964,Comedy,Stanley Kubrick,8.4,500000,1800000,95
+59,Princess Mononoke,1997,Animation,Hayao Miyazaki,8.4,400000,23500000,134
+60,Oldboy,2003,Thriller,Park Chan-wook,8.4,580000,3000000,120
+61,Avengers: Endgame,2019,Action,Russo Brothers,8.4,1200000,356000000,181
+62,Amélie,2001,Romance,Jean-Pierre Jeunet,8.3,760000,10000000,122
+63,Coco,2017,Animation,Lee Unkrich,8.4,520000,175000000,105
+64,Your Name,2016,Animation,Makoto Shinkai,8.4,280000,61000000,106
+65,Alien: Resurrection,1997,Sci-Fi,Jean-Pierre Jeunet,6.2,270000,75000000,109
+66,The Dark Knight Rises,2012,Action,Christopher Nolan,8.4,1700000,250000000,164
+67,Toy Story,1995,Animation,John Lasseter,8.3,1000000,30000000,81
+68,Amadeus,1984,Drama,Milos Forman,8.4,410000,18000000,160
+69,Braveheart,1995,War,Mel Gibson,8.3,1000000,72000000,178
+70,Joker,2019,Drama,Todd Phillips,8.4,1300000,55000000,122
+71,Once Upon a Time in America,1984,Crime,Sergio Leone,8.3,360000,30000000,229
+72,Good Will Hunting,1997,Drama,Gus Van Sant,8.3,970000,10000000,126
+73,Toy Story 3,2010,Animation,Lee Unkrich,8.3,850000,200000000,103
+74,Das Boot,1981,War,Wolfgang Petersen,8.3,250000,18500000,149
+75,2001: A Space Odyssey,2001,Sci-Fi,Stanley Kubrick,8.3,680000,10500000,149
+76,Inglourious Basterds,2009,War,Quentin Tarantino,8.3,1400000,70000000,153
+77,Reservoir Dogs,1992,Crime,Quentin Tarantino,8.3,1000000,1200000,99
+78,M,1931,Thriller,Fritz Lang,8.3,160000,75000,117
+79,Requiem for a Dream,2000,Drama,Darren Aronofsky,8.3,850000,4500000,102
+80,Eternal Sunshine of the Spotless Mind,2004,Romance,Michel Gondry,8.3,1000000,20000000,108
+81,Citizen Kane,1941,Drama,Orson Welles,8.3,440000,839000,119
+82,Full Metal Jacket,1987,War,Stanley Kubrick,8.3,750000,30000000,116
+83,North by Northwest,1959,Thriller,Alfred Hitchcock,8.3,340000,3100000,136
+84,Vertigo,1958,Thriller,Alfred Hitchcock,8.3,420000,2500000,128
+85,Bicycle Thieves,1948,Drama,Vittorio De Sica,8.3,170000,133000,89
+86,Singin' in the Rain,1952,Musical,Stanley Donen,8.3,250000,2500000,103
+87,A Clockwork Orange,1971,Sci-Fi,Stanley Kubrick,8.3,850000,2200000,136
+88,Snatch,2000,Crime,Guy Ritchie,8.3,870000,10000000,102
+89,Taxi Driver,1976,Drama,Martin Scorsese,8.2,850000,1900000,114
+90,The Kid,1921,Comedy,Charlie Chaplin,8.3,140000,250000,68
+91,Lawrence of Arabia,1962,Adventure,David Lean,8.3,300000,15000000,218
+92,The Sting,1973,Crime,George Roy Hill,8.3,270000,5500000,129
+93,Metropolis,1927,Sci-Fi,Fritz Lang,8.3,180000,200000,153
+94,For a Few Dollars More,1965,Western,Sergio Leone,8.2,260000,600000,132
+95,Double Indemnity,1944,Crime,Billy Wilder,8.3,160000,980000,107
+96,Scarface,1983,Crime,Brian De Palma,8.3,850000,25000000,170
+97,To Kill a Mockingbird,1962,Drama,Robert Mulligan,8.3,320000,2000000,129
+98,The Apartment,1960,Comedy,Billy Wilder,8.3,190000,3000000,125
+99,Indiana Jones: Raiders of the Lost Ark,1981,Adventure,Steven Spielberg,8.4,980000,20000000,115
+100,Up,2009,Animation,Pete Docter,8.3,1100000,175000000,96
+101,Heat,1995,Crime,Michael Mann,8.3,670000,60000000,170
+102,L.A. Confidential,1997,Crime,Curtis Hanson,8.2,590000,35000000,138
+103,Monty Python and the Holy Grail,1975,Comedy,Terry Gilliam,8.2,560000,400000,91
+104,Die Hard,1988,Action,John McTiernan,8.2,900000,28000000,132
+105,Rashomon,1950,Drama,Akira Kurosawa,8.2,180000,100000,88
+106,Unforgiven,1992,Western,Clint Eastwood,8.2,420000,14400000,131
+107,Green Book,2018,Drama,Peter Farrelly,8.2,490000,23000000,130
+108,Batman Begins,2005,Action,Christopher Nolan,8.2,1500000,150000000,140
+109,The Great Escape,1963,War,John Sturges,8.2,250000,4000000,172
+110,My Neighbor Totoro,1988,Animation,Hayao Miyazaki,8.2,340000,3700000,86
+111,Some Like It Hot,1959,Comedy,Billy Wilder,8.2,270000,2900000,121
+112,Howl's Moving Castle,2004,Animation,Hayao Miyazaki,8.2,420000,24000000,119
+113,The Hunt,2012,Drama,Thomas Vinterberg,8.3,330000,3600000,115
+114,Ran,1985,War,Akira Kurosawa,8.2,130000,11500000,162
+115,Ikiru,1952,Drama,Akira Kurosawa,8.3,85000,200000,143
+116,There Will Be Blood,2007,Drama,Paul Thomas Anderson,8.2,610000,25000000,158
+117,The Grand Budapest Hotel,2014,Comedy,Wes Anderson,8.1,830000,25000000,99
+118,Pan's Labyrinth,2006,Fantasy,Guillermo del Toro,8.2,680000,19000000,118
+119,Casino,1995,Crime,Martin Scorsese,8.2,540000,52000000,178
+120,The Secret in Their Eyes,2009,Thriller,Juan José Campanella,8.2,210000,2000000,129
+121,Raging Bull,1980,Drama,Martin Scorsese,8.2,360000,18000000,129
+122,The Sixth Sense,1999,Thriller,M. Night Shyamalan,8.2,1000000,40000000,107
+123,Prisoners,2013,Thriller,Denis Villeneuve,8.1,730000,46000000,153
+124,The Thing,1982,Horror,John Carpenter,8.2,430000,15000000,109
+125,A Beautiful Mind,2001,Drama,Ron Howard,8.2,940000,58000000,135
+126,The Truman Show,1998,Comedy,Peter Weir,8.2,1100000,60000000,103
+127,Warrior,2011,Drama,Gavin O'Connor,8.1,490000,25000000,140
+128,Jurassic Park,1993,Adventure,Steven Spielberg,8.1,1000000,63000000,127
+129,The Terminator,1984,Sci-Fi,James Cameron,8.1,880000,6400000,107
+130,Yojimbo,1961,Action,Akira Kurosawa,8.2,130000,160000,110
+131,Kill Bill: Vol. 1,2003,Action,Quentin Tarantino,8.2,1100000,30000000,111
+132,Fargo,1996,Crime,Coen Brothers,8.1,700000,7000000,98
+133,No Country for Old Men,2007,Thriller,Coen Brothers,8.1,970000,25000000,122
+134,V for Vendetta,2005,Action,James McTeigue,8.2,1100000,54000000,132
+135,Inside Out,2015,Animation,Pete Docter,8.1,720000,175000000,95
+136,The Bridge on the River Kwai,1957,War,David Lean,8.2,230000,3000000,161
+137,"Lock, Stock and Two Smoking Barrels",1998,Crime,Guy Ritchie,8.2,590000,1350000,107
+138,Harry Potter and the Deathly Hallows Part 2,2011,Fantasy,David Yates,8.1,900000,125000000,130
+139,Shutter Island,2010,Thriller,Martin Scorsese,8.2,1300000,80000000,138
+140,The Battle of Algiers,1966,War,Gillo Pontecorvo,8.1,62000,800000,121
+141,Room,2015,Drama,Lenny Abrahamson,8.1,430000,6000000,118
+142,The Elephant Man,1980,Drama,David Lynch,8.1,250000,5000000,124
+143,Wild Strawberries,1957,Drama,Ingmar Bergman,8.1,110000,45000,91
+144,The General,1926,Comedy,Buster Keaton,8.1,95000,750000,67
+145,Trainspotting,1996,Drama,Danny Boyle,8.1,700000,1500000,93
+146,Blade Runner,1982,Sci-Fi,Ridley Scott,8.1,780000,28000000,117
+147,Warrior,2011,Drama,Gavin O'Connor,8.1,490000,25000000,140
+148,Gone Girl,2014,Thriller,David Fincher,8.1,1000000,61000000,149
+149,The Gold Rush,1925,Comedy,Charlie Chaplin,8.1,110000,923000,95
+150,12 Years a Slave,2013,Drama,Steve McQueen,8.1,710000,20000000,134
+151,Gran Torino,2008,Drama,Clint Eastwood,8.1,790000,33000000,116
+152,Before Sunrise,1995,Romance,Richard Linklater,8.1,320000,2500000,101
+153,The Wolf of Wall Street,2013,Crime,Martin Scorsese,8.2,1400000,100000000,180
+154,Mad Max: Fury Road,2015,Action,George Miller,8.1,1000000,150000000,120
+155,Hacksaw Ridge,2016,War,Mel Gibson,8.1,540000,40000000,139
+156,The Wages of Fear,1953,Thriller,Henri-Georges Clouzot,8.1,64000,250000,131
+157,Million Dollar Baby,2004,Drama,Clint Eastwood,8.1,700000,30000000,132
+158,Ben-Hur,1959,Adventure,William Wyler,8.1,250000,15000000,212
+159,Blade Runner 2049,2017,Sci-Fi,Denis Villeneuve,8.0,590000,150000000,164
+160,The Third Man,1949,Thriller,Carol Reed,8.1,180000,540000,93
+161,Spotlight,2015,Drama,Tom McCarthy,8.1,470000,20000000,128
+162,In the Name of the Father,1993,Drama,Jim Sheridan,8.1,180000,13000000,133
+163,Gone with the Wind,1939,Romance,Victor Fleming,8.2,320000,3900000,238
+164,The Deer Hunter,1978,War,Michael Cimino,8.1,350000,15000000,183
+165,Memories of Murder,2003,Thriller,Bong Joon Ho,8.1,190000,2800000,132
+166,Judgment at Nuremberg,1961,Drama,Stanley Kramer,8.2,79000,3000000,186
+167,The Treasure of the Sierra Madre,1948,Adventure,John Huston,8.2,130000,3000000,126
+168,Fargo,1996,Crime,Coen Brothers,8.1,700000,7000000,98
+169,Finding Nemo,2003,Animation,Andrew Stanton,8.1,1100000,94000000,100
+170,The Big Lebowski,1998,Comedy,Coen Brothers,8.1,830000,15000000,117
+171,Cool Hand Luke,1967,Drama,Stuart Rosenberg,8.1,180000,3200000,127
+172,On the Waterfront,1954,Drama,Elia Kazan,8.1,160000,910000,108
+173,Rebecca,1940,Thriller,Alfred Hitchcock,8.1,150000,1300000,130
+174,How to Train Your Dragon,2010,Animation,Dean DeBlois,8.1,790000,165000000,98
+175,It Happened One Night,1934,Romance,Frank Capra,8.1,110000,325000,105
+176,The Battle of Algiers,1966,War,Gillo Pontecorvo,8.1,62000,800000,121
+177,Persona,1966,Drama,Ingmar Bergman,8.1,130000,60000,83
+178,Dial M for Murder,1954,Thriller,Alfred Hitchcock,8.2,190000,1400000,105
+179,All About Eve,1950,Drama,Joseph L. Mankiewicz,8.2,140000,1400000,138
+180,Logan,2017,Action,James Mangold,8.1,800000,97000000,137
+181,Rush,2013,Drama,Ron Howard,8.1,490000,38000000,123
+182,The Handmaiden,2016,Thriller,Park Chan-wook,8.1,160000,8800000,145
+183,The Maltese Falcon,1941,Crime,John Huston,8.1,170000,375000,100
+184,Barry Lyndon,1975,Drama,Stanley Kubrick,8.1,170000,11000000,185
+185,Amores Perros,2000,Drama,Alejandro G. Iñárritu,8.1,250000,2400000,154
+186,The Passion of Joan of Arc,1928,Drama,Carl Theodor Dreyer,8.1,60000,400000,110
+187,Mary and Max,2009,Animation,Adam Elliot,8.1,180000,8200000,92
+188,Hotel Rwanda,2004,Drama,Terry George,8.1,360000,17500000,121
+189,The Seventh Seal,1957,Drama,Ingmar Bergman,8.1,200000,150000,96
+190,Gandhi,1982,Drama,Richard Attenborough,8.0,240000,22000000,191
+191,Stand by Me,2001,Drama,Rob Reiner,8.1,420000,8000000,89
+192,Platoon,1986,War,Oliver Stone,8.1,430000,6000000,120
+193,Before Sunset,2004,Romance,Richard Linklater,8.1,280000,2700000,80
+194,Network,1976,Drama,Sidney Lumet,8.1,170000,3800000,121
+195,The Wizard of Oz,1939,Fantasy,Victor Fleming,8.1,420000,2800000,102
+196,Hachi: A Dog's Tale,2009,Drama,Lasse Hallström,8.1,300000,16000000,93
+197,Incendies,2010,Drama,Denis Villeneuve,8.3,180000,6800000,131
+198,Wild Tales,2014,Comedy,Damián Szifron,8.1,200000,3300000,122
+199,The 400 Blows,1959,Drama,François Truffaut,8.1,120000,75000,99
+200,Catch Me If You Can,2002,Crime,Steven Spielberg,8.1,1000000,52000000,141
