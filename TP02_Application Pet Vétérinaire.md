@@ -1,21 +1,20 @@
-# Cassandra : TP02_Application Pet Vétérinaire :
+### Cassandra : TP02_Application Pet Vétérinaire :
 
 ***
 
 # 🚀 GUIDE DE DÉMARRAGE RAPIDE
 
-## Installation en 3 étapes
+#### Installation en 3 étapes
 
 cd  ~/cassandra-tp00
 
 sudo rm -Rf veterinary-app*
 
-## On récupère l'application : https://drive.google.com/file/d/1nVQRPSP-jRu_5M-Lsr-4dvxZFt2aXejm/view?usp=drive_link
-## wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1nVQRPSP-jRu_5M-Lsr-4dvxZFt2aXejm' -O veterinary-app.tar
+#### On récupère l'application : veterinary-app.tar
 gdown 1nVQRPSP-jRu_5M-Lsr-4dvxZFt2aXejm
 ls 
 tar -xvf veterinary-app.tar
-# Affichage en retour : 
+#### Affichage en retour : 
 	veterinary-app/
 	veterinary-app/QUICKSTART.md
 	veterinary-app/README.md
@@ -26,14 +25,14 @@ tar -xvf veterinary-app.tar
 	veterinary-app/server.js
 	veterinary-app/verify-compliance.sh
 
-# Si le fichier avait été compressé (.gz)
-# tar -xzvf veterinary-app.tar.gz
+#### Si le fichier avait été compressé (.gz)
+#### tar -xzvf veterinary-app.tar.gz
 
 
-# Regardons le modèle de donnée proposé : 
+#### Regardons le modèle de donnée proposé : 
 cat ~/cassandra-tp00/veterinary-app/schema.cql
 
-## Affichage en retour : 
+#### Affichage en retour : 
 -- Schéma Cassandra pour l'application de gestion vétérinaire
 -- À exécuter sur le cluster Cassandra
 
@@ -120,7 +119,7 @@ VALUES (uuid(), 'Oiseau', 'Volatiles divers');
 
 
 
-### 1️⃣ Initialiser Cassandra
+#### 1️⃣ Initialiser Cassandra
 
 ```bash
 # Connectez-vous à votre cluster Cassandra
@@ -140,29 +139,29 @@ docker exec -i cassandra01 cqlsh < ~/cassandra-tp00/veterinary-app/schema.cql
 ```
 
 
-## En CQL, on regarde le keyspace et les tables créées : 
+#### En CQL, on regarde le keyspace et les tables créées : 
 
 cqlsh> describe keyspaces
 
-## Affichage en retour : 
+#### Affichage en retour : 
 	system       system_distributed  system_traces  system_virtual_schema
 	system_auth  system_schema       system_views   veterinary
 
-## Plus en détail : 
+#### Plus en détail : 
 describe keyspace veterinary
 
-## Affichage en retour : 
+#### Affichage en retour : 
 ... > Remarquez les différences avec le CQL d'origine utilisé pour la création ( schema.cql)
 
 
-### 2️⃣ Installer les dépendances Node.js
+#### 2️⃣ Installer les dépendances Node.js
 
 ```bash
 cd /home/user/cassandra-tp00/veterinary-app
 npm install
 ```
 
-### 3️⃣ Démarrer l'application
+#### 3️⃣ Démarrer l'application
 
 ```bash
 npm start
@@ -172,7 +171,7 @@ npm start
 
 ---
 
-## ✅ Vérification de conformité
+#### ✅ Vérification de conformité
 
 Lancez le script de vérification pour confirmer que tout est correct:
 
@@ -190,7 +189,7 @@ Ce script vérifie automatiquement:
 
 ---
 
-## 📊 Architecture validée
+#### 📊 Architecture validée
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -215,26 +214,26 @@ Ce script vérifie automatiquement:
 
 ---
 
-## 🎯 Fonctionnalités implémentées
+#### 🎯 Fonctionnalités implémentées
 
-### 👨‍⚕️ Vétérinaires
+#### 👨‍⚕️ Vétérinaires
 - ➕ Ajout avec validation complète
 - ✏️ Modification des informations
 - 🗑️ Suppression (soft delete - désactivation)
 
-### 🦁 Espèces
+#### 🦁 Espèces
 - ➕ Ajout d'espèces animales
 - ✏️ Modification
 - 🗑️ Suppression
 
-### 🐶 Animaux
+#### 🐶 Animaux
 - ➕ Ajout avec validation espèce
 - ⚠️ **Validation**: L'espèce doit exister
 - Informations propriétaire complètes
 - ✏️ Modification
 - 🗑️ Suppression
 
-### 📅 Rendez-vous
+#### 📅 Rendez-vous
 - ➕ Création avec planification
 - ⚠️ **Validation**: Animal ET vétérinaire doivent exister
 - Gestion des statuts
@@ -243,7 +242,7 @@ Ce script vérifie automatiquement:
 
 ---
 
-## 🔐 Validations automatiques
+#### 🔐 Validations automatiques
 
 L'application refuse automatiquement:
 - ❌ Animal avec espèce inexistante
@@ -254,7 +253,7 @@ Messages d'erreur clairs affichés à l'utilisateur.
 
 ---
 
-## 📝 Workflow recommandé
+#### 📝 Workflow recommandé
 
 1. **Ajouter des vétérinaires** (Dr. Dupont, Dr. Martin déjà présents)
 2. **Ajouter des espèces** (Chat, Chien, Lapin, Oiseau déjà présents)
@@ -263,9 +262,9 @@ Messages d'erreur clairs affichés à l'utilisateur.
 
 ---
 
-## 🐛 Dépannage rapide
+#### 🐛 Dépannage rapide
 
-### Problème de connexion Cassandra
+#### Problème de connexion Cassandra
 ```bash
 # Vérifier l'état du cluster
 docker exec cassandra01 nodetool status
@@ -275,20 +274,20 @@ pyenv activate cqlsh-env
 cqlsh 192.168.100.151 -e "DESCRIBE KEYSPACE veterinary;"
 ```
 
-### Si pb de port 3000 occupé
+#### Si pb de port 3000 occupé
 Modifiez dans `server.js`:
 ```javascript
 const PORT = 3001; // Changez le port
 ```
 
-### Données de test
+#### Données de test
 Le fichier `schema.cql` inclut des données de démo:
 - 2 vétérinaires
 - 4 espèces
 
 ---
 
-## 📂 Structure des fichiers
+#### 📂 Structure des fichiers
 
 ```
 veterinary-app/
@@ -303,7 +302,7 @@ veterinary-app/
 
 ---
 
-## 🎉 C'est prêt !
+#### 🎉 C'est prêt !
 
 Votre application respecte TOUTES les spécifications:
 - ✅ Cluster Cassandra 4 nœuds (192.168.100.151-154)
