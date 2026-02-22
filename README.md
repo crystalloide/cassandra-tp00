@@ -564,8 +564,8 @@ SELECT COUNT(*) FROM formation.imdb;
 SELECT * FROM formation.imdb LIMIT 100;
 
 -- Requêter un film avec un id précis  :
-SELECT * FROM formation.imdb WHERE movie_id = 1;
-SELECT * FROM formation.imdb WHERE movie_id = 200;
+SELECT * FROM formation.imdb WHERE movie_id = '1';
+SELECT * FROM formation.imdb WHERE movie_id = '200';
 
 -- Afficher seulement certaines colonnes
 SELECT title, year, rating, director FROM formation.imdb LIMIT 10;
@@ -614,26 +614,26 @@ ALLOW FILTERING;
 
 ```sql
 -- Mise à jour du rating d'un film
-UPDATE formation.imdb SET rating = 9.4 WHERE movie_id = 1;
+UPDATE formation.imdb SET rating = 9.4 WHERE movie_id = '1';
 
 -- Vérification de la modification
-SELECT title, rating FROM formation.imdb WHERE movie_id = 1;
+SELECT title, rating FROM formation.imdb WHERE movie_id = '1';
 
 -- Mise à jour de plusieurs colonnes
 UPDATE formation.imdb 
 SET rating = 9.1, votes = 2700000 
-WHERE movie_id = 3;
+WHERE movie_id = '3';
 
 -- Ajout d'une nouvelle colonne à la table
 ALTER TABLE formation.imdb ADD country TEXT;
 
 -- Mise à jour avec la nouvelle colonne
-UPDATE formation.imdb SET country = 'USA' WHERE movie_id = 1;
-UPDATE formation.imdb SET country = 'USA' WHERE movie_id = 2;
-UPDATE formation.imdb SET country = 'UK' WHERE movie_id = 3;
+UPDATE formation.imdb SET country = 'USA' WHERE movie_id = '1';
+UPDATE formation.imdb SET country = 'USA' WHERE movie_id = '2';
+UPDATE formation.imdb SET country = 'UK' WHERE movie_id = '3';
 
 -- Vérification
-SELECT title, country FROM formation.imdb WHERE movie_id IN (1,2,3) ALLOW FILTERING;
+SELECT title, country FROM formation.imdb WHERE movie_id IN ('1','2','3') ALLOW FILTERING;
 ```
 
 
@@ -641,20 +641,20 @@ SELECT title, country FROM formation.imdb WHERE movie_id IN (1,2,3) ALLOW FILTER
 
 ```sql
 -- Suppression d'un film spécifique
-DELETE FROM formation.imdb WHERE movie_id = 4;
+DELETE FROM formation.imdb WHERE movie_id = '4';
 
 -- Vérification de la suppression
-SELECT * FROM formation.imdb WHERE movie_id = 4;
+SELECT * FROM formation.imdb WHERE movie_id = '4';
 
 -- Suppression de plusieurs films (une par une en Cassandra)
-DELETE FROM formation.imdb WHERE movie_id = 6;
-DELETE FROM formation.imdb WHERE movie_id = 7;
+DELETE FROM formation.imdb WHERE movie_id = '6';
+DELETE FROM formation.imdb WHERE movie_id = '7';
 
 -- Suppression d'une colonne spécifique (mise à NULL)
-UPDATE formation.imdb SET budget = NULL WHERE movie_id = 1;
+UPDATE formation.imdb SET budget = NULL WHERE movie_id = '1';
 
 -- Vérification
-SELECT title, budget FROM formation.imdb WHERE movie_id = 1;
+SELECT title, budget FROM formation.imdb WHERE movie_id = '1';
 ```
 
 
@@ -712,7 +712,7 @@ CONSISTENCY ALL;
 
 -- Active le tracing sur le noeud où est connecté le client CQLSH pour voir le détail des étapes d'exécution des requêtes
 TRACING ON;
-SELECT * FROM formation.imdb WHERE movie_id = 1;
+SELECT * FROM formation.imdb WHERE movie_id = '1';
 TRACING OFF;
 
 -- Afficher les informations de pagination
@@ -742,10 +742,10 @@ docker exec -it cassandra01 cqlsh
 
 ```sql
 CONSISTENCY QUORUM;
-SELECT * FROM formation.imdb WHERE movie_id = 1;
+SELECT * FROM formation.imdb WHERE movie_id = '1';
 
 CONSISTENCY ALL;
-SELECT * FROM formation.imdb WHERE movie_id = 1;
+SELECT * FROM formation.imdb WHERE movie_id = '1';
 
 CONSISTENCY QUORUM;
 
@@ -988,7 +988,7 @@ read_request_timeout: 5000ms
 SELECT movie_id, title, rating FROM formation.imdb LIMIT 5;
 
 
--- Films avec les meilleures notes (> 9.8
+-- Films avec les meilleures notes (> 9.8)
 SELECT title, rating, year, genre 
 FROM formation.imdb 
 WHERE rating > 9.8
