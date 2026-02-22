@@ -379,6 +379,8 @@ cqlsh localhost 9142
 #### 1. Création du keyspace formation
 
 ```sql
+DROP KEYSPACE IF EXISTS formation;
+
 CREATE KEYSPACE formation 
 WITH replication = {
   'class': 'NetworkTopologyStrategy', 
@@ -391,7 +393,7 @@ DESCRIBE formation;
 
 ```
 
-#### Devrait afficher :  
+#### la commande DESCRIBE devrait afficher :  
 CREATE KEYSPACE formation WITH replication = {'class': 'NetworkTopologyStrategy', 'dc1': '3'}  AND durable_writes = true;
 
 **Note** : 
@@ -1043,5 +1045,3 @@ rm -rf docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra
 Bon travail avec Cassandra ! 🚀
 
 <div align="center">:-)</div>
-
-
