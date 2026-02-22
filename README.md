@@ -234,6 +234,7 @@ docker compose -f docker-compose.yml up  -d
 #### Suivre les logs pour vérifier le démarrage (dans un autre terminal si besoin)
 cd ~/cassandra-tp00
 docker compose logs -f
+# Faire <CTRL>+>C> pour sortir
 
 
 #### Dans un autre terminal, pour suivre  :
@@ -787,6 +788,7 @@ docker exec -it cassandra01 nodetool tablestats formation.imdb
 ```bash
 # Afficher les logs d'un nœud spécifique
 docker compose logs -f cassandra01
+# Faire <CTRL>+>C> pour sortir
 
 # Arrêter le cluster
 docker compose down
