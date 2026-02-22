@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinique Vétérinaire - Gestion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f5f5f5;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            background: #f5f5f5;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            background: #e0e0e0;
+        }
+
+        .tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-section {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 2px solid #e0e0e0;
+        }
+
+        .form-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input, select, textarea {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            margin-left: 10px;
+        }
+
+        .list-section {
+            margin-top: 30px;
+        }
+
+        .list-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit, .btn-delete {
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-edit {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #218838;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .cluster-info {
+            background: #e7f3ff;
+            border: 2px solid #2196F3;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #1976D2;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-primary {
+            background: #667eea;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🐾 Clinique Vétérinaire</h1>
+            <p class="subtitle">Système de gestion complète - Cluster Cassandra 4 nœuds</p>
+        </header>
+
+        <div class="cluster-info">
+            📊 Connecté au cluster Cassandra : 192.168.100.151, 192.168.100.152, 192.168.100.153, 192.168.100.154
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('veterinaires')">👨‍⚕️ Vétérinaires</button>
+            <button class="tab" onclick="showTab('especes')">🦁 Espèces</button>
+            <button class="tab" onclick="showTab('animaux')">🐶 Animaux</button>
+            <button class="tab" onclick="showTab('rendezvous')">📅 Rendez-vous</button>
+        </div>
+
+        <!-- TAB VÉTÉRINAIRES -->
+        <div id="veterinaires" class="tab-content active">
+            <div id="alert-veterinaires"></div>
+            
+            <div class="form-section">
+                <h3>Ajouter / Modifier un vétérinaire</h3>
+                <form id="form-veterinaires">
+                    <input type="hidden" id="vet-id">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nom *</label>
+                            <input type="text" id="vet-nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Prénom *</label>
+                            <input type="text" id="vet-prenom" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Spécialité</label>
+                            <input type="text" id="vet-specialite">
+                        </div>
+                        <div class="form-group">
+                            <label>Téléphone</label>
+                            <input type="tel" id="vet-telephone">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="vet-email">
+                        </div>
+                    </div>
+                    <button type="submit">💾 Enregistrer</button>
+                    <button type="button" class="btn-secondary" onclick="resetForm('veterinaires')">🔄 Réinitialiser</button>
+                </form>
+            </div>
+
+            <div class="list-section">
+                <h3>Liste des vétérinaires</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Spécialité</th>
+                            <th>Téléphone</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list-veterinaires"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB ESPÈCES -->
+        <div id="especes" class="tab-content">
+            <div id="alert-especes"></div>
+            
+            <div class="form-section">
+                <h3>Ajouter / Modifier une espèce</h3>
+                <form id="form-especes">
+                    <input type="hidden" id="espece-id">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nom de l'espèce *</label>
+                            <input type="text" id="espece-nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="espece-description"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit">💾 Enregistrer</button>
+                    <button type="button" class="btn-secondary" onclick="resetForm('especes')">🔄 Réinitialiser</button>
+                </form>
+            </div>
+
+            <div class="list-section">
+                <h3>Liste des espèces</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list-especes"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB ANIMAUX -->
+        <div id="animaux" class="tab-content">
+            <div id="alert-animaux"></div>
+            
+            <div class="form-section">
+                <h3>Ajouter / Modifier un animal</h3>
+                <form id="form-animaux">
+                    <input type="hidden" id="animal-id">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nom de l'animal *</label>
+                            <input type="text" id="animal-nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Espèce *</label>
+                            <select id="animal-espece" required>
+                                <option value="">Sélectionner une espèce</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nom du propriétaire *</label>
+                            <input type="text" id="animal-proprio-nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Téléphone propriétaire</label>
+                            <input type="tel" id="animal-proprio-tel">
+                        </div>
+                        <div class="form-group">
+                            <label>Email propriétaire</label>
+                            <input type="email" id="animal-proprio-email">
+                        </div>
+                        <div class="form-group">
+                            <label>Date de naissance</label>
+                            <input type="date" id="animal-date-naissance">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea id="animal-notes"></textarea>
+                    </div>
+                    <button type="submit">💾 Enregistrer</button>
+                    <button type="button" class="btn-secondary" onclick="resetForm('animaux')">🔄 Réinitialiser</button>
+                </form>
+            </div>
+
+            <div class="list-section">
+                <h3>Liste des animaux</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Espèce</th>
+                            <th>Propriétaire</th>
+                            <th>Contact</th>
+                            <th>Date naissance</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list-animaux"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB RENDEZ-VOUS -->
+        <div id="rendezvous" class="tab-content">
+            <div id="alert-rendezvous"></div>
+            
+            <div class="form-section">
+                <h3>Ajouter / Modifier un rendez-vous</h3>
+                <form id="form-rendezvous">
+                    <input type="hidden" id="rdv-id">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Animal *</label>
+                            <select id="rdv-animal" required>
+                                <option value="">Sélectionner un animal</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Vétérinaire *</label>
+                            <select id="rdv-veterinaire" required>
+                                <option value="">Sélectionner un vétérinaire</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Date et heure *</label>
+                            <input type="datetime-local" id="rdv-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Statut</label>
+                            <select id="rdv-statut">
+                                <option value="Programmé">Programmé</option>
+                                <option value="Confirmé">Confirmé</option>
+                                <option value="En cours">En cours</option>
+                                <option value="Terminé">Terminé</option>
+                                <option value="Annulé">Annulé</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Motif *</label>
+                        <textarea id="rdv-motif" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea id="rdv-notes"></textarea>
+                    </div>
+                    <button type="submit">💾 Enregistrer</button>
+                    <button type="button" class="btn-secondary" onclick="resetForm('rendezvous')">🔄 Réinitialiser</button>
+                </form>
+            </div>
+
+            <div class="list-section">
+                <h3>Liste des rendez-vous</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date/Heure</th>
+                            <th>Animal</th>
+                            <th>Vétérinaire</th>
+                            <th>Motif</th>
+                            <th>Statut</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list-rendezvous"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+
+        // Gestion des onglets
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+            
+            loadData(tabName);
+        }
+
+        // Afficher les alertes
+        function showAlert(section, message, type = 'success') {
+            const alertDiv = document.getElementById(`alert-${section}`);
+            alertDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            setTimeout(() => alertDiv.innerHTML = '', 3000);
+        }
+
+        // ==================== VÉTÉRINAIRES ====================
+        
+        async function loadVeterinaires() {
+            try {
+                const response = await fetch(`${API_URL}/veterinaires`);
+                const data = await response.json();
+                const tbody = document.getElementById('list-veterinaires');
+                tbody.innerHTML = data.map(vet => `
+                    <tr>
+                        <td>${vet.nom}</td>
+                        <td>${vet.prenom}</td>
+                        <td>${vet.specialite || '-'}</td>
+                        <td>${vet.telephone || '-'}</td>
+                        <td>${vet.email || '-'}</td>
+                        <td class="action-buttons">
+                            <button class="btn-edit" onclick="editVeterinaire('${vet.id}')">✏️ Modifier</button>
+                            <button class="btn-delete" onclick="deleteVeterinaire('${vet.id}')">🗑️ Supprimer</button>
+                        </td>
+                    </tr>
+                `).join('');
+                
+                // Mise à jour du select des rendez-vous
+                updateVeterinairesSelect(data);
+            } catch (error) {
+                showAlert('veterinaires', 'Erreur lors du chargement', 'error');
+            }
+        }
+
+        document.getElementById('form-veterinaires').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('vet-id').value;
+            const data = {
+                nom: document.getElementById('vet-nom').value,
+                prenom: document.getElementById('vet-prenom').value,
+                specialite: document.getElementById('vet-specialite').value,
+                telephone: document.getElementById('vet-telephone').value,
+                email: document.getElementById('vet-email').value
+            };
+
+            try {
+                const url = id ? `${API_URL}/veterinaires/${id}` : `${API_URL}/veterinaires`;
+                const method = id ? 'PUT' : 'POST';
+                await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showAlert('veterinaires', id ? 'Vétérinaire modifié avec succès' : 'Vétérinaire ajouté avec succès');
+                resetForm('veterinaires');
+                loadVeterinaires();
+            } catch (error) {
+                showAlert('veterinaires', 'Erreur lors de l\'enregistrement', 'error');
+            }
+        });
+
+        async function editVeterinaire(id) {
+            const response = await fetch(`${API_URL}/veterinaires`);
+            const data = await response.json();
+            const vet = data.find(v => v.id === id);
+            if (vet) {
+                document.getElementById('vet-id').value = vet.id;
+                document.getElementById('vet-nom').value = vet.nom;
+                document.getElementById('vet-prenom').value = vet.prenom;
+                document.getElementById('vet-specialite').value = vet.specialite || '';
+                document.getElementById('vet-telephone').value = vet.telephone || '';
+                document.getElementById('vet-email').value = vet.email || '';
+            }
+        }
+
+        async function deleteVeterinaire(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce vétérinaire ?')) {
+                try {
+                    await fetch(`${API_URL}/veterinaires/${id}`, { method: 'DELETE' });
+                    showAlert('veterinaires', 'Vétérinaire supprimé avec succès');
+                    loadVeterinaires();
+                } catch (error) {
+                    showAlert('veterinaires', 'Erreur lors de la suppression', 'error');
+                }
+            }
+        }
+
+        function updateVeterinairesSelect(veterinaires) {
+            const select = document.getElementById('rdv-veterinaire');
+            select.innerHTML = '<option value="">Sélectionner un vétérinaire</option>' +
+                veterinaires.map(v => `<option value="${v.id}">${v.prenom} ${v.nom}</option>`).join('');
+        }
+
+        // ==================== ESPÈCES ====================
+        
+        async function loadEspeces() {
+            try {
+                const response = await fetch(`${API_URL}/especes`);
+                const data = await response.json();
+                const tbody = document.getElementById('list-especes');
+                tbody.innerHTML = data.map(espece => `
+                    <tr>
+                        <td>${espece.nom}</td>
+                        <td>${espece.description || '-'}</td>
+                        <td class="action-buttons">
+                            <button class="btn-edit" onclick="editEspece('${espece.id}')">✏️ Modifier</button>
+                            <button class="btn-delete" onclick="deleteEspece('${espece.id}')">🗑️ Supprimer</button>
+                        </td>
+                    </tr>
+                `).join('');
+                
+                // Mise à jour du select des animaux
+                updateEspecesSelect(data);
+            } catch (error) {
+                showAlert('especes', 'Erreur lors du chargement', 'error');
+            }
+        }
+
+        document.getElementById('form-especes').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('espece-id').value;
+            const data = {
+                nom: document.getElementById('espece-nom').value,
+                description: document.getElementById('espece-description').value
+            };
+
+            try {
+                const url = id ? `${API_URL}/especes/${id}` : `${API_URL}/especes`;
+                const method = id ? 'PUT' : 'POST';
+                await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                showAlert('especes', id ? 'Espèce modifiée avec succès' : 'Espèce ajoutée avec succès');
+                resetForm('especes');
+                loadEspeces();
+            } catch (error) {
+                showAlert('especes', 'Erreur lors de l\'enregistrement', 'error');
+            }
+        });
+
+        async function editEspece(id) {
+            const response = await fetch(`${API_URL}/especes`);
+            const data = await response.json();
+            const espece = data.find(e => e.id === id);
+            if (espece) {
+                document.getElementById('espece-id').value = espece.id;
+                document.getElementById('espece-nom').value = espece.nom;
+                document.getElementById('espece-description').value = espece.description || '';
+            }
+        }
+
+        async function deleteEspece(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette espèce ?')) {
+                try {
+                    await fetch(`${API_URL}/especes/${id}`, { method: 'DELETE' });
+                    showAlert('especes', 'Espèce supprimée avec succès');
+                    loadEspeces();
+                } catch (error) {
+                    showAlert('especes', 'Erreur lors de la suppression', 'error');
+                }
+            }
+        }
+
+        function updateEspecesSelect(especes) {
+            const select = document.getElementById('animal-espece');
+            select.innerHTML = '<option value="">Sélectionner une espèce</option>' +
+                especes.map(e => `<option value="${e.id}">${e.nom}</option>`).join('');
+        }
+
+        // ==================== ANIMAUX ====================
+        
+        async function loadAnimaux() {
+            try {
+                const response = await fetch(`${API_URL}/animaux`);
+                const data = await response.json();
+                const tbody = document.getElementById('list-animaux');
+                tbody.innerHTML = data.map(animal => `
+                    <tr>
+                        <td>${animal.nom}</td>
+                        <td><span class="badge badge-primary">${animal.espece_nom}</span></td>
+                        <td>${animal.proprietaire_nom}</td>
+                        <td>${animal.proprietaire_telephone || animal.proprietaire_email || '-'}</td>
+                        <td>${animal.date_naissance || '-'}</td>
+                        <td class="action-buttons">
+                            <button class="btn-edit" onclick="editAnimal('${animal.id}')">✏️ Modifier</button>
+                            <button class="btn-delete" onclick="deleteAnimal('${animal.id}')">🗑️ Supprimer</button>
+                        </td>
+                    </tr>
+                `).join('');
+                
+                // Mise à jour du select des rendez-vous
+                updateAnimauxSelect(data);
+            } catch (error) {
+                showAlert('animaux', 'Erreur lors du chargement', 'error');
+            }
+        }
+
+        document.getElementById('form-animaux').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('animal-id').value;
+            const data = {
+                nom: document.getElementById('animal-nom').value,
+                espece_id: document.getElementById('animal-espece').value,
+                proprietaire_nom: document.getElementById('animal-proprio-nom').value,
+                proprietaire_telephone: document.getElementById('animal-proprio-tel').value,
+                proprietaire_email: document.getElementById('animal-proprio-email').value,
+                date_naissance: document.getElementById('animal-date-naissance').value,
+                notes: document.getElementById('animal-notes').value
+            };
+
+            if (!data.espece_id) {
+                showAlert('animaux', 'Veuillez sélectionner une espèce existante', 'error');
+                return;
+            }
+
+            try {
+                const url = id ? `${API_URL}/animaux/${id}` : `${API_URL}/animaux`;
+                const method = id ? 'PUT' : 'POST';
+                const response = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    showAlert('animaux', error.error || 'Erreur lors de l\'enregistrement', 'error');
+                    return;
+                }
+                
+                showAlert('animaux', id ? 'Animal modifié avec succès' : 'Animal ajouté avec succès');
+                resetForm('animaux');
+                loadAnimaux();
+            } catch (error) {
+                showAlert('animaux', 'Erreur lors de l\'enregistrement', 'error');
+            }
+        });
+
+        async function editAnimal(id) {
+            const response = await fetch(`${API_URL}/animaux`);
+            const data = await response.json();
+            const animal = data.find(a => a.id === id);
+            if (animal) {
+                document.getElementById('animal-id').value = animal.id;
+                document.getElementById('animal-nom').value = animal.nom;
+                document.getElementById('animal-espece').value = animal.espece_id;
+                document.getElementById('animal-proprio-nom').value = animal.proprietaire_nom;
+                document.getElementById('animal-proprio-tel').value = animal.proprietaire_telephone || '';
+                document.getElementById('animal-proprio-email').value = animal.proprietaire_email || '';
+                document.getElementById('animal-date-naissance').value = animal.date_naissance || '';
+                document.getElementById('animal-notes').value = animal.notes || '';
+            }
+        }
+
+        async function deleteAnimal(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cet animal ?')) {
+                try {
+                    await fetch(`${API_URL}/animaux/${id}`, { method: 'DELETE' });
+                    showAlert('animaux', 'Animal supprimé avec succès');
+                    loadAnimaux();
+                } catch (error) {
+                    showAlert('animaux', 'Erreur lors de la suppression', 'error');
+                }
+            }
+        }
+
+        function updateAnimauxSelect(animaux) {
+            const select = document.getElementById('rdv-animal');
+            select.innerHTML = '<option value="">Sélectionner un animal</option>' +
+                animaux.map(a => `<option value="${a.id}">${a.nom} (${a.espece_nom})</option>`).join('');
+        }
+
+        // ==================== RENDEZ-VOUS ====================
+        
+        async function loadRendezvous() {
+            try {
+                const response = await fetch(`${API_URL}/rendezvous`);
+                const data = await response.json();
+                const tbody = document.getElementById('list-rendezvous');
+                tbody.innerHTML = data.map(rdv => {
+                    const date = new Date(rdv.date_heure);
+                    const dateStr = date.toLocaleDateString('fr-FR') + ' ' + date.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'});
+                    return `
+                    <tr>
+                        <td>${dateStr}</td>
+                        <td>${rdv.animal_nom}</td>
+                        <td>${rdv.veterinaire_nom}</td>
+                        <td>${rdv.motif}</td>
+                        <td><span class="badge badge-primary">${rdv.statut}</span></td>
+                        <td class="action-buttons">
+                            <button class="btn-edit" onclick="editRendezvous('${rdv.id}')">✏️ Modifier</button>
+                            <button class="btn-delete" onclick="deleteRendezvous('${rdv.id}')">🗑️ Supprimer</button>
+                        </td>
+                    </tr>
+                `}).join('');
+            } catch (error) {
+                showAlert('rendezvous', 'Erreur lors du chargement', 'error');
+            }
+        }
+
+        document.getElementById('form-rendezvous').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const id = document.getElementById('rdv-id').value;
+            const data = {
+                animal_id: document.getElementById('rdv-animal').value,
+                veterinaire_id: document.getElementById('rdv-veterinaire').value,
+                date_heure: document.getElementById('rdv-date').value,
+                motif: document.getElementById('rdv-motif').value,
+                statut: document.getElementById('rdv-statut').value,
+                notes: document.getElementById('rdv-notes').value
+            };
+
+            if (!data.animal_id || !data.veterinaire_id) {
+                showAlert('rendezvous', 'Veuillez sélectionner un animal et un vétérinaire existants', 'error');
+                return;
+            }
+
+            try {
+                const url = id ? `${API_URL}/rendezvous/${id}` : `${API_URL}/rendezvous`;
+                const method = id ? 'PUT' : 'POST';
+                const response = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    showAlert('rendezvous', error.error || 'Erreur lors de l\'enregistrement', 'error');
+                    return;
+                }
+                
+                showAlert('rendezvous', id ? 'Rendez-vous modifié avec succès' : 'Rendez-vous ajouté avec succès');
+                resetForm('rendezvous');
+                loadRendezvous();
+            } catch (error) {
+                showAlert('rendezvous', 'Erreur lors de l\'enregistrement', 'error');
+            }
+        });
+
+        async function editRendezvous(id) {
+            const response = await fetch(`${API_URL}/rendezvous`);
+            const data = await response.json();
+            const rdv = data.find(r => r.id === id);
+            if (rdv) {
+                document.getElementById('rdv-id').value = rdv.id;
+                document.getElementById('rdv-animal').value = rdv.animal_id;
+                document.getElementById('rdv-veterinaire').value = rdv.veterinaire_id;
+                const date = new Date(rdv.date_heure);
+                document.getElementById('rdv-date').value = date.toISOString().slice(0, 16);
+                document.getElementById('rdv-motif').value = rdv.motif;
+                document.getElementById('rdv-statut').value = rdv.statut;
+                document.getElementById('rdv-notes').value = rdv.notes || '';
+            }
+        }
+
+        async function deleteRendezvous(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer ce rendez-vous ?')) {
+                try {
+                    await fetch(`${API_URL}/rendezvous/${id}`, { method: 'DELETE' });
+                    showAlert('rendezvous', 'Rendez-vous supprimé avec succès');
+                    loadRendezvous();
+                } catch (error) {
+                    showAlert('rendezvous', 'Erreur lors de la suppression', 'error');
+                }
+            }
+        }
+
+        // ==================== UTILITAIRES ====================
+        
+        function resetForm(section) {
+            const forms = {
+                veterinaires: 'form-veterinaires',
+                especes: 'form-especes',
+                animaux: 'form-animaux',
+                rendezvous: 'form-rendezvous'
+            };
+            document.getElementById(forms[section]).reset();
+            const idFields = {
+                veterinaires: 'vet-id',
+                especes: 'espece-id',
+                animaux: 'animal-id',
+                rendezvous: 'rdv-id'
+            };
+            document.getElementById(idFields[section]).value = '';
+        }
+
+        function loadData(section) {
+            const loaders = {
+                veterinaires: loadVeterinaires,
+                especes: loadEspeces,
+                animaux: loadAnimaux,
+                rendezvous: loadRendezvous
+            };
+            if (loaders[section]) {
+                loaders[section]();
+            }
+        }
+
+        // Chargement initial
+        window.addEventListener('load', () => {
+            loadVeterinaires();
+            loadEspeces();
+            loadAnimaux();
+            loadRendezvous();
+        });
+    </script>
+</body>
+</html>
