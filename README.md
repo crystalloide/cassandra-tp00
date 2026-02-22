@@ -26,18 +26,24 @@ Le fichier `Cluster_4_noeuds_4_racks_1_DC.yml` déploie :
 
 ```bash
 cd ~
+sudo rm -Rf ~/cassandra-tp00
+
+### Ici, on va simpleemnt cloner le projet :
+git clone https://github.com/crystalloide/cassandra-tp00
+cd 
+
 # Créer le répertoire de travail
-mkdir -p ~/cassandra-tp00
+# mkdir -p ~/cassandra-tp00
+
 cd ~/cassandra-tp00
 
-# On nettoie s'il y a eu des essais passés :
-sudo rm -Rf docker/*
+
 
 # Créer ou récupérer le fichier docker compose de notre cluster 4 noeuds cassandra :
 
-gedit Cluster_4_noeuds_4_racks_1_DC.yml
+cat Cluster_4_noeuds_4_racks_1_DC.yml
 
-# Copier le contenu suivant et sortir en sauvegardant : 
+# Le fichier doit avoir le contenu suivant : 
 
 networks:
   cassandra_network:
@@ -213,7 +219,6 @@ cp Cluster_4_noeuds_4_racks_1_DC.yml docker-compose.yml
 # Créer les répertoires de volumes (optionnel si vous voulez nettoyer)
 sudo rm -Rf docker/cassanda*
 mkdir -p docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra04
-
 
 # On affiche les répertoires créés : 
 ls ~/cassandra-tp00/docker
