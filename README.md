@@ -983,10 +983,6 @@ docker exec -it cassandra01 cqlsh
 SELECT COUNT(*) FROM formation.imdb ALLOW FILTERING;
 
 
-docker exec -it cassandra01 cat /etc/cassandra/cassandra.yaml | grep 'read_request_timeout'
-read_request_timeout: 5000ms
-
-
 SELECT movie_id, title, rating FROM formation.imdb LIMIT 5;
 
 
