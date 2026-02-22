@@ -353,13 +353,15 @@ Python 3.11.7
 pyenv virtualenv 3.11.7 cqlsh-env
 pyenv activate cqlsh-env
 
+#### Actualisation versions
+python -m pip install --upgrade pip
+
 #### Installer cqlsh dans cet environnement
 pip install cqlsh
 
 #### Maintenant lancer cqlsh
 cqlsh localhost 9142
 
-python -m pip install --upgrade pip
 ```
 
 #### Et pour les prochaines fois, il n'y aura besoin que de faire  : 
