@@ -302,6 +302,9 @@ UN  192.168.100.153  80.03 KiB   16      50.7%             21b3ae41-1e2a-4c7d-97
 # Se connecter à cqlsh sur cassandra01 :
 docker exec -it cassandra01 cqlsh
 
+# Pour sortir du shell : 
+exit 
+
 # Ou spécifier l'adresse IP :
 docker exec -it cassandra01 cqlsh 192.168.100.151 9042
 ```
