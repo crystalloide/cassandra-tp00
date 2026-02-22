@@ -500,8 +500,8 @@ gdown 16uJWq5N465U9rYvTCR1lKIBPHeNfd-oK
 #### Extrait de imdb_movies.csv :
 ```csv
 movie_id,title,year,genre,director,rating,votes,budget,length
-11,"The Lord of the Rings",2001,"Fantasy","Peter Jackson",8.8,1800000,93000000,178
-12,"Star Wars",1977,"Sci-Fi","George Lucas",8.6,1400000,11000000,121
+"11","The Lord of the Rings",2001,"Fantasy","Peter Jackson",8.8,1800000,"93000000",178
+"12","Star Wars",1977,"Sci-Fi","George Lucas",8.6,1400000,"11000000",121
 ...
 ```
 
