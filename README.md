@@ -39,7 +39,7 @@ cd ~/cassandra-tp00
 
 
 
-# Créer ou récupérer le fichier docker compose de notre cluster 4 noeuds cassandra :
+# Vérifier le contenu ou créer le fichier docker compose de notre cluster 4 noeuds cassandra :
 
 cat Cluster_4_noeuds_4_racks_1_DC.yml
 
