@@ -477,19 +477,23 @@ Pour charger des films, récupérer les fichiers CSV sur votre machine hôte :
 **Fichier : imdb_movies.csv**   https://www.kaggle.com/datasets/hoomch/imdb-full-dataset
 
 #### Conseil : on utilise gdown : 
+```bash
 pip install gdown
-
+```
 #### Les fichiers sont disponibles aussi dans Google Drive : 
 
 #### imdb_movies_extrait.csv (14,3 Ko)
+```bash
 gdown 1KZdUmJkw-dlihqlrQWrR56qVcqzmUrmI
-
+```
 #### IMDB_movies.zip (197 Mo)
+```bash
 gdown 1q6v-PEHu8UYfDONajVujqoTTGhRUAPHl
-
+```
 #### imdb_movies.csv (362 Mo)
+```bash
 gdown 16uJWq5N465U9rYvTCR1lKIBPHeNfd-oK
-
+```
 #### Extrait de imdb_movies.csv :
 ```csv
 movie_id,title,year,genre,director,rating,votes,budget,length
@@ -498,7 +502,7 @@ movie_id,title,year,genre,director,rating,votes,budget,length
 ...
 ```
 
-Nous allons charger des fichiers de données en .csv dans un des 4 conteneurs et ensuite charger ces données dans le cluster cassandra :
+#### Nous allons charger des fichiers de données en .csv dans un des 4 conteneurs et ensuite charger ces données dans le cluster cassandra :
 
 ```bash
 
