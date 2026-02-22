@@ -1,6 +1,10 @@
 ## TP00 - Cassandra 5.0 avec Docker Compose (Cluster 4 nœuds)
 
-TP00 pour utiliser un cluster Cassandra déployé via Docker Compose avec 4 nœuds sur 4 racks différents dans un seul datacenter DC1.
+Cassandra 5.0 avec Docker Compose (Cluster 4 nœuds)
+
+https://github.com/crystalloide/cassandra-tp00
+
+Cluster Cassandra déployé via Docker Compose avec 4 nœuds sur 4 racks différents dans un seul datacenter DC1.
 
 #### Vue d'ensemble du cluster
 
