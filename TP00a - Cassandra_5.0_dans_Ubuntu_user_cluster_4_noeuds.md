@@ -206,18 +206,20 @@ services:
       retries: 50
       start_period: 180s
 ```
-#### Fin du fichier
-
+#### Copie du fichier docker compose :
 ```bash
-#### Copier le fichier docker compose
 sudo rm docker-compose.yml
 cp Cluster_4_noeuds_4_racks_1_DC.yml docker-compose.yml
+```
 
-#### Créer les répertoires de volumes (optionnel)
+#### Création à vide des répertoires pour persister les volumes :
+```bash
 sudo rm -Rf docker/cassanda*
 mkdir -p docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra04
+```
 
-#### On affiche les répertoires créés : 
+#### Afficheage des répertoires créés :
+```bash
 ls ~/cassandra-tp00/docker
 
 #### Affichage : cassandra01  cassandra02  cassandra03  cassandra04
@@ -229,20 +231,22 @@ ls ~/cassandra-tp00/docker
 ```bash
 # Démarrer le cluster en arrière-plan
 docker compose -f docker-compose.yml up  -d
-
+```
 #### Suivre les logs pour vérifier le démarrage (dans un autre terminal si besoin)
+```bash
 cd ~/cassandra-tp00
 docker compose logs -f
-# Faire <CTRL>+>C> pour sortir
-
+```
+#### Faire <CTRL>+>C> pour sortir
 
 #### Dans un autre terminal, pour suivre  :
-bash
+```bash
 cd ~
 docker ps -a 
+```
 
-# Affichage (exemple) ': 
-# 
+#### Affichage (exemple) ': 
+```bash
 # CONTAINER ID   IMAGE              COMMAND                  CREATED              STATUS                             PORTS                                                                                                                                                       NAMES
 # 439bcb49160a   cassandra:latest   "docker-entrypoint.s…"   About a minute ago   Created                                                                                                                                                                                        cassandra04
 # 7dd3d0d2bf79   cassandra:latest   "docker-entrypoint.s…"   About a minute ago   Created                                                                                                                                                                                        cassandra03
@@ -251,36 +255,35 @@ docker ps -a
 ```
 
 **Note** : Le démarrage complet peut prendre 5-10 minutes car les nœuds démarrent séquentiellement avec healthchecks. L'ordre de démarrage est :
-
+```bash
 1. cassandra01 (1er seed, peut démarrer en 1er)
 2. cassandra02 (attend cassandra01 healthy)
 3. cassandra03 (2ème seed, attend cassandra02 healthy)
 4. cassandra04 (attend cassandra03 healthy)
-
+```
 
 #### Pour visualiser les logs de cassandra01 : 
+```bash
 docker logs cassandra01
-
-
+```
 
 #### Étape 3 : Vérification du cluster (après 5-10 minutes)
-
 ```bash
 # Regarder les ports à l'écoute :
 netstat -anl | grep 0:
-
-# Vérifier que les 4 conteneurs sont UP sinon attendre (non listé ou encore en train de joindre : 'UJ') 
+```
+#### Vérifier que les 4 conteneurs sont UP sinon attendre (non listé ou encore en train de joindre : 'UJ') 
+```bash
 cd /home/user/cassandra-tp00
 docker compose ps 
-
-# Vérifier le statut du cluster via nodetool
-docker exec -it cassandra01 nodetool status
-
-# Vous devriez voir finalement les 4 nœuds cassandra avec le statut "UN" (Up Normal)
 ```
+#### Vérifier le statut du cluster via nodetool
+```bash
+docker exec -it cassandra01 nodetool status
+```
+#### Vous devriez voir finalement les 4 nœuds cassandra avec le statut "UN" (Up Normal)
 
-Le résultat devrait ressembler à :
-
+#### Le résultat devrait ressembler à :
 ```
 Datacenter: dc1
 ===============
@@ -292,7 +295,6 @@ UN  192.168.100.151  119.82 KiB  16      48.5%             e2efa530-2ac0-4957-88
 UN  192.168.100.152  80.06 KiB   16      48.8%             955ae8dc-40f6-4c7c-a534-4f99af4af5de  Rack2
 UN  192.168.100.153  80.03 KiB   16      50.7%             21b3ae41-1e2a-4c7d-97d7-bcca250c85df  Rack3
 ```
-
 
 #### Accès à cqlsh
 
@@ -311,16 +313,17 @@ docker exec -it cassandra01 cqlsh 192.168.100.151 9042
 
 
 #### Option 2 : Depuis l'hôte (via ports exposés)
-
+```bash
 Les ports CQL sont exposés sur l'hôte :
 
 - cassandra01 : localhost:9142
 - cassandra02 : localhost:9242
 - cassandra03 : localhost:9342
 - cassandra04 : localhost:9442
+```
 
+#### Si cqlsh est installé sur votre machine hôte
 ```bash
-# Si cqlsh est installé sur votre machine hôte
 cqlsh localhost 9142
 ```
 
