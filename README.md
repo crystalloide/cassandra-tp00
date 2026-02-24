@@ -37,12 +37,12 @@ git clone https://github.com/crystalloide/cassandra-tp00
 
 cd ~/cassandra-tp00
 
-# Vérifier le contenu ou créer le fichier docker compose de notre cluster 4 noeuds cassandra :
+#### Vérifier le contenu ou créer le fichier docker compose de notre cluster 4 noeuds cassandra :
 
 cat Cluster_4_noeuds_4_racks_1_DC.yml
-
-# Le fichier doit avoir le contenu suivant : 
-
+```
+#### Le fichier doit avoir le contenu suivant : 
+```bash
 networks:
   cassandra_network:
     ipam:
@@ -61,7 +61,7 @@ services:
       cassandra_network:
         ipv4_address: 192.168.100.151
     volumes:
-    - ./docker/cassandra01:/bitnami
+    - ~/cassandra-tp00/docker/cassandra01:/var/lib/cassandra
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra03
@@ -101,7 +101,7 @@ services:
       cassandra_network:
         ipv4_address: 192.168.100.152
     volumes:
-    - ./docker/cassandra02:/bitnami
+    - ~/cassandra-tp00/docker/cassandra02:/var/lib/cassandra
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra03
@@ -141,7 +141,7 @@ services:
       cassandra_network:
         ipv4_address: 192.168.100.153
     volumes:
-    - ./docker/cassandra03:/bitnami
+    - ~/cassandra-tp00/docker/cassandra03:/var/lib/cassandra
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra03
@@ -181,7 +181,7 @@ services:
       cassandra_network:
         ipv4_address: 192.168.100.154
     volumes:
-    - ./docker/cassandra04:/bitnami
+    - ~/cassandra-tp00/docker/cassandra04:/var/lib/cassandra
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra03
@@ -206,7 +206,7 @@ services:
       timeout: 10s
       retries: 50
       start_period: 180s
-
+```
 # Fin du fichier
 
 
