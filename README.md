@@ -209,7 +209,7 @@ services:
 ```
 # Fin du fichier
 
-
+```bash
 # Copier le fichier docker compose
 sudo rm docker-compose.yml
 cp Cluster_4_noeuds_4_racks_1_DC.yml docker-compose.yml
