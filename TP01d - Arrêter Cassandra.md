@@ -72,29 +72,30 @@ docker exec -it cassandra01 ./opt/cassandra/bin/stop-server
     qui fournit à Cassandra le nom d'un fichier dans lequel sera écrit l'identifiant de processus (PID) au démarrage. 
     C'est sans doute l'approche la plus fiable pour s'assurer de killer le bon processus.
 
-##### Avec l'option **-l** :
-```bash
-docker exec -it cassandra01 ./opt/cassandra/bin/stop-server -l
-```
-
-##### Avec l'option **-e** :
-```bash
-docker exec -it cassandra02 ./opt/cassandra/bin/stop-server -l
-```
-
-##### Avec l'option **-h** :
-```bash
-docker exec -it cassandra03 ./opt/cassandra/bin/stop-server -h
-```
-
-###### Egalement, si on veut retrouver le processus de cassandra  
+###### Si on veut retrouver le processus de cassandra sans connaître l Pid "p" :  
 ###### Il est possible d'utiliser "pgrep" pour localiser les processus de l'utilisateur actuel contenant le terme « cassandra » :
 ```bash
-docker exec -it cassandra04 bash
+docker exec -it cassandra01 bash
 utilisateur=`whoami`
 pgrep -u $user -f cassandra | xargs kill −9
 exit
 ```
+
+##### Avec l'option **-l** :
+```bash
+docker exec -it cassandra02 ./opt/cassandra/bin/stop-server -l
+```
+
+##### Avec l'option **-e** :
+```bash
+docker exec -it cassandra03 ./opt/cassandra/bin/stop-server -l
+```
+
+##### Avec l'option **-h** :
+```bash
+docker exec -it cassandra04 ./opt/cassandra/bin/stop-server -h
+```
+
 
 ###### Et voilà :-)
 
@@ -111,6 +112,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
