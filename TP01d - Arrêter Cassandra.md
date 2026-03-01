@@ -32,6 +32,16 @@ docker exec -it cassandra01 nodetool status
 ##### Pour un déploiement DataStax (DSE), on aurait fait  : 
 ###### docker exec -it cassandra01 dsetool status
 
+    Datacenter: dc1
+    ===============
+    Status=Up/Down
+    |/ State=Normal/Leaving/Joining/Moving
+    --  Address          Load       Tokens  Owns (effective)  Host ID                               Rack
+    UN  192.168.100.154  38.77 MiB  16      73.2%             3a11e986-d24f-46f3-83b2-bc0632ac5991  Rack4
+    UN  192.168.100.151  39.5 MiB   16      74.7%             13473850-0ed8-4adb-9cc3-923efb56ecd9  Rack1
+    UN  192.168.100.152  39.62 MiB  16      74.7%             67895141-9db1-467c-8c15-b0e57fe4fa72  Rack2
+    UN  192.168.100.153  40.84 MiB  16      77.4%             2c0c4b8e-f221-4db2-9ead-4eb9030539cc  Rack3
+    
 _____________________________________
 
 ##### Pour arrêter Cassandra :
@@ -42,10 +52,11 @@ _____________________________________
 ###### Une commande "stop-server" est présente dans le répertoire "bin"
 
 ###### Si on lance cette commande sur linux : 
+```bash
 docker exec -it cassandra01 ./stop-server
-
+```
 ###### Affichage en retour : 
-###### veuillez lire le script d'arrêt du serveur avant utilisation
+    veuillez lire le script d'arrêt du serveur avant utilisation
 
 ###### Le serveur n'a pas été arrêté, et on nous invite à lire le script. 
 ###### En regardant à l'intérieur avec son éditeur de code préféré, 
@@ -77,6 +88,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
