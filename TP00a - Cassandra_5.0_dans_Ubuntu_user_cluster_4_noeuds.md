@@ -401,7 +401,6 @@ cqlsh localhost 9142
 #### Exercices CQL avec données IMDB
 
 #### 1. Création du keyspace formation
-
 ```sql
 DROP KEYSPACE IF EXISTS formation;
 
@@ -443,9 +442,6 @@ CREATE TABLE formation.imdb (
 
 DESCRIBE TABLE formation.imdb;
 ```
-
-
-
 
 #### 3. Chargement de films
 
@@ -588,54 +584,73 @@ FROM '/tmp/imdb_movies_extrait.csv'
 WITH HEADER = TRUE AND DELIMITER = ',';
 ```
 
-#### 4. Lecture de films
+#### 4. Qualques requêtes :
 
 ```sql
--- Compter le nombre total de films
+-- Compter le nombre total de films :
 SELECT COUNT(*) FROM formation.imdb;
+```
 
--- Lecture des 10 premiers films
+```sql
+-- Lecture des 10 premiers films :
 SELECT * FROM formation.imdb LIMIT 100;
+```
 
+```sql
 -- Requêter un film avec un id précis  :
 SELECT * FROM formation.imdb WHERE movie_id = '1';
 SELECT * FROM formation.imdb WHERE movie_id = '200';
+```
 
--- Afficher seulement certaines colonnes
+```sql
+-- Afficher seulement certaines colonnes :
 SELECT title, year, rating, director FROM formation.imdb LIMIT 10;
+```
 
--- Top 15 des meilleurs films
+```sql
+-- extrait de 15 des meilleurs films :
 SELECT title, rating, year, director 
 FROM formation.imdb 
 WHERE rating >= 8.8 
 LIMIT 15
 ALLOW FILTERING;
+```
 
-
--- Créer un index secondaire sur l'année
+```sql
+-- Créer un index secondaire sur l'année :
 CREATE INDEX idx_year ON formation.imdb(year);
+```
 
--- Recherche par année
+```sql
+-- Recherche par année :
 SELECT title, year, rating, director 
 FROM formation.imdb 
 WHERE year = 1994 
 ALLOW FILTERING;
+```
 
--- Créer un index sur le genre
+```sql
+-- Créer un index sur le genre :
 CREATE INDEX idx_genre ON formation.imdb(genre);
+```
 
--- Films par genre
+```sql
+-- Films par genre :
 SELECT title, genre, rating, director
 FROM formation.imdb 
 WHERE genre = 'Drama' 
 ALLOW FILTERING;
+```
 
+```sql
 -- Films par genre pour une année précise : 
 SELECT title, genre, rating, director
 FROM formation.imdb 
 WHERE genre = 'Drama' AND year= 2014
 ALLOW FILTERING;
+```
 
+```sql
 -- Films Sci-Fi
 SELECT title, year, rating 
 FROM formation.imdb 
@@ -649,23 +664,33 @@ ALLOW FILTERING;
 ```sql
 -- Mise à jour du rating d'un film
 UPDATE formation.imdb SET rating = 9.4 WHERE movie_id = '1';
+```
 
+```sql
 -- Vérification de la modification
 SELECT title, rating FROM formation.imdb WHERE movie_id = '1';
+```
 
+```sql
 -- Mise à jour de plusieurs colonnes
 UPDATE formation.imdb 
 SET rating = 9.1, votes = 2700000 
 WHERE movie_id = '3';
+```
 
+```sql
 -- Ajout d'une nouvelle colonne à la table
 ALTER TABLE formation.imdb ADD country TEXT;
+```
 
+```sql
 -- Mise à jour avec la nouvelle colonne
 UPDATE formation.imdb SET country = 'USA' WHERE movie_id = '1';
 UPDATE formation.imdb SET country = 'USA' WHERE movie_id = '2';
 UPDATE formation.imdb SET country = 'UK' WHERE movie_id = '3';
+```
 
+```sql
 -- Vérification
 SELECT title, country FROM formation.imdb WHERE movie_id IN ('1','2','3') ALLOW FILTERING;
 ```
@@ -676,17 +701,25 @@ SELECT title, country FROM formation.imdb WHERE movie_id IN ('1','2','3') ALLOW 
 ```sql
 -- Suppression d'un film spécifique
 DELETE FROM formation.imdb WHERE movie_id = '4';
+```
 
+```sql
 -- Vérification de la suppression
 SELECT * FROM formation.imdb WHERE movie_id = '4';
+```
 
+```sql
 -- Suppression de plusieurs films (une par une en Cassandra)
 DELETE FROM formation.imdb WHERE movie_id = '6';
 DELETE FROM formation.imdb WHERE movie_id = '7';
+```
 
+```sql
 -- Suppression d'une colonne spécifique (mise à NULL)
 UPDATE formation.imdb SET budget = NULL WHERE movie_id = '1';
+```
 
+```sql
 -- Vérification
 SELECT title, budget FROM formation.imdb WHERE movie_id = '1';
 ```
@@ -697,22 +730,30 @@ SELECT title, budget FROM formation.imdb WHERE movie_id = '1';
 ```sql
 -- Comptage total de films
 SELECT COUNT(*) FROM formation.imdb;
+```
 
+```sql
 -- Films avec les meilleures notes (> 8.5)
 SELECT title, rating, year, genre 
 FROM formation.imdb 
 WHERE rating > 8.5 
 ALLOW FILTERING;
+```
 
+```sql
 -- Films récents (après 2000)
 SELECT title, year, rating, director 
 FROM formation.imdb 
 WHERE year > 2000 
 ALLOW FILTERING;
+```
 
+```sql
 -- Créer un index sur le réalisateur
 CREATE INDEX idx_director ON formation.imdb(director);
+```
 
+```sql
 -- Films de Christopher Nolan
 SELECT title, year, rating 
 FROM formation.imdb 
@@ -726,29 +767,43 @@ ALLOW FILTERING;
 ```sql
 -- Afficher la structure de la table
 DESCRIBE TABLE formation.imdb;
+```
 
+```sql
 -- Afficher tous les keyspaces ( ~ databases, et porte en + la notion de réplication mono ou multi-DC)
 DESCRIBE KEYSPACES;
+```
 
+```sql
 -- Efface pour y voir plus clair
 CLEAR
+```
 
+```sql
 -- Afficher le schéma complet du keyspace
 DESCRIBE KEYSPACE formation;
+```
 
+```sql
 -- Vérifier le niveau de cohérence actuel
 CONSISTENCY;
+```
 
+```sql
 -- Changer le niveau de cohérence
 CONSISTENCY QUORUM;
 CONSISTENCY ONE;
 CONSISTENCY ALL;
+```
 
+```sql
 -- Active le tracing sur le noeud où est connecté le client CQLSH pour voir le détail des étapes d'exécution des requêtes
 TRACING ON;
 SELECT * FROM formation.imdb WHERE movie_id = '1';
 TRACING OFF;
+```
 
+```sql
 -- Afficher les informations de pagination
 PAGING 10;
 SELECT * FROM formation.imdb;
@@ -777,68 +832,84 @@ docker exec -it cassandra01 cqlsh
 ```sql
 CONSISTENCY QUORUM;
 SELECT * FROM formation.imdb WHERE movie_id = '1';
+```
 
+```sql
 CONSISTENCY ALL;
 SELECT * FROM formation.imdb WHERE movie_id = '1';
-
-CONSISTENCY QUORUM;
-
 ```
 
-#### Vérifier le statut du cluster
+```sql
+CONSISTENCY QUORUM;
+```
 
+#### Vérifier le statut du cluster :
 ```bash
 docker exec -it cassandra01 nodetool status
-# cassandra02 devrait apparaître comme "DN" (Down Normal)
-
-# Redémarrer le nœud
-docker start cassandra02
-
-# Attendre 60 secondes et vérifier à nouveau
-docker exec -it cassandra01 nodetool status
 ```
 
+#### cassandra02 devrait apparaître comme "DN" (= Down Normal) :
+
+#### Redémarrer le nœud :
+```bash
+docker start cassandra02
+```
+
+#### Attendre 60 secondes et vérifier à nouveau :
+```bash
+docker exec -it cassandra01 nodetool status
+```
 
 #### Vérifier la distribution des données
 
 ```bash
 # Voir la distribution des tokens et des données
 docker exec -it cassandra01 nodetool ring
-
-# Statistiques de chaque nœud
+```
+#### Statistiques de chaque nœud :
+```bash
 docker exec -it cassandra01 nodetool info
 docker exec -it cassandra02 nodetool info
 docker exec -it cassandra03 nodetool info
 docker exec -it cassandra04 nodetool info
 
-# Voir les métriques de performances
+#### Voir les métriques de performances
 docker exec -it cassandra01 nodetool tablestats formation.imdb
 ```
 
 
-#### Commandes Docker Compose utiles ( à ne pas faire ici, juste pour montrer)
+#### Commandes Docker Compose utiles ( => à ne pas faire ici, juste pour montrer)
 
 ```bash
-# Afficher les logs d'un nœud spécifique
+#### Afficher les logs d'un nœud spécifique
 docker compose logs -f cassandra01
-# Faire <CTRL>+>C> pour sortir
-
-# Arrêter le cluster
-docker compose down
-
-# Arrêter et supprimer les volumes (supprime toutes les données)
-docker compose down -v
-
-# Redémarrer le cluster
-docker compose restart
-
-# Voir l'utilisation des ressources
-docker stats cassandra01 cassandra02 cassandra03 cassandra04
-
-# Accès shell à un conteneur
-docker exec -it cassandra01 /bin/bash
+#### Faire <CTRL>+>C> pour sortir
 ```
 
+#### Arrêter le cluster :
+```bash
+docker compose down
+```
+
+#### Arrêter et supprimer les volumes (supprime toutes les données) :
+```bash
+docker compose down -v
+```
+
+#### Redémarrer le cluster :
+```bash
+docker compose restart
+```
+
+#### Voir l'utilisation des ressources :
+```bash
+docker stats cassandra01 cassandra02 cassandra03 cassandra04
+```
+
+#### Accès shell à un conteneur :
+```bash
+docker exec -it cassandra01 /bin/bash
+```
 
 
 #### Exercice avancé : on travaille désormais avec le fichier le plus complet : imdb_movies.csv
@@ -847,47 +918,59 @@ docker exec -it cassandra01 /bin/bash
 ```bash
 # Afficher la première ligne du fichier imdb_movies.csv
 docker exec -it cassandra01 head -1 /tmp/imdb_movies.csv
-
-## Affichage en retour : 
+```
+#### Affichage en retour :
+```bash
 movie_id,name,org_name,date,title_year,point,point_volume,metascore,user_reviews,critic_reviews,director,writer,story_line,cast,genres,country,language,budget,world_gross,usa_gross,runtime,production_companies,dollar_budget,w_gross_money,u_gross_money,inflation_coeff,casts_id,BlogPage,CompPage,HomePage,release_month,release_day,keywords
+```
+#### On voit qu'il y a bcp trop d'information par rapport à notre table cible 
+#### Malheureusement, la commande COPY de Cassandra ne permet pas de sélectionner des colonnes spécifiques du fichier CSV. 
+#### Elle s'attend à ce que les colonnes du fichier correspondent exactement (dans l'ordre) aux colonnes spécifiées dans la commande.
 
-# On voit qu'il y a bcp trop d'information par rapport à notre table cible 
-# Malheureusement, la commande COPY de Cassandra ne permet pas de sélectionner des colonnes spécifiques du fichier CSV. 
-# Elle s'attend à ce que les colonnes du fichier correspondent exactement (dans l'ordre) aux colonnes spécifiées dans la commande.
 
-
-# L'utilitaire DSBulk permet le mapping de colonnes :
-# Récupération de l'utilitaire 
+#### L'utilitaire DSBulk permet le mapping de colonnes :
+#### Récupération de l'utilitaire :
+```bash
 wget https://downloads.datastax.com/dsbulk/dsbulk-1.11.0.tar.gz
+```
 
-# Copie dans le conteneur cassandra01 : 
+#### Copie dans le conteneur cassandra01 : 
+```bash
 docker cp dsbulk-1.11.0.tar.gz cassandra01:/tmp/dsbulk-1.11.0.tar.gz
+```
 
-# Installer DSBulk dans le conteneur
+#### Installer DSBulk dans le conteneur :
+```bash
 docker exec -it cassandra01 bash
 cd /tmp
 tar -xzf dsbulk-1.11.0.tar.gz
 ls dsbulk-1.11.0/bin
 export PATH=$PATH:/tmp/dsbulk-1.11.0/bin
+```
 
-# Lancer l'import : 
+#### Lancer l'import :
+```bash
 dsbulk load \
   -url /tmp/imdb_movies.csv \
   -k formation \
   -t imdb \
   -header true \
   -m "0=movie_id, 1=title, 4=year, 14=genre, 10=director, 5=rating, 6=votes, 17=budget, 20=length"
+```
 
-
-# Si besoin de diagnostiquer les erreurs de chargement : les logs sont ici : (exemple à adapter à votre cas)
+#### Si besoin de diagnostiquer les erreurs de chargement : les logs sont ici : (exemple à adapter à votre cas)
+```bash
 cat /tmp/logs/LOAD_20260221-164858-592667/mapping-errors.log |grep Suppressed
 cat /tmp/logs/LOAD_20260221-164858-592667/mapping-errors.log |grep InvalidMapping
-
 cat /tmp/logs/LOAD_20260221-170143-031056/operation.log |grep Error
+cat /tmp/logs/LOAD_20260221-172956-413471/connector-errors.log
 cat /tmp/logs/LOAD_20260221-170143-031056/connector-errors.log |grep IllegalArgumentException
 
+head -5 /tmp/logs/LOAD_20260221-172956-413471/connector-errors.log
+```
 
-# Relancer l'import en entier :  
+#### Exemple de relancer de l'import en entier : 
+```bash
  dsbulk load \
   -url /tmp/imdb_movies.csv \
   -k formation \
@@ -895,9 +978,10 @@ cat /tmp/logs/LOAD_20260221-170143-031056/connector-errors.log |grep IllegalArgu
   -header true \
   -m "0=movie_id, 1=title, 4=year, 14=genre, 10=director, 5=rating, 6=votes, 17=budget, 20=length"  \
   -escape '\"'  
+```
 
-
-# Relancer l'import à partir du dernier arrêt :
+#### Exemple de relance de l'import à partir du dernier arrêt :
+```bash
 dsbulk load \
   -url /tmp/imdb_movies.csv \
   -k formation \
@@ -907,12 +991,13 @@ dsbulk load \
   -escape '\\"' \
   --connector.csv.maxCharsPerColumn 10000 \
   --dsbulk.log.checkpoint.file=/tmp/logs/LOAD_20260221-171717-693590/checkpoint.csv
+```
 
-
-# Commande complète :  ( ~10% lignes en erreur pour des problèmes de format, échappement, etc)
-# Pour tester un chargement à blanc dans écrire les données : option --dryRun 
-# https://docs.datastax.com/en/dsbulk/reference/schema-options.html
-
+#### Pour charger notre fichier, voici la cCommande complète :  
+#### (~10% lignes en erreur pour des problèmes de format, échappement, etc)
+#### A savoir : pour tester un chargement à blanc dans écrire les données : option --dryRun 
+#### **https://docs.datastax.com/en/dsbulk/reference/schema-options.html**
+```bash
 dsbulk load \
   -url /tmp/imdb_movies.csv \
   -k formation \
@@ -923,16 +1008,9 @@ dsbulk load \
   --connector.csv.normalizeLineEndingsInQuotes true \
   --continueOnError true \
   --log.maxErrors 30000
+```
 
-
-## Si des erreurs sont à analyser : 
-
-cat /tmp/logs/LOAD_20260221-172956-413471/operation.log |grep Error
-cat /tmp/logs/LOAD_20260221-172956-413471/connector-errors.log
-
-head -5 /tmp/logs/LOAD_20260221-172956-413471/connector-errors.log
-
-# Synthèse du chargement : 
+#### Synthèse du chargement : 
 
 	total 	| failed | rows/s | p50ms | p99ms | p999ms | batches
 	481,342 | 25,890 |  1,498 |  4.76 | 91.23 | 179.31 |    1.00
@@ -948,7 +1026,7 @@ head -5 /tmp/logs/LOAD_20260221-172956-413471/connector-errors.log
 
 
 
-# Paramètres essentiels
+#### Paramètres essentiels
 
 --connector.csv.maxCharsPerColumn -1           		# Redimensionne dynamiquement (pas de limite fixe)
 --connector.csv.normalizeLineEndingsInQuotes true  	# \n → espace dans champs quotés
@@ -957,7 +1035,7 @@ head -5 /tmp/logs/LOAD_20260221-172956-413471/connector-errors.log
 --connector.csv.escape '\"'                    		# Escape des quotes internes
 
 
-# Tolérance erreurs/performance
+#### Tolérance erreurs/performance
 
 --continueOnError true   		                   # Continue malgré erreurs
 --log.maxErrors 5000            	               # Tolère 5000 erreurs max
@@ -965,75 +1043,87 @@ head -5 /tmp/logs/LOAD_20260221-172956-413471/connector-errors.log
 --batch.maxSize.rows 500                	       # Batch de 500 lignes
 
 
-## Comptage du nombre de ligne : 
+#### Comptage du nombre de ligne : 
+```bash
 dsbulk count -k formation -t imdb --dsbulk.log.dir /tmp/dsbulk-count
-
-## Affichage en retour : 
+```
+#### Affichage en retour : 
 	Operation directory: /tmp/logs/COUNT_20260221-175434-996579
 	total | failed | rows/s | p50ms |  p99ms | p999ms
 	456,029 |      0 | 46,319 | 90.82 | 402.65 | 402.65
 
 
 	
-## Pourquoi l'utilitaire DSBulk est intéressant et non soumis au timeout que l'on recontre en CQL sur des requêtes trop lourdes : 	
-| Aspect          | CQL COUNT(*)                | DSBulk count                                      |
-| --------------- | --------------------------- | ------------------------------------------------- |
-| Méthode         | Scan complet 1 requête      | Token range splitting (1000s requêtes parallèles) |
-| Coordinateur    | 1 node attend TOUS          | Round-robin + retries automatiques                |
-| Timeout         | range_request_timeout_in_ms | Configurable + heartbeat                          |
-| Perf 34k lignes | 1-5min (timeout)            | 5-10s                                             |
-| Parallélisme    | 1 thread                    | --driver.threads 8 auto                           |	
-	
+#### L'utilitaire DSBulk est intéressant car il n'est pas soumis au timeout que l'on recontre en CQL sur des requêtes trop lourdes : 	
+#### DSBulk effectue l'opéraiton en la répartissant sous forme d'actions distinctes (multi-thread et multiples accès répartis sur le cluster) 
+
+	| Aspect          | CQL COUNT(*)                | DSBulk count                                      |
+	| --------------- | --------------------------- | ------------------------------------------------- |
+	| Méthode         | Scan complet 1 requête      | Token range splitting (1000s requêtes parallèles) |
+	| Coordinateur    | 1 node attend TOUS          | Round-robin + retries automatiques                |
+	| Timeout         | range_request_timeout_in_ms | Configurable + heartbeat                          |
+	| Perf 34k lignes | 1-5min (timeout)            | 5-10s                                             |
+	| Parallélisme    | 1 thread                    | --driver.threads 8 auto                           |	
 
 
-## Si on veut augmenter temporairement et dynamiquenent sur un noeud cassandra la durée de timeout : 
+#### Si on veut augmenter temporairement et dynamiquenent sur un noeud cassandra la durée de timeout : 
+```bash
 nodetool settimeout read 120000
 nodetool settimeout range 300000
+```
 
+#### Si on veut connaitres les seuils de timeout en cours sur un noeud cassandra : 
+```bash
 nodetool gettimeout read
 nodetool settimeout range
-
 ```
-
 
 #### Poursuivons :  
-
 ```bash
 docker exec -it cassandra01 cat /etc/cassandra/cassandra.yaml | grep 'read_request_timeout'
-
-## Afichage en retour : 
-read_request_timeout: 5000ms
-
-## On lance le client CQL : 
-docker exec -it cassandra01 cqlsh
-
 ```
+
+#### Afichage en retour : 
+    read_request_timeout: 5000ms
+
+#### On lance le client CQL : 
+```bash
+docker exec -it cassandra01 cqlsh
+```
+
 #### Nouvelles requêtes :  
 
 ```sql
-
 -- Comptage total de films : ~40k+ lignes
 SELECT COUNT(*) FROM formation.imdb ALLOW FILTERING;
+```
 
-
+```sql
 SELECT movie_id, title, rating FROM formation.imdb LIMIT 5;
+```
 
-
+```sql
 -- Films avec les meilleures notes (> 9.8)
 SELECT title, rating, year, genre 
 FROM formation.imdb 
 WHERE rating > 9.8
 ALLOW FILTERING;
+```
 
+```sql
 -- Films récents (après 2024)
 SELECT title, year, rating, director 
 FROM formation.imdb 
 WHERE year > 2024
 ALLOW FILTERING;
+```
 
+```sql
 -- Créer un index sur le réalisateur
 CREATE INDEX idx_director ON formation.imdb(director);
+```
 
+```sql
 -- Films de Ernst Lubitsch
 SELECT title, year, rating 
 FROM formation.imdb 
@@ -1042,16 +1132,15 @@ ALLOW FILTERING;
 ```
 
 
+#### Nettoyage de l'environnement :
 
-
-
-#### Nettoyage de l'environnement
-
+##### Pour arrêter et supprimer tous les conteneurs et volumes :
 ```bash
-# Arrêter et supprimer tous les conteneurs et volumes
 docker compose down -v
+```
 
-# Supprimer les répertoires de données locaux
+##### Et pour -en plus- supprimer les répertoires de données persistés en local :
+```bash
 rm -rf docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra04
 ```
 
