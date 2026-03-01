@@ -115,7 +115,7 @@ exit
 docker exec -it cassandra03 bash
 ```
 ```bash
-/opt/cassandra/bin/stop-server -l
+/opt/cassandra/bin/stop-server -e
 ```
 ```bash
 exit
@@ -148,6 +148,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
