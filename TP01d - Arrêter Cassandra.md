@@ -163,12 +163,28 @@ docker exec cassandra03 nodetool status
 
 
 ```bash
+docker logs cassandra01 | tail -5
+```
+
+```bash
 docker exec cassandra01 start
+```
+
+```bash
 sleep 45
+```
+
+```bash
+docker logs cassandra01
+##### CTRL+D pour sortir
+```
+
+```bash
 docker exec cassandra03 nodetool status
 ```
 
 _____________________________________
 ##### Fin du TP
 _____________________________________
+
 
