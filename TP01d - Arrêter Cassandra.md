@@ -85,12 +85,18 @@ ps aux | grep cassandra
 ```
 cassand+  1234  ... java -Dcassandra ...
 ```
-###### On supposera ici que cassandra tourne sous le user "root" (on le trouve aussi parfois sous "cassandra") : 
+###### On supposera ici que cassandra tourne sous le user "cassandra" : 
 ```bash
-pgrep -u root -f cassandra | xargs kill -9
+pgrep -u cassandra -f cassandra | xargs kill -9
 ```
 ```bash
 exit
+```
+###### Notre cas est un peu particulier car on tourne sous docker, 
+###### La bonne façon est donc d'agir sur le contenur lui-même, de l'extérieur : 
+
+```bash
+docker stop cassandra01
 ```
 
 ##### Avec l'option **-l** :
@@ -124,6 +130,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
