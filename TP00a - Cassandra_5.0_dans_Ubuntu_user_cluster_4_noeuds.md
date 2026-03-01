@@ -366,7 +366,6 @@ pyenv install 3.11.7
 ```bash
 pyenv virtualenv 3.11.7 cqlsh-env
 pyenv activate cqlsh-env
-Python 3.11.7
 ```
 #### Actualisation versions : 
 ```bash
