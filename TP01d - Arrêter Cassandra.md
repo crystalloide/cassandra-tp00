@@ -106,6 +106,9 @@ docker exec -it cassandra02 bash
 ```bash
 /opt/cassandra/bin/stop-server -l
 ```
+```bash
+exit
+```
 
 ##### Avec l'option **-e** :
 ```bash
@@ -113,6 +116,8 @@ docker exec -it cassandra03 bash
 ```
 ```bash
 /opt/cassandra/bin/stop-server -l
+```
+```bash
 exit
 ```
 
@@ -122,6 +127,9 @@ docker exec -it cassandra04 bash
 ```
 ```bash
 /opt/cassandra/bin/stop-server -h
+```
+```bash
+exit
 ```
 
 
@@ -140,6 +148,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
