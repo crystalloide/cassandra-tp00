@@ -2,7 +2,7 @@
 
 ***
 
-# Exercices Pratiques Détaillés
+# Exercices pratiques détaillés
 
 ## Exercice 1 : Test des Niveaux de Cohérence
 
