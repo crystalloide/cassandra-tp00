@@ -147,8 +147,8 @@ firefox http://192.168.100.154:8081/
 ```
 #### Ou :
 ```bash
-firefox http://localhost:8181
-firefox http://localhost:8281
-firefox http://localhost:8381
-firefox http://localhost:8481
+firefox http://localhost:8181 &
+firefox http://localhost:8281 &
+firefox http://localhost:8381 &
+firefox http://localhost:8481 &
 ```
