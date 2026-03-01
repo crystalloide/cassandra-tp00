@@ -167,7 +167,7 @@ docker logs cassandra01 | tail -5
 ```
 
 ```bash
-docker exec cassandra01 start
+docker start cassandra01
 ```
 
 ```bash
@@ -175,7 +175,7 @@ sleep 45
 ```
 
 ```bash
-docker logs cassandra01
+docker logs cassandra01 -f
 ##### CTRL+D pour sortir
 ```
 
