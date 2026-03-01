@@ -964,9 +964,17 @@ docker cp dsbulk-1.11.0.tar.gz cassandra01:/tmp/dsbulk-1.11.0.tar.gz
 #### Installer DSBulk dans le conteneur :
 ```bash
 docker exec -it cassandra01 bash
+```
+```bash
 cd /tmp
+```
+```bash
 tar -xzf dsbulk-1.11.0.tar.gz
+```
+```bash
 ls dsbulk-1.11.0/bin
+```
+```bash
 export PATH=$PATH:/tmp/dsbulk-1.11.0/bin
 ```
 
