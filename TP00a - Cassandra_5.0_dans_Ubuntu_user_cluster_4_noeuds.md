@@ -843,6 +843,11 @@ SELECT * FROM formation.imdb WHERE movie_id = '1';
 CONSISTENCY QUORUM;
 ```
 
+```sql
+-- On sort maintenant du CQLSH pour fire des commandes nodetool :
+EXIT;
+```
+
 #### Vérifier le statut du cluster :
 ```bash
 docker exec -it cassandra01 nodetool status
