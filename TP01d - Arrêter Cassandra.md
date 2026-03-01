@@ -35,6 +35,8 @@ docker exec -it cassandra01 nodetool status
 _____________________________________
 
 ###### Pour arrêter Cassandra :
+_____________________________________
+
 ###### Maintenant que Cassandra est lancé,  on peut vouloir l'arrêter :-) 
 
 ###### Une commande "stop-server" est présente dans le répertoire "bin"
@@ -75,6 +77,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
