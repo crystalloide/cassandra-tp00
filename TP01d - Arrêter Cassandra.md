@@ -183,6 +183,19 @@ docker logs cassandra01 -f
 docker exec cassandra03 nodetool status
 ```
 
+    Affichage quand le clutser est opérationnel : 
+
+    Datacenter: dc1
+    ===============
+    Status=Up/Down
+    |/ State=Normal/Leaving/Joining/Moving
+    --  Address          Load       Tokens  Owns (effective)  Host ID                               Rack
+    UN  192.168.100.154  38.67 MiB  16      73.2%             3a11e986-d24f-46f3-83b2-bc0632ac5991  Rack4
+    UN  192.168.100.151  39.61 MiB  16      74.7%             13473850-0ed8-4adb-9cc3-923efb56ecd9  Rack1
+    UN  192.168.100.152  39.62 MiB  16      74.7%             67895141-9db1-467c-8c15-b0e57fe4fa72  Rack2
+    UN  192.168.100.153  40.84 MiB  16      77.4%             2c0c4b8e-f221-4db2-9ead-4eb9030539cc  Rack3
+    
 _____________________________________
 ##### Fin du TP
 _____________________________________
+
