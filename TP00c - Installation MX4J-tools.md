@@ -137,22 +137,29 @@ docker exec -it cassandra01 nodetool status
 
 #### Visualisation avec un navigateur web des informations des 4 noeuds du cluster Cassandra :
 
+##### On véirfie que les ports 8181/8182/8381/8481 sont bien là :
 ```bash
 netstat -anl | grep :8
 ```
-```bash
-firefox http://192.168.100.151:8081/
+bash
+
+##### Ouvrrir les 4 liens ci-dessous dans un navigateur :
+```
+http://192.168.100.151:8081
 ```
 ```bash
-firefox http://192.168.100.152:8081/
+http://192.168.100.152:8081
 ```
 ```bash
-firefox http://192.168.100.153:8081/
+http://192.168.100.153:8081
 ```
 ```bash
-firefox http://192.168.100.154:8081/
+http://192.168.100.154:8081
 ```
-#### Ou :
+
+##### Ou -sous un vrai Linux- 
+##### (pas WSL2 : WSLg ne fournit qu’un sous‑ensemble minimal des interfaces disponibles sous Linux.) :
+
 ```bash
 firefox http://localhost:8181 &
 firefox http://localhost:8281 &
