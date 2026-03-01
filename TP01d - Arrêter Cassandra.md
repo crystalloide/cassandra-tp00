@@ -28,7 +28,7 @@ docker compose -f docker-compose.yml up  -d
 docker exec -it cassandra01 nodetool status
 ```
 
-#####Pour un déploiement DataStax (DSE), on aurait fait  : 
+##### Pour un déploiement DataStax (DSE), on aurait fait  : 
 docker exec -it cassandra01 dsetool status
 
 _____________________________________
@@ -74,4 +74,5 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
