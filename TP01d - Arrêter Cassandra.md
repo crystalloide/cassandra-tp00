@@ -54,6 +54,9 @@ _____________________________________
 ###### Si on lance cette commande sur linux : 
 ```bash
 docker exec -it cassandra01 stop-server
+```
+#### Commande équivalente à :
+```bash
 docker exec -it cassandra01 ./opt/cassandra/bin/stop-server
 ```
 ###### Affichage en retour : 
@@ -76,19 +79,21 @@ docker exec -it cassandra01 ./opt/cassandra/bin/stop-server -l
 
 ##### Avec l'option **-e** :
 ```bash
-docker exec -it cassandra01 ./opt/cassandra/bin/stop-server -l
+docker exec -it cassandra02 ./opt/cassandra/bin/stop-server -l
 ```
 
 ##### Avec l'option **-h** :
 ```bash
-docker exec -it cassandra01 ./opt/cassandra/bin/stop-server -h
+docker exec -it cassandra03 ./opt/cassandra/bin/stop-server -h
 ```
 
 ###### Egalement, si on veut retrouver le processus de cassandra  
 ###### Il est possible d'utiliser "pgrep" pour localiser les processus de l'utilisateur actuel contenant le terme « cassandra » :
 ```bash
+docker exec -it cassandra04 bash
 utilisateur=`whoami`
 pgrep -u $user -f cassandra | xargs kill −9
+exit
 ```
 
 ###### Et voilà :-)
@@ -106,6 +111,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
