@@ -1119,7 +1119,7 @@ nodetool settimeout range 300000
 #### Si on veut connaitres les seuils de timeout en cours sur un noeud cassandra : 
 ```bash
 nodetool gettimeout read
-nodetool settimeout range
+nodetool gettimeout range
 ```
 
 #### Poursuivons :  
