@@ -816,12 +816,13 @@ EXIT;
 
 #### 9. Exercices supplémentaires avec le cluster
 
-#### Tester la réplication et la tolérance aux pannes
+#### Tester la réplication et la tolérance aux pannes :
+
+##### On va maintenant arrêter un nœud :
 ```bash
-# Dans un autre terminal, arrêter un nœud
+# Arrêt du nœud cassandra02 :
 docker stop cassandra02
 ```
-
 
 #### Retourner dans cqlsh 
 ```bash
@@ -829,7 +830,7 @@ docker exec -it cassandra01 cqlsh
 
 ```
 
-#### et vérifier que les requêtes fonctionnent toujours
+#### et vérifier que les requêtes fonctionnent toujours :
 #### (avec CONSISTENCY QUORUM ou ONE)
 
 
