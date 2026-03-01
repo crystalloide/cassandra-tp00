@@ -990,16 +990,16 @@ dsbulk load \
 
 #### Si besoin de diagnostiquer les erreurs de chargement : les logs sont ici : (exemple à adapter à votre cas)
 ```bash
-cat /tmp/logs/LOAD_20260221-164858-592667/mapping-errors.log |grep Suppressed
-cat /tmp/logs/LOAD_20260221-164858-592667/mapping-errors.log |grep InvalidMapping
-cat /tmp/logs/LOAD_20260221-170143-031056/operation.log |grep Error
-cat /tmp/logs/LOAD_20260221-172956-413471/connector-errors.log
-cat /tmp/logs/LOAD_20260221-170143-031056/connector-errors.log |grep IllegalArgumentException
+cat /tmp/logs/**LOAD_20260221-164858-592667**/mapping-errors.log |grep Suppressed
+cat /tmp/logs/**LOAD_20260221-164858-592667**/mapping-errors.log |grep InvalidMapping
+cat /tmp/logs/**LOAD_20260221-170143-031056**/operation.log |grep Error
+cat /tmp/logs/**LOAD_20260221-172956-413471**/connector-errors.log
+cat /tmp/logs/**LOAD_20260221-170143-031056**/connector-errors.log |grep IllegalArgumentException
 
-head -5 /tmp/logs/LOAD_20260221-172956-413471/connector-errors.log
+head -5 /tmp/logs/**LOAD_20260221-172956-413471**/connector-errors.log
 ```
 
-#### Exemple de relancer de l'import en entier : 
+#### Exemple de relance de l'import en entier : 
 ```bash
  dsbulk load \
   -url /tmp/imdb_movies.csv \
