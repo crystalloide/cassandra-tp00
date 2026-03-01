@@ -241,7 +241,7 @@ docker compose -f docker-compose.yml up  -d
 cd ~/cassandra-tp00
 docker compose logs -f
 ```
-#### Faire **\<CTRL>+\<C>** pour sortir
+##### Faire **\<CTRL>+\<C>** pour sortir
 
 #### Dans un autre terminal, pour suivre  :
 ```bash
