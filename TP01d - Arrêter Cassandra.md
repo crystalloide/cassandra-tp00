@@ -70,14 +70,19 @@ docker exec -it cassandra01 ./opt/cassandra/bin/stop-server
     C'est sans doute l'approche la plus fiable pour s'assurer de killer le bon processus.
 
 ##### Avec l'option **-l** :
+```bash
 docker exec -it cassandra01 ./opt/cassandra/bin/stop-server -l
+```
 
 ##### Avec l'option **-e** :
+```bash
 docker exec -it cassandra01 ./opt/cassandra/bin/stop-server -l
+```
 
 ##### Avec l'option **-h** :
+```bash
 docker exec -it cassandra01 ./opt/cassandra/bin/stop-server -h
-
+```
 
 ###### Egalement, si on veut retrouver le processus de cassandra  
 ###### Il est possible d'utiliser "pgrep" pour localiser les processus de l'utilisateur actuel contenant le terme « cassandra » :
@@ -101,6 +106,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
