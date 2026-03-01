@@ -49,29 +49,42 @@ _____________________________________
 
 ###### Maintenant que Cassandra est lancé,  on peut vouloir l'arrêter :-) 
 
-###### Une commande "stop-server" est présente dans le répertoire "bin"
+###### Une commande "stop-server" est présente dans le répertoire "bin" : /opt/cassandra/bin
 
 ###### Si on lance cette commande sur linux : 
 ```bash
-docker exec -it cassandra01 ./stop-server
+docker exec -it cassandra01 stop-server
+docker exec -it cassandra01 ./opt/cassandra/bin/stop-server
 ```
 ###### Affichage en retour : 
-    veuillez lire le script d'arrêt du serveur avant utilisation
+    Usage: /opt/cassandra/bin/stop-server [-p <pidfile>] | [-l] | [-e] | [-h]
+    -p <pidfile>    Stop the process using the specified pidfile
+    -l              Stop the process with the name like 'cassandra'
+    -e              Stop the process with the name equal 'CassandraDaemon'
+    -h              Show the help message
 
 ###### Le serveur n'a pas été arrêté, et on nous invite à lire le script. 
-###### En regardant à l'intérieur avec son éditeur de code préféré, 
-###### Il apparaît que la façon d'arrêter Cassandra est de "killer" le process JVM qui exécute Cassandra. 
-###### Le script suggère plusieurs techniques différentes pour identifier le process JVM et pouvoir le killer : 
+###### Le script suggère plusieurs techniques différentes pour arrêter C* : 
+    La première technique consiste à démarrer Cassandra à l'aide de l'option "-p", 
+    qui fournit à Cassandra le nom d'un fichier dans lequel sera écrit l'identifiant de processus (PID) au démarrage. 
+    C'est sans doute l'approche la plus fiable pour s'assurer de killer le bon processus.
 
-###### La première technique consiste à démarrer Cassandra à l'aide de l'option "-p", 
-###### qui fournit à Cassandra le nom d'un fichier dans lequel sera écrit l'identifiant de processus (PID) au démarrage. 
-###### C'est sans doute l'approche la plus fiable pour s'assurer de killer le bon processus.
+##### Avec l'option **-l** :
+docker exec -it cassandra01 ./opt/cassandra/bin/stop-server -l
 
-###### Cependant, si, comme dans notre cas, on n'a pas démarré Cassandra avec l'option "-p", il faut retrouver le processus. 
-## Il est suggérer d'utiliser "pgrep" pour localiser les processus de l'utilisateur actuel contenant le terme « cassandra » :
+##### Avec l'option **-e** :
+docker exec -it cassandra01 ./opt/cassandra/bin/stop-server -l
 
+##### Avec l'option **-h** :
+docker exec -it cassandra01 ./opt/cassandra/bin/stop-server -h
+
+
+###### Egalement, si on veut retrouver le processus de cassandra  
+###### Il est possible d'utiliser "pgrep" pour localiser les processus de l'utilisateur actuel contenant le terme « cassandra » :
+```bash
 utilisateur=`whoami`
 pgrep -u $user -f cassandra | xargs kill −9
+```
 
 ###### Et voilà :-)
 
@@ -88,6 +101,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
