@@ -1,7 +1,9 @@
 ## WSL 2 : 
+```bash
 export GTK_USE_PORTAL=0
 echo 'export GTK_USE_PORTAL=0' >> ~/.bashrc
 source ~/.bashrc
+```
 
 #### Installation de Firefox avec Snap :
 ```bash
