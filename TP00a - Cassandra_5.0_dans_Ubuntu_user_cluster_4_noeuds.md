@@ -357,18 +357,11 @@ eval "$(pyenv init -)"
 ```bash
 source ~/.bashrc
 ```
-#### Installer Python 3.11
+#### Installer Python 3.11.7 :
 ```bash
 pyenv install 3.11.7
 ```
-#### Vérification :
-```bash
-python --version
-```
-#### Affichge en retour :  
-```bash
-Python 3.11.7
-```
+
 #### Créer un environnement virtuel pour cqlsh :
 ```bash
 pyenv virtualenv 3.11.7 cqlsh-env
@@ -382,6 +375,14 @@ python -m pip install --upgrade pip
 #### Installer cqlsh dans cet environnement :
 ```bash
 pip install cqlsh
+```
+#### Vérification :
+```bash
+python --version
+```
+#### Affichage en retour :  
+```bash
+Python 3.11.7
 ```
 #### Maintenant, on va lancer cqlsh :
 ```bash
