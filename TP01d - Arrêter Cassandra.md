@@ -34,7 +34,7 @@ docker exec -it cassandra01 nodetool status
 
 _____________________________________
 
-###### Pour arrêter Cassandra :
+##### Pour arrêter Cassandra :
 _____________________________________
 
 ###### Maintenant que Cassandra est lancé,  on peut vouloir l'arrêter :-) 
@@ -77,6 +77,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
