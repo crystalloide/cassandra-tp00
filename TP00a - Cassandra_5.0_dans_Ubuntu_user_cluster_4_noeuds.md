@@ -988,7 +988,11 @@ dsbulk load \
   -m "0=movie_id, 1=title, 4=year, 14=genre, 10=director, 5=rating, 6=votes, 17=budget, 20=length"
 ```
 
-#### Si besoin de diagnostiquer les erreurs de chargement : les logs sont ici : (exemple à adapter à votre cas)
+#### Si besoin de diagnostiquer les erreurs de chargement : les logs sont ici : (exemple à adapter à votre cas) :
+##### : regardons avant le nom exact des fichiers disponibles dans notre cas : 
+```bash
+ls /tmp/logs/
+```
 ```bash
 cat /tmp/logs/LOAD_20260221-164858-592667/mapping-errors.log |grep Suppressed
 ```
@@ -1032,7 +1036,7 @@ dsbulk load \
   --dsbulk.log.checkpoint.file=/tmp/logs/LOAD_20260221-171717-693590/checkpoint.csv
 ```
 
-#### Pour charger notre fichier, voici la cCommande complète :  
+#### Pour charger notre fichier, voici la commande complète :  
 #### (~10% lignes en erreur pour des problèmes de format, échappement, etc)
 #### A savoir : pour tester un chargement à blanc dans écrire les données : option --dryRun 
 #### **https://docs.datastax.com/en/dsbulk/reference/schema-options.html**
