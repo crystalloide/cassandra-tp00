@@ -81,7 +81,7 @@ docker exec -it cassandra01 bash
 user=`whoami`
 ```
 ```bash
-pgrep -u $user -f cassandra | xargs kill −9
+pgrep -u $user -f cassandra | xargs kill -9
 ```
 ```bash
 exit
@@ -118,6 +118,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
