@@ -14,6 +14,7 @@ sleep 30
 ###### Pour éviter tout lien/interférence avec un lancement précédent :  on supprime les répertoires C* persistés en local
 ###### (à faire pour de la formation uniquement !!!)
 ```bash
+cd ~/cassandra-tp00
 sudo rm -Rf docker/cassanda*
 mkdir -p docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra04
 ```
@@ -74,5 +75,6 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
