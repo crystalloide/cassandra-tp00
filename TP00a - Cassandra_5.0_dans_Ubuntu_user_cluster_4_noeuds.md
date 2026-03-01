@@ -809,6 +809,10 @@ PAGING 10;
 SELECT * FROM formation.imdb;
 ```
 
+```sql
+-- On sort maintenant du CQLSH pour pouvoir arrêter des noeuds Cassandra et voir les effets :
+EXIT;
+```
 
 #### 9. Exercices supplémentaires avec le cluster
 
@@ -844,7 +848,7 @@ CONSISTENCY QUORUM;
 ```
 
 ```sql
--- On sort maintenant du CQLSH pour fire des commandes nodetool :
+-- On sort maintenant du CQLSH pour lancer des commandes nodetool :
 EXIT;
 ```
 
