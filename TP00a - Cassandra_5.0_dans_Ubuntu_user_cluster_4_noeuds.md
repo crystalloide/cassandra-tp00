@@ -1060,30 +1060,31 @@ dsbulk load \
 	
 	Operation LOAD_20260221-174310-370255 completed with 25,890 errors in 5 minutes and 3 seconds.
 
-| ----------------- | ------------ | ------------------------------------------------------- |
-| Option            | Valeur HOCON | Signification                                           |
-| ----------------- | ------------ | ------------------------------------------------------- |
-| quote             | \"           | Caractère de quote = " datastax​                         |
-| escape            | \"           | Échappement des quotes internes par \\" github​          |
-| maxCharsPerColumn | 10000        | Limite champ = 10k caractères (pour keywords) datastax​  |
 
+	| ----------------- | ------------ | ------------------------------------------------------- |
+	| Option            | Valeur HOCON | Signification                                           |
+	| ----------------- | ------------ | ------------------------------------------------------- |
+	| quote             | \"           | Caractère de quote = " datastax​                         |
+	| escape            | \"           | Échappement des quotes internes par \\" github​          |
+	| maxCharsPerColumn | 10000        | Limite champ = 10k caractères (pour keywords) datastax​  |
+	| ----------------- | ------------ | ------------------------------------------------------- |
 
 
 #### Paramètres essentiels
 
---connector.csv.maxCharsPerColumn -1           		# Redimensionne dynamiquement (pas de limite fixe)
---connector.csv.normalizeLineEndingsInQuotes true  	# \n → espace dans champs quotés
---connector.csv.schema.allowExtraFields true    	# Ignore colonnes supplémentaires
---connector.csv.quote '\"'                     		# Quote = "
---connector.csv.escape '\"'                    		# Escape des quotes internes
+	--connector.csv.maxCharsPerColumn -1           		# Redimensionne dynamiquement (pas de limite fixe)
+	--connector.csv.normalizeLineEndingsInQuotes true  	# \n → espace dans champs quotés
+	--connector.csv.schema.allowExtraFields true    	# Ignore colonnes supplémentaires
+	--connector.csv.quote '\"'                     		# Quote = "
+	--connector.csv.escape '\"'                    		# Escape des quotes internes
 
 
 #### Tolérance erreurs/performance
 
---continueOnError true   		                   # Continue malgré erreurs
---log.maxErrors 5000            	               # Tolère 5000 erreurs max
---driver.threads 8                  	           # 8 threads parallèles (ajuste CPU)
---batch.maxSize.rows 500                	       # Batch de 500 lignes
+	--continueOnError true   		                   # Continue malgré erreurs
+	--log.maxErrors 5000            	               # Tolère 5000 erreurs max
+	--driver.threads 8                  	           # 8 threads parallèles (ajuste CPU)
+	--batch.maxSize.rows 500                	       # Batch de 500 lignes
 
 
 #### Comptage du nombre de ligne : 
