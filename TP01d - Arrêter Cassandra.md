@@ -79,6 +79,11 @@ docker exec -it cassandra01 bash
 ```
 ```bash
 user=`whoami`
+ps aux | grep cassandra
+```
+Vous devriez voir quelque chose comme :
+```
+cassand+  1234  ... java -Dcassandra ...
 ```
 ###### On supposera ici que cassandra tourne sous le user "cassandra" : 
 ```bash
@@ -119,6 +124,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
