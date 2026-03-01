@@ -38,73 +38,95 @@ Le fichier `Cluster_4_noeuds_4_racks_1_DC.yml` déploie :
 #### Installation de VisualVM  :
 
 ```bash
-# 1. Téléchargement
+#### 1. Téléchargement :
 wget "https://sourceforge.net/projects/mx4j/files/MX4J%20Binary/3.0.2/mx4j-3.0.2.zip/download" -O mx4j-3.0.2.zip 
 
-# 2. Décompression
+#### 2. Décompression :
+```bash
 unzip mx4j-3.0.2.zip
 chmod 777 -Rf ~/cassandra-tp00/mx4j-3.0.2/lib
 
-# 3. Copie dans chaque conteneur
+#### 3. Copie dans chaque conteneur :
+```bash
 docker cp mx4j-3.0.2/lib/mx4j-tools.jar cassandra01:/opt/cassandra/lib/
 docker cp mx4j-3.0.2/lib/mx4j-tools.jar cassandra02:/opt/cassandra/lib/
 docker cp mx4j-3.0.2/lib/mx4j-tools.jar cassandra03:/opt/cassandra/lib/
 docker cp mx4j-3.0.2/lib/mx4j-tools.jar cassandra04:/opt/cassandra/lib/
 
-# 4. Prise en compte dans chaque conteneur dans /etc/cassandra/cassandra-env.sh
+#### 4. Prise en compte dans chaque conteneur dans /etc/cassandra/cassandra-env.sh :
 
-# cassandra01
+#### cassandra01 :
+```bash
 docker exec cassandra01 sed -i \
   's/#\s*MX4J_ADDRESS=.*/MX4J_ADDRESS="192.168.100.151"/' \
   /etc/cassandra/cassandra-env.sh
+```
+```bash
 docker exec cassandra01 sed -i \
   's/#\s*MX4J_PORT=.*/MX4J_PORT="-Dmx4jport=8081"/' \
   /etc/cassandra/cassandra-env.sh
+```
 
-# cassandra02
+#### cassandra02 :
+```bash
 docker exec cassandra02 sed -i \
   's/#\s*MX4J_ADDRESS=.*/MX4J_ADDRESS="192.168.100.152"/' \
   /etc/cassandra/cassandra-env.sh
+```
+```bash
 docker exec cassandra02 sed -i \
   's/#\s*MX4J_PORT=.*/MX4J_PORT="-Dmx4jport=8081"/' \
   /etc/cassandra/cassandra-env.sh
+```
 
-# cassandra03
+#### cassandra03 :
+```bash
 docker exec cassandra03 sed -i \
   's/#\s*MX4J_ADDRESS=.*/MX4J_ADDRESS="192.168.100.153"/' \
   /etc/cassandra/cassandra-env.sh
+```
+```bash
 docker exec cassandra03 sed -i \
   's/#\s*MX4J_PORT=.*/MX4J_PORT="-Dmx4jport=8081"/' \
   /etc/cassandra/cassandra-env.sh
+```
 
-# cassandra04
+#### cassandra04 :
+```bash
 docker exec cassandra04 sed -i \
   's/#\s*MX4J_ADDRESS=.*/MX4J_ADDRESS="192.168.100.154"/' \
   /etc/cassandra/cassandra-env.sh
+```
+```bash
 docker exec cassandra04 sed -i \
   's/#\s*MX4J_PORT=.*/MX4J_PORT="-Dmx4jport=8081"/' \
   /etc/cassandra/cassandra-env.sh
+```
 
-
-# 5. Prise en compte avec le redémarrage tour à tour des 4 noeuds cassnadra :
-
-# cassandra01
+#### 5. Prise en compte avec le redémarrage tour à tour des 4 noeuds cassnadra :
+```bash
+##### cassandra01 :
 docker restart cassandra01 
 sleep 15
-
-# cassandra02
+```
+```bash
+##### cassandra02 :
 docker restart cassandra02 
 sleep 15
-
-# cassandra03
+```
+```bash
+##### cassandra03 :
 docker restart cassandra03 
 sleep 15
-
-# cassandra04
+```
+```bash
+##### cassandra04 :
 docker restart cassandra04 
 sleep 15
+```
 
-# On vérifie que le cluster est bien "UN" pour les 4 noeuds :
+##### On vérifie que le cluster est bien "UN" pour les 4 noeuds :
+```bash
 docker exec -it cassandra01 nodetool status
 ```
 
