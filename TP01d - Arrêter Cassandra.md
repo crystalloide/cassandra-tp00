@@ -80,8 +80,9 @@ docker exec -it cassandra01 bash
 ```bash
 user=`whoami`
 ```
+###### On supposera ici que cassandra tourne sous le user "cassandra" : 
 ```bash
-pgrep -u $user -f cassandra | xargs kill -9
+pgrep -u cassandra -f cassandra | xargs kill -9
 ```
 ```bash
 exit
@@ -118,6 +119,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
