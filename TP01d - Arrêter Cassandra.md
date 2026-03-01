@@ -121,7 +121,7 @@ docker exec -it cassandra03 bash
 exit
 ```
 
-##### Avec l'option **-h** : affiche k'aide : 
+##### Avec l'option **-h** : affiche l'aide : 
 ```bash
 docker exec -it cassandra04 bash
 ```
@@ -148,6 +148,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
