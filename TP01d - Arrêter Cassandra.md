@@ -24,7 +24,7 @@ mkdir -p docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassand
 docker compose -f docker-compose.yml up  -d
 ```
 
-#####
+##### On vérifie quand le cluster est bien lancé : 
 ```bash
 docker exec -it cassandra01 nodetool status
 ```
@@ -101,6 +101,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
