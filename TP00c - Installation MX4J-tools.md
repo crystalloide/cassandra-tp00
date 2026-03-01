@@ -139,10 +139,17 @@ docker exec -it cassandra01 nodetool status
 
 ```bash
 netstat -anl | grep :8
-
+```
+```bash
 firefox http://192.168.100.151:8081/
+```
+```bash
 firefox http://192.168.100.152:8081/
+```
+```bash
 firefox http://192.168.100.153:8081/
+```
+```bash
 firefox http://192.168.100.154:8081/
 ```
 #### Ou :
