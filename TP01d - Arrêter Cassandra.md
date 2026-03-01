@@ -76,8 +76,14 @@ docker exec -it cassandra01 ./opt/cassandra/bin/stop-server
 ###### Il est possible d'utiliser "pgrep" pour localiser les processus de l'utilisateur actuel contenant le terme « cassandra » :
 ```bash
 docker exec -it cassandra01 bash
+```
+```bash
 utilisateur=`whoami`
+```
+```bash
 pgrep -u $user -f cassandra | xargs kill −9
+```
+```bash
 exit
 ```
 
@@ -112,6 +118,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
