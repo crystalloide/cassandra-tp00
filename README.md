@@ -11,7 +11,7 @@ Cluster Cassandra déployé via Docker Compose avec 4 nœuds sur 4 racks différ
 Le fichier `Cluster_4_noeuds_4_racks_1_DC.yml` déploie :
 
 - **4 nœuds Cassandra** : cassandra01, cassandra02, cassandra03, cassandra04
-- **1 datacenter** : DC1
+- **1 datacenter** : dc1
 - **4 racks** : Rack1, Rack2, Rack3, Rack4
 - **Seeds** : cassandra01 et cassandra03
 - **Réseau** : 192.168.100.0/24
