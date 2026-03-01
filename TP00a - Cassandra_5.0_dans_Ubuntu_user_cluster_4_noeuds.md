@@ -235,19 +235,21 @@ ls ~/cassandra-tp00/docker
 ```bash
 # Démarrer le cluster en arrière-plan
 docker compose -f docker-compose.yml up  -d
-
+```
 #### Suivre les logs pour vérifier le démarrage (dans un autre terminal si besoin)
+```bash
 cd ~/cassandra-tp00
 docker compose logs -f
-# Faire <CTRL>+>C> pour sortir
-
+```
+#### Faire <CTRL>+>C> pour sortir
 
 #### Dans un autre terminal, pour suivre  :
-bash
+```bash
 cd ~
 docker ps -a 
-
-# Affichage (exemple) ': 
+```
+#### Affichage (exemple) ': 
+```bash
 # 
 # CONTAINER ID   IMAGE              COMMAND                  CREATED              STATUS                             PORTS                                                                                                                                                       NAMES
 # 439bcb49160a   cassandra:latest   "docker-entrypoint.s…"   About a minute ago   Created                                                                                                                                                                                        cassandra04
@@ -265,29 +267,31 @@ docker ps -a
 
 
 #### Pour visualiser les logs de cassandra01 : 
+```bash
 docker logs cassandra01
-
-
+```
 
 #### Étape 3 : Vérification du cluster (après 5-10 minutes)
 
+#### Regarder les ports à l'écoute :
 ```bash
-# Regarder les ports à l'écoute :
 netstat -anl | grep 0:
+```
 
-# Vérifier que les 4 conteneurs sont UP sinon attendre (non listé ou encore en train de joindre : 'UJ') 
+#### Vérifier que les 4 conteneurs sont UP sinon attendre (non listé ou encore en train de joindre : 'UJ')
+```bash
 cd /home/user/cassandra-tp00
-docker compose ps 
+docker compose ps
+```
 
-# Vérifier le statut du cluster via nodetool
+#### Vérifier le statut du cluster via nodetool
+```bash
 docker exec -it cassandra01 nodetool status
-
-# Vous devriez voir finalement les 4 nœuds cassandra avec le statut "UN" (Up Normal)
 ```
+#### Vous devriez voir finalement les 4 nœuds cassandra avec le statut "UN" (Up Normal)
+#### Le résultat devrait ressembler à :
 
-Le résultat devrait ressembler à :
-
-```
+```bash
 Datacenter: dc1
 ===============
 Status=Up/Down
@@ -300,21 +304,23 @@ UN  192.168.100.153  80.03 KiB   16      50.7%             21b3ae41-1e2a-4c7d-97
 ```
 
 
-#### Accès à cqlsh
+#### Accès à cqlsh :
 
 #### Option 1 : Via Docker exec (recommandé)
-
+#### Se connecter à cqlsh sur cassandra01 :
 ```bash
-# Se connecter à cqlsh sur cassandra01 :
 docker exec -it cassandra01 cqlsh
-
-# Pour sortir du shell : 
-exit 
-
-# Ou spécifier l'adresse IP :
-docker exec -it cassandra01 cqlsh 192.168.100.151 9042
 ```
 
+#### Pour sortir du shell :
+```bash
+exit 
+```
+
+#### Ou spécifier l'adresse IP :
+```bash
+docker exec -it cassandra01 cqlsh 192.168.100.151 9042
+```
 
 #### Option 2 : Depuis l'hôte (via ports exposés)
 
