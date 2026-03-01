@@ -1123,6 +1123,12 @@ nodetool gettimeout range
 ```
 
 #### Poursuivons :  
+###### On sort du conteneur : 
+```bash
+###### On sort du conteneur : 
+exit
+```
+###### Et on recherche l'information telle qu'elle est codée dans cassandra.yaml d'un des noeuds (ici cassandra01) : 
 ```bash
 docker exec -it cassandra01 cat /etc/cassandra/cassandra.yaml | grep 'read_request_timeout'
 ```
