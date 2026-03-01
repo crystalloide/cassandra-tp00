@@ -36,9 +36,9 @@ sudo rm -Rf ~/cassandra-tp00
 git clone https://github.com/crystalloide/cassandra-tp00
 
 cd ~/cassandra-tp00
-
-# Vérifier le contenu ou créer le fichier docker compose de notre cluster 4 noeuds cassandra :
-
+```
+#### Vérifier le contenu ou créer le fichier docker compose de notre cluster 4 noeuds cassandra :
+```bash
 cat Cluster_4_noeuds_4_racks_1_DC.yml
 
 # Le fichier doit avoir le contenu suivant : 
@@ -210,24 +210,25 @@ services:
       timeout: 10s
       retries: 50
       start_period: 180s
+```
+#### Fin du fichier
 
-# Fin du fichier
-
-
-# Copier le fichier docker compose
+#### Copier le fichier docker compose
+```bash
 sudo rm docker-compose.yml
 cp Cluster_4_noeuds_4_racks_1_DC.yml docker-compose.yml
-
-# Créer les répertoires de volumes (optionnel)
+```
+#### Créer les répertoires de volumes (optionnel)
+```bash
 sudo rm -Rf docker/cassanda*
 mkdir -p docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra04
-
-# On affiche les répertoires créés : 
+```
+#### On affiche les répertoires créés :
+```bash
 ls ~/cassandra-tp00/docker
 
-## Affichage : cassandra01  cassandra02  cassandra03  cassandra04
+#### Affichage : cassandra01  cassandra02  cassandra03  cassandra04
 ```
-
 
 #### Étape 2 : Démarrage du cluster avec Docker Compose
 
