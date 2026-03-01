@@ -499,7 +499,7 @@ EXIT;
 
 #### Chargement en masse avec COPY
 
-Pour charger des films, récupérer les fichiers CSV sur votre machine hôte :
+Pour charger des films, allons récupérer les fichiers CSV sur votre machine hôte :
 
 **Fichier : imdb_movies.csv**   https://www.kaggle.com/datasets/hoomch/imdb-full-dataset
 
@@ -521,7 +521,7 @@ gdown 1q6v-PEHu8UYfDONajVujqoTTGhRUAPHl
 ```bash
 gdown 16uJWq5N465U9rYvTCR1lKIBPHeNfd-oK
 ```
-#### Extrait de imdb_movies.csv :
+#### Voici un extrait de imdb_movies.csv :
 ```csv
 movie_id,title,year,genre,director,rating,votes,budget,length
 "11","The Lord of the Rings",2001,"Fantasy","Peter Jackson",8.8,1800000,"93000000",178
@@ -531,48 +531,58 @@ movie_id,title,year,genre,director,rating,votes,budget,length
 
 #### Nous allons charger des fichiers de données en .csv dans un des 4 conteneurs et ensuite charger ces données dans le cluster cassandra :
 
+#### Copier les fichiers CSV dans le conteneur cassandra01 qui nous servira de passerelle pour les charger ensuite dans le cluster Cassandra :
 ```bash
-
-# Copier les fichiers CSV dans le conteneur cassandra01 qui nous servira de passerelle pour les charger ensuite dans le cluster Cassandra :
 docker cp imdb_movies.csv cassandra01:/tmp/imdb_movies.csv
 docker cp imdb_movies_extrait.csv cassandra01:/tmp/imdb_movies_extrait.csv
+```
 
-# 1°) Affichage du contenu en local du conteneur cassandra01 pour le fichier imdb_movies.csv : 
+#### # 1°) Affichage du contenu en local du conteneur cassandra01 pour le fichier imdb_movies.csv : 
+```bash
 docker exec -it cassandra01 tail -5 /tmp/imdb_movies.csv
-
-## Affichage en retour de 5 lignes :   
+```
+#### Affichage en retour de 5 lignes :   
+```bash
 	tt14330672,Goodbye Julia,Goodbye Julia,2020-01-01,2020.0,,0.0,,0.0,0.0,wridir_not_provided,wridir_not_provided,story_line_not_provided,Issraa El-Kogali,Drama,"Sudan,Sweden",Arabic,,,,,Station Films,,,,0.9955575702629192,/name/nm4754706/,0,0,0,1.0,1.0,keys_not_provided
 	tt14337116,Macbeth,Macbeth,2020-01-01,2020.0,,0.0,,0.0,0.0,wridir_not_provided,wridir_not_provided,story_line_not_provided,Sergei Tsimbalenko,Drama,Russia,Russian,$10000,,,,company_not_provided,10000.0,,,0.9955575702629192,/name/nm12440622/,0,0,0,1.0,1.0,keys_not_provided
 	tt14325500,Les fantômes du sanatorium,Les fantômes du sanatorium,2020-01-01,2020.0,,0.0,,0.0,0.0,wridir_not_provided,wridir_not_provided,story_line_not_provided,casts_not_provided,genre_not_provided,France,French,,,,59.0,Les Films-Cabanes,,,,0.9955575702629192,castIDs_not_provided,0,0,0,1.0,1.0,keys_not_provided
 	tt14332642,Predators,Khishchniki,2021-02-18,2020.0,,0.0,,0.0,0.0,wridir_not_provided,wridir_not_provided,"An ambitious personal growth coach, author of the Predator Psychology manual, unexpectedly finds himself drawn into a confrontation with a millionaire who wants to demolish the garage complex where he keeps his Jaguar.","Elena Babenko,Sergey Byzgu,Irina Osnovina,Arseny Popov,Aleksey Shevchenkov,Vladimir Sychyov,Alan Tomaev,Ekaterina Zorina,Oksana Bazilevich,Fyodor Lavrov,Andrey Pogrebinskiy,Maxim Sevrinovsky,Sergey Styopin,Oleg Taktarov,Yuliya Topolnitskaya","Comedy,Crime",Russia,Russian,,,,88.0,"Taganka Film,Zebra Film",,,,0.9955575702629192,"/name/nm1461130/,/name/nm1531240/,/name/nm0652148/,/name/nm12439283/,/name/nm1169445/,/name/nm0842962/,/name/nm9989842/,/name/nm6864539/,/name/nm1480626/,/name/nm1655031/,/name/nm11159329/,/name/nm12439282/,/name/nm2672605/,/name/nm0847727/,/name/nm8290348/",0,0,0,2.0,18.0,keys_not_provided
 	tt14331300,Nareul guhaji maseyo,Nareul guhaji maseyo,2020-09-10,2020.0,,0.0,,0.0,0.0,wridir_not_provided,wridir_not_provided,story_line_not_provided,"Seo-Yun Cho,Hwi-Jong Lee,So-min Yang,Ro-Woon Choi,Seon-hee Lee",Drama,South Korea,Korean,,,,93.0,Aura Pictures,,,,0.9955575702629192,"/name/nm12438883/,/name/nm12438884/,/name/nm1789399/,/name/nm6857341/,/name/nm3786371/",0,0,0,9.0,10.0,keys_not_provided
-	
-# 2°) Affichage du contenu en local du conteneur cassandra01 pour le fichier imdb_movies_extrait.csv : 
-docker exec -it cassandra01 tail -5 /tmp/imdb_movies_extrait.csv
+```
 
-## Affichage en retour des 5 dernières lignes :   
+#### # 2°) Affichage du contenu en local du conteneur cassandra01 pour le fichier imdb_movies_extrait.csv : 
+
+##### Affichage en retour des 5 premières lignes :
+```bash
+docker exec -it cassandra01 tail -5 /tmp/imdb_movies_extrait.csv
+```
+##### Affichage en retour des 5 dernières lignes :
+```bash
 	196,Hachi: A Dog's Tale,2009,Drama,Lasse Hallström,8.1,300000,16000000,93
 	197,Incendies,2010,Drama,Denis Villeneuve,8.3,180000,6800000,131
 	198,Wild Tales,2014,Comedy,Damián Szifron,8.1,200000,3300000,122
 	199,The 400 Blows,1959,Drama,François Truffaut,8.1,120000,75000,99
 	200,Catch Me If You Can,2002,Crime,Steven Spielberg,8.1,1000000,52000000,141
-
-
+```
+##### Affichage des 5 premières lignes :   
+```bash
 docker exec -it cassandra01 head -5 /tmp/imdb_movies.csv
-
-## Affichage en retour des 5 premières lignes :   
+```
+##### Affichage en retour des 5 premières lignes :
+```bash
 movie_id,name,org_name,date,title_year,point,point_volume,metascore,user_reviews,critic_reviews,director,writer,story_line,cast,genres,country,language,budget,world_gross,usa_gross,runtime,production_companies,dollar_budget,w_gross_money,u_gross_money,inflation_coeff,casts_id,BlogPage,CompPage,HomePage,release_month,release_day,keywords
 tt0000009,Miss Jerry,Miss Jerry,1894-10-09,1894.0,5.9,154.0,,1.0,2.0,Alexander Black,Alexander Black,"Geraldine (Jerry) Holbrook, a girl of Eastern birth, decides to start a career in journalism in the heart of New York, after she feels that her father is close to a financial crush. In the process she falls in love with the editor of her paper, Mr. Hamilton. After the first successful article, she leads Hamilton into doubting her love for him, and this makes him accept a job in London. But his worries prove wrong when Jerry accepts to marry him and leave to London.","Blanche Bayliss,Chauncey Depew,William Courtenay",Romance,USA,English,,,,45.0,Alexander Black Photoplays,,,,,castIDs_not_provided,0,0,0,10.0,9.0,"character-name-as-title,two-word-title,nickname-as-title,photoplay,reporter,editor,lost-film"
 tt0000147,The Corbett-Fitzsimmons Fight,The Corbett-Fitzsimmons Fight,1897-05-22,1897.0,5.2,356.0,,4.0,0.0,wridir_not_provided,wridir_not_provided,"This legendary fight was filmed on March 17, 1897, using 63mm film that produced an aspect ratio of about 1.75:1. Using three adjacent cameras, Enoch Rector recorded the entire fight, simultaneously creating the world's first known feature film, as the resulting footage lasted over 90 minutes in length. About a quarter of the film survives today.","James J. Corbett,Billy Madden,John L. Sullivan,Bob Fitzsimmons,George Siler","Documentary,News,Sport",USA,English,,,,20.0,Veriscope Company,,,,,castIDs_not_provided,0,0,0,5.0,22.0,"national-film-registry,first-of-its-kind,partially-lost-film,year-1897,1890s,19th-century,bare-chested-male,boxing"
 tt0000335,Soldiers of the Cross,Soldiers of the Cross,1900-09-13,1900.0,6.1,41.0,,1.0,0.0,wridir_not_provided,wridir_not_provided,"The plot outlined the story of the early Christian martyrs with a compendium of horrors guaranteed to jolt audiences into an awareness of terrible suffering for the sake of Christianity. Contained maulings at the Colosseum, crucifixions, beheadings, savage hackings and burnings at the stake, burnings in the limepit, the spectacle of human torches in Nero's garden. Overall ""soul stirring stories of the martyrs, illustrated by the most beautiful living pictures by kinematograph and limelight and never before witnessed in this or any other country.","Beatrice Day,Mr. Graham,Orrie Perry,Harold Graham,John Jones,Reg Perry","Biography,Drama",Australia,English,,,,,"Limelight Department of the Salvation Army, Melbourne,Salvation Army",,,,31.374285714285712,castIDs_not_provided,0,0,0,9.0,13.0,keys_not_provided
 tt0000502,Bohemios,Bohemios,1905-01-01,1905.0,3.8,6.0,,0.0,0.0,wridir_not_provided,"Ricardo de Baños,Miguel de Palacios",story_line_not_provided,"Antonio del Pozo,El Mochuelo",genre_not_provided,Spain,Spanish,,,,100.0,Gaumont Española,,,,29.678378378378376,castIDs_not_provided,0,0,0,1.0,1.0,keys_not_provided
-
-
+```
 	
-# Se connecter à cqlsh sur le conteneur cassandra01 
+#### On se connecte  à cqlsh sur le conteneur cassandra01 :
+```bash
 docker exec -it cassandra01 cqlsh
-
-# Dans cqlsh, charger les données
+```
+#### Dans cqlsh, et on charge les données :
+```bash
 COPY formation.imdb (movie_id, title, year, genre, director, rating, votes, budget, length) 
 FROM '/tmp/imdb_movies_extrait.csv' 
 WITH HEADER = TRUE AND DELIMITER = ',';
