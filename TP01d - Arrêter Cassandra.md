@@ -81,7 +81,7 @@ docker exec -it cassandra01 bash
 user=`whoami`
 ps aux | grep cassandra
 ```
-Vous devriez voir quelque chose comme :
+##### Vous devriez voir quelque chose comme :
 ```
 cassand+  1234  ... java -Dcassandra ...
 ```
@@ -124,6 +124,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
