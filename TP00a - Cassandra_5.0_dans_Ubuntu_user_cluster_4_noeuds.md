@@ -879,44 +879,56 @@ docker exec -it cassandra01 nodetool ring
 #### Statistiques de chaque nœud :
 ```bash
 docker exec -it cassandra01 nodetool info
-docker exec -it cassandra02 nodetool info
-docker exec -it cassandra03 nodetool info
-docker exec -it cassandra04 nodetool info
+```
 
-#### Voir les métriques de performances
+```bash
+docker exec -it cassandra02 nodetool info
+```
+
+```bash
+docker exec -it cassandra03 nodetool info
+```
+
+```bash
+docker exec -it cassandra04 nodetool info
+```
+
+#### Voir les métriques de performances :
+```bash
 docker exec -it cassandra01 nodetool tablestats formation.imdb
 ```
 
 
 #### Commandes Docker Compose utiles ( => à ne pas faire ici, juste pour montrer)
 
+##### Afficher les logs d'un nœud spécifique
 ```bash
 #### Afficher les logs d'un nœud spécifique
 docker compose logs -f cassandra01
 #### Faire <CTRL>+>C> pour sortir
 ```
 
-#### Arrêter le cluster :
+##### Arrêter le cluster :
 ```bash
 docker compose down
 ```
 
-#### Arrêter et supprimer les volumes (supprime toutes les données) :
+##### Arrêter et supprimer les volumes (supprime toutes les données) :
 ```bash
 docker compose down -v
 ```
 
-#### Redémarrer le cluster :
+##### Redémarrer le cluster :
 ```bash
 docker compose restart
 ```
 
-#### Voir l'utilisation des ressources :
+##### Voir l'utilisation des ressources :
 ```bash
 docker stats cassandra01 cassandra02 cassandra03 cassandra04
 ```
 
-#### Accès shell à un conteneur :
+##### Accès shell à un conteneur :
 ```bash
 docker exec -it cassandra01 /bin/bash
 ```
