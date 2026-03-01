@@ -40,9 +40,9 @@ cd ~/cassandra-tp00
 #### Vérifier le contenu ou créer le fichier docker compose de notre cluster 4 noeuds cassandra :
 ```bash
 cat Cluster_4_noeuds_4_racks_1_DC.yml
-
-# Le fichier doit avoir le contenu suivant : 
-
+```
+#### Le fichier doit avoir le contenu suivant : 
+```bash
 networks:
   cassandra_network:
     ipam:
