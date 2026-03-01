@@ -340,50 +340,62 @@ cqlsh localhost 9142
 #### Installer pyenv si ce n'est pas déjà fait
 ```bash
 curl https://pyenv.run | bash
-
+```
 #### Ajouter pyenv au PATH (ajouter à ~/.bashrc)
+```bash
 gedit ~/.bashrc
+```
 #### Ajouter tout à la fin : 
+```bash
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-
+```
 #### Sauvegarder et quitter
 
 #### Recharger le shell
+```bash
 source ~/.bashrc
-
+```
 #### Installer Python 3.11
+```bash
 pyenv install 3.11.7
-
-#### Vérification 
+```
+#### Vérification :
+```bash
 python --version
+```
 #### Affichge en retour :  
+```bash
 Python 3.11.7
-
-#### Créer un environnement virtuel pour cqlsh
+```
+#### Créer un environnement virtuel pour cqlsh :
+```bash
 pyenv virtualenv 3.11.7 cqlsh-env
 pyenv activate cqlsh-env
-
-#### Actualisation versions
+Python 3.11.7
+```
+#### Actualisation versions : 
+```bash
 python -m pip install --upgrade pip
-
-#### Installer cqlsh dans cet environnement
+```
+#### Installer cqlsh dans cet environnement :
+```bash
 pip install cqlsh
-
-#### Maintenant lancer cqlsh
+```
+#### Maintenant, on va lancer cqlsh :
+```bash
 cqlsh localhost 9142
-
 ```
 
 #### Et pour les prochaines fois, il n'y aura besoin que de faire  : 
 #### Activer l'environnement
 ```bash
 pyenv activate cqlsh-env
-
+```
 #### Lancer cqlsh
+```bash
 cqlsh localhost 9142
-
 ```
 
 #### Exercices CQL avec données IMDB
