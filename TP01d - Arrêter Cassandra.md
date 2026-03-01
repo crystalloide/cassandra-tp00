@@ -87,7 +87,7 @@ cassand+  1234  ... java -Dcassandra ...
 ```
 ###### On supposera ici que cassandra tourne sous le user "root" (on le trouve aussi parfois sous "cassandra") : 
 ```bash
-pgrep -u cassandra -f cassandra | xargs kill -9
+pgrep -u root -f cassandra | xargs kill -9
 ```
 ```bash
 exit
@@ -124,6 +124,7 @@ _____________________________________
 ## FIN DU TP01f 
 
 #####################################################################################################################
+
 
 
 
