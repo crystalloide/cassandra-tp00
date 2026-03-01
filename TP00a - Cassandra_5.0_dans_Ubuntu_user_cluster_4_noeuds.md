@@ -618,7 +618,7 @@ ALLOW FILTERING;
 
 ```sql
 -- Créer un index secondaire sur l'année :
-CREATE INDEX idx_year ON formation.imdb(year);
+CREATE INDEX IF NOT EXISTS idx_year ON formation.imdb(year);
 ```
 
 ```sql
@@ -631,7 +631,7 @@ ALLOW FILTERING;
 
 ```sql
 -- Créer un index sur le genre :
-CREATE INDEX idx_genre ON formation.imdb(genre);
+CREATE INDEX IF NOT EXISTS idx_genre ON formation.imdb(genre);
 ```
 
 ```sql
@@ -750,7 +750,7 @@ ALLOW FILTERING;
 
 ```sql
 -- Créer un index sur le réalisateur
-CREATE INDEX idx_director ON formation.imdb(director);
+CREATE INDEX IF NOT EXISTS idx_director ON formation.imdb(director);
 ```
 
 ```sql
@@ -1120,7 +1120,7 @@ ALLOW FILTERING;
 
 ```sql
 -- Créer un index sur le réalisateur
-CREATE INDEX idx_director ON formation.imdb(director);
+CREATE INDEX IF NOT EXISTS idx_director ON formation.imdb(director);
 ```
 
 ```sql
