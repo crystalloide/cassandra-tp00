@@ -37,14 +37,17 @@ Le fichier `Cluster_4_noeuds_4_racks_1_DC.yml` déploie :
 	
 #### Installation de VisualVM  :
 
-```bash
+
 #### 1. Téléchargement :
+```bash
 wget "https://sourceforge.net/projects/mx4j/files/MX4J%20Binary/3.0.2/mx4j-3.0.2.zip/download" -O mx4j-3.0.2.zip 
+```
 
 #### 2. Décompression :
 ```bash
 unzip mx4j-3.0.2.zip
 chmod 777 -Rf ~/cassandra-tp00/mx4j-3.0.2/lib
+```
 
 #### 3. Copie dans chaque conteneur :
 ```bash
@@ -52,6 +55,7 @@ docker cp mx4j-3.0.2/lib/mx4j-tools.jar cassandra01:/opt/cassandra/lib/
 docker cp mx4j-3.0.2/lib/mx4j-tools.jar cassandra02:/opt/cassandra/lib/
 docker cp mx4j-3.0.2/lib/mx4j-tools.jar cassandra03:/opt/cassandra/lib/
 docker cp mx4j-3.0.2/lib/mx4j-tools.jar cassandra04:/opt/cassandra/lib/
+```
 
 #### 4. Prise en compte dans chaque conteneur dans /etc/cassandra/cassandra-env.sh :
 
