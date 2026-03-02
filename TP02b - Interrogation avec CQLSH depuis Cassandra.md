@@ -68,9 +68,9 @@ select * from formateurs ;
 
 ##### Affichage : 
      
-    id                                   | name  | email
+     id                                   | name  | email
     --------------------------------------+-------+-----------------
-    e65abf00-a2fa-11e7-8194-ef791791e2c9 | Steph | steph@gmail.com
+     e65abf00-a2fa-11e7-8194-ef791791e2c9 | Steph | steph@gmail.com
     
     
 ```sql
@@ -266,6 +266,7 @@ _____________
 #### Fin du TP02b : Interrogation avec CQLSH (suite)
 
 _____________
+
 
 
 
