@@ -40,16 +40,25 @@ docker ps -a
 ________
 ##### 3°) Pour comprendre la gestion de la répartition des token, nous allons créer un cluster à 2 noeuds
 ________
-##### 	   On supprime les données chargées dans le TP précédent :
+##### 	  On supprime les données chargées dans le TP précédent : on recrée à vide les répertoires :
 ________
 ```bash
 cd ~/cassandra-tp00/docker
-sudo rm -Rf cassandra01/*			#### On supprime tout l'historique et les données sur cassandra01
-sudo rm -Rf cassandra02/*			#### On supprime tout l'historique et les données sur cassandra02
-sudo rm -Rf cassandra01-conf/*			#### On supprime tout l'historique et les données sur cassandra01
-sudo rm -Rf cassandra02-conf/*			#### On supprime tout l'historique et les données sur cassandra02
-ls cassandra0*/
-cd ~/cassandra-tp00/
+sudo rm -Rf ~/cassandra-tp00/docker/cassandra*
+mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02 ~/cassandra-tp00/docker/cassandra03 ~/cassandra-tp00/docker/cassandra04
+```
+
+```bash
+mkdir -p ~/cassandra-tp00/docker/cassandra01-conf ~/cassandra-tp00/docker/cassandra02-conf ~/cassandra-tp00/docker/cassandra03-conf ~/cassandra-tp00/docker/cassandra04-conf
+```
+#### On affiche les répertoires créés :
+```bash
+ls ~/cassandra-tp00/docker
+```
+#### Affichage : cassandra01  cassandra02  cassandra03  cassandra04
+
+```bash
+cd ~/cassandra-tp00/docker
 ```
 _______
 ##### Remarque importante : 
@@ -207,4 +216,5 @@ _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
+
 
