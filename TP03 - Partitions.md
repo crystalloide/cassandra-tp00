@@ -96,7 +96,7 @@ cat ./donnees/cours-par-theme.csv
 
 ##### Résultat de la commande : 
     
-    **tag,cours id,ajout date,intitule**
+    tag,cours id,ajout date,intitule
     cassandra,1645ea59-14bd-11e5-a993-8138354b7e31,2014-01-29,Histoire de Cassandra
     cassandra,245e8024-14bd-11e5-9743-8238356b7e32,2012-04-03,Cassandra & SSDs
     cassandra,3452f7de-14bd-11e5-855e-8738355b7e3a,2013-03-17,Introduction a Cassandra
@@ -431,5 +431,6 @@ ________
 ##### Fin du TP N°03 : Partitions 
 
 ________
+
 
 
