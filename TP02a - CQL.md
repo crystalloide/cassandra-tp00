@@ -214,12 +214,11 @@ CREATE TABLE cours (
 );
 ```
 _____________
-####      Si besoin, en cas d'erreur, pour supprimer la table cours du Keyspace EntrepriseFormation, 
-####      exécutez la requête suivante : 
-####      DROP TABLE EntrepriseFormation.cours;
+#####      Si besoin, en cas d'erreur, pour supprimer la table cours du Keyspace EntrepriseFormation, 
+#####      exécutez la requête suivante : 
+     DROP TABLE EntrepriseFormation.cours;
 _____________
 
-_____________
 ####  6°) Insérez manuellement un enregistrement dans la table avec la commande INSERT :  
 ####  Insérez la première rangée de la table ci-dessous : 
 _____________
@@ -499,6 +498,7 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
 
