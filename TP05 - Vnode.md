@@ -51,83 +51,35 @@ mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02
 ```bash
 mkdir -p ~/cassandra-tp00/docker/cassandra01-conf ~/cassandra-tp00/docker/cassandra02-conf ~/cassandra-tp00/docker/cassandra03-conf ~/cassandra-tp00/docker/cassandra04-conf
 ```
-#### On affiche les répertoires créés :
+##### 4°) On affiche les répertoires créés :
 ```bash
 ls ~/cassandra-tp00/docker
 ```
-#### Affichage :
+##### Affichage :
     cassandra01  cassandra01-conf  cassandra02  cassandra02-conf  cassandra03  cassandra03-conf  cassandra04  cassandra04-conf
 
 ```bash
 cd ~/cassandra-tp00/docker
 ```
 _______
-##### Remarque importante : 
+##### 5°) Remarque importante : 
 
     En supprimant les répertoires de configuration des noeuds cassandra01 et cassandra02 (cassandra0x-conf), 
 	on réinitialise les fichiers cassandra.yaml avec leurs valeurs par défaut
 	et donc l'usage en VNodes.
 	Cela nous évite d'aller remettre les valeurs modifiée à l'état initial  (Vnode = 24  et 'Initial Token' en commentaire)
 
-
 _______
-##### 4°) On lance le 1er noeud cassandra01 :
+##### 6°) On lance le cluster de 2 noeuds cassandra01 et cassandra02 en VNodes : :
 ________
 ```bash
-docker start cassandra01
-docker logs cassandra01 
-sleep 30
-```
-```bash
-docker exec -it cassandra01 cat /opt/cassandra/logs/system.log | grep 'state jump to NORMAL'
-```
-##### Attendez que le premier noeud soit bien démarré (= affichage du message type 'state jump to NORMAL'),
-##### puis appuyez sur <Entrée> pour récupérer la ligne de commande
-
-________
-##### 5°) Vérifiez que le noeud n°1 s'exécute correctement avec la commande :
-________
-```bash
-docker exec -it cassandra01 nodetool status
-```
-##### Affichage :
-     
-     Datacenter: dc1
-     ===============
-     Status=Up/Down
-     |/ State=Normal/Leaving/Joining/Moving
-     --  Address          Load        Owns (effective)  Host ID                               Token  Rack
-     UN  192.168.100.151  114.33 KiB  100.0%            465a3a80-e0a6-4518-aa98-231566a01e66  0      Rack1
-     
-	 
-________
-##### 6°) Relancez le second noeud avec la commande : 
-```bash
-docker start cassandra02
-docker logs cassandra02 
-sleep 30
+cd ~/cassandra-tp00
+# Démarrer le cluster en arrière-plan
+docker compose -f Cluster_2_noeuds_2_racks_1_DC.yml up  -d
 ```
 
-```bash
-docker exec -it cassandra02 cat /opt/cassandra/logs/system.log | grep 'state jump to NORMAL'
-```
-
-##### Remarque : Ce noeud mettra un peu plus de temps à démarrer et rejoindre le cluster.
 ________
-##### Attendez bien que le second noeud soit démarré avant de continuer le TP.
-________
-
-    Datacenter: Cassandra
-    =====================
-    Status=Up/Down
-    |/ State=Normal/Leaving/Joining/Moving
-    --  Address          Load       Tokens       Owns    Host ID                               Rack
-    UJ  192.168.100.152  41,29 KiB  1            ?       4e430812-8aa9-48da-b30e-af662e6f50b1  rack1
-    UN  192.168.100.151  87,97 KiB  1            ?       5d916655-7699-4615-aec7-4a10d5e94142  rack1
-
-
-________
-##### 7°) Lancez à nouveau la commande 'nodetool status' pour voir le statut du cluster
+##### 7°) Lancez la commande 'nodetool status' pour voir le statut du cluster
 ________
 ```bash
 docker exec -it cassandra01 nodetool status
@@ -217,6 +169,7 @@ _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
+
 
 
 
