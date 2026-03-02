@@ -288,8 +288,8 @@ ________
 ________
 ##### Pour cours_par_theme, sur quel(s) noeud(s) réside(nt) quelle(s) partition(s) ?
 ##### Vous pouvez vous aider pour savoir quel noeud contient quels ranges de token, en passant la commande "nodetool ring"
+
 ##### Allons-y :  
-________
 ```sql
 exit
 ```
@@ -369,19 +369,27 @@ ________
 ##### 12°) Vous pouvez aussi détailler quelles partitions résident sur quels noeuds,
 #####     avec cette fois la commande suivante : nodetool
 ________
+#####     Quel noeud gère la clé de partition **cassandra** : 
 ```bash
 docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
+```
+##### Affichage du résultat retourné : 
+    192.168.100.152
+
+#####     Quel noeud gère la clé de partition **1FORM@** : 
+```bash
 docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
 ```
-
+##### Affichage du résultat retourné : 
+    192.168.100.151
+	
+#####     Quel noeud gère la clé de partition **1Data-Hexagone** : 
+```bash
+docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours_par_theme '1Data-Hexagone'
+```
 
 ##### Affichage du résultat retourné : 
-
-#### root@cassandra01:~# /node/resources/cassandra/bin/nodetool getendpoints EntrepriseFormation cours_par_theme 'cassandra'
-#### 192.168.100.152
-#### root@cassandra01:~# /node/resources/cassandra/bin/nodetool getendpoints EntrepriseFormation cours_par_theme '1FORM@'
-#### 192.68.1.151
-##
+    192.168.100.151
 ________
 #### la commande getendpoints renvoie les adresses IP du (ou des) noeud(s) qui contiennent les données partitions
 #### correspondants à la clé de partition : dernier argument entre quote : ici  'cassandra' and '1FORM@' respectivement
@@ -412,6 +420,7 @@ nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ﻿________
 ##### Fin du TP N°4: Anneau / Ring
 ________
+
 
 
 
