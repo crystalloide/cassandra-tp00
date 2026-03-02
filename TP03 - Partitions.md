@@ -303,6 +303,21 @@ GROUP BY cours_id;
     
     (3 rows)
 
+```sql
+SELECT COUNT(*)
+FROM entrepriseformation.cours_par_theme
+WHERE theme = 'cassandra'
+GROUP BY theme;
+```
+
+##### Affichage (valide): PRIMARY KEY (theme, cours_id)
+    
+     count
+    -------
+         3
+    
+    (3 rows)
+
 
 ________
 ##### On peut faire un COUNT(*) : 
@@ -444,6 +459,7 @@ ________
 ##### Fin du TP N°03 : Partitions 
 
 ________
+
 
 
 
