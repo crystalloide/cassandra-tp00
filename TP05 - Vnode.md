@@ -67,7 +67,7 @@ _______
     En supprimant les répertoires de configuration des noeuds cassandra01 et cassandra02 (cassandra0x-conf), 
 	on réinitialise les fichiers cassandra.yaml avec leurs valeurs par défaut
 	et donc l'usage en VNodes.
-	Cela nous évite d'aller remettre les valeurs modifiée à l'état initial  (Vnode = 24  et 'Initial Token' en commentaire)
+	Cela nous évite d'aller remettre les valeurs modifiée à l'état initial  (Vnode = 16  et 'Initial Token' en commentaire)
 
 _______
 ##### 6°) On lance le cluster de 2 noeuds cassandra01 et cassandra02 en VNodes : :
@@ -151,6 +151,7 @@ _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
+
 
 
 
