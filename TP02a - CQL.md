@@ -279,10 +279,24 @@ _____________
 ```sql
 SELECT WRITETIME(intitule) FROM cours WHERE cours_id = 245e8024-14bd-11e5-9743-8238356b7e32;
 ```
-
+     
+      writetime(intitule)
+     ---------------------
+         1772450826701836
+     
+     (1 rows)
+	 
 ####  Retourne une valeur de timestamp (EPOCH) 
-
+     Writetime = microsecondes depuis l’époque Unix
+	 
 #### Pour rendre ce timestamp compréhensible pour un être humain :-) :
+```sql
+SELECT toTimestamp(1772450826701) FROM system.local;
+```
+Cassandra n’autorise pas d’appeler une fonction seule dans un SELECT sans clause FROM.
+Exemple pour minTimeuuid(), qui ne dépend d’aucune table, mais CQL impose toujours un FROM.
+Il faut utiliser une table factice, par exemple **system.local** :
+
 ```sql
 SELECT toTimestamp(cours_id)
 FROM cours
@@ -510,6 +524,7 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
 
