@@ -291,6 +291,10 @@ SELECT WRITETIME(intitule) FROM cours WHERE cours_id = 245e8024-14bd-11e5-9743-8
 	 
 #### Pour rendre ce timestamp compréhensible pour un être humain :-) :
 
+Cassandra n’autorise pas d’appeler une fonction seule dans un SELECT sans clause FROM.
+Exemple pour minTimeuuid(), qui ne dépend d’aucune table, mais CQL impose toujours un FROM.
+Il faut utiliser une table factice, par exemple **system.local** :
+
 ```sql
 SELECT minTimeuuid(1772450826701) FROM system.local;
 ```
@@ -301,10 +305,9 @@ SELECT toTimestamp(minTimeuuid(1772450826701)) FROM system.local;
 ```sql
 SELECT toTimestamp(maxTimeuuid(1772450826701)) FROM system.local;
 ```
-Cassandra n’autorise pas d’appeler une fonction seule dans un SELECT sans clause FROM.
-Exemple pour minTimeuuid(), qui ne dépend d’aucune table, mais CQL impose toujours un FROM.
-Il faut utiliser une table factice, par exemple **system.local** :
-
+     ⚠️ Méthodes "approximative" car `minTimeuuid` et `minTimeuuid` arrondissent à la milliseconde.
+	 
+#### Conversion via ToTimestamp : 
 ```sql
 SELECT toTimestamp(cours_id) FROM cours
 WHERE cours_id = 245e8024-14bd-11e5-9743-8238356b7e32;
@@ -315,7 +318,6 @@ _____________
 ```sql
 SELECT JSON * FROM cours WHERE cours_id = 245e8024-14bd-11e5-9743-8238356b7e32;
 ```
-     ⚠️ Cette méthode est approximative car `minTimeuuid` arrondit à la milliseconde.
 	 
 _____________
 ####  Utilisation de fonctions : CAST :  
@@ -531,6 +533,7 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
 
