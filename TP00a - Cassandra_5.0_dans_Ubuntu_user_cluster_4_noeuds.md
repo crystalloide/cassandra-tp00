@@ -235,12 +235,12 @@ volumes:
 ```
 #### Fin du fichier
 
-#### Copier le fichier docker compose
+#### Copier le fichier docker compose :
 ```bash
 sudo rm docker-compose.yml
 cp Cluster_4_noeuds_4_racks_1_DC.yml docker-compose.yml
 ```
-#### Créer les répertoires de volumes (optionnel)
+#### Créer les répertoires de volumes :
 ```bash
 sudo rm -Rf ~/cassandra-tp00/docker/cassandra*
 mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02 ~/cassandra-tp00/docker/cassandra03 ~/cassandra-tp00/docker/cassandra04
