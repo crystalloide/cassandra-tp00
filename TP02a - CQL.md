@@ -198,7 +198,7 @@ _____________
 USE EntrepriseFormation;
 ```
 ####  L'invite de saisie de commande est changée :
-####  cqlsh:entrepriseformation> ....
+      cqlsh:entrepriseformation> ....
 
 _____________
 ####  5°) Créez une table simple nommée "cours" avec la structure indiquée ci-dessus. "cours_id" sera la clé primaire.
@@ -499,6 +499,7 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
 
