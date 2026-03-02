@@ -250,7 +250,7 @@ SELECT * FROM entrepriseformation.cours_par_theme
 WHERE theme = 'cassandra'
 ORDER BY ajout_date ASC;
 ```
-##### Affichage (échec) :
+##### Affichage (échec) : PRIMARY KEY (theme, cours_id)
     InvalidRequest: Error from server: code=2200 [Invalid query] message="Order by is currently only supported on the clustered columns of the PRIMARY KEY, got ajout_date"
 	
 ```sql
@@ -259,7 +259,7 @@ WHERE theme = 'cassandra'
 ORDER BY cours_id ASC;
 ```
 
-##### Affichage (valide):
+##### Affichage (valide): PRIMARY KEY (theme, cours_id)
   
      cqlsh:entrepriseformation> SELECT * FROM entrepriseformation.cours_par_theme
                             ... WHERE theme = 'cassandra'
@@ -282,7 +282,7 @@ FROM entrepriseformation.cours_par_theme
 WHERE theme = 'cassandra'
 GROUP BY ajout_date;
 ```
-##### Affichage (échec) :
+##### Affichage (échec) : PRIMARY KEY (theme, cours_id)
     InvalidRequest: Error from server: code=2200 [Invalid query] message="Group by is currently only supported on the columns of the PRIMARY KEY, got ajout_date"
 
 
@@ -293,7 +293,7 @@ WHERE theme = 'cassandra'
 GROUP BY cours_id;
 ```
 
-##### Affichage (valide):
+##### Affichage (valide): PRIMARY KEY (theme, cours_id)
     
      count
     -------
@@ -444,6 +444,7 @@ ________
 ##### Fin du TP N°03 : Partitions 
 
 ________
+
 
 
 
