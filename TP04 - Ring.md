@@ -314,7 +314,7 @@ Address          Rack        Status State   Load            Owns                
 Datacenter: Cassandra
 ==========
 Address          Rack        Status State   Load            Owns                Token                                       
-                                                                              9182585498027392616                         
+                                                                                9182585498027392616                         
 192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   -9223245761691305015                        
 192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   -9001411233921878659                        
 192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -6451529490400418319                        
@@ -420,6 +420,7 @@ nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ﻿________
 ##### Fin du TP N°4: Anneau / Ring
 ________
+
 
 
 
