@@ -220,8 +220,11 @@ cp Cluster_4_noeuds_4_racks_1_DC.yml docker-compose.yml
 ```
 #### Créer les répertoires de volumes (optionnel)
 ```bash
-sudo rm -Rf docker/cassanda*
-mkdir -p docker/cassandra01 docker/cassandra02 docker/cassandra03 docker/cassandra04
+sudo rm -Rf ~/cassandra-tp00/docker/cassandra*
+mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02 ~/cassandra-tp00/docker/cassandra03 ~/cassandra-tp00/docker/cassandra04
+```
+```bash
+mkdir -p ~/cassandra-tp00/docker/cassandra01-conf ~/cassandra-tp00/docker/cassandra02-conf ~/cassandra-tp00/docker/cassandra03-conf ~/cassandra-tp00/docker/cassandra04-conf
 ```
 #### On affiche les répertoires créés :
 ```bash
