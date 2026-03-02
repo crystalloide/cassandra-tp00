@@ -70,7 +70,7 @@ docker exec -it cassandra01 cat /opt/cassandra/conf/cassandra.yaml | grep native
 
 ####  Pour visualiser les logs du noeud cassandra01 : (par défaut : /var/log/cassandra/system.log)
 ```bash
-docker exec -it cassandra01 cat /opt/cassandra/logs/system.log | grep '151:7000 state jump to'
+docker exec -it cassandra01 cat /opt/cassandra/logs/system.log | tail -50
 ```
 
 ####  On regarde les options et niveaux de logging définis (toujours cassandra01 en exemple ici) :
@@ -499,6 +499,7 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
 
