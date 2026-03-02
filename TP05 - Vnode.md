@@ -84,7 +84,17 @@ ________
 ```bash
 docker exec -it cassandra01 nodetool status
 ```
-    
+    Datacenter: dc1
+    ===============
+    Status=Up/Down
+    |/ State=Normal/Leaving/Joining/Moving
+    --  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
+    UN  192.168.100.151  114.68 KiB  16      100.0%            aad76b9d-b975-4942-8772-d36896124cb3  Rack1
+    UJ  192.168.100.152  30.89 KiB   16      ?                 86cf0dbf-7778-48b0-b8c8-044effc1735e  Rack2
+
+
+##### Au bout de plusieurs minutes : 
+
     Datacenter: dc1
     ===============
     Status=Up/Down
@@ -151,6 +161,7 @@ _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
+
 
 
 
