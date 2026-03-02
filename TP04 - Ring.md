@@ -303,7 +303,7 @@ docker exec -it cassandra01 nodetool ring
 Datacenter: Cassandra
 ==========
 Address          Rack        Status State   Load            Owns                Token                                       
-                                                                              6228280314724367774                         
+                                                                                6228280314724367774                         
 192.168.100.151  rack1       Up     Normal  117,46 KiB      ?                   0                                           
 192.168.100.152  rack1       Up     Normal  168,03 KiB      ?                   6228280314724367774 
 ```
@@ -420,6 +420,7 @@ nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ﻿________
 ##### Fin du TP N°4: Anneau / Ring
 ________
+
 
 
 
