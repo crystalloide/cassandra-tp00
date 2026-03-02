@@ -417,7 +417,8 @@ ________
 ```bash
 docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ```
-﻿________
-##### Fin du TP N°4: Anneau / Ring
+
 ________
 
+##### Fin du TP N°4: Anneau / Ring
+________
