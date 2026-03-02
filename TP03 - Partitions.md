@@ -62,9 +62,6 @@ ________
 ________
 ##### Question 2 : Combien de partitions possède cette table ?
 ##### Réponse 2 : 	Autant qu'il y a de valeurs distinctes de la clé primaire.
-________
-
-
 
 ________
 ##### 4°) Lancer la requête suivante pour les valeurs de tokens pour chaque valeur de cours_id :
@@ -74,19 +71,17 @@ SELECT token(cours_id), cours_id FROM cours;
 ```
 
 ##### Résultat de la requête : 
-##### 
-##### cqlsh:entrepriseformation> SELECT token(cours_id), cours_id FROM cours;
-##### 
-##### system.token(cours_id) | cours_id
-##### ------------------------+--------------------------------------
-#####    -7805440677194688247 | 245e8024-14bd-11e5-9743-8238356b7e32
-#####    -1963973032031712291 | 3452f7de-14bd-11e5-855e-8738355b7e3a
-#####    -1613479371119279545 | 5645f8bd-14bd-11e5-af1a-8638355b8e3a
-#####     3855558958565172223 | 1645ea59-14bd-11e5-a993-8138354b7e31
-#####     7966101712501124149 | 4845ed97-14bd-11e5-8a40-8338255b7e33
-##### 
 
-
+     cqlsh:entrepriseformation> SELECT token(cours_id), cours_id FROM cours;
+ 
+     system.token(cours_id) | cours_id
+     ------------------------+--------------------------------------
+        -7805440677194688247 | 245e8024-14bd-11e5-9743-8238356b7e32
+        -1963973032031712291 | 3452f7de-14bd-11e5-855e-8738355b7e3a
+        -1613479371119279545 | 5645f8bd-14bd-11e5-af1a-8638355b8e3a
+         3855558958565172223 | 1645ea59-14bd-11e5-a993-8138354b7e31
+         7966101712501124149 | 4845ed97-14bd-11e5-8a40-8338255b7e33
+   
 
 ________
 ##### 5°) Quitter cqlsh et regarder le contenu du fichier ./donnees/cours-par-theme.csv :
@@ -435,3 +430,4 @@ ________
 ##### Fin du TP N°03 : Partitions 
 
 ________
+
