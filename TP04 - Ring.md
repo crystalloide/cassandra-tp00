@@ -114,7 +114,6 @@ docker exec -it cassandra01 cat /opt/cassandra/logs/system.log | grep 'state jum
 ```
 ##### Attendez que le premier noeud soit bien démarré (= affichage du message type 'state jump to NORMAL'),
 ##### puis appuyez sur <Entrée> pour récupérer la ligne de commande
-________
 
 ________
 ##### 5°) Vérifiez que le noeud n°1 s'exécute correctement avec la commande :
@@ -413,6 +412,7 @@ nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ﻿________
 ##### Fin du TP N°4: Anneau / Ring
 ________
+
 
 
 
