@@ -16,14 +16,14 @@ ________
 docker exec -it cassandra01 cqlsh
 ```
 ________
-2) Sélectionner le Keyspace EntrepriseFormation avec la commande USE :
+##### 2°) Sélectionner le Keyspace EntrepriseFormation avec la commande USE :
 ________
 ```sql
 USE EntrepriseFormation;
 ```
 
 ________
-##### 3) Lancez la commande suivante pour visualiser les métadonnées de la table des cours créée précédemment : 
+##### 3°) Lancez la commande suivante pour visualiser les métadonnées de la table des cours créée précédemment : 
 ________
 ```sql
 DESCRIBE TABLE cours;
@@ -171,14 +171,14 @@ SELECT * FROM cours_par_theme WHERE theme = 'cassandra';
 ```
 	
 ________
-##### 11) On extrait tous les cours concernant le thème 1FORM@ : 
+##### 11°) On extrait tous les cours concernant le thème 1FORM@ : 
 ________
 ```sql
 SELECT * FROM cours_par_theme WHERE theme = '1FORM@';
 ```
 
 ________
-##### 12) On recherche maintenant les cours qui contiennent les mots "Introduction a Cassandra"
+##### 12°) On recherche maintenant les cours qui contiennent les mots "Introduction a Cassandra"
 ________
 ```sql
 SELECT * FROM cours_par_theme WHERE intitule = 'Introduction a Cassandra';
@@ -240,7 +240,7 @@ DESCRIBE entrepriseformation.cours_par_theme ;
         AND read_repair = 'BLOCKING'
         AND speculative_retry = '99p';
 ________
-##### Synthèse : 
+##### 13°) Synthèse : 
 ________
 ##### - On ne peut (doit) requêter qu'en spécifiant la clé de partition 
 ##### - et on peut trier uniquement sur une clé de clustering ( = partie de la clé primaire autre que la clé de partition): 
@@ -274,7 +274,7 @@ ORDER BY cours_id ASC;
     
 
 ________
-##### On ne peut faire un GROUP BY que sur une colonne de la clé primaire (clé de partition ou clé de clustering ): 
+##### 14°) On ne peut faire un GROUP BY que sur une colonne de la clé primaire (clé de partition ou clé de clustering ): 
 ________
 ##### Group by sur 'ajout_date'
 ```sql
@@ -325,7 +325,7 @@ GROUP BY cours_id;
 
 
 ________
-##### On peut faire un COUNT(*) : 
+##### 15°) On peut faire un COUNT(*) : 
 ________
 ```sql
 SELECT COUNT(*) FROM entrepriseformation.cours_par_theme;
@@ -351,7 +351,7 @@ exit
 
 
 ________
-##### Utilisation de nodetool describering "nom du keyspace" :
+##### 16°) Utilisation de nodetool describering "nom du keyspace" :
 ________ 
 ```bash
 docker exec -it cassandra01 nodetool describering entrepriseformation
@@ -462,17 +462,4 @@ docker exec -it cassandra01 nodetool describering entrepriseformation
 
 ________
 ##### Fin du TP N°03 : Partitions 
-
 ________
-
-
-
-
-
-
-
-
-
-
-
-
