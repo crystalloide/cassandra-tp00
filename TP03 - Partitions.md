@@ -161,12 +161,9 @@ ________
 ##### alors la table ne contiendrait plus que 2 enregistrements. 
 ##### C'est pour cette raison que l'on inclut le champ 'cours_id' comme colonne cluster.
 ________
-
-________
 ##### Refaire les étapes 8 et 9 : voyez-vous une différence ? Pourquoi ?
 ________
 
-________
 ##### 10°) Requête de SELECT pour retrouver tous les enregistrements en relation avec le theme 'cassandra'
 ________
 ```sql
@@ -432,6 +429,7 @@ ________
 ##### Fin du TP N°03 : Partitions 
 
 ________
+
 
 
 
