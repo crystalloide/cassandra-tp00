@@ -47,15 +47,15 @@ docker exec -it cassandra01 nodetool status
 
 _____________
 ####  Si C* n'est pas démarré sur le noeud que l'on veut interroger : un message de type suivant va apparaître :
-####  Connection refused to host: 127.0.0.1; nested exception is:
-####          java.net.ConnectException: Connection refused (Connection refused)
-####  Si ce n'est pas le cas: on lance donc cassandra : à faire uniquement si on a eu le message "connection refused"
-
+     Connection refused to host: 127.0.0.1; nested exception is:
+     java.net.ConnectException: Connection refused (Connection refused)
+	 
+#####  On peut vérifier si le noeud cassandra à bien démarré, utile si on a reçu le message "connection refused"
 ```bash
 docker exec -it cassandra01 cat /opt/cassandra/logs/system.log | grep '151:7000 state jump to'
 ```
 ####  Le message suivant est signe que le démarrage est ok : 
-####  INFO  [main] 2026-03-02 10:10:29,989 StorageService.java:3281 - Node /192.168.100.151:7000 state jump to NORMAL
+     INFO  [main] 2026-03-02 10:10:29,989 StorageService.java:3281 - Node /192.168.100.151:7000 state jump to NORMAL
 
 _____________
 ####  
@@ -499,6 +499,7 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
 
