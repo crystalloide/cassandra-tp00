@@ -46,9 +46,18 @@ ________
 cd ~/cassandra-tp00/docker
 sudo rm -Rf cassandra01/*			#### On supprime tout l'historique et les données sur cassandra01
 sudo rm -Rf cassandra02/*			#### On supprime tout l'historique et les données sur cassandra02
+sudo rm -Rf cassandra01-conf/*			#### On supprime tout l'historique et les données sur cassandra01
+sudo rm -Rf cassandra02-conf/*			#### On supprime tout l'historique et les données sur cassandra02
 ls cassandra0*/
 cd ~/cassandra-tp00/
 ```
+_______
+##### Remarque importante : 
+
+    En supprimant les répertoires de configuration des noeuds cassandra01 et cassandra02 (cassandra0x-conf), 
+	on réinitialise les fichiers cassandra.yaml avec leurs valeurs par défaut
+	et donc l'usage en VNodes.
+	Cela nous évite d'aller remettre les valeurs modifiée à l'état initial  (Vnode = 24  et 'Initial Token' en commentaire)
 
 
 _______
@@ -196,4 +205,5 @@ Address          Rack        Status State   Load            Owns                
 
 _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
+
 _______
