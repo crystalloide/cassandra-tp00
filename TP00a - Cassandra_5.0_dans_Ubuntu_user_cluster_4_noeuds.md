@@ -32,7 +32,7 @@ Le fichier `Cluster_4_noeuds_4_racks_1_DC.yml` déploie :
 cd ~
 sudo rm -Rf ~/cassandra-tp00
 
-#### Ici, on va simpleemnt cloner le projet :
+#### Ici, on va simplement cloner le projet :
 git clone https://github.com/crystalloide/cassandra-tp00
 
 cd ~/cassandra-tp00
