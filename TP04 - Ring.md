@@ -244,7 +244,7 @@ CREATE TABLE cours_par_theme (theme TEXT,cours_id UUID, ajout_date TIMESTAMP, in
 ```
 
 ```sql
-COPY cours_par_theme(theme,cours_id,ajout_date,intitule) FROM '/sources/donnees/cours-par-theme.csv' WITH HEADER = TRUE;
+COPY cours_par_theme(theme,cours_id,ajout_date,intitule) FROM '/donnees/cours-par-theme.csv' WITH HEADER = TRUE;
 ```
 
 ```sql
@@ -419,4 +419,5 @@ nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ﻿________
 ##### Fin du TP N°4: Anneau / Ring
 ________
+
 
