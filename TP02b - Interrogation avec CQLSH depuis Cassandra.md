@@ -2,7 +2,6 @@ _____________
 #### TP02b : Interrogation avec CQLSH (suite) 
 _____________
 
-_____________
 #### Commandes pratiques  
 _____________
 
@@ -19,78 +18,91 @@ DESCRIBE TABLES;
 ```
 
 ```sql
-CREATE KEYSPACE formation WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '3'}  AND durable_writes = true;
+DROP KEYSPACE IF EXISTS formation;
+```
+
+```sql
+CREATE KEYSPACE IF NOT EXISTS formation WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '3'}  AND durable_writes = true;
+
 ```sql
 DESCRIBE KEYSPACE formation;
 ```
+
 ```sql
 USE formation;
 ```
+
 ```sql
 CREATE TABLE formateurs(id uuid,name varchar,PRIMARY KEY(id, email));
 #### InvalidRequest: Error from server: code=2200 [Invalid query] message="Unknown definition email referenced in PRIMARY KEY"
 ```
+
 ```sql
 CREATE TABLE formateurs(id uuid,name varchar,PRIMARY KEY(id, name));
 ```
+
 ```sql
 DESCRIBE table formateurs;
 ```
+
 ```sql
 DROP TABLE formateurs;
 ```
+
 ```sql
 CREATE TABLE formateurs(id uuid,name varchar,email varchar, PRIMARY KEY(id, name, email));
 ```
+
 ```sql
 DESCRIBE table formateurs;
 ```
+
 ```sql
 insert into formateurs (id,name,email) values (now(),'Steph','steph@gmail.com');
 ```
+
 ```sql
 select * from formateurs ;
-
-#### Affichage : 
-#### 
-####  id                                   | name  | email
-#### --------------------------------------+-------+-----------------
-####  e65abf00-a2fa-11e7-8194-ef791791e2c9 | Steph | steph@gmail.com
-#### 
-#### 
 ```
+##### Affichage : 
+     
+    id                                   | name  | email
+    --------------------------------------+-------+-----------------
+    e65abf00-a2fa-11e7-8194-ef791791e2c9 | Steph | steph@gmail.com
+    
+    
 ```sql
 help DESCRIBE
 ```
+
 ```sql
 DESCRIBE formateurs;
 ```
+
 ```sql
-#### Affichage :
-#### 
-#### CREATE TABLE formation.formateurs (
-####     id uuid,
-####     name text,
-####     email text,
-####     PRIMARY KEY (id, name, email)
-#### ) WITH CLUSTERING ORDER BY (name ASC, email ASC)
-####     AND bloom_filter_fp_chance = 0.01
-####     AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
-####     AND comment = ''
-####     AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
-####     AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
-####     AND crc_check_chance = 1.0
-####     AND dclocal_read_repair_chance = 0.1
-####     AND default_time_to_live = 0
-####     AND gc_grace_seconds = 864000
-####     AND max_index_interval = 2048
-####     AND memtable_flush_period_in_ms = 0
-####     AND min_index_interval = 128
-####     AND read_repair_chance = 0.0
-####     AND speculative_retry = '99PERCENTILE';
-#### 
-#### 
-```
+##### Affichage :
+     
+     CREATE TABLE formation.formateurs (
+         id uuid,
+         name text,
+         email text,
+         PRIMARY KEY (id, name, email)
+     ) WITH CLUSTERING ORDER BY (name ASC, email ASC)
+         AND bloom_filter_fp_chance = 0.01
+         AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+         AND comment = ''
+         AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+         AND compression = {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+         AND crc_check_chance = 1.0
+         AND dclocal_read_repair_chance = 0.1
+         AND default_time_to_live = 0
+         AND gc_grace_seconds = 864000
+         AND max_index_interval = 2048
+         AND memtable_flush_period_in_ms = 0
+         AND min_index_interval = 128
+         AND read_repair_chance = 0.0
+         AND speculative_retry = '99PERCENTILE';
+     
 ```sql	
 DESCRIBE FULL SCHEMA
 ```
@@ -267,4 +279,5 @@ exit
 
 _____________
 #### Fin du TP02b : Interrogation avec CQLSH (suite)
+
 _____________
