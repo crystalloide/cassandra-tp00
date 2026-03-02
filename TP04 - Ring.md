@@ -71,8 +71,10 @@ initial_token: 0
 #####  Le paramètre initial_token permet de spécifier les tokens manuellement.
 
     Remarque : Il faut mettre en commentaire le paramètre initial_token
-    si on utilise les vnodes (num_tokens > 1, above) 
+    si on utilise les vnodes (c'est à dire si num_tokens > 1) 
+	
     Dans le cas présent, vous pouvez spécifier une liste séparée par des virgules.
+	
     C'était en effet ainsi que l'on ajoutait originellement des noeuds au cluster déjà existants sans vnodes.
 
 ##### Sur cassandra02 : modifier cassandra.yaml
@@ -417,3 +419,4 @@ nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ﻿________
 ##### Fin du TP N°4: Anneau / Ring
 ________
+
