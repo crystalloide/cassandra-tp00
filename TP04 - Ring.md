@@ -285,13 +285,7 @@ SELECT token(theme),theme FROM cours_par_theme;
 ________
 ##### Combien de partitions y-t-il pour la table cours ? 
 ________
-
-
-________
 ##### Combien de partitions y-t-il pour la table cours_par_theme ? 
-________
-
-
 ________
 ##### Pour cours_par_theme, sur quel(s) noeud(s) réside(nt) quelle(s) partition(s) ?
 ##### Vous pouvez vous aider pour savoir quel noeud contient quels ranges de token, en passant la commande "nodetool ring"
@@ -419,5 +413,6 @@ nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ﻿________
 ##### Fin du TP N°4: Anneau / Ring
 ________
+
 
 
