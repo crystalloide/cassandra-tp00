@@ -55,7 +55,7 @@ mkdir -p ~/cassandra-tp00/docker/cassandra01-conf ~/cassandra-tp00/docker/cassan
 ```bash
 ls ~/cassandra-tp00/docker
 ```
-#### Affichage : cassandra01  cassandra02  cassandra03  cassandra04
+#### Affichage : cassandra01  cassandra01-conf  cassandra02  cassandra02-conf  cassandra03  cassandra03-conf  cassandra04  cassandra04-conf
 
 ```bash
 cd ~/cassandra-tp00/docker
@@ -216,5 +216,6 @@ _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
+
 
 
