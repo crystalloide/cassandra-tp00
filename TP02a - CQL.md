@@ -20,9 +20,9 @@ _____________
      intitule				text
 _____________
 
-_____________
 ####  Etapes : 
 _____________
+
 ####  1°) Vérifier que Cassandra est bien en cours d'exécution, 
 ####  Dans un terminal, sur un des noeuds du cluster C*, avec la commande : 
 ```bash
@@ -497,4 +497,5 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
