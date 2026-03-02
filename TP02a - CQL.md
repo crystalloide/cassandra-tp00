@@ -316,7 +316,7 @@ SELECT NOW() FROM cours;
 	 => Elle n'a aucun lien avec les données stockées dans la table dans notre exemple.
 
 	 L'information de quand un enregistrement a été inséré/modifié (UPSERT) est déjà conservée par Cassandra.
-	 Pour stocker le timestamp d'insertion initiale dans une colonne spécifiqué dédiée :
+	 Pour stocker le timestamp d'insertion initiale dans une colonne spécifique dédiée :
 ```sql
 lINSERT INTO cours (id, titre, created_at) 
 VALUES (uuid(), 'Cassandra', NOW());
@@ -504,6 +504,7 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
 
