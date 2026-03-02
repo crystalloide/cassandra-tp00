@@ -186,97 +186,79 @@ SELECT * FROM system.compaction_history LIMIT 20;
      10084ce0-1620-11f1-81e9-a3342f18b42d |     1051 |       711 |               local | 2026-03-02 10:10:39.063000+0000 | {'compaction_type': 'Compaction'} |        system |                             {5: 1}
 
     (20 rows)
-
-```sql
-SELECT * FROM system_schema.keyspaces;
-
-#### Affichage : 
-##
-####  keyspace_name       | durable_writes | graph_engine | replication
-#### ---------------------+----------------+--------------+-------------------------------------------------------------------------------------
-####          system_auth |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
-####        system_schema |           True |         null |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
-####     dse_system_local |           True |         null |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
-####           dse_system |           True |         null |                        {'class': 'org.apache.cassandra.locator.EverywhereStrategy'}
-####           dse_leases |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
-####            formation |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
-####           solr_admin |           True |         null |                        {'class': 'org.apache.cassandra.locator.EverywhereStrategy'}
-####         dse_insights |           True |         null |                        {'class': 'org.apache.cassandra.locator.EverywhereStrategy'}
-####   dse_insights_local |           True |         null |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
-####   system_distributed |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
-####       system_backups |           True |         null |                        {'class': 'org.apache.cassandra.locator.EverywhereStrategy'}
-####               system |           True |         null |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
-####             dse_perf |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
-####        system_traces |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '2'}
-####  entrepriseformation |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
-####         dse_security |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
-#### 
-#### (16 rows)
-#### 
-```
-```sql
+	
 #### Interrogation de la table keyspaces avec un ordre de SELECT :
-SELECT * FROM system_schema.keyspaces;
-
-#### Affichage : 
-
-	 keyspace_name       | durable_writes | graph_engine | replication
-	---------------------+----------------+--------------+-------------------------------------------------------------------------------------
-			 system_auth |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
-		   system_schema |           True |         null |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
-		dse_system_local |           True |         null |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
-			  dse_system |           True |         null |                        {'class': 'org.apache.cassandra.locator.EverywhereStrategy'}
-			  dse_leases |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
-			   formation |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
-			  solr_admin |           True |         null |                        {'class': 'org.apache.cassandra.locator.EverywhereStrategy'}
-			dse_insights |           True |         null |                        {'class': 'org.apache.cassandra.locator.EverywhereStrategy'}
-	  dse_insights_local |           True |         null |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
-	  system_distributed |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
-		  system_backups |           True |         null |                        {'class': 'org.apache.cassandra.locator.EverywhereStrategy'}
-				  system |           True |         null |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
-				dse_perf |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
-		   system_traces |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '2'}
-	 entrepriseformation |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
-			dse_security |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
-
-
-
-```
 ```sql
+SELECT * FROM system_schema.keyspaces;
+```
+##### Affichage sur un cluster Apache Cassandra : 
+     keyspace_name       | durable_writes | replication
+    ---------------------+----------------+-------------------------------------------------------------------------------------
+             system_auth |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+           system_schema |           True |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+               formation |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
+      system_distributed |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
+                  system |           True |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+           system_traces |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '2'}
+     entrepriseformation |           True | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+    
+    (7 rows)
+
+##### Affichage sur un cluster DSE : 
+      keyspace_name       | durable_writes | graph_engine | replication
+     ---------------------+----------------+--------------+-------------------------------------------------------------------------------------
+              system_auth |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+            system_schema |           True |         null |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+         dse_system_local |           True |         null |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+               dse_system |           True |         null |                        {'class': 'org.apache.cassandra.locator.EverywhereStrategy'}
+               dse_leases |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+                formation |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
+               solr_admin |           True |         null |                        {'class': 'org.apache.cassandra.locator.EverywhereStrategy'}
+             dse_insights |           True |         null |                        {'class': 'org.apache.cassandra.locator.EverywhereStrategy'}
+       dse_insights_local |           True |         null |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+       system_distributed |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '3'}
+           system_backups |           True |         null |                        {'class': 'org.apache.cassandra.locator.EverywhereStrategy'}
+                   system |           True |         null |                             {'class': 'org.apache.cassandra.locator.LocalStrategy'}
+                 dse_perf |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+            system_traces |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '2'}
+      entrepriseformation |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+             dse_security |           True |         null | {'class': 'org.apache.cassandra.locator.SimpleStrategy', 'replication_factor': '1'}
+     
+     (16 rows)
+
+
 #### Interrogation de system_schema concernant une table précise : 
-_____________
+```sql
 SELECT * FROM system_schema.tables WHERE keyspace_name = 'formation' AND table_name = 'formateurs';
-
-#### Affichage : 
-#### 
-####  keyspace_name | table_name | additional_write_policy | bloom_filter_fp_chance | caching                                       | cdc  | comment | compaction                                                                                                                | compression                                                                             | crc_check_chance | dclocal_read_repair_chance | default_time_to_live | extensions | flags        | gc_grace_seconds | id                                   | max_index_interval | memtable_flush_period_in_ms | min_index_interval | nodesync                                   | read_repair | read_repair_chance | speculative_retry
-#### ---------------+------------+-------------------------+------------------------+-----------------------------------------------+------+---------+---------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+------------------+----------------------------+----------------------+------------+--------------+------------------+--------------------------------------+--------------------+-----------------------------+--------------------+--------------------------------------------+-------------+--------------------+-------------------
-####      formation | formateurs |            99PERCENTILE |                   0.01 | {'keys': 'ALL', 'rows_per_partition': 'NONE'} | null |         | {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'} | {'chunk_length_in_kb': '64', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} |                1 |                          0 |                    0 |           {} | {'compound'} |           864000 | 22fafe40-e702-11ef-9e86-994d0f5a37c9 |               2048 |                           0 |                128 | {'enabled': 'true', 'incremental': 'true'} |    BLOCKING |                  0 |      99PERCENTILE
-#### 
-#### (1 rows)
-#### 
-
 ```
 
-#### Interrogation de schema_columns sur les colonnes d'une table : 
+##### Affichage : 
+     keyspace_name | table_name | additional_write_policy | allow_auto_snapshot | bloom_filter_fp_chance | caching                                       | cdc  | comment | compaction                                                                                                                | compression                                                                             | crc_check_chance | dclocal_read_repair_chance | default_time_to_live | extensions | flags        | gc_grace_seconds | id                                   | incremental_backups | max_index_interval | memtable | memtable_flush_period_in_ms | min_index_interval | read_repair | read_repair_chance | speculative_retry
+---------------+------------+-------------------------+---------------------+------------------------+-----------------------------------------------+------+---------+---------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+------------------+----------------------------+----------------------+------------+--------------+------------------+--------------------------------------+---------------------+--------------------+----------+-----------------------------+--------------------+-------------+--------------------+-------------------
+     formation | formateurs |                     99p |                null |                   0.01 | {'keys': 'ALL', 'rows_per_partition': 'NONE'} | null |         | {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'} | {'chunk_length_in_kb': '16', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} |                1 |                          0 |                    0 |           {} | {'compound'} |           864000 | c44ffa10-164b-11f1-a651-a3342f18b42d |                null |               2048 |     null |                           0 |                128 |    BLOCKING |                  0 |               99p
+
+    (1 rows)
+
+
+##### Interrogation de schema_columns sur les colonnes d'une table : 
 
 ```sql
 SELECT * FROM system_schema.columns WHERE keyspace_name = 'formation' AND table_name = 'formateurs';
-
-#### Affichage : 
-#### 
-####  keyspace_name | table_name | column_name | clustering_order | column_name_bytes | kind          | position | required_for_liveness | type
-#### ---------------+------------+-------------+------------------+-------------------+---------------+----------+-----------------------+------
-####      formation | formateurs |       email |              asc |      0x656d61696c |    clustering |        1 |                 False | text
-####      formation | formateurs |          id |             none |            0x6964 | partition_key |        0 |                 False | uuid
-####      formation | formateurs |        name |              asc |        0x6e616d65 |    clustering |        0 |                 False | text
-#### 
-#### (3 rows)
-#### 
-
 ```
+##### Affichage : 
+
+    ####  keyspace_name | table_name | column_name | clustering_order | column_name_bytes | kind          | position | required_for_liveness | type
+     ---------------+------------+-------------+------------------+-------------------+---------------+----------+-----------------------+------
+          formation | formateurs |       email |              asc |      0x656d61696c |    clustering |        1 |                 False | text
+          formation | formateurs |          id |             none |            0x6964 | partition_key |        0 |                 False | uuid
+          formation | formateurs |        name |              asc |        0x6e616d65 |    clustering |        0 |                 False | text
+     
+     (3 rows)
+     
+
+
+##### On sort du client shell cassandra CQLSH :
 ```sql
-#### On sort du client shell cassandra CQLSH :  
 exit
 ```
 
@@ -284,6 +266,7 @@ _____________
 #### Fin du TP02b : Interrogation avec CQLSH (suite)
 
 _____________
+
 
 
 
