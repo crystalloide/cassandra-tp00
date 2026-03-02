@@ -198,13 +198,13 @@ SELECT * FROM cours_par_theme WHERE intitule = 'Introduction a Cassandra' ALLOW 
 ```
 
 ##### Résulat de la requête : 
-
-#####  theme     | cours_id                             | ajout_date               | intitule
-##### -----------+--------------------------------------+--------------------------+-----------------
-#####  cassandra | 3452f7de-14bd-11e5-855e-8738355b7e3a | 2013-03-17 00:00:00+0000 | Introduction a Cassandra
-##### 
-##### (1 rows)
-##### 
+    
+     theme     | cours_id                             | ajout_date                      | intitule
+    -----------+--------------------------------------+---------------------------------+--------------------------
+     cassandra | 3452f7de-14bd-11e5-855e-8738355b7e3a | 2013-03-17 00:00:00.000000+0000 | Introduction a Cassandra
+    
+    (1 rows)
+	
 ________
 
 ```sql
@@ -429,6 +429,7 @@ ________
 ##### Fin du TP N°03 : Partitions 
 
 ________
+
 
 
 
