@@ -212,14 +212,33 @@ DESCRIBE entrepriseformation.cours_par_theme ;
 ```
 
 ##### Résulat de la requête : 
-CREATE TABLE entrepriseformation.cours_par_theme (
-    theme text,
-    cours_id uuid,
-    ajout_date timestamp,
-    intitule text,
-    PRIMARY KEY (theme, cours_id)
-
-
+    
+    CREATE TABLE entrepriseformation.cours_par_theme (
+        theme text,
+        cours_id uuid,
+        ajout_date timestamp,
+        intitule text,
+        PRIMARY KEY (theme, cours_id)
+    ) WITH CLUSTERING ORDER BY (cours_id ASC)
+        AND additional_write_policy = '99p'
+        AND allow_auto_snapshot = true
+        AND bloom_filter_fp_chance = 0.01
+        AND caching = {'keys': 'ALL', 'rows_per_partition': 'NONE'}
+        AND cdc = false
+        AND comment = ''
+        AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'}
+        AND compression = {'chunk_length_in_kb': '16', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'}
+        AND memtable = 'default'
+        AND crc_check_chance = 1.0
+        AND default_time_to_live = 0
+        AND extensions = {}
+        AND gc_grace_seconds = 864000
+        AND incremental_backups = true
+        AND max_index_interval = 2048
+        AND memtable_flush_period_in_ms = 0
+        AND min_index_interval = 128
+        AND read_repair = 'BLOCKING'
+        AND speculative_retry = '99p';
 ________
 ##### Synthèse : 
 ________
@@ -240,17 +259,17 @@ ORDER BY cours_id ASC;
 
 ##### Affichage :
   
-##### cqlsh:entrepriseformation> SELECT * FROM entrepriseformation.cours_par_theme
-#####                        ... WHERE theme = 'cassandra'
-#####                        ... ORDER BY cours_id ASC;
-##### 
-#####  theme     | cours_id                             | ajout_date                      | intitule
-##### -----------+--------------------------------------+---------------------------------+--------------------------
-#####  cassandra | 1645ea59-14bd-11e5-a993-8138354b7e31 | 2014-01-29 00:00:00.000000+0000 |    Histoire de Cassandra
-#####  cassandra | 245e8024-14bd-11e5-9743-8238356b7e32 | 2012-04-03 00:00:00.000000+0000 |         Cassandra & SSDs
-#####  cassandra | 3452f7de-14bd-11e5-855e-8738355b7e3a | 2013-03-17 00:00:00.000000+0000 | Introduction a Cassandra
-##### 
-
+     cqlsh:entrepriseformation> SELECT * FROM entrepriseformation.cours_par_theme
+                            ... WHERE theme = 'cassandra'
+                            ... ORDER BY cours_id ASC;
+     
+      theme     | cours_id                             | ajout_date                      | intitule
+     -----------+--------------------------------------+---------------------------------+--------------------------
+      cassandra | 1645ea59-14bd-11e5-a993-8138354b7e31 | 2014-01-29 00:00:00.000000+0000 |    Histoire de Cassandra
+      cassandra | 245e8024-14bd-11e5-9743-8238356b7e32 | 2012-04-03 00:00:00.000000+0000 |         Cassandra & SSDs
+      cassandra | 3452f7de-14bd-11e5-855e-8738355b7e3a | 2013-03-17 00:00:00.000000+0000 | Introduction a Cassandra
+     
+    
 
 ________
 ##### On ne peut faire un GROUP BY que sur une colonne de la clé primaire (autre que la clé de partition =>  clé de clustering ): 
@@ -429,6 +448,7 @@ ________
 ##### Fin du TP N°03 : Partitions 
 
 ________
+
 
 
 
