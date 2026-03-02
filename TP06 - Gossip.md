@@ -145,6 +145,7 @@ docker exec -it cassandra01 nodetool gossipinfo
 
 _____
 ##### 4°) Exécutez 'nodetool gossipinfo' sur cassandra02 au lieu de cassandra01. Notez que les données de Gossip sont identiques : 
+_____
 
 ##### Sur cassandra02 :
 ```bash
@@ -273,14 +274,14 @@ docker exec -it cassandra01 nodetool gossipinfo
   JMX_PORT:11:7199
   SCHEMA_COMPATIBILITY_VERSION:5:2
   TOKENS:44:<hidden>
-```bash
+```
 
 
 
 9°) Démarrez cqlsh et exécutez la requête suivante de la table system.peers qui stocke certaines données de discussion gossip sur les peers d'un noeud.
 ```bash
 docker exec -it cassandra01 cqlsh
-```bash
+```
 
 ```sql
 SELECT peer, data_center, host_id, preferred_ip, rack, release_version, rpc_address, schema_version
@@ -322,3 +323,4 @@ _____
 ##### Fin du TP06 : les échanges avec le protocole Gossip
 
 _____
+
