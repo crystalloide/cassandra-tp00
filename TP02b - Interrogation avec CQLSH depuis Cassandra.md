@@ -234,10 +234,11 @@ SELECT * FROM system_schema.tables WHERE keyspace_name = 'formation' AND table_n
 
 ##### Affichage : 
      keyspace_name | table_name | additional_write_policy | allow_auto_snapshot | bloom_filter_fp_chance | caching                                       | cdc  | comment | compaction                                                                                                                | compression                                                                             | crc_check_chance | dclocal_read_repair_chance | default_time_to_live | extensions | flags        | gc_grace_seconds | id                                   | incremental_backups | max_index_interval | memtable | memtable_flush_period_in_ms | min_index_interval | read_repair | read_repair_chance | speculative_retry
----------------+------------+-------------------------+---------------------+------------------------+-----------------------------------------------+------+---------+---------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+------------------+----------------------------+----------------------+------------+--------------+------------------+--------------------------------------+---------------------+--------------------+----------+-----------------------------+--------------------+-------------+--------------------+-------------------
-     formation | formateurs |                     99p |                null |                   0.01 | {'keys': 'ALL', 'rows_per_partition': 'NONE'} | null |         | {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'} | {'chunk_length_in_kb': '16', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} |                1 |                          0 |                    0 |           {} | {'compound'} |           864000 | c44ffa10-164b-11f1-a651-a3342f18b42d |                null |               2048 |     null |                           0 |                128 |    BLOCKING |                  0 |               99p
+    ---------------+------------+-------------------------+---------------------+------------------------+-----------------------------------------------+------+---------+---------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------+------------------+----------------------------+----------------------+------------+--------------+------------------+--------------------------------------+---------------------+--------------------+----------+-----------------------------+--------------------+-------------+--------------------+-------------------
+         formation | formateurs |                     99p |                null |                   0.01 | {'keys': 'ALL', 'rows_per_partition': 'NONE'} | null |         | {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy', 'max_threshold': '32', 'min_threshold': '4'} | {'chunk_length_in_kb': '16', 'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} |                1 |                          0 |                    0 |           {} | {'compound'} |           864000 | c44ffa10-164b-11f1-a651-a3342f18b42d |                null |               2048 |     null |                           0 |                128 |    BLOCKING |                  0 |               99p
 
     (1 rows)
+
 
 
 ##### Interrogation de schema_columns sur les colonnes d'une table : 
@@ -266,6 +267,7 @@ _____________
 #### Fin du TP02b : Interrogation avec CQLSH (suite)
 
 _____________
+
 
 
 
