@@ -389,7 +389,7 @@ docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours_par_
 ```
 
 ##### Affichage du résultat retourné : 
-    192.168.100.151
+    192.168.100.152
 ________
 #### la commande getendpoints renvoie les adresses IP du (ou des) noeud(s) qui contiennent les données partitions
 #### correspondants à la clé de partition : dernier argument entre quote : ici  'cassandra' and '1FORM@' respectivement
@@ -420,11 +420,3 @@ nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ﻿________
 ##### Fin du TP N°4: Anneau / Ring
 ________
-
-
-
-
-
-
-
-
