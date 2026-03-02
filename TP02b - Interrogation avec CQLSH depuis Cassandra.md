@@ -35,8 +35,8 @@ USE formation;
 
 ```sql
 CREATE TABLE formateurs(id uuid,name varchar,PRIMARY KEY(id, email));
-#### InvalidRequest: Error from server: code=2200 [Invalid query] message="Unknown definition email referenced in PRIMARY KEY"
 ```
+    InvalidRequest: Error from server: code=2200 [Invalid query] message="Unknown definition email referenced in PRIMARY KEY"
 
 ```sql
 CREATE TABLE formateurs(id uuid,name varchar,PRIMARY KEY(id, name));
@@ -283,4 +283,5 @@ _____________
 #### Fin du TP02b : Interrogation avec CQLSH (suite)
 
 _____________
+
 
