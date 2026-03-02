@@ -349,14 +349,11 @@ _____________
 ####  Voir ici : https://cassandra.apache.org/doc/stable/cassandra/cql/functions.html
 _____________
 
-
-_____________
 ####  Pour récupérer des informations en spécifiant une égalité sur une ou plusieurs clés de partition :
 _____________
 ```sql
 SELECT intitule FROM cours WHERE cours_id IN (245e8024-14bd-11e5-9743-8238356b7e32, 1645ea59-14bd-11e5-a993-8138354b7e31);
 ```
-
 _____________
 ####  ! A proscrire ! récupérer des informations en ne spécifiant pas d'égalité sur la clé de partition :
 _____________
@@ -364,14 +361,12 @@ _____________
 SELECT intitule FROM cours WHERE cours_id > 245e8024-14bd-11e5-9743-8238356b7e32
 ALLOW FILTERING ;
 ```
-
 _____________
 ####  Pour supprimer une cellule précise : 
 _____________
 ```sql
 DELETE intitule FROM cours WHERE cours_id = 245e8024-14bd-11e5-9743-8238356b7e32;
 ```
-
 _____________
 ####  Pour forcer une lecture avant un update : 
 _____________
@@ -386,7 +381,7 @@ IF EXISTS;
 ####  ! Impact significatif sur la performance !
 
 ####  Les clauses "IF EXISTS" ou "IF NOT EXISTS" sont utilisables sur un INSERT, UPDATE, DELETE
-####  La clauses "IF EXISTS" est souvent utilisablée lors d'un UPDATE ou un DELETE
+####  La clauses "IF EXISTS" est souvent utilisée lors d'un UPDATE ou un DELETE
 ####  La clause "IF NOT EXISTS" est souvent utilisée lors d'un INSERT
 
 ```sql
@@ -509,6 +504,7 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
 
