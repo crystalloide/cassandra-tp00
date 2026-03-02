@@ -9,8 +9,8 @@ _____________
 #####  Vous avez été engagé pour construire la plus récente et performante entreprise de MOOC (ou cours) sur Internet 
 #####  Votre mission est de monter en compétences sur ce sujet et devenir familier avec l'usage de Cassandra. 
 #####  Pour débuter, vous décidez de créer une table et d'y charger des données sur les premiers cours.
-
 _____________
+
 #####   La table cours est définie ainsi : 
 
      Nom de colonne :		Type :
@@ -497,3 +497,4 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
