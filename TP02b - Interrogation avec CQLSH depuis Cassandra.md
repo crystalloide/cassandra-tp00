@@ -248,7 +248,7 @@ SELECT * FROM system_schema.columns WHERE keyspace_name = 'formation' AND table_
 ```
 ##### Affichage : 
 
-    ####  keyspace_name | table_name | column_name | clustering_order | column_name_bytes | kind          | position | required_for_liveness | type
+      keyspace_name | table_name | column_name | clustering_order | column_name_bytes | kind          | position | required_for_liveness | type
      ---------------+------------+-------------+------------------+-------------------+---------------+----------+-----------------------+------
           formation | formateurs |       email |              asc |      0x656d61696c |    clustering |        1 |                 False | text
           formation | formateurs |          id |             none |            0x6964 | partition_key |        0 |                 False | uuid
@@ -267,6 +267,7 @@ _____________
 #### Fin du TP02b : Interrogation avec CQLSH (suite)
 
 _____________
+
 
 
 
