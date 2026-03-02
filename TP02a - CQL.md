@@ -445,19 +445,34 @@ _____________
      
      (0 rows)
      
-
+```sql
+EXIT;
+```
 
 _____________
 ####  10°) Pour importer les données dans la table "cours" à partir d'un fichier cette fois : 
 _____________
+##### A partir d'un temrinal Linux, on alimente un des noeuds (ici cassandra01) avec les fichiers que l'on va charger ensuite :
+```bash
+cd ~/cassandra-tp00
+docker exec -it cassandra01 mkdir -p /donnees
+docker cp ./donnees/cours.csv cassandra01:/donnees/cours.csv
+docker cp ./donnees/cours-par-theme.csv cassandra01:/donnees/cours-par-theme.csv
+docker exec -it cassandra01 chmod 775 -Rf /donnees
+docker exec -it cassandra01 ls /donnees
+docker exec -it cassandra01 cqlsh
+```
+
+
 ```sql
+USE entrepriseformation;
 COPY cours(cours_id,ajout_date,intitule)
-FROM '~/donnees/cours.csv'
+FROM '/donnees/cours.csv'
 WITH HEADER=TRUE;
 ```
 
 ####  
-     cqlsh:entrepriseformation> COPY cours(cours_id, ajout_date, intitule) FROM '~/donnees/cours.csv' WITH HEADER=TRUE; Using 1 child processes
+     cqlsh:entrepriseformation> COPY cours(cours_id, ajout_date, intitule) FROM '/donnees/cours.csv' WITH HEADER=TRUE; Using 1 child processes
       
      Starting copy of entrepriseformation.cours with columns [cours_id, ajout_date, intitule].
      Processed: 5 rows; Rate:       9 rows/s; Avg. rate:      14 rows/s
