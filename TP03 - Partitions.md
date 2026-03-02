@@ -250,14 +250,16 @@ SELECT * FROM entrepriseformation.cours_par_theme
 WHERE theme = 'cassandra'
 ORDER BY ajout_date ASC;
 ```
-
+##### Affichage (échec) :
+    InvalidRequest: Error from server: code=2200 [Invalid query] message="Order by is currently only supported on the clustered columns of the PRIMARY KEY, got ajout_date"
+	
 ```sql
 SELECT * FROM entrepriseformation.cours_par_theme
 WHERE theme = 'cassandra'
 ORDER BY cours_id ASC;
 ```
 
-##### Affichage :
+##### Affichage (valide):
   
      cqlsh:entrepriseformation> SELECT * FROM entrepriseformation.cours_par_theme
                             ... WHERE theme = 'cassandra'
@@ -448,6 +450,7 @@ ________
 ##### Fin du TP N°03 : Partitions 
 
 ________
+
 
 
 
