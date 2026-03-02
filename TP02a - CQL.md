@@ -310,7 +310,18 @@ _____________
 ```sql
 SELECT NOW() FROM cours;
 ```
+     Remarque : 
+     NOW() = moment de la lecture, pas de l'écriture
+     NOW() génère un nouveau timeuuid à l'instant où la requête SELECT est exécutée. 
+	 => Elle n'a aucun lien avec les données stockées dans la table dans notre exemple.
 
+	 L'information de quand un enregistrement a été inséré/modifié (UPSERT) est déjà conservée par Cassandra.
+	 Pour stocker le timestamp d'insertion initiale dans une colonne spécifiqué dédiée :
+```sql
+lINSERT INTO cours (id, titre, created_at) 
+VALUES (uuid(), 'Cassandra', NOW());
+```
+	Dans cet exemple, la valeur initiale d'insertion sera figée dans la colonne "created_at" au moment de l'écriture.
 _____________
 ####  Récupération de la date courante dans un format date :  
 _____________
@@ -498,6 +509,7 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
 
