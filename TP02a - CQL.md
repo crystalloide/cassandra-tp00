@@ -84,24 +84,24 @@ docker exec -it cassandra01 nodetool getlogginglevels
 	 
 	 
 #### Pour information, pour un Cassandra DSE : on aurait eu plus de composants et donc plus d'informations : 
-####  [cassandra@cassandra01 ~]$ nodetool getlogginglevels
-####  
-####  Logger Name                                        				Log Level
-####  ROOT                                                    			INFO
-####  DroppedAuditEventLogger                                 			INFO
-####  SLF4JAuditWriter                                        			INFO
-####  SolrValidationErrorLogger                              			ERROR
-####  com.cryptsoft                                            		    OFF
-####  com.datastax.bdp.search.solr.metrics.MetricsWriteEventListener    DEBUG
-####  com.thinkaurelius.thrift                               			ERROR
-####  org.apache.cassandra                                   			DEBUG
-####  org.apache.lucene.index                                 			INFO
-####  org.apache.solr.core.CassandraSolrConfig                			WARN
-####  org.apache.solr.core.RequestHandlers                	 	 	   	WARN
-####  org.apache.solr.core.SolrCore                          			WARN
-####  org.apache.solr.handler.component                       			WARN
-####  org.apache.solr.search.SolrIndexSearcher                			WARN
-####  org.apache.solr.update                                  			WARN
+     [cassandra@cassandra01 ~]$ nodetool getlogginglevels
+     
+     Logger Name                                        				Log Level
+     ROOT                                                    			INFO
+     DroppedAuditEventLogger                                 			INFO
+     SLF4JAuditWriter                                        			INFO
+     SolrValidationErrorLogger                              			ERROR
+     com.cryptsoft                                            		    OFF
+     com.datastax.bdp.search.solr.metrics.MetricsWriteEventListener    DEBUG
+     com.thinkaurelius.thrift                               			ERROR
+     org.apache.cassandra                                   			DEBUG
+     org.apache.lucene.index                                 			INFO
+     org.apache.solr.core.CassandraSolrConfig                			WARN
+     org.apache.solr.core.RequestHandlers                	 	 	   	WARN
+     org.apache.solr.core.SolrCore                          			WARN
+     org.apache.solr.handler.component                       			WARN
+     org.apache.solr.search.SolrIndexSearcher                			WARN
+     org.apache.solr.update                                  			WARN
 
 _____________
 
@@ -499,6 +499,7 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
 
