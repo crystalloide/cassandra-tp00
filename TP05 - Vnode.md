@@ -114,52 +114,53 @@ docker exec -it cassandra01 nodetool ring
 
 ##### Et vous constatez que chaque noeud gère davantage de ranges de tokens, mais avec des ranges plus petits désormais :
 _______
-Datacenter: Cassandra
+```text
+Datacenter: dc1
 ==========
-Address          Rack        Status State   Load            Owns                Token                                       
-                                                                                 9182585498027392616                         
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   -9223245761691305015                        
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   -9001411233921878659                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -6451529490400418319                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -6331071059786887605                        
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   -5502462926403927906                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -5151518716733954119                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -4865812991487230911                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -4686662117020609827                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -4589277629902406520                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -4519341955053524228                        
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   -4304966749874030721                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -3790915448222356172                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -3704192414321088699                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -3679706412540035777                        
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   -3515774096211335643                        
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   -2830995281623314127                        
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   -2361040142479385241                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -2259668643174869380                        
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   -2001112480839316975                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -1475785154902851578                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -1046441655995904749                        
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -781762133627427892                         
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   -511354990042522884                         
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   -165242179514535119                         
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   617634041154420569                          
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   705115867777137798                          
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   1305579881792888544                         
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   1703455916127014425                         
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   1863981107510145969                         
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   2144796348157359734                         
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   2345889752805553007                         
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   2508204703233522005                         
-192.168.100.151  rack1       Up     Normal  117,11 KiB      ?                   3902767836011988747                         
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   3953880818003957065                         
-192.168.100.152  rack1       Up     Normal  122,57 KiB      ?                   4108804865486480678                         
+Address               Rack        Status State   Load            Owns                Token
+                                                                                     8956661515134890508
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             -8872101526672461030
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             -8418581942234628294
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             -7807760536899397632
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             -7400730537492201278
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             -6583058604879850484
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             -5987756235919451233
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             -5507302723654270944
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             -4771387030943377303
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             -4110691906406465204
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             -3692014223495775646
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             -2941736983227450824
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             -2448494217815183672
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             -1892613182898259736
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             -1481129974736648174
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             -956700010106744316
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             -541062350535104437
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             108874577777250463
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             670617996136876707
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             1067940848485589498
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             1727897873474293760
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             2326361564431032586
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             2706043325990407836
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             3360662211106436953
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             3786948712387566343
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             4484677626813994964
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             5137150538962244226
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             5580719527048933253
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             6194527055891202443
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             6672016637741145512
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             7516393285232307270
+192.168.100.152       Rack2       Up     Normal  85.08 KiB       100.00%             8316221955893437552
+192.168.100.151       Rack1       Up     Normal  119.82 KiB      100.00%             8956661515134890508
 
-
+  Warning: "nodetool ring" is used to output all the tokens of a node.
+  To view status related info of a node use "nodetool status" instead.
+```
 
 _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
+
 
 
 
