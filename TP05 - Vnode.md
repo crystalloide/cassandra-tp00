@@ -24,17 +24,17 @@ docker stop cassandra01
 docker stop cassandra02
 ```
 ________
-##### 2°) Bien attendre que les noeuds s'arrêtent avant de continuer :
+##### 2°) On nettoie tout l'environnement : 
 ________
+```bash
+docker compose down -v
+```
+
 ```bash
 docker ps -a 
 ```
 
     CONTAINER ID   IMAGE              COMMAND                  CREATED             STATUS                        PORTS     NAMES
-    fc54bf7dbe3b   cassandra:latest   "docker-entrypoint.s…"   About an hour ago   Exited (137) 53 minutes ago             cassandra04
-    b82c5a66de6c   cassandra:latest   "docker-entrypoint.s…"   About an hour ago   Exited (137) 53 minutes ago             cassandra03
-    fe6612364f4e   cassandra:latest   "docker-entrypoint.s…"   About an hour ago   Exited (137) 19 seconds ago             cassandra02
-    4426dfad9fbe   cassandra:latest   "docker-entrypoint.s…"   About an hour ago   Exited (137) 30 seconds ago             cassandra01
 	
 	
 ________
@@ -207,3 +207,4 @@ _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
+
