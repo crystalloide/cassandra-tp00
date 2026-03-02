@@ -520,7 +520,32 @@ SELECT COUNT(*) FROM cours;
      
      Warnings :
      Aggregation query used without partition key
-     
+	 
+ _____________
+####  13°) Utilisation de la commande SELECT COUNT(*) pour compter le nombre de lignes importées.
+####  Le nombre doit correspondre au nombre de lignes que la commande d'import (COPY) a indiqué.
+_____________    
+
+```sql
+exit;   -- On quitte CQLSH
+```
+##### On crée un script d'ingestion : 
+```bash
+for i in {1..30}; do
+	docker exec -it cassandra01 cqlsh -e "use entrepriseformation; select tracing on; insert into cours (cours_id, ajout_date, intitule) values (now(), '2023-09-22', 'Super cours de cuisine');"
+done
+```
+##### On regarde le résultat : 
+```bash
+	docker exec -it cassandra01 cqlsh -e "SELECT COUNT(*) FROM entrepriseformation.cours;"
+```
+ _____________
+####  14°) Rappel de quelques commandes majeures : 
+_____________    
+
+```bash
+	docker exec -it cassandra01 cqlsh
+```
 
 ```sql
 DESCRIBE CLUSTER;
@@ -535,7 +560,7 @@ DESCRIBE TABLES;
 ```
 
 _____________
-####  13°) Pour quitter CQLSH, entrez la commande : 
+####  15°) Pour quitter CQLSH, entrez la commande : 
 _____________
 ```sql
 QUIT;
