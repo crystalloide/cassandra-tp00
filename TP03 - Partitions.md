@@ -282,6 +282,9 @@ FROM entrepriseformation.cours_par_theme
 WHERE theme = 'cassandra'
 GROUP BY ajout_date;
 ```
+##### Affichage (échec) :
+    InvalidRequest: Error from server: code=2200 [Invalid query] message="Group by is currently only supported on the columns of the PRIMARY KEY, got ajout_date"
+
 
 ```sql
 SELECT COUNT(*)
@@ -290,22 +293,15 @@ WHERE theme = 'cassandra'
 GROUP BY cours_id;
 ```
 
-##### Affichage :  
-
-##### cqlsh:entrepriseformation> SELECT COUNT(*)
-#####                        ... FROM entrepriseformation.cours_par_theme
-#####                        ... WHERE theme = 'cassandra'
-#####                        ... GROUP BY cours_id;
-##### 
-#####  count
-##### -------
-#####      1
-#####      1
-#####      1
-##### 
-##### (3 rows)
-##### 
-
+##### Affichage (valide):
+    
+     count
+    -------
+         1
+         1
+         1
+    
+    (3 rows)
 
 
 ________
@@ -315,18 +311,16 @@ ________
 SELECT COUNT(*) FROM entrepriseformation.cours_par_theme;
 ```
 
-##### Affichage :  
-##### 
-##### count
-##### -------
-#####      5
-##### 
-##### (1 rows)
-##### 
-##### Warnings :
-##### Aggregation query used without partition key
-##### 
+##### Affichage :  (warning) 
 
+     count
+    -------
+         5
+    
+    (1 rows)
+    
+    Warnings :
+    Aggregation query used without partition key
 
 ________
 ##### Sortir de CQLSH : 
@@ -450,6 +444,7 @@ ________
 ##### Fin du TP N°03 : Partitions 
 
 ________
+
 
 
 
