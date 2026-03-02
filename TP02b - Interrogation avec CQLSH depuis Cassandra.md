@@ -23,6 +23,7 @@ DROP KEYSPACE IF EXISTS formation;
 
 ```sql
 CREATE KEYSPACE IF NOT EXISTS formation WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '3'}  AND durable_writes = true;
+```
 
 ```sql
 DESCRIBE KEYSPACE formation;
@@ -64,6 +65,7 @@ insert into formateurs (id,name,email) values (now(),'Steph','steph@gmail.com');
 ```sql
 select * from formateurs ;
 ```
+
 ##### Affichage : 
      
     id                                   | name  | email
@@ -281,3 +283,4 @@ _____________
 #### Fin du TP02b : Interrogation avec CQLSH (suite)
 
 _____________
+
