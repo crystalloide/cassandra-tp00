@@ -145,15 +145,16 @@ SELECT * FROM cours_par_theme;
 ```
 
 ##### Résultat de la requête : 
-
-#####  theme     | cours_id                             | ajout_date                      | intitule
-##### -----------+--------------------------------------+---------------------------------+--------------------------
-#####  cassandra | 1645ea59-14bd-11e5-a993-8138354b7e31 | 2014-01-29 01:00:00.000000+0000 |    Histoire de Cassandra
-#####  cassandra | 245e8024-14bd-11e5-9743-8238356b7e32 | 2012-04-03 01:00:00.000000+0000 |         Cassandra & SSDs
-#####  cassandra | 3452f7de-14bd-11e5-855e-8738355b7e3a | 2013-03-17 01:00:00.000000+0000 | Introduction a Cassandra
-#####     1FORM@ | 4845ed97-14bd-11e5-8a40-8338255b7e33 | 2013-10-16 01:00:00.000000+0000 |         Formation 1FORM@
-#####     1FORM@ | 5645f8bd-14bd-11e5-af1a-8638355b8e3a | 2013-04-16 01:00:00.000000+0000 |         Qui sommes nous?
-##### 
+    
+     theme     | cours_id                             | ajout_date                      | intitule
+    -----------+--------------------------------------+---------------------------------+--------------------------
+     cassandra | 1645ea59-14bd-11e5-a993-8138354b7e31 | 2014-01-29 00:00:00.000000+0000 |    Histoire de Cassandra
+     cassandra | 245e8024-14bd-11e5-9743-8238356b7e32 | 2012-04-03 00:00:00.000000+0000 |         Cassandra & SSDs
+     cassandra | 3452f7de-14bd-11e5-855e-8738355b7e3a | 2013-03-17 00:00:00.000000+0000 | Introduction a Cassandra
+        1FORM@ | 4845ed97-14bd-11e5-8a40-8338255b7e33 | 2013-10-16 00:00:00.000000+0000 |         Formation 1FORM@
+        1FORM@ | 5645f8bd-14bd-11e5-af1a-8638355b8e3a | 2013-04-16 00:00:00.000000+0000 |         Qui sommes nous?
+    
+    (5 rows)
 
 ________
 ##### Si la clé primaire n'avait contenu que le champ "theme", 
@@ -431,6 +432,7 @@ ________
 ##### Fin du TP N°03 : Partitions 
 
 ________
+
 
 
 
