@@ -537,14 +537,14 @@ done
 ```
 ##### On regarde le résultat : 
 ```bash
-	docker exec -it cassandra01 cqlsh -e "SELECT COUNT(*) FROM entrepriseformation.cours;"
+docker exec -it cassandra01 cqlsh -e "SELECT COUNT(*) FROM entrepriseformation.cours;"
 ```
  _____________
 ####  14°) Rappel de quelques commandes majeures : 
 _____________    
 
 ```bash
-	docker exec -it cassandra01 cqlsh
+docker exec -it cassandra01 cqlsh
 ```
 
 ```sql
@@ -572,5 +572,3 @@ EXIT;
 _____________
 ####  Fin du TP N°2: CQL
 _____________
-
-
