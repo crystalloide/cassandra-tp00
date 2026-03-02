@@ -80,8 +80,6 @@ help DESCRIBE
 ```sql
 DESCRIBE formateurs;
 ```
-
-```sql
 ##### Affichage :
      
      CREATE TABLE formation.formateurs (
@@ -108,28 +106,30 @@ DESCRIBE formateurs;
 ```sql	
 DESCRIBE FULL SCHEMA
 ```
+
 ```sql
 SELECT * FROM system_auth.roles WHERE role = 'cassandra' ;
-#### 
-#### Reponse : 
-#### 
-####  role      | can_login | is_superuser | member_of | salted_hash
-#### -----------+-----------+--------------+-----------+--------------------------------------------------------------
-####  cassandra |      True |         True |      null | $2a$10$9WcE3xktKcy/fUyFrWz5/OAIkWXLigM/rr2uSABdu43ugj2c5uBT.
-#### 
-#### (1 rows)
-#### 
-#### 
 ```
+
+#### Retour : 
+     
+      role      | can_login | is_superuser | member_of | salted_hash
+     -----------+-----------+--------------+-----------+--------------------------------------------------------------
+      cassandra |      True |         True |      null | $2a$10$9WcE3xktKcy/fUyFrWz5/OAIkWXLigM/rr2uSABdu43ugj2c5uBT.
+     
+     (1 rows)
+     
+     
 ```sql	
-SELECT release_version from system.local;	
-#### 
-####  release_version
-#### -----------------
-####       4.0.0.690
-#### 
-#### (1 rows)
+SELECT release_version from system.local;
 ```
+     
+      release_version
+     -----------------
+           4.0.0.690
+     
+     (1 rows)
+
 ```sql
 SELECT * FROM system.local;
 ####               
@@ -141,6 +141,7 @@ SELECT * FROM system.local;
 ##(1 rows)
 ##
 ```
+
 ```sql
 SELECT * FROM system.peers ;
 
@@ -283,5 +284,6 @@ _____________
 #### Fin du TP02b : Interrogation avec CQLSH (suite)
 
 _____________
+
 
 
