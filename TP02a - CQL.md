@@ -282,14 +282,21 @@ SELECT WRITETIME(intitule) FROM cours WHERE cours_id = 245e8024-14bd-11e5-9743-8
 
 ####  Retourne une valeur de timestamp (EPOCH) 
 
-
+#### Pour rendre ce timestamp compréhenseible pour un être humain :-) :
+     WRITETIME() retourne un bigint, il faut d'abord le convertir. 
+     La façon la plus simple est d'utiliser toTimestamp(now()) comme modèle, mais pour un WRITETIME il faut passer par minTimeuuid() :
+```sql
+SELECT toTimestamp(minTimeuuid(1772450826701836)) FROM cours 
+WHERE cours_id = 245e8024-14bd-11e5-9743-8238356b7e32;
+```
 _____________
 ####  Pour récupérer en JSON les informations : 
 _____________
 ```sql
 SELECT JSON * FROM cours WHERE cours_id = 245e8024-14bd-11e5-9743-8238356b7e32;
 ```
-
+     ⚠️ Cette méthode est approximative car `minTimeuuid` arrondit à la milliseconde.
+	 
 _____________
 ####  Utilisation de fonctions : CAST :  
 _____________
@@ -504,6 +511,7 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
 
