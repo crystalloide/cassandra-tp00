@@ -147,7 +147,7 @@ SELECT * FROM system.local;
 
 ```sql
 SELECT * FROM system.peers ;
-
+```
 #### Affichage :
      peer            | data_center | host_id                              | preferred_ip | rack  | release_version | rpc_address     | schema_version                       | tokens
 -----------------+-------------+--------------------------------------+--------------+-------+-----------------+-----------------+--------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -157,39 +157,37 @@ SELECT * FROM system.peers ;
 
     (3 rows)
 
-##
-```
-```sql
-SELECT * FROM system.compaction_history ;
 
-#### Affichage : 
-#### 
-####  id                                   | bytes_in | bytes_out | columnfamily_name    | compacted_at                    | keyspace_name      | rows_merged
-#### --------------------------------------+----------+-----------+----------------------+---------------------------------+--------------------+---------------
-####  808df295-e6ff-11ef-9e86-994d0f5a37c9 |        0 |         0 |            functions | 2025-02-09 16:04:12.419000+0000 |      system_schema |          null
-####  2009bca0-e700-11ef-9e86-994d0f5a37c9 |      887 |       528 |            keyspaces | 2025-02-09 16:08:39.616000+0000 |      system_schema | {1: 12, 2: 3}
-####  808df293-e6ff-11ef-9e86-994d0f5a37c9 |        0 |         0 |           aggregates | 2025-02-09 16:04:12.348000+0000 |      system_schema |          null
-####  19ba5f10-e702-11ef-9e86-994d0f5a37c9 |     4973 |      4166 |               tables | 2025-02-09 16:22:48.310000+0000 |      system_schema | {1: 15, 2: 1}
-####  808df290-e6ff-11ef-9e86-994d0f5a37c9 |        0 |         0 |              indexes | 2025-02-09 16:04:12.194000+0000 |      system_schema |          null
-####  19f2fb40-e702-11ef-9e86-994d0f5a37c9 |     1984 |      1248 |  prepared_statements | 2025-02-09 16:22:48.416000+0000 |             system |  {1: 7, 2: 9}
-####  808da470-e6ff-11ef-9e86-994d0f5a37c9 |        0 |         0 |                edges | 2025-02-09 16:04:12.061000+0000 |      system_schema |          null
-####  80ee6210-e6ff-11ef-9e86-994d0f5a37c9 |        0 |         0 |     sstable_activity | 2025-02-09 16:04:12.676000+0000 |             system |          null
-####  80db7650-e6ff-11ef-9e86-994d0f5a37c9 |        0 |         0 |      nodesync_status | 2025-02-09 16:04:12.657000+0000 | system_distributed |          null
-####  808df292-e6ff-11ef-9e86-994d0f5a37c9 |       98 |        78 |      dropped_columns | 2025-02-09 16:04:12.506000+0000 |      system_schema |        {1: 2}
-####  808da471-e6ff-11ef-9e86-994d0f5a37c9 |        0 |         0 |                views | 2025-02-09 16:04:12.175000+0000 |      system_schema |          null
-####  80f4cab0-e6ff-11ef-9e86-994d0f5a37c9 |     7109 |      4065 |               tables | 2025-02-09 16:04:12.802000+0000 |      system_schema | {1: 11, 2: 3}
-####  808df291-e6ff-11ef-9e86-994d0f5a37c9 |        0 |         0 |             vertices | 2025-02-09 16:04:12.233000+0000 |      system_schema |          null
-####  808ba8a0-e6ff-11ef-9e86-994d0f5a37c9 |        0 |         0 |       hidden_columns | 2025-02-09 16:04:12.084000+0000 |      system_schema |          null
-####  0143b4e0-e702-11ef-9e86-994d0f5a37c9 |      919 |       551 |            keyspaces | 2025-02-09 16:22:06.979000+0000 |      system_schema | {1: 14, 2: 2}
-####  80ef7380-e6ff-11ef-9e86-994d0f5a37c9 |        0 |         0 | nodesync_checkpoints | 2025-02-09 16:04:12.677000+0000 |             system |          null
-####  80f31d00-e6ff-11ef-9e86-994d0f5a37c9 |    15764 |      9936 |              columns | 2025-02-09 16:04:12.876000+0000 |      system_schema | {1: 11, 2: 3}
-####  19b94da0-e702-11ef-9e86-994d0f5a37c9 |    10297 |     10099 |              columns | 2025-02-09 16:22:48.351000+0000 |      system_schema | {1: 15, 2: 1}
-####  810dd0f0-e6ff-11ef-9e86-994d0f5a37c9 |        0 |         0 |      nodesync_status | 2025-02-09 16:04:12.813000+0000 | system_distributed |          null
-####  808df294-e6ff-11ef-9e86-994d0f5a37c9 |        0 |         0 |             triggers | 2025-02-09 16:04:12.382000+0000 |      system_schema |          null
-#### 
-#### (20 rows)
-#### 
+
+```sql
+SELECT * FROM system.compaction_history LIMIT 20;
 ```
+##### Affichage : 
+     id                                   | bytes_in | bytes_out | columnfamily_name   | compacted_at                    | compaction_properties             | keyspace_name | rows_merged
+    --------------------------------------+----------+-----------+---------------------+---------------------------------+-----------------------------------+---------------+------------------------------------
+     53b0d0d0-161f-11f1-8ffd-a97acb5ce2f8 |      204 |        51 |          aggregates | 2026-03-02 10:05:23.209000+0000 | {'compaction_type': 'Compaction'} | system_schema |                             {4: 2}
+     ef814c8a-1627-11f1-81e9-a3342f18b42d |        0 |         0 | sstable_activity_v2 | 2026-03-02 11:07:00.349000+0000 | {'compaction_type': 'Compaction'} |        system |                               null
+     1a2739f0-1627-11f1-81e9-a3342f18b42d |     4021 |      3936 |              tables | 2026-03-02 11:01:02.465000+0000 | {'compaction_type': 'Compaction'} | system_schema |                       {1: 7, 2: 1}
+     0f8ed720-1620-11f1-81e9-a3342f18b42d |    13409 |      3491 |        column_masks | 2026-03-02 10:10:38.589000+0000 | {'compaction_type': 'Compaction'} | system_schema |                       {1: 1, 4: 2}
+     a3bfa290-159d-11f1-a2a5-eb793db39d3d |  2062621 |   2086372 |   imdb.idx_director | 2026-03-01 18:37:04.568000+0000 | {'compaction_type': 'Compaction'} |     formation | {1: 11112, 2: 1362, 3: 298, 4: 37}
+     53f18350-161f-11f1-8ffd-a97acb5ce2f8 |      204 |        51 |           functions | 2026-03-02 10:05:23.627000+0000 | {'compaction_type': 'Compaction'} | system_schema |                             {4: 2}
+     61dfbc50-1630-11f1-81e9-a3342f18b42d |      910 |       752 |               local | 2026-03-02 12:07:28.273000+0000 | {'compaction_type': 'Compaction'} |        system |                             {4: 1}
+     8a5cc590-164b-11f1-a651-a3342f18b42d |    10332 |      3474 |        column_masks | 2026-03-02 15:21:52.750000+0000 | {'compaction_type': 'Compaction'} | system_schema |                 {1: 1, 2: 2, 3: 2}
+     53cff190-161f-11f1-8ffd-a97acb5ce2f8 |      204 |        51 |            triggers | 2026-03-02 10:05:23.331000+0000 | {'compaction_type': 'Compaction'} | system_schema |                             {4: 2}
+     fedf6ca0-159d-11f1-a2a5-eb793db39d3d |  4059116 |   4125392 |       imdb.idx_year | 2026-03-01 18:39:38.824000+0000 | {'compaction_type': 'Compaction'} |     formation |        {1: 16, 2: 5, 3: 8, 4: 105}
+     a7862560-162a-11f1-81e9-a3342f18b42d |     8490 |      8249 |             columns | 2026-03-02 11:26:28.169000+0000 | {'compaction_type': 'Compaction'} | system_schema |                 {1: 6, 2: 1, 3: 1}
+     0b7a5a60-159e-11f1-a2a5-eb793db39d3d | 19797659 |  19938082 |                imdb | 2026-03-01 18:40:01.869000+0000 | {'compaction_type': 'Compaction'} |     formation |                        {1: 340429}
+     34193220-162a-11f1-81e9-a3342f18b42d |      212 |       101 |               types | 2026-03-02 11:23:12.813000+0000 | {'compaction_type': 'Compaction'} | system_schema |                       {1: 2, 2: 2}
+     6a7a0a60-1625-11f1-81e9-a3342f18b42d |      197 |        80 |            triggers | 2026-03-02 10:48:58.323000+0000 | {'compaction_type': 'Compaction'} | system_schema |                       {1: 1, 3: 2}
+     ff7ae810-1647-11f1-a651-a3342f18b42d |        0 |         0 |    sstable_activity | 2026-03-02 14:56:31.044000+0000 | {'compaction_type': 'Compaction'} |        system |                               null
+     f33bc540-159f-11f1-801f-539f6c47747a |     1028 |       709 |               local | 2026-03-01 18:53:35.395000+0000 | {'compaction_type': 'Compaction'} |        system |                             {5: 1}
+     d5bc1bc0-1647-11f1-9526-f9f6314fde6a |     1092 |       754 |               local | 2026-03-02 14:55:21.296000+0000 | {'compaction_type': 'Compaction'} |        system |                             {5: 1}
+     73dce5c0-15b0-11f1-a2f3-295a5859a2aa |     1021 |       708 |               local | 2026-03-01 20:51:42.966000+0000 | {'compaction_type': 'Compaction'} |        system |                             {4: 1}
+     b70bd210-159d-11f1-a2a5-eb793db39d3d |  2638269 |   2673827 |   imdb.idx_director | 2026-03-01 18:37:37.307000+0000 | {'compaction_type': 'Compaction'} |     formation | {1: 14169, 2: 1572, 3: 232, 4: 16}
+     10084ce0-1620-11f1-81e9-a3342f18b42d |     1051 |       711 |               local | 2026-03-02 10:10:39.063000+0000 | {'compaction_type': 'Compaction'} |        system |                             {5: 1}
+
+    (20 rows)
+
 ```sql
 SELECT * FROM system_schema.keyspaces;
 
@@ -287,6 +285,7 @@ _____________
 #### Fin du TP02b : Interrogation avec CQLSH (suite)
 
 _____________
+
 
 
 
