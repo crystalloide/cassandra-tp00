@@ -1,28 +1,24 @@
 _____________
 ####  TP N°2: CQL
-####  Création d'un keyspace pour EntrepriseFormation
-####  Création d'une table pour stocker les métadonnées des cours
-####  Chargement des données de la table des cours à partir d'un fichier en format .csv
+#####  Création d'un keyspace pour EntrepriseFormation
+#####  Création d'une table pour stocker les métadonnées des cours
+#####  Chargement des données de la table des cours à partir d'un fichier en format .csv
 _____________
 ####  Contexte du TP : 
-####  Bienvenue dans l'entreprise de formation : "EntrepriseFormation" 
-####  Vous avez été engagé pour construire la plus récente et performante entreprise de MOOC (ou cours) sur Internet 
-####  Votre mission est de monter en compétences sur ce sujet et devenir familier avec l'usage de Cassandra. 
-####  Pour débuter, vous décidez de créer une table et d'y charger des données sur les premiers cours.
-_____________
+#####  Bienvenue dans l'entreprise de formation : "EntrepriseFormation" 
+#####  Vous avez été engagé pour construire la plus récente et performante entreprise de MOOC (ou cours) sur Internet 
+#####  Votre mission est de monter en compétences sur ce sujet et devenir familier avec l'usage de Cassandra. 
+#####  Pour débuter, vous décidez de créer une table et d'y charger des données sur les premiers cours.
 
 _____________
-####  
-####  La table cours est définie ainsi : 
-##
-####  Nom de colonne :		Type :
-##
-####  cours_id				timeuuid
-####  ajout_date			timestamp
-####  intitule				text
-####  
-_____________
+#####   La table cours est définie ainsi : 
 
+     Nom de colonne :		Type :
+     
+     cours_id				timeuuid
+     ajout_date			timestamp
+     intitule				text
+_____________
 
 _____________
 ####  Etapes : 
@@ -499,4 +495,5 @@ EXIT
 
 _____________
 ####  Fin du TP N°2: CQL
+
 _____________
