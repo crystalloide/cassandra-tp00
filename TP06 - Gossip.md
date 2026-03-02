@@ -81,8 +81,6 @@ docker exec -it cassandra01 nodetool gossipinfo
 _____
 ##### Notez que même si nous avons exécuté cette commande sur le node cassandra01, ce noeud connaît aussi l'état "gossip" du noeud cassandra02.
 ##### Notez également que l'état du noeud se compose de paires "clé-valeurs".
-_____
-
 
 _____
 ##### 3°) Réexécutez la même commande 'nodetool gossipinfo' à nouveau deux ou trois fois 
@@ -322,4 +320,5 @@ FROM system.peers;
 
 _____
 ##### Fin du TP06 : les échanges avec le protocole Gossip
+
 _____
