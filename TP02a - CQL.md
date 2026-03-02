@@ -531,7 +531,7 @@ exit;   -- On quitte CQLSH
 ```
 ##### On crée un script d'ingestion : 
 ```bash
-for i in {1..30}; do
+for i in {1..15}; do
 	docker exec -it cassandra01 cqlsh -e "use entrepriseformation; tracing on; insert into cours (cours_id, ajout_date, intitule) values (now(), '2023-09-22', 'Super cours de cuisine');"
 done
 ```
@@ -572,4 +572,5 @@ EXIT;
 _____________
 ####  Fin du TP N°2: CQL
 _____________
+
 
