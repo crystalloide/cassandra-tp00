@@ -26,8 +26,10 @@ _____________
 ####  1°) Vérifier que Cassandra est bien en cours d'exécution, 
 ####  Dans un terminal, sur un des noeuds du cluster C*, avec la commande : 
 ```bash
-docker exec -it cassandra01 bash 
+docker exec -it cassandra01 bash
+```
 #### Affichons les logs sur le noeud cassandra01 :
+```bash
 cat /opt/cassandra/logs/system.log
 nodetool status
 ```
@@ -497,5 +499,6 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
