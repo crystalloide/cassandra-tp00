@@ -400,10 +400,10 @@ ________
 ##
 ________
 ```bash
-nodetool getendpoints entrepriseformation cours '245e8024-14bd-11e5-9743-8238356b7e32'
+docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours '245e8024-14bd-11e5-9743-8238356b7e32'
 ```
-#### [cassandra@cassandra01 ~]$ nodetool getendpoints entrepriseformation cours '245e8024-14bd-11e5-9743-8238356b7e32'
-#### 192.168.100.151
+##### Affichage du résultat retourné : 
+    192.168.100.151
 
 ________
 ##### 13°) Connaisance de l'emplacement des tokens, même seux pas encore utilisés :
@@ -415,8 +415,9 @@ ________
 #####  Par exemple, essayez :
 ________
 ```bash
-nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
+docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ```
 ﻿________
 ##### Fin du TP N°4: Anneau / Ring
 ________
+
