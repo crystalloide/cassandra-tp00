@@ -452,12 +452,12 @@ _____________
 _____________
 ```sql
 COPY cours(cours_id,ajout_date,intitule)
-FROM '/sources/donnees/cours.csv'
+FROM '~/donnees/cours.csv'
 WITH HEADER=TRUE;
 ```
 
 ####  
-     cqlsh:entrepriseformation> COPY cours(cours_id, ajout_date, intitule) FROM '/sources/donnees/cours.csv' WITH HEADER=TRUE; Using 1 child processes
+     cqlsh:entrepriseformation> COPY cours(cours_id, ajout_date, intitule) FROM '~/donnees/cours.csv' WITH HEADER=TRUE; Using 1 child processes
       
      Starting copy of entrepriseformation.cours with columns [cours_id, ajout_date, intitule].
      Processed: 5 rows; Rate:       9 rows/s; Avg. rate:      14 rows/s
@@ -523,34 +523,12 @@ _____________
 ####  13°) Pour quitter CQLSH, entrez la commande : 
 _____________
 ```sql
-QUIT
+QUIT;
 ```
 #####  ou 
 ```sql
-EXIT
+EXIT;
 ```
-
 _____________
 ####  Fin du TP N°2: CQL
-
 _____________
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
