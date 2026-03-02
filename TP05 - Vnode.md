@@ -95,24 +95,6 @@ docker exec -it cassandra01 nodetool status
 
 
 _______
-
-##### Affichage en réponse à la commande dsetool status :
-##
-##### On remarque bien que chaque noeud a désormais 24 VNodes :
-##### 
-##### root@cassandra01:~# /node/bin/dsetool status
-##### DC: Cassandra       Workload: Cassandra       Graph: no
-##### ======================================================
-##### Status=Up/Down
-##### |/ State=Normal/Leaving/Joining/Moving
-##### --   Server ID          Address            Load             Owns                 VNodes            Rack         Health [0,1]
-##### UN   08-00-27-A8-A6-C3  192.168.1.151      95.97 KB         ?                    24                rack1        0.00
-##### UN   08-00-27-A8-A6-C3  192.168.1.152      106.89 KB        ?                    24       	       	rack1        0.00
-##### 
-_______
-
-
-_______
 ##### 6°) Exécuter la commande : 
 _______
 
@@ -169,6 +151,7 @@ _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
+
 
 
 
