@@ -1,11 +1,11 @@
 ﻿________
 #### TP N°4: Anneau / Ring
 ________
-#### Comprendre le fonctionnement en anneau de Cassandra (ring) :
+##### Comprendre le fonctionnement en anneau de Cassandra (ring) :
 ________
-#### Création d'un cluster de 2 noeuds
+##### Création d'un cluster de 2 noeuds dans un cluster VNode = 1 (noeud physique)
 ________
-#### Contexte :
+##### Contexte :
 ##### L'un des secrets de la performance d'Apache Cassandra est l'utilisation d'un ring sur lesquels sont répartis les tokens
 ##### (token = clé partition transformée par le partitionneur). 
 ##### Chaque noeud Cassandra sait exactement quels sont les noeuds qui gèrent un token donné
@@ -13,9 +13,7 @@ ________
 ________
 #### Etapes : 
 ________
-
-________
-#### 1°) Tout d'abord, il faut arrêter le cluster, avec les commandes suivantes : 
+##### 1°) Tout d'abord, il faut arrêter le cluster, avec les commandes suivantes : 
 ________
 ```bash
 docker stop cassandra01
@@ -24,7 +22,7 @@ docker stop cassandra03
 docker stop cassandra04
 ```
 ________
-#### 2°) Bien attendre que les noeuds s'arrêtent avant de continuer :
+##### 2°) Bien attendre que les noeuds s'arrêtent avant de continuer :
 ________
 ```bash
 docker ps -a 
@@ -38,7 +36,7 @@ docker ps -a
 	
 	
 ________
-#### 3°) Pour comprendre la gestion de la répartition des token, nous allons créer un cluster à 2 noeuds
+##### 3°) Pour comprendre la gestion de la répartition des token, nous allons créer un cluster à 2 noeuds
 ________
 ##### 	   On supprime les données chargées dans les TPs précédents ;
 ________
@@ -53,47 +51,46 @@ cd ~/cassandra-tp00/
 ```
 
 ________
-#### 	   Et on paramètre les 2 noeuds pour une gestion manuelle des tokens :
+##### 	   Et on paramètre les 2 noeuds pour une gestion manuelle des tokens :
 ________
-#### Sur cassandra01 : modifier cassandra.yaml
+##### Sur cassandra01 : modifier cassandra.yaml
 ```bash
 gedit ~/cassandra-tp00/docker/cassandra01-conf/cassandra.yaml
 ```
 
-#### Noeud 1 : Repassons en gestion manuelle des tokens en mettant num_tokens à '1': 
+#####  Noeud 1 : Repassons en gestion manuelle des tokens en mettant num_tokens à '1': 
 ```bash
 num_tokens: 1
 ```
-#### et décommentez initial_token : 
+#####  et décommentez initial_token : 
 ```bash
 initial_token: 0
 ```
 
 
-#### Le paramètre initial_token permet de spécifier les tokens manuellement.
+#####  Le paramètre initial_token permet de spécifier les tokens manuellement.
 
-#### Remarque : Il faut mettre en commentaire le paramètre initial_token
-#### si on utilise les vnodes (num_tokens > 1, above) 
-#### Dans le cas présent, vous pouvez spécifier une liste séparée par des virgules.
-#### C'était en effet ainsi que l'on ajoutait originellement des noeuds au cluster déjà existants sans vnodes.
-#### 
+    Remarque : Il faut mettre en commentaire le paramètre initial_token
+    si on utilise les vnodes (num_tokens > 1, above) 
+    Dans le cas présent, vous pouvez spécifier une liste séparée par des virgules.
+    C'était en effet ainsi que l'on ajoutait originellement des noeuds au cluster déjà existants sans vnodes.
 
-#### Sur cassandra02 : modifier cassandra.yaml
+##### Sur cassandra02 : modifier cassandra.yaml
 ```bash
 gedit ~/cassandra-tp00/docker/cassandra02-conf/cassandra.yaml
 ```
 
-#### Noeud 2 : Repassons en gestion manuelle des tokens en mettant num_tokens à '1': 
+##### Noeud 2 : Repassons en gestion manuelle des tokens en mettant num_tokens à '1': 
 ```bash
 num_tokens: 1
 ```
-#### et décommentez initial_token : 
+##### et décommentez initial_token : 
 ```bash
 initial_token: 6228280314724367774
 ```
 
-#### Modifiez la valeur de : initial_token à 6228280314724367774 (mettre un espace entre ':' et la valeur). 
-#### Le 2nd noeud gèrera la seconde moitié du range de token positif.
+##### Modifiez la valeur de : initial_token à 6228280314724367774 (mettre un espace entre ':' et la valeur). 
+##### Le 2nd noeud gèrera la seconde moitié du range de token positif.
 
     Remarque : si on tentait de démarrer le 2nd noeud avec lui-aussi un intial_token à '0', 
     le 2nd noeud ne démarrerait pas, en retournant l'erreur suivante : 
@@ -103,7 +100,7 @@ initial_token: 6228280314724367774
     
 
 ________
-#### 4°) On lance le 1er noeud cassandra01 :
+##### 4°) On lance le 1er noeud cassandra01 :
 ________
 ```bash
 docker start cassandra01
@@ -113,17 +110,17 @@ sleep 30
 ```bash
 docker exec -it cassandra01 cat /opt/cassandra/logs/system.log | grep 'state jump to NORMAL'
 ```
-#### Attendez que le premier noeud soit bien démarré (= affichage du message type 'state jump to NORMAL'),
-#### puis appuyez sur <Entrée> pour récupérer la ligne de commande
+##### Attendez que le premier noeud soit bien démarré (= affichage du message type 'state jump to NORMAL'),
+##### puis appuyez sur <Entrée> pour récupérer la ligne de commande
 ________
 
 ________
-#### 5°) Vérifiez que le noeud n°1 s'exécute correctement avec la commande :
+##### 5°) Vérifiez que le noeud n°1 s'exécute correctement avec la commande :
 ________
 ```bash
 docker exec -it cassandra01 nodetool status
 ```
-#####
+##### Affichage :
      
      Datacenter: dc1
      ===============
@@ -134,7 +131,7 @@ docker exec -it cassandra01 nodetool status
      
 	 
 ________
-#### 6°) Relancez le second noeud avec la commande : 
+##### 6°) Relancez le second noeud avec la commande : 
 ```bash
 docker start cassandra02
 docker logs cassandra02 
@@ -143,22 +140,22 @@ sleep 30
 ```bash
 docker exec -it cassandra02 cat /opt/cassandra/logs/system.log | grep 'state jump to NORMAL'
 ```
-#### Remarque : Ce noeud mettra plus de temps à démarrer et rejoindre le cluster.
+##### Remarque : Ce noeud mettra plus de temps à démarrer et rejoindre le cluster.
 ________
-#### Attendez bien que le second noeud soit démarré avant de continuer le TP.
+##### Attendez bien que le second noeud soit démarré avant de continuer le TP.
 ________
 
-#### Datacenter: Cassandra
-#### =====================
-#### Status=Up/Down
-#### |/ State=Normal/Leaving/Joining/Moving
-#### --  Address          Load       Tokens       Owns    Host ID                               Rack
-#### UJ  192.168.100.152  41,29 KiB  1            ?       4e430812-8aa9-48da-b30e-af662e6f50b1  rack1
-#### UN  192.168.100.151  87,97 KiB  1            ?       5d916655-7699-4615-aec7-4a10d5e94142  rack1
-##
+    Datacenter: Cassandra
+    =====================
+    Status=Up/Down
+    |/ State=Normal/Leaving/Joining/Moving
+    --  Address          Load       Tokens       Owns    Host ID                               Rack
+    UJ  192.168.100.152  41,29 KiB  1            ?       4e430812-8aa9-48da-b30e-af662e6f50b1  rack1
+    UN  192.168.100.151  87,97 KiB  1            ?       5d916655-7699-4615-aec7-4a10d5e94142  rack1
+
 
 ________
-#### 7°) Lancez à nouveau la commande 'nodetool status' pour voir le statut du cluster
+##### 7°) Lancez à nouveau la commande 'nodetool status' pour voir le statut du cluster
 ________
 ```bash
 docker exec -it cassandra01 nodetool status
@@ -174,8 +171,8 @@ docker exec -it cassandra01 nodetool status
 
 
 ________
-#### 8°) Objectif : sur notre cluster à 2 noeuds : 
-####     Nous allons déterminer quel noeud contient quelles partitions de la table cours_par_theme 
+##### 8°) Objectif : sur notre cluster à 2 noeuds : 
+#####     Nous allons déterminer quel noeud contient quelles partitions de la table cours_par_theme 
 ________
 ##### (Passer cette étape si la copie des données sur cassandra01 a déjà été faite précédemment) 
      A partir d'un terminal Linux, on alimente un des noeuds (ici cassandra01) 
@@ -195,7 +192,7 @@ CREATE KEYSPACE IF NOT EXISTS EntrepriseFormation WITH replication = {'class':'S
 USE EntrepriseFormation;
 ```
 ________
-#### 9°) On récrée et recharge la table 'cours':
+##### 9°) On récrée et recharge la table 'cours':
 ________
 ```sql
 USE EntrepriseFormation;
@@ -211,7 +208,7 @@ COPY cours(cours_id,ajout_date,intitule) FROM '/donnees/cours.csv' WITH HEADER=T
 SELECT * FROM cours;
 ```
 
-#### Résultat de la requête : 
+##### Résultat de la requête : 
 
      cours_id                             | ajout_date                      | intitule
     --------------------------------------+---------------------------------+--------------------------
@@ -221,7 +218,7 @@ SELECT * FROM cours;
      1645ea59-14bd-11e5-a993-8138354b7e31 | 2014-01-29 01:00:00.000000+0000 |    Histoire de Cassandra
      4845ed97-14bd-11e5-8a40-8338255b7e33 | 2013-10-16 01:00:00.000000+0000 |        Formation 1FORM@ 
 
-#### Regardons de plus près les tokens impliqués :
+##### Regardons de plus près les tokens impliqués :
 ```sql
 SELECT token(cours_id),cours_id FROM cours;
 ```
@@ -238,7 +235,7 @@ SELECT token(cours_id),cours_id FROM cours;
  
   
 ________
-#### 10°) Puis on recrée la table 'cours_par_theme' :
+##### 10°) Puis on recrée la table 'cours_par_theme' :
 ________
 ```sql
 CREATE TABLE cours_par_theme (theme TEXT,cours_id UUID, ajout_date TIMESTAMP, intitule TEXT, PRIMARY KEY ((theme), cours_id));
@@ -264,7 +261,7 @@ SELECT * FROM cours_par_theme;
      
      (5 rows)
 
-#### Regardons de plus près les tokens impliqués :
+##### Regardons de plus près les tokens impliqués :
 ```sql
 SELECT token(theme),theme FROM cours_par_theme;
 ```
@@ -284,25 +281,25 @@ SELECT token(theme),theme FROM cours_par_theme;
      
 
 ________
-#### Combien de partitions y-t-il pour la table cours ? 
+##### Combien de partitions y-t-il pour la table cours ? 
 ________
 
 
 ________
-#### Combien de partitions y-t-il pour la table cours_par_theme ? 
+##### Combien de partitions y-t-il pour la table cours_par_theme ? 
 ________
 
 
 ________
-#### Pour cours_par_theme, sur quel(s) noeud(s) réside(nt) quelle(s) partition(s) ?
-#### Vous pouvez vous aider pour savoir quel noeud contient quels ranges de token, en passant la commande "nodetool ring"
-#### Allons-y :  
+##### Pour cours_par_theme, sur quel(s) noeud(s) réside(nt) quelle(s) partition(s) ?
+##### Vous pouvez vous aider pour savoir quel noeud contient quels ranges de token, en passant la commande "nodetool ring"
+##### Allons-y :  
 ________
 ```sql
 exit
 ```
 
-#### Utilisons 'nodetool ring' :
+##### Utilisons 'nodetool ring' :
 ```bash
 docker exec -it cassandra01 nodetool ring
 ```
@@ -317,7 +314,7 @@ Address          Rack        Status State   Load            Owns                
 ```
 
 
-#### Si on etait en mode VNodes, on aurait : 
+##### Si on était en mode VNodes (noeuds logiques), on aurait : 
 ```text
 Datacenter: Cassandra
 ==========
@@ -374,8 +371,8 @@ Address          Rack        Status State   Load            Owns                
 ```
 
 ________
-#### 12°) Vous pouvez aussi détailler quelles partitions résident sur quels noeuds,
-####     avec cette fois la commande suivante : nodetool
+##### 12°) Vous pouvez aussi détailler quelles partitions résident sur quels noeuds,
+#####     avec cette fois la commande suivante : nodetool
 ________
 ```bash
 docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
@@ -383,7 +380,7 @@ docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours_par_
 ```
 
 
-#### Affichage du résultat retourné : 
+##### Affichage du résultat retourné : 
 
 #### root@cassandra01:~# /node/resources/cassandra/bin/nodetool getendpoints EntrepriseFormation cours_par_theme 'cassandra'
 #### 192.168.100.152
@@ -406,11 +403,17 @@ nodetool getendpoints entrepriseformation cours '245e8024-14bd-11e5-9743-8238356
 #### 192.168.100.151
 
 ________
-#### 13°) Cassandra n'a pas besoin d'avoir une partition déjà existante (donc pour une valeur de clé donnée)
-####     pour déterminer quels nœuds stockeront quelle partition.
-####     Vous pouvez ainsi essayer avec n'importe quelle valeur de clé de partition, vous saurez quel noeud en sera l'hôte.
-####     Par exemple, essayez :
+##### 13°) Connaisance de l'emplacement des tokens, même seux pas encore utilisés :
+    Cassandra n'a pas besoin d'avoir une partition déjà existante (donc pour une valeur de clé donnée)
+    pour déterminer quels nœuds stockeront quelle partition.
+	
+    Vous pouvez ainsi essayer avec n'importe quelle valeur de clé de partition, vous saurez quel noeud en sera l'hôte.
+
+#####  Par exemple, essayez :
 ________
 ```bash
 nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ```
+﻿________
+##### Fin du TP N°4: Anneau / Ring
+________
