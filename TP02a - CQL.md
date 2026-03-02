@@ -118,32 +118,32 @@ cqlsh localhost 9142
      Exemple de warning possible en retour : 
      WARNING: cqlsh was built against 5.0.0, but this server is 5.0.6.  All features may not work!
 	 
-```bash
-exit    # on sort de cqlsh et on revient sur la machine hôte
+```sql
+EXIT;    -- on sort de cqlsh et on revient sur la machine hôte
 ```
 
 ##### Méthode conseillée pour utiliser la version CQLSH adaptée à la version du cluster :  
 ```bash
 docker exec -it cassandra01 cqlsh 
 ```
-```bash
-exit    # on sort de cqlsh et on revient sur la machine hôte
+```sql
+EXIT;    -- on sort de cqlsh et on revient sur la machine hôte
 ```
 
 ##### la commande précédente est équivalente à : 
 ```bash
 docker exec -it cassandra01 cqlsh cassandra01 9042
 ```
-```bash
-exit    # on sort de cqlsh et on revient sur la machine hôte
+```sql
+EXIT;    -- on sort de cqlsh et on revient sur la machine hôte
 ```
 
 ##### équivalent à : 
 ```bash
 docker exec -it cassandra01 cqlsh 127.0.0.1 9042
 ```
-```bash
-exit    # on sort de cqlsh et on revient sur la machine hôte
+```sql
+EXIT;    -- on sort de cqlsh et on revient sur la machine hôte
 ```
 
 
@@ -499,6 +499,7 @@ _____________
 ####  Fin du TP N°2: CQL
 
 _____________
+
 
 
 
