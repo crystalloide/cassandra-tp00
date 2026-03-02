@@ -274,8 +274,9 @@ ORDER BY cours_id ASC;
     
 
 ________
-##### On ne peut faire un GROUP BY que sur une colonne de la clé primaire (autre que la clé de partition =>  clé de clustering ): 
+##### On ne peut faire un GROUP BY que sur une colonne de la clé primaire (clé de partition ou clé de clustering ): 
 ________
+##### Group by sur 'ajout_date'
 ```sql
 SELECT COUNT(*)
 FROM entrepriseformation.cours_par_theme
@@ -286,6 +287,24 @@ GROUP BY ajout_date;
     InvalidRequest: Error from server: code=2200 [Invalid query] message="Group by is currently only supported on the columns of the PRIMARY KEY, got ajout_date"
 
 
+##### Group by sur 'theme' (clé de partition)
+```sql
+SELECT COUNT(*)
+FROM entrepriseformation.cours_par_theme
+WHERE theme = 'cassandra'
+GROUP BY theme;
+```
+
+##### Affichage (valide): PRIMARY KEY (theme, cours_id)
+    
+     count
+    -------
+         3
+    
+    (3 rows)
+
+	
+##### Group by sur 'cours_id' (Clé de clustering)
 ```sql
 SELECT COUNT(*)
 FROM entrepriseformation.cours_par_theme
@@ -302,21 +321,7 @@ GROUP BY cours_id;
          1
     
     (3 rows)
-
-```sql
-SELECT COUNT(*)
-FROM entrepriseformation.cours_par_theme
-WHERE theme = 'cassandra'
-GROUP BY theme;
-```
-
-##### Affichage (valide): PRIMARY KEY (theme, cours_id)
-    
-     count
-    -------
-         3
-    
-    (3 rows)
+	
 
 
 ________
@@ -459,6 +464,7 @@ ________
 ##### Fin du TP N°03 : Partitions 
 
 ________
+
 
 
 
