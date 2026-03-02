@@ -100,9 +100,8 @@ docker exec -it cassandra01 nodetool status
     Status=Up/Down
     |/ State=Normal/Leaving/Joining/Moving
     --  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
-    UN  192.168.100.151  119.47 KiB  1       100.0%            465a3a80-e0a6-4518-aa98-231566a01e66  Rack1
-    UN  192.168.100.152  30.89 KiB   1       100.0%            c895162a-3887-4db4-9b84-e8eed1c2994a  Rack2
-
+    UN  192.168.100.151  119.82 KiB  16      100.0%            aad76b9d-b975-4942-8772-d36896124cb3  Rack1
+    UN  192.168.100.152  119.65 KiB  16      100.0%            86cf0dbf-7778-48b0-b8c8-044effc1735e  Rack2
 
 _______
 ##### 6°) Exécuter la commande : 
@@ -161,6 +160,7 @@ _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
+
 
 
 
