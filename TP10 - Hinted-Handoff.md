@@ -126,13 +126,13 @@ ____
 ____
 ##### sur cassandra02 :
 ```bash
-docker exec -it cassandra02 ls -l /opt/cassandra/data/hints
+ls -l /home/user/cassandra-tp00/docker/cassandra02/hints/
 ```
 ##### total 0
 
 ##### sur cassandra03 :
 ```bash
-docker exec -it cassandra03 ls -l /opt/cassandra/data/hints
+ls -l /home/user/cassandra-tp00/docker/cassandra03/hints/
 ```
 ##### total 0
 ____
@@ -274,6 +274,7 @@ ____
 ##### Fin du TP10 : Hinted-handoff
 
 ____
+
 
 
 
