@@ -408,7 +408,7 @@ nodetool tablestats keyspace1.standard1
 Memtable cell count: 0
 Memtable data size: 0
 Memtable off heap memory used: 0
-Memtable switch count: 3
+Memtable switch count: 2
 ```
 
 ____
@@ -434,6 +434,7 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
 
 
 
