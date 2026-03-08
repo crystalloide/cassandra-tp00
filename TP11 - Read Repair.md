@@ -261,9 +261,10 @@ docker exec -it cassandra03 nodetool status
 
 
 ____ 
-##### 12°) Dans cqlsh, positionnez le niveau de cohérence à 2 : 
+##### 12°) On lance cqlsh : 
 ____
 
+##### client CSQLSh en passant par le noeud cassandr03 :
 ```bash
 docker exec -it cassandra03 cqlsh
 ```
@@ -340,4 +341,5 @@ SELECT * FROM EntrepriseFormation.cours_par_theme WHERE theme = 'cassandra';
 
 ____ 
 ##### Fin du TP11 : Read Repair
+
 ____ 
