@@ -72,6 +72,7 @@ ________
 ________
 
 ##### Recréation des répertoires de volumes (dat + conf)  :
+
 ```bash
 cd ~/cassandra-tp00/docker
 sudo rm -Rf ~/cassandra-tp00/docker/cassandra*
@@ -79,10 +80,23 @@ mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02
 mkdir -p ~/cassandra-tp00/docker/cassandra01-conf ~/cassandra-tp00/docker/cassandra02-conf ~/cassandra-tp00/docker/cassandra03-conf ~/cassandra-tp00/docker/cassandra04-conf
 ```
 
-#### On affiche les répertoires re-créés :
+##### On affiche les répertoires re-créés :
+
 ```bash
 ls ~/cassandra-tp00/docker
 ```
+
+##### Lancement du cluster 2 DC 2 racks : 
+
+```bash
+docker compose -f Cluster_2_noeuds_2_racks_2_DC.yml up -d
+sleep 60
+```
+
+```bash
+docker exec -it cassandra01 n,odetool status
+```
+
 
 ______
 ##### 5°) On va maintenant s'intéresser aux modifications apportées dans cassandra.yaml :
@@ -209,3 +223,4 @@ ______
 ##### Fin du TP07 : Snitches
 
 ______
+
