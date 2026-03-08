@@ -63,14 +63,15 @@ Datacenter: Nord
 Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving
 --  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
-UN  192.168.100.151  119.84 KiB  16      100.0%            3aa6222b-2507-44a2-a0da-cdab4704f6ef  Winterfell
+UN  192.168.100.151  119.82 KiB  16      61.1%             6ceb7b98-12d7-4c3d-b74e-41f12cc5284e  Winterfell
+UN  192.168.100.153  80.05 KiB   16      67.5%             ae4e8761-8f8a-46e4-adc6-93adbb194d16  Winterfell
 
 Datacenter: Terres-de-la-Couronne
 =================================
 Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving
 --  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
-UN  192.168.100.152  85.12 KiB   16      100.0%            646d0ad2-b6e3-46f1-9f4b-4b240f772566  Port-Real
+UN  192.168.100.152  85.11 KiB   16      71.4%             6fb77427-ad69-4dc6-bd44-1eec66fe40f7  Port-Real
 
 ```
 
@@ -269,4 +270,5 @@ _____
 ##
 
 _____
+
 
