@@ -304,55 +304,76 @@ ____
 nodetool tablestats keyspace1.standard1
 ```
 
-##### Remarque : cfstats est déprécié => On utilise depuis plusieurs versions : tablestats  
+##### Remarque : 
+```text
+cfstats est déprécié => On utilise depuis plusieurs versions : tablestats  
 
-##### cassandra-stress a créé le KeySpace et la table Keyspace1.standard1, et l'a chargée.
-##### tablestats donne les statistiques sur cette column family (table). 
-##### Le terme "Column family" is le nom déprécié utilisé pour nommer une table.
-##### 
-##### [cassandra@cassandra01 ~]$ /node/bin/nodetool tablestats keyspace1.standard1
-##### Total number of tables: 45
-##### ----------------
-##### Keyspace: keyspace1
-##### 	Read Count: 0
-##### 	Read Latency: NaN ms.
-##### 	Write Count: 250000
-##### 	Write Latency: 0.040414532 ms.
-##### 	Pending Flushes: 0
-##### 		Table: standard1
-##### 		SSTable count: 2
-##### 		Space used (live): 52403218
-##### 		Space used (total): 52403218
-##### 		Space used by snapshots (total): 0
-##### 		Off heap memory used (total): 299966
-##### 		SSTable Compression Ratio: 0.0
-##### 		Number of keys (estimate): 250837
-##### 		Memtable cell count: 39058
-##### 		Memtable data size: 10897182
-##### 		Memtable off heap memory used: 0
-##### 		Memtable switch count: 2
-##### 		Local read count: 0
-##### 		Local read latency: NaN ms
-##### 		Local write count: 250000
-##### 		Local write latency: 0.037 ms
-##### 		Pending flushes: 0
-##### 		Bloom filter false positives: 0
-##### 		Bloom filter false ratio: 0.00000
-##### 		Bloom filter space used: 263704
-##### 		Bloom filter off heap memory used: 263688
-##### 		Index summary off heap memory used: 36278
-##### 		Compression metadata off heap memory used: 0
-##### 		Compacted partition minimum bytes: 180
-##### 		Compacted partition maximum bytes: 258
-##### 		Compacted partition mean bytes: 258
-##### 		Average live cells per slice (last five minutes): NaN
-##### 		Maximum live cells per slice (last five minutes): 0
-##### 		Average tombstones per slice (last five minutes): NaN
-##### 		Maximum tombstones per slice (last five minutes): 0
-##### 		
-##### Notez que "Write Count" correspond au nombre d'enregistrements insérés par cassandra-stress. 
-##### tablestats affiche des informations également sur le nombre de SSTables, l'espace utilisé, et les statistiques de bloom filter.
+cassandra-stress a créé le KeySpace et la table Keyspace1.standard1, et l'a chargée.
 
+tablestats donne les statistiques sur cette column family (table). 
+
+Le terme "Column family" is le nom déprécié utilisé pour nommer une table.
+
+```
+##### Résultat de la commande 'nodetool tablestat Keyspace1.standard1' : 
+
+```text
+Total number of tables: 1
+----------------
+Keyspace: keyspace1
+        Read Count: 0
+        Read Latency: NaN ms
+        Write Count: 25000
+        Write Latency: 0.01201248 ms
+        Pending Flushes: 0
+                Table: standard1
+                SSTable count: 1
+                Old SSTable count: 0
+                Max SSTable size: 4.741MiB
+                Space used (live): 4971809
+                Space used (total): 4971809
+                Space used by snapshots (total): 0
+                Off heap memory used (total): 28574
+                SSTable Compression Ratio: -1.00000
+                Number of partitions (estimate): 25162
+                Memtable cell count: 4908
+                Memtable data size: 1467492
+                Memtable off heap memory used: 0
+                Memtable switch count: 1
+                Speculative retries: 0
+                Local read count: 0
+                Local read latency: NaN ms
+                Local write count: 25000
+                Local write latency: 0.008 ms
+                Local read/write ratio: 0.00000
+                Pending flushes: 0
+                Percent repaired: 0.0
+                Bytes repaired: 0B
+                Bytes unrepaired: 4.387MiB
+                Bytes pending repair: 0B
+                Bloom filter false positives: 0
+                Bloom filter false ratio: 0.00000
+                Bloom filter space used: 25128
+                Bloom filter off heap memory used: 25120
+                Index summary off heap memory used: 3454
+                Compression metadata off heap memory used: 0
+                Compacted partition minimum bytes: 180
+                Compacted partition maximum bytes: 258
+                Compacted partition mean bytes: 258
+                Average live cells per slice (last five minutes): NaN
+                Maximum live cells per slice (last five minutes): 0
+                Average tombstones per slice (last five minutes): NaN
+                Maximum tombstones per slice (last five minutes): 0
+                Droppable tombstone ratio: 0.00000
+
+----------------
+```
+
+##### Remarque : 
+```texte
+Notez que "Write Count" correspond au nombre d'enregistrements insérés par cassandra-stress. 
+tablestats affiche des informations également sur le nombre de SSTables, l'espace utilisé, et les statistiques de bloom filter.
+```bash
 
 
 ____
@@ -411,6 +432,7 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
 
 
 
