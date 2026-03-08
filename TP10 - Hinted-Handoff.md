@@ -88,7 +88,7 @@ VALUES ('cassandra', '2016-02-11',uuid(), 'Cassandra, Je veux rentrer chez moi')
 ##### à destination des deux noeuds portant les réplicas, jusqu'à ce qu'ils redeviennent actifs.
 
 ```sql
-EXIT;
+exit;
 ```
 
 ___
@@ -112,11 +112,7 @@ total 8
 -rw-r--r-- 1 999 systemd-journal 178 Mar  8 17:23 0d049785-4093-43df-958e-b9f7d1fd9200-1772987009198-2.hints
 -rw-r--r-- 1 999 systemd-journal 178 Mar  8 17:23 b18bc462-22d2-45d8-8109-9354978f68a8-1772987009163-2.hints
 
-
 ##### Il y a deux fichiers, un fichier stockant tous les hints pour un noeud donné.
-____
-
-
 
 ____
 ##### 8°) Vous pouvez vérifier également dans les répertoires des autres noeuds arrêtés,
@@ -272,4 +268,5 @@ ____
 ##### Fin du TP10 : Hinted-handoff
 
 ____
+
 
