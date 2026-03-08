@@ -294,10 +294,9 @@ ____
 ```sql
 SELECT * FROM EntrepriseFormation.cours_par_theme
 WHERE theme = 'cassandra';
-```sql
+```
 
 ##### Les données sont bien revenues sur les deux noeuds.
-
 
 ____ 
 ##### 14°) Maintenant, stoppez le noeud récemment relancé (celui qui avait toutes les données de la table cours_par_theme.)
@@ -307,7 +306,6 @@ ____
 ```bash
 docker stop cassandra03
 ```
-
 
 ____ 
 ##### 15°) Dans cqlsh, positionnnez la cohérence à "ONE" : 
@@ -343,3 +341,4 @@ ____
 ##### Fin du TP11 : Read Repair
 
 ____ 
+
