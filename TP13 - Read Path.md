@@ -88,7 +88,7 @@ ls -lh *Filter.db
 #### Affichage :
 ```text
 -rw-r--r-- 1 cassandra cassandra 31K Mar  8 19:25 nb-5-big-Filter.db
-```text
+```
 
 #### Noter la taille  du ou des fichiers.
 
@@ -323,4 +323,5 @@ Keyspace: keyspace1
 ____
 #### Fin du TP13 : Read Path
 ____
+
 
