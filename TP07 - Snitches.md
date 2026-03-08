@@ -217,11 +217,11 @@ rack=Port-Real
 ```
 
 ______
-##### 7°) Une fois les deux noeuds opérationnels, lancez la commande : 
+##### 7°) Maintenant que notre cluster à 2 noeuds 2 DC 2 rackes est opérationnel, lancez la commande : 
 ______
 ##### node/bin/dsetool status
 ```bash
-docker exec -it cassandra nodsetool status
+docker exec -it cassandra01 nodsetool status
 ```
 
 ##### Et notez les assignations pour les différents noeuds, qui sont désormais :
@@ -247,9 +247,3 @@ ______
 ##### Fin du TP07 : Snitches
 
 ______
-
-
-
-
-
-
