@@ -12,7 +12,7 @@ ____
 ____
 ##### Etapes : 
 ____
-##### 1°)Réinitialisation : 
+##### 1°) Réinitialisation : 
 
 ```text
 On démonte entièrement le cluster, on va lancer un seul noeud cassandra01 en solo
@@ -280,3 +280,4 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
