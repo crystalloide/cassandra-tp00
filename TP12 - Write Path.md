@@ -98,7 +98,7 @@ UN  192.168.100.151  114.72 KiB  16      100.0%            c4d56bcd-1a2e-49c6-a9
 
 
 ____
-##### 5°)Investiguons dans le répertoire "commitlog" :
+##### 2°) Investiguons dans le répertoire "commitlog" :
 ____
 ```bash
 docker exec -it cassandra01 ls -lh ~/cassandra-tp00/docker/cassandra01commitlog
@@ -127,7 +127,7 @@ watch -n 1 -d "ls -lh ~/cassandra-tp00/docker/cassandra01/commitlog"
 ##### NOTE : Pour sortir de cette commande ensuite, faites "CTRL-C"
 
 ____
-##### 8°) Nous allons utiliser l'outil "cassandra-stress" pour générer plusieurs centaines d'écritures sur le noeud. 
+##### 3°) Nous allons utiliser l'outil "cassandra-stress" pour générer plusieurs centaines d'écritures sur le noeud. 
 #####     Exécutez la commande suivante sur le premier terminal :
 ____
 ```bash
@@ -160,12 +160,12 @@ bash cassandra-stress write no-warmup n=25000 cl=one -rate threads=1 -node 192.1
 ##### - Vous pouvez voir apparaître des fichiers de commitlog supplémentaires
 
 ____
-##### 9°) Quand l'outil cassandra-stress a fini, sortez de la fenêtre en faisant "CTRL-C"
+##### 4°) Quand l'outil cassandra-stress a fini, sortez de la fenêtre en faisant "CTRL-C"
 ____
 
 
 ____
-##### 10°) Lancez la commande suivante "nodetool" :
+##### 5°) Lancez la commande suivante "nodetool tablestats xxxxx" :
 ____
 ```bash
 nodetool tablestats keyspace1.standard1
@@ -223,7 +223,7 @@ nodetool tablestats keyspace1.standard1
 
 
 ____
-##### 11°) Notez les stastistiques liées à la Memtable : 
+##### 6°) Notez les stastistiques liées à la Memtable : 
 ____
 ##### Memtable cell count: 39058
 ##### Memtable data size: 10897182
@@ -233,15 +233,14 @@ ____
 
 
 ____
-##### 12°) Exécutez la commande "nodetool" qui forcera l'écriture de la memtable sur disque (flush) : 
+##### 7°) Exécutez la commande "nodetool" qui forcera l'écriture de la memtable sur disque (flush) : 
 ____
 ```bash
 nodetool flush
 ```
 
-
 ____
-##### 13°) Vérifiez maintenant les stats de la table à nouveau :
+##### 8°) Vérifiez maintenant les stats de la table à nouveau :
 ____
 ```bash
 nodetool tablestats keyspace1.standard1
@@ -256,9 +255,8 @@ Memtable off heap memory used: 0
 Memtable switch count: 3
 ```
 
-
 ____
-##### 14°) Dernier exercice : stopper le noeud et supprimez les logs : le fichier /node/log/system.log
+##### 9°) Dernier exercice : stopper le noeud et supprimez les logs : le fichier /node/log/system.log
 ##### 		( rappel : par défaut /var/log/cassandra/system.log), 
 ##### relancez le noeud, et recherchez "CommitLog.java" dans le nouveau fichier logs/system.log 
 ##### Vous devriez voir apparaître des lignes d'information sur le rejeu de commitlog au démarrage.
@@ -267,21 +265,16 @@ ____
 ##### Si Cassandra trouve un ou plusieurs fichiers commit log, Cassandra rejoue les mises à jours dans les memtables
 ##### puis flushe les memtables sur disque.
 
-
-##### 15°) On démonte notre lcuster mononoeud une fois terminé
+____
+##### 10°) On démonte notre cluster mono-noeud une fois le TP terminé :
 ____
 
-##### Arrêter et démonter le cluster 
+##### Arrêt et démontage  du cluster et des volumes :
 ```bash
 docker compose -f Cluster_1_noeud_1_rack_1_DC.yml down -v
 ```
-
 
 ____
 ##### Fin du TP12 : Write Path
 
 ____
-
-
-
-
