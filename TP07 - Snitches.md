@@ -182,7 +182,7 @@ Ces zones correspondent à des risques de panne précis (perte d'un rack, d'un d
 
 ```text
 Ces paramètres seront utilisés par le snitch avec la stratégie 'GossipingPropertyFileSnitch',
-et indiqueront le DataCenter et le rack d'appartenance du noeud 1 considéré.
+et indiqueront le DataCenter et le rack d'appartenance du noeud considéré.
 ```
 
 ##### Pour voir la configuration de cassandra01 :
@@ -247,6 +247,7 @@ ______
 ##### Fin du TP07 : Snitches
 
 ______
+
 
 
 
