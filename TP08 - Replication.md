@@ -203,9 +203,11 @@ _____
 ##### nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
 ##### nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
 
-##### Sur cassandra03 : 
+##### Sur un des noeuds cassandra (ici cassandra03) : 
 ```bash
 docker exec -it cassandra03 nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
+```
+```bash
 docker exec -it cassandra03 nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
 ```
 
