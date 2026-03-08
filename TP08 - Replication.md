@@ -130,9 +130,22 @@ rack=Winterfell
 
 _____
 ##### 4°) Vous allez réimporter les données des cours :  
-#####    accédez à cqlsh : 
+_____
+
+##### A partir d'un temrinal, on alimente un des noeuds (ici cassandra01) avec les fichiers que l'on va charger ensuite :
 ```bash
-docker exec -it cassandra03 cqlsh
+cd ~/cassandra-tp00
+docker exec -it cassandra01 mkdir -p /donnees
+docker cp ./donnees/cours.csv cassandra01:/donnees/cours.csv
+docker cp ./donnees/cours-par-theme.csv cassandra01:/donnees/cours-par-theme.csv
+docker exec -it cassandra01 chmod 775 -Rf /donnees
+docker exec -it cassandra01 ls /donnees
+docker exec -it cassandra01 cqlsh
+```
+
+##### Accédez à cqlsh à partir du noeud qui a les données en local (cassandra01 donc) : 
+```bash
+docker exec -it cassandra01 cqlsh
 ```
 
 
@@ -148,14 +161,12 @@ WITH replication = {
 };
 ```
 
-
 _____
 ##### 5°) Sélectionnez le keyspace EntrepriseFormation : 
 _____
 ```sql
 USE EntrepriseFormation;
 ```
-
 
 _____
 ##### 6°) Recréez la table cours_par_theme table et réimportez les données, 
@@ -172,9 +183,7 @@ CREATE TABLE cours_par_theme (
 ```
 
 ```sql
-COPY cours_par_theme(theme, cours_id, ajout_date, intitule)
-FROM '/sources/donnees/cours-par-theme.csv'
-WITH HEADER=TRUE;
+COPY cours_par_theme(theme,cours_id,ajout_date,intitule) FROM './donnees/cours-par-theme.csv' WITH HEADER = TRUE;
 ```
 
 ##### On vérifie le bon chargement de la table : 
@@ -258,3 +267,4 @@ _____
 192.168.100.152
 ```
 _____
+
