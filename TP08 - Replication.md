@@ -109,7 +109,6 @@ cat ~/cassandra-tp00/docker/cassandra03-conf/cassandra.yaml | grep "endpoint_sni
 endpoint_snitch: SimpleSnitch
 ```
 
-
 ##### Pour voir la configuration de cassandra03 :
 ```bash
 docker exec -it cassandra03 head -n 21 /opt/cassandra/conf/cassandra-rackdc.properties
@@ -129,42 +128,8 @@ rack=Winterfell
 
 
 
-
 _____
-##### 4°) Une fois le 3ème noeud lancé, vérifiez que les 3 noeuds sont bien 'up', avec la commande :
-
-##### Sur un des noeuds cassandra, ici on choisit arbitrairement le noeud cassandra03 :
-
-```bash
-docker exec -it cassandra03 nodetool status
-```
-
-
-##### Vous pouvez lancer cette commande nodetool à partir de n'importe quel noeud actif .
-##### 
-##### Résultat de la commande : 
-##### 
-##### 	[cassandra@cassandra03 ~]$ dsetool status
-##### 	DC: Nord            Workload: Cassandra       Graph: no     
-##### 	======================================================
-##### 	Status=Up/Down
-##### 	|/ State=Normal/Leaving/Joining/Moving
-##### 	--   Address          Load             Effective-Ownership  VNodes                                       Rack         Health [0,1] 
-##### 	UN   192.168.100.151  128.68 KiB       70.21%               24                                           Winterfell   0.50         
-##### 	UN   192.168.100.153  123.63 KiB       63.05%               24                                           Winterfell   0.00         
-##### 
-##### 	DC: Terres-de-la-Couronne Workload: Cassandra       Graph: no     
-##### 	============================================================
-##### 	Status=Up/Down
-##### 	|/ State=Normal/Leaving/Joining/Moving
-##### 	--   Address          Load             Effective-Ownership  VNodes                                       Rack         Health [0,1] 
-##### 	UN   192.168.100.152  101.62 KiB       66.75%               24                                           Port-Real    0.50         
-##### 
-
-
-
-_____
-##### 5°) Vous allez réimporter les données des cours :  
+##### 4°) Vous allez réimporter les données des cours :  
 #####    accédez à cqlsh : 
 cqlsh 192.168.100.153
 
@@ -181,14 +146,14 @@ WITH replication = {
 
 
 _____
-##### 6°) Sélectionnez le keyspace EntrepriseFormation : 
+##### 5°) Sélectionnez le keyspace EntrepriseFormation : 
 _____
 USE EntrepriseFormation;
 
 
 
 _____
-##### 7°) Recréez la table cours_par_theme table et réimportez les données, 
+##### 6°) Recréez la table cours_par_theme table et réimportez les données, 
 #####     avec les commandes suivantes : A faire sur cassandra01 :  
 
 CREATE TABLE cours_par_theme (
@@ -213,7 +178,7 @@ exit
 
 
 _____
-##### 8°) Regardez sur quels noeuds les réplicas ont été répartis et positionnés,  
+##### 7°) Regardez sur quels noeuds les réplicas ont été répartis et positionnés,  
 #####     avec les commandes suivantes :
 ##### /node/resources/cassandra/bin/nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
 ##### /node/resources/cassandra/bin/nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
@@ -242,7 +207,7 @@ _____
 
 
 _____
-##### 09°) Cassandra n'a pas besoin d'avoir une partition déjà existante (donc pour une valeur de clé donnée)
+##### 8°) Cassandra n'a pas besoin d'avoir une partition déjà existante (donc pour une valeur de clé donnée)
 #####      pour déterminer quels nœuds stockeront quelle partition (Par contre, le keyspace et la table doivent exister)
 #####      Vous pouvez ainsi essayer avec n'importe quelle valeur de clé de partition, vous saurez quel noeud en sera l'hôte.
 #####      Par exemple, essayez :
@@ -270,6 +235,3 @@ _____
 ##
 
 _____
-
-
-
