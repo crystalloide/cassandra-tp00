@@ -96,21 +96,28 @@ ___
 ##### 7°) Vous pouvez vérifier que le seul noeud restant (encore actif) a bien stocké un hint,
 #####     en allant dans le répertoire de ce noeud : /node/dse-data/hints/ 
 ____
-##### dans le cas présent, si on suppose que c'est le noeud 1 
-##### sur cassandra01 : Dans le répertorie de stockage des hints du noeud cassandra0z : 
+
+##### dans le cas présent, si on suppose que c'est le noeud 1 : sur cassandra01 : 
+
+##### Dans le répertoire de stockage des hints du noeud cassandra0z : 
+
 ```bash
 ls -l /home/user/cassandra-tp00/docker/cassandra01/hints/
 ```
+
 ##### ou, ce qui revient au même : 
+
 ```bash
 docker exec -it cassandra01 ls -l /opt/cassandra/data/hints
 ```
 
 ##### Affichage en retour :
 
+```text
 total 8
 -rw-r--r-- 1 999 systemd-journal 178 Mar  8 17:23 0d049785-4093-43df-958e-b9f7d1fd9200-1772987009198-2.hints
 -rw-r--r-- 1 999 systemd-journal 178 Mar  8 17:23 b18bc462-22d2-45d8-8109-9354978f68a8-1772987009163-2.hints
+```
 
 ##### Il y a deux fichiers, un fichier stockant tous les hints pour un noeud donné.
 
@@ -268,5 +275,6 @@ ____
 ##### Fin du TP10 : Hinted-handoff
 
 ____
+
 
 
