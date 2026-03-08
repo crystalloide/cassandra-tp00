@@ -2,7 +2,6 @@ ____
 ##### TP12 : Write Path
 ____
 
-____
 ##### Dans ce TP, nous allons étudier la méthode d'écriture de Cassandra.
 ____
 ##### Contexte du TP : 
@@ -279,4 +278,5 @@ docker compose -f Cluster_1_noeud_1_rack_1_DC.yml down -v
 
 ____
 ##### Fin du TP12 : Write Path
+
 ____
