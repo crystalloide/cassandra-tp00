@@ -288,7 +288,7 @@ CONSISTENCY TWO;
 
 
 ____ 
-##### 13°) Exécutez la requête suivante:
+##### 13°) Exécutez la requête suivante :
 ____ 
 
 ```sql
@@ -297,6 +297,10 @@ WHERE theme = 'cassandra';
 ```
 
 ##### Les données sont bien revenues sur les deux noeuds.
+
+```sql
+exit;
+```
 
 ____ 
 ##### 14°) Maintenant, stoppez le noeud récemment relancé (celui qui avait toutes les données de la table cours_par_theme.)
@@ -341,4 +345,5 @@ ____
 ##### Fin du TP11 : Read Repair
 
 ____ 
+
 
