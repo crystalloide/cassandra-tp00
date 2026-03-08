@@ -185,11 +185,7 @@ WHERE theme = 'cassandra';
 
 ##### Affichage en retour : 
 ```text
-cqlsh:entrepriseformation> SELECT *
-                      ... FROM EntrepriseFormation.cours_par_theme
-                      ... WHERE theme = 'cassandra';
-NoHostAvailable:
-cqlsh:entrepriseformation>
+NoHostAvailable: ('Unable to complete the operation against any hosts', {<Host: 192.168.100.153:9042 Nord>: Unavailable('Error from server: code=1000 [Unavailable exception] message="Cannot achieve consistency level TWO" info={\'consistency\': \'TWO\', \'required_replicas\': 2, \'alive_replicas\': 1}')})
 
 ```
 ##### La requête échoue car vous ne pouvez plus obtenir le niveau de consistance 'TWO', du fait qu'un des noeuds nécessaire a été arrêté.
@@ -462,6 +458,7 @@ ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 
 ____
+
 
 
 
