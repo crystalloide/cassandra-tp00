@@ -363,9 +363,6 @@ WHERE theme = 'cassandra';
 ##### C'est encore une fois grâce au mécanisme de 'read repair', qui sera explicité plus tard.
 ____
 
-
-
-____
 ##### 25°) Mettez à jour l'enregistrement avec un nouveau titre en exécutant la requête CQL suivante. 
 #####    (Copiez/collez le cours_id du résultat défini ci-dessus dans la clause WHERE de la requête d'UPDATE.)
 ____
