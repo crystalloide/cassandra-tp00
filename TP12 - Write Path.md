@@ -302,7 +302,7 @@ ____
 ____
 ```bash
 nodetool tablestats keyspace1.standard1
-```bash
+```
 
 ##### Remarque : cfstats est déprécié => On utilise depuis plusieurs versions : tablestats  
 
@@ -411,6 +411,7 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
 
 
 
