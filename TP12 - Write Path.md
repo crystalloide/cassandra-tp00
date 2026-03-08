@@ -292,14 +292,12 @@ END
 ##### Quelques éléments à regarder pendant l'insertion de ces enregistrements :
 ##### - La taille totale continue à augmenter.
 ##### - Le timestamp change pour le segment en cours d'écriture.
-##### - Vous pouvez voir apparaître des fichiers de commitlog supplémentaires
+##### - Vous pouvez voir apparaître des fichiers de commitlog supplémentaires (si le benchmark a été assez poussé)
 
 ____
 ##### 4°) Quand l'outil cassandra-stress a fini, sortez de la fenêtre en faisant "CTRL-C"
 ____
 
-
-____
 ##### 5°) Lancez la commande suivante "nodetool tablestats xxxxx" :
 ____
 ```bash
@@ -413,6 +411,7 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
 
 
 
