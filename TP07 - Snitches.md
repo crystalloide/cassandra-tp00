@@ -56,17 +56,19 @@ rack=rack1
 
 ##### Nous allons maintenant arrêter et relancer un cluster avec des valeurs modifiées plus intéressantes que les valeurs par défaut :
 
-##### 1°) On nettoie tout l'environnement : 
+##### 3°) On nettoie tout l'environnement : 
 ________
+
 ```bash
 docker compose -f Cluster_2_noeuds_1_rack_1_DC.yml down -v
 ```
 
 ```bash
 docker ps -a 
+```
 
 ________
-##### 2°) On relance un nouveau cluster à 2 noeuds mais cette fois qui seront répartis sur des racks et des Datacenters (DC) différents : 
+##### 4°) On relance un nouveau cluster à 2 noeuds mais cette fois qui seront répartis sur des racks et des Datacenters (DC) différents : 
 ________
 
 ##### Recréation des répertoires de volumes (dat + conf)  :
@@ -83,7 +85,7 @@ ls ~/cassandra-tp00/docker
 ```
 
 ______
-##### 3°) On va maintenant s'intéresser aux modifications apportées dans cassandra.yaml :
+##### 5°) On va maintenant s'intéresser aux modifications apportées dans cassandra.yaml :
 ______
 
     Notamment au paramètre endpoint_snitch 
@@ -122,7 +124,7 @@ cat ~/cassandra-tp00/docker/cassandra02-conf/cassandra.yaml | grep "endpoint_sni
 
 
 ______
-##### 4°) De la même façon, on regarde maintenant le fichier de configuration rack + DC de chaque noeud : "cassandra-rackdc.properties"
+##### 6°) De la même façon, on regarde maintenant le fichier de configuration rack + DC de chaque noeud : "cassandra-rackdc.properties"
 ______
 
 ```text
@@ -177,7 +179,7 @@ rack=Port-Real
 ```
 
 ______
-5°) Une fois les deux noeuds opérationnels, lancez la commande : 
+##### 7°) Une fois les deux noeuds opérationnels, lancez la commande : 
 ______
 ##### node/bin/dsetool status
 ```bash
@@ -207,5 +209,3 @@ ______
 ##### Fin du TP07 : Snitches
 
 ______
-
-
