@@ -9,12 +9,9 @@ ____
 ##### Le mécanisme de rejeu "Hinted-handoff" permet à Cassandra de conserver la cohérence des données, 
 ##### tout particulièrement lorsqu'un noeud est arrêté.
 ____
-
-____
 ##### ETAPES : 
 ____
 
-____
 ##### 1°) Vérifiez que tous les 3 noeuds précédents sont actifs avant de débuter le TP.
 ____
 
@@ -274,4 +271,5 @@ Vous pouvez en savoir plus ici : http://www.datastax.com/dev/blog/whats-coming-t
 ```
 ____
 ##### Fin du TP10 : Hinted-handoff
+
 ____
