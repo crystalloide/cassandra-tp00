@@ -79,7 +79,8 @@ ____
 SELECT *
 FROM cours_par_theme
 WHERE theme = 'cassandra';
-```sql
+```
+##### Affichage en retour : 
 
 ```text
 
@@ -95,7 +96,7 @@ WHERE theme = 'cassandra';
 ____
 ```sql
 exit
-```sql
+```
 
 ____
 ##### 6°) Déterminez quels noeuds contiennent les réplicas pour la clé 'cassandra' de la table cours_par_theme 
@@ -458,3 +459,4 @@ ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 
 ____
+
