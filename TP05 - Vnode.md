@@ -81,7 +81,7 @@ ________
 ```bash
 docker exec -it cassandra01 nodetool status
 ```
-    Datacenter: dc1
+    Datacenter: datacenter1
     ===============
     Status=Up/Down
     |/ State=Normal/Leaving/Joining/Moving
@@ -92,7 +92,7 @@ docker exec -it cassandra01 nodetool status
 
 ##### Au bout de plusieurs minutes : 
 
-    Datacenter: dc1
+    Datacenter: datacenter1
     ===============
     Status=Up/Down
     |/ State=Normal/Leaving/Joining/Moving
@@ -112,7 +112,7 @@ docker exec -it cassandra01 nodetool ring
 ##### Et vous constatez que chaque noeud gère davantage de ranges de tokens, mais avec des ranges plus petits désormais :
 _______
 ```text
-Datacenter: dc1
+Datacenter: datacenter1
 ==========
 Address               Rack        Status State   Load            Owns                Token
                                                                                      8956661515134890508
@@ -157,5 +157,6 @@ _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
+
 
 
