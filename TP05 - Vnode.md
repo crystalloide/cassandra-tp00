@@ -58,9 +58,6 @@ ls ~/cassandra-tp00/docker
 ##### Affichage :
     cassandra01  cassandra01-conf  cassandra02  cassandra02-conf  cassandra03  cassandra03-conf  cassandra04  cassandra04-conf
 
-```bash
-cd ~/cassandra-tp00/docker
-```
 _______
 ##### 5°) Remarque importante : 
 
@@ -70,7 +67,7 @@ _______
 	Cela nous évite d'aller remettre les valeurs modifiée à l'état initial  (Vnode = 16  et 'Initial Token' en commentaire)
 
 _______
-##### 6°) On lance le cluster de 2 noeuds cassandra01 et cassandra02 en VNodes : :
+##### 6°) On lance le cluster de 2 noeuds cassandra01 et cassandra02 en VNodes en mode 1 cluster basique sur 1 DC: 
 ________
 ```bash
 cd ~/cassandra-tp00
@@ -160,4 +157,5 @@ _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
+
 
