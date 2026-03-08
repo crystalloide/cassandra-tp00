@@ -19,7 +19,7 @@ _____
 ________
 
 ```bash
-docker compose -f Cluster_2_noeuds_2_rack_2_DC.yml down -v
+docker compose -f Cluster_2_noeuds_2_racks_2_DC.yml down -v
 ```
 
 ```bash
@@ -269,3 +269,4 @@ _____
 ##
 
 _____
+
