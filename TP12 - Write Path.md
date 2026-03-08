@@ -25,7 +25,7 @@ docker compose -f Cluster_3_noeuds_2_racks_2_DC.yml down -v
 ```
 
 
-#### Recréer les répertoires de volumes :
+##### Recréer les répertoires de volumes :
 ```bash
 sudo rm -Rf ~/cassandra-tp00/docker/cassandra*
 mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02 ~/cassandra-tp00/docker/cassandra03 ~/cassandra-tp00/docker/cassandra04
@@ -46,7 +46,7 @@ ls ~/cassandra-tp00/docker
      assandra01-conf  cassandra02-conf  cassandra03-conf  cassandra04-conf
 ```
 
-#### Étape 2 : Démarrage du cluster avec Docker Compose
+##### Démarrage du cluster avec Docker Compose :
 
 ##### Démarrer le cluster mono-noeud en arrière-plan
 ```bash
@@ -60,32 +60,32 @@ docker compose -f Cluster_1_noeud_1_rack_1_DC.yml logs
 ```
 ##### Faire **\<CTRL>+\<C>** pour sortir
 
-#### Dans un autre terminal, pour suivre  :
+##### Dans un autre terminal, pour suivre  :
 ```bash
 cd ~/cassandra-tp00
 docker ps -a 
 ```
-#### Affichage (exemple) ': 
+##### Affichage (exemple) ': 
 ```text
 CONTAINER ID   IMAGE              COMMAND                  CREATED         STATUS                   PORTS                                                                                                                                                                                                    NAMES
 9be7d93e24ef   cassandra:latest   "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes (healthy)   7001/tcp, 9160/tcp, 0.0.0.0:7199->7199/tcp, [::]:7199->7199/tcp, 0.0.0.0:7100->7000/tcp, [::]:7100->7000/tcp, 0.0.0.0:8181->8081/tcp, [::]:8181->8081/tcp, 0.0.0.0:9142->9042/tcp, [::]:9142->9042/tcp   cassandra01
 ```
 
-#### Pour visualiser les logs de cassandra01 : 
+##### Pour visualiser les logs de cassandra01 : 
 ```bash
 docker logs cassandra01
 ```
 
-#### Regarder les ports à l'écoute :
+##### Regarder les ports à l'écoute :
 ```bash
 netstat -anl | grep 0:
 ```
 
-#### Vérifier le statut du cluster via nodetool
+##### Vérifier le statut du cluster via nodetool
 ```bash
 docker exec -it cassandra01 nodetool status
 ```
-#### Vous devriez voir finalement le nœuds cassandra01 avec le statut "UN" (Up Normal) :
+##### Vous devriez voir finalement le nœuds cassandra01 avec le statut "UN" (Up Normal) :
 
 ```text
 Datacenter: datacenter1
@@ -95,7 +95,6 @@ Status=Up/Down
 --  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
 UN  192.168.100.151  114.72 KiB  16      100.0%            c4d56bcd-1a2e-49c6-a90b-16782f40800a  rack1
 ```
-
 
 ____
 ##### 2°) Investiguons dans le répertoire "commitlog" :
@@ -284,4 +283,5 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
 
