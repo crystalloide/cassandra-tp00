@@ -31,7 +31,6 @@ bash cassandra-stress write no-warmup n=25000 cl=one -rate threads=2 -node 192.1
 
 ____
 #### Faites une visite à la fontaine à eau ou à la machine à café ou machine à glace en attendant la fin...
-____
 
 
 ____
@@ -248,3 +247,4 @@ ____
 #### Fin du TP13 : Read Path
 
 ____
+
