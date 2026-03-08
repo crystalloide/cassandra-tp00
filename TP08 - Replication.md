@@ -45,7 +45,7 @@ ls ~/cassandra-tp00/docker
 ```
 
 ________
-##### 2°) On relance le nouveau cluster à 3 noeuds : 
+##### 2°) On lance ce nouveau cluster à 3 noeuds : 
 ________
 
 ##### Lancement du cluster  : 
@@ -275,6 +275,7 @@ _____
 ```
 
 _____
+
 
 
 
