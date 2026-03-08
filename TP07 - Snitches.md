@@ -26,7 +26,7 @@ cat ~/cassandra-tp00/docker/cassandra01-conf/cassandra.yaml | grep "endpoint_sni
 
 ###### Ou ici (c'est la même chose dans notre contexte de disques des consteneurs persistés en local  ) : 
 ```bash
-head -n 21 ~/cassandra-tp00/docker/cassandra01-conf/cassandra.yaml | grep "endpoint_snitch"
+cat ~/cassandra-tp00/docker/cassandra01-conf/cassandra.yaml | grep "endpoint_snitch"
 ```
 
 ##### Affichage en retour : 
@@ -204,4 +204,5 @@ UN  192.168.100.152  0 bytes    24           100.0%            b7ec5a87-fdcb-46f
 
 ______
 ##### Fin du TP07 : Snitches
+
 ______
