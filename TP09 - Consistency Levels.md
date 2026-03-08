@@ -84,11 +84,11 @@ WHERE theme = 'cassandra';
 
 ```text
 
- theme     | ajout_date               | cours_id                             | intitule
------------+--------------------------+--------------------------------------+-------------------
- cassandra | 2014-01-29 00:00:00+0000 | 1645ea59-14bd-11e5-a993-8138354b7e31 | Cassandra History
- cassandra | 2013-03-17 00:00:00+0000 | 3452f7de-14bd-11e5-855e-8738355b7e3a |   Cassandra Intro
- cassandra | 2012-04-03 00:00:00+0000 | 245e8024-14bd-11e5-9743-8238356b7e32 |  Cassandra & SSDs
+ theme     | ajout_date                      | cours_id                             | intitule
+-----------+---------------------------------+--------------------------------------+--------------------------
+ cassandra | 2014-01-29 00:00:00.000000+0000 | 1645ea59-14bd-11e5-a993-8138354b7e31 |    Histoire de Cassandra
+ cassandra | 2013-03-17 00:00:00.000000+0000 | 3452f7de-14bd-11e5-855e-8738355b7e3a | Introduction a Cassandra
+ cassandra | 2012-04-03 00:00:00.000000+0000 | 245e8024-14bd-11e5-9743-8238356b7e32 |         Cassandra & SSDs
 
 (3 rows)
 
@@ -459,4 +459,5 @@ ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 
 ____
+
 
