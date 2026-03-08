@@ -413,8 +413,25 @@ Memtable switch count: 2
 
 ____
 ##### 9°) Dernier exercice : stopper le noeud et supprimez les logs : le fichier /node/log/system.log
-##### 		( rappel : par défaut /var/log/cassandra/system.log), 
-##### relancez le noeud, et recherchez "CommitLog.java" dans le nouveau fichier logs/system.log 
+```bash
+cd ~/cassandra-tp00/
+docker stop cassandra01
+```
+
+```text
+(rappel : par défaut les logs de cassandra sont dans /var/log/cassandra/system.log),
+```
+
+##### relancez le noeud,
+```bash
+docker restart cassandra01
+```
+
+```bash
+docker exec -it cassandra01 cat 
+```
+
+et recherchez "CommitLog.java" dans le nouveau fichier logs/system.log 
 ##### Vous devriez voir apparaître des lignes d'information sur le rejeu de commitlog au démarrage.
 ##### 
 ##### S'il n'y a pas de commit log trouvé lors du redémarrage, aucun rejeu ne sera effectué. 
@@ -434,12 +451,3 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
-
-
-
-
-
-
-
-
-
