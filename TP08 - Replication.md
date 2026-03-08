@@ -250,10 +250,10 @@ _____
 docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ```
 ```bash
-docker exec -it cassandra02 getendpoints entrepriseformation cours_par_theme 'wing_suit'
+docker exec -it cassandra02 nodetool getendpoints entrepriseformation cours_par_theme 'wing_suit'
 ```
 ```bash
-docker exec -it cassandra03 getendpoints entrepriseformation cours_par_theme 'Dark_Vador'
+docker exec -it cassandra03 nodetool getendpoints entrepriseformation cours_par_theme 'Dark_Vador'
 ```
 
 _____
@@ -278,13 +278,3 @@ _____
 ```
 
 _____
-
-
-
-
-
-
-
-
-
-
