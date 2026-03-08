@@ -449,7 +449,58 @@ ____
 ##### en fonction de quels noeuds étaient coordinateurs sur les écritures précédentes,
 ##### et également s'ils ont effectué le proccessus de 'hinted handoff' que nous verrons juste après.
 
+
+
+##### 31°) On relance le denier noeud encore arrêté : (cassandra02 ici)
+```bash
+docker start cassandra02
+```
+
+____
+##### 32°) Exécutez plusieurs la requête de SELECT à partir du noeud cassandra01 (pas concerné par la clé 'cassandra'), en cqlsh :
+____
+
+##### Accédez à cqlsh depuis cassandra03 : 
+```bash
+docker exec -it cassandra01 cqlsh
+```
+
+```sql
+SELECT *
+FROM EntrepriseFormation.cours_par_theme
+WHERE theme = 'cassandra';
+```
+
+##### Il est possible que vous assistiez à la mise en oeuvre du hinted handoff en direct :  
+
+```text
+cqlsh> SELECT * FROM EntrepriseFormation.cours_par_theme WHERE theme = 'cassandra';
+
+ theme     | ajout_date                      | cours_id                             | intitule
+-----------+---------------------------------+--------------------------------------+--------------------------
+ cassandra | 2016-02-08 00:00:00.000000+0000 | 18ab9ba9-c1db-4ace-b110-4744b6c5d04a |        J adore Cassandra <<<<<<<<<
+ cassandra | 2014-01-29 00:00:00.000000+0000 | 1645ea59-14bd-11e5-a993-8138354b7e31 |    Histoire de Cassandra
+ cassandra | 2013-03-17 00:00:00.000000+0000 | 3452f7de-14bd-11e5-855e-8738355b7e3a | Introduction a Cassandra
+ cassandra | 2012-04-03 00:00:00.000000+0000 | 245e8024-14bd-11e5-9743-8238356b7e32 |         Cassandra & SSDs
+
+(4 rows)
+
+.....
+
+cqlsh> SELECT * FROM EntrepriseFormation.cours_par_theme WHERE theme = 'cassandra';
+
+ theme     | ajout_date                      | cours_id                             | intitule
+-----------+---------------------------------+--------------------------------------+----------------------------
+ cassandra | 2016-02-08 00:00:00.000000+0000 | 18ab9ba9-c1db-4ace-b110-4744b6c5d04a | J adore vraiment Cassandra <<<<<<<<< le hinted handoff a eu lieu dans notre cas : la mise à jour manqué a été effectée par le noeud cassandra02 qui étéit arrêté
+ cassandra | 2014-01-29 00:00:00.000000+0000 | 1645ea59-14bd-11e5-a993-8138354b7e31 |      Histoire de Cassandra
+ cassandra | 2013-03-17 00:00:00.000000+0000 | 3452f7de-14bd-11e5-855e-8738355b7e3a |   Introduction a Cassandra
+ cassandra | 2012-04-03 00:00:00.000000+0000 | 245e8024-14bd-11e5-9743-8238356b7e32 |           Cassandra & SSDs
+
+(4 rows)
+
+```sql
+
+
 ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 ____
-
