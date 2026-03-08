@@ -377,7 +377,7 @@ WHERE theme = 'cassandra' AND ajout_date = '2016-02-08' AND cours_id = xxxxxxxxx
 ```sql 
 UPDATE EntrepriseFormation.cours_par_theme
 SET intitule = 'J adore vraiment Cassandra'
-WHERE theme = 'cassandra' AND ajout_date = '2016-02-08' AND cours_id = ec690d01-0e7e-4cdb-9e86-305be9a35b71;
+WHERE theme = 'cassandra' AND ajout_date = '2016-02-08' AND cours_id = 18ab9ba9-c1db-4ace-b110-4744b6c5d04a;
 ```
 
 
@@ -452,3 +452,4 @@ ____
 ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 ____
+
