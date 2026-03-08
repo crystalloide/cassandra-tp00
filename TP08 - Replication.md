@@ -16,7 +16,7 @@ _____
 
 ##### Nous allons maintenant arrêter et relancer un cluster à 3 noeuds :
 
-##### les 2 précédents + un 3ème noeud cassandra03 situé sur le même datacenter et le rack de cassandra01)
+##### => les 2 précédents + un 3ème noeud cassandra03 situé sur le même datacenter et le rack de cassandra01)
 
 
 ##### 1°) On nettoie l'environnement précédent : 
@@ -275,6 +275,7 @@ _____
 ```
 
 _____
+
 
 
 
