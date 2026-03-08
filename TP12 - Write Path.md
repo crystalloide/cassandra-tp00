@@ -450,6 +450,11 @@ Si Cassandra trouve un ou plusieurs fichiers commit log :
 - Cassandra rejoue les mises à jours dans les memtables
 - puis flushe les memtables sur disque.
 ```
+##### Exemple de redémarrage avec rejeu de commitlog : 
+**INFO  [main] 2026-03-08 19:09:49,713 CommitLog.java:206 - Replaying /opt/cassandra/data/commitlog/CommitLog-7-1772995254102.log**
+**INFO  [main] 2026-03-08 19:09:49,899 CommitLog.java:210 - Log replay complete, 0 replayed mutations in 185 ms**
+
+```
 
 ____
 ##### 10°) On démonte notre cluster mono-noeud une fois le TP terminé :
@@ -465,5 +470,6 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
 
 
