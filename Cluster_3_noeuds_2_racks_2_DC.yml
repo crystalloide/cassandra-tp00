@@ -1,0 +1,144 @@
+networks:
+  cassandra_network:
+    ipam:
+      config:
+        - subnet: 192.168.100.0/24
+
+services:
+  cassandra01:
+    image: docker.io/library/cassandra:latest
+    hostname: cassandra01
+    container_name: cassandra01
+    mem_limit: 1g
+    cpus: 0.5
+    restart: always
+    networks:
+      cassandra_network:
+        ipv4_address: 192.168.100.151
+    volumes:
+      - ${PWD}/docker/cassandra01:/var/lib/cassandra
+      - conf01:/opt/cassandra/conf
+    environment:
+      - CASSANDRA_CLUSTER_NAME=formation
+      - CASSANDRA_SEEDS=cassandra01,cassandra03
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=Nord
+      - CASSANDRA_RACK=Winterfell
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=192.168.100.151
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m
+      - LOCAL_JMX=no
+      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=192.168.100.151 -Dcom.sun.management.jmxremote.authenticate=false
+    ports:
+      - "7100:7000"
+      - "9142:9042"
+      - "7199:7199"
+      - "8181:8081"
+    healthcheck:
+      test: ["CMD-SHELL", "grep -q 'Startup complete' /var/log/cassandra/system.log"]
+      interval: 15s
+      timeout: 10s
+      retries: 50
+      start_period: 180s
+
+  cassandra02:
+    depends_on:
+      cassandra01:
+        condition: service_healthy
+    image: docker.io/library/cassandra:latest
+    hostname: cassandra02
+    container_name: cassandra02
+    mem_limit: 1g
+    cpus: 0.5
+    restart: always
+    networks:
+      cassandra_network:
+        ipv4_address: 192.168.100.152
+    volumes:
+      - ${PWD}/docker/cassandra02:/var/lib/cassandra
+      - conf02:/opt/cassandra/conf
+    environment:
+      - CASSANDRA_CLUSTER_NAME=formation
+      - CASSANDRA_SEEDS=cassandra01,cassandra03
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=Terres-de-la-Couronne
+      - CASSANDRA_RACK=Port-Real
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=192.168.100.152
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m
+      - LOCAL_JMX=no
+      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=192.168.100.152 -Dcom.sun.management.jmxremote.authenticate=false
+    ports:
+      - "7200:7000"
+      - "9242:9042"
+      - "7299:7199"
+      - "8281:8081"
+    healthcheck:
+      test: ["CMD-SHELL", "grep -q 'Startup complete' /var/log/cassandra/system.log"]
+      interval: 15s
+      timeout: 10s
+      retries: 50
+      start_period: 180s
+
+  cassandra03:
+    depends_on:
+      cassandra02:
+        condition: service_healthy
+    image: docker.io/library/cassandra:latest
+    hostname: cassandra03
+    container_name: cassandra03
+    mem_limit: 1g
+    cpus: 0.5
+    restart: always
+    networks:
+      cassandra_network:
+        ipv4_address: 192.168.100.153
+    volumes:
+      - ${PWD}/docker/cassandra03:/var/lib/cassandra
+      - conf03:/opt/cassandra/conf
+    environment:
+      - CASSANDRA_CLUSTER_NAME=formation
+      - CASSANDRA_SEEDS=cassandra01,cassandra03
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=Nord
+      - CASSANDRA_RACK=Winterfell
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=192.168.100.153
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m
+      - LOCAL_JMX=no
+      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=192.168.100.152 -Dcom.sun.management.jmxremote.authenticate=false
+    ports:
+      - "7300:7000"
+      - "9342:9042"
+      - "7399:7199"
+      - "8381:8081"
+    healthcheck:
+      test: ["CMD-SHELL", "grep -q 'Startup complete' /var/log/cassandra/system.log"]
+      interval: 15s
+      timeout: 10s
+      retries: 50
+      start_period: 180s
+
+volumes:
+  conf01:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/docker/cassandra01-conf
+  conf02:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/docker/cassandra02-conf
+  conf03:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/docker/cassandra03-conf
+
