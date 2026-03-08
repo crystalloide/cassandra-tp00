@@ -293,7 +293,7 @@ FROM system.peers;
     
      peer            | data_center | host_id                              | preferred_ip | rack  | release_version | rpc_address     | schema_version
     -----------------+-------------+--------------------------------------+--------------+-------+-----------------+-----------------+--------------------------------------
-     192.168.100.151 |         dc1 | aad76b9d-b975-4942-8772-d36896124cb3 |         null | Rack1 |           5.0.6 | 192.168.100.151 | d03783d7-b468-3c1a-82f1-8e30b2edde8b
+     192.168.100.151 |  datacenter1 | aad76b9d-b975-4942-8772-d36896124cb3 |         null | Rack1 |           5.0.6 | 192.168.100.151 | d03783d7-b468-3c1a-82f1-8e30b2edde8b
     
     (1 rows)
 
@@ -320,4 +320,5 @@ FROM system.peers;
 _____
 ##### Fin du TP06 : les échanges avec le protocole Gossip
 _____
+
 
