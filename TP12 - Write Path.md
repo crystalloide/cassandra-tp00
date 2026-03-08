@@ -101,7 +101,7 @@ ____
 ##### 5°)Investiguons dans le répertoire "commitlog" :
 ____
 ```bash
-docker exec -if cassandra01 ls -lh ~/cassandra-tp00/docker/cassandra01commitlog
+docker exec -it cassandra01 ls -lh ~/cassandra-tp00/docker/cassandra01commitlog
 ```
 
 
@@ -281,6 +281,7 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
 
 
 
