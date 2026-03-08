@@ -251,8 +251,11 @@ mkdir -p ~/cassandra-tp00/docker/cassandra01-conf ~/cassandra-tp00/docker/cassan
 #### On affiche les répertoires créés :
 ```bash
 ls ~/cassandra-tp00/docker
-
-#### Affichage : cassandra01  cassandra02  cassandra03  cassandra04
+```
+##### Affichage : 
+```bash
+     cassandra01       cassandra02       cassandra03       cassandra04
+     assandra01-conf  cassandra02-conf  cassandra03-conf  cassandra04-conf
 ```
 
 #### Étape 2 : Démarrage du cluster avec Docker Compose
