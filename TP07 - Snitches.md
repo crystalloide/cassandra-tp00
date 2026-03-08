@@ -21,7 +21,7 @@ ______
 
 ##### Pour voir la configuration de cassandra01 :
 ```bash
-cat ~/cassandra-tp00/docker/cassandra01-conf/cassandra.yaml | grep "endpoint_snitch"
+docker exec -it cassandra01 cat /opt/cassandra/conf/cassandra.yaml | grep "endpoint_snitch"
 ```
 
 ###### Ou ici (c'est la même chose dans notre contexte de disques des consteneurs persistés en local  ) : 
@@ -206,3 +206,4 @@ ______
 ##### Fin du TP07 : Snitches
 
 ______
+
