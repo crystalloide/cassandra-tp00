@@ -74,7 +74,6 @@ ________
 ##### Recréation des répertoires de volumes (dat + conf)  :
 
 ```bash
-cd ~/cassandra-tp00/docker
 sudo rm -Rf ~/cassandra-tp00/docker/cassandra*
 mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02 ~/cassandra-tp00/docker/cassandra03 ~/cassandra-tp00/docker/cassandra04
 mkdir -p ~/cassandra-tp00/docker/cassandra01-conf ~/cassandra-tp00/docker/cassandra02-conf ~/cassandra-tp00/docker/cassandra03-conf ~/cassandra-tp00/docker/cassandra04-conf
@@ -89,6 +88,7 @@ ls ~/cassandra-tp00/docker
 ##### Lancement du cluster 2 DC 2 racks : 
 
 ```bash
+cd ~/cassandra-tp00/
 docker compose -f Cluster_2_noeuds_2_racks_2_DC.yml up -d
 sleep 60
 ```
@@ -223,4 +223,5 @@ ______
 ##### Fin du TP07 : Snitches
 
 ______
+
 
