@@ -491,7 +491,7 @@ cqlsh> SELECT * FROM EntrepriseFormation.cours_par_theme WHERE theme = 'cassandr
 
  theme     | ajout_date                      | cours_id                             | intitule
 -----------+---------------------------------+--------------------------------------+----------------------------
- cassandra | 2016-02-08 00:00:00.000000+0000 | 18ab9ba9-c1db-4ace-b110-4744b6c5d04a | J adore vraiment Cassandra <<<<<<<<< le hinted handoff a eu lieu dans notre cas : la mise à jour manqué a été effectée par le noeud cassandra02 qui étéit arrêté
+ cassandra | 2016-02-08 00:00:00.000000+0000 | 18ab9ba9-c1db-4ace-b110-4744b6c5d04a | J adore vraiment Cassandra <<<<<<<<< le hinted handoff a eu lieu dans notre cas : la mise à jour manquée a été effectuée par le noeud cassandra02 qui était arrêté lors de la mise à jour la + récente
  cassandra | 2014-01-29 00:00:00.000000+0000 | 1645ea59-14bd-11e5-a993-8138354b7e31 |      Histoire de Cassandra
  cassandra | 2013-03-17 00:00:00.000000+0000 | 3452f7de-14bd-11e5-855e-8738355b7e3a |   Introduction a Cassandra
  cassandra | 2012-04-03 00:00:00.000000+0000 | 245e8024-14bd-11e5-9743-8238356b7e32 |           Cassandra & SSDs
@@ -504,3 +504,4 @@ cqlsh> SELECT * FROM EntrepriseFormation.cours_par_theme WHERE theme = 'cassandr
 ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 ____
+
