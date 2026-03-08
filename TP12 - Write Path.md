@@ -461,6 +461,7 @@ ____
 ____
 
 ##### Arrêt et démontage  du cluster et des volumes :
+
 ```bash
 cd ~/cassandra-tp00/
 docker compose -f Cluster_1_noeud_1_rack_1_DC.yml down -v
@@ -470,6 +471,3 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
-
-
-
