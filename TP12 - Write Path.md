@@ -373,18 +373,20 @@ Keyspace: keyspace1
 ```texte
 Notez que "Write Count" correspond au nombre d'enregistrements insérés par cassandra-stress. 
 tablestats affiche des informations également sur le nombre de SSTables, l'espace utilisé, et les statistiques de bloom filter.
-```bash
+```
 
 
 ____
 ##### 6°) Notez les stastistiques liées à la Memtable : 
 ____
-##### Memtable cell count: 39058
-##### Memtable data size: 10897182
-##### Memtable off heap memory used: 0
-##### Memtable switch count: 2
-
-
+```texte
+....
+Memtable cell count: 4908
+Memtable data size: 1467492
+Memtable off heap memory used: 0
+Memtable switch count: 1
+.....
+```
 
 ____
 ##### 7°) Exécutez la commande "nodetool" qui forcera l'écriture de la memtable sur disque (flush) : 
@@ -432,6 +434,7 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
 
 
 
