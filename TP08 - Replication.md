@@ -9,7 +9,7 @@ _____
      Cassandra permet la scalabilité et la tolérance aux pannes.
      La réplication est l'ingrédient magique qui permet cela.
      Dans cet exercice, nous allons ajouter un troisième noeud à notre cluster,
-     et utiliser différents paramètres de la réplication.
+     et utiliser différents paramètres liés à la réplication.
      
 _____
 
@@ -274,6 +274,7 @@ _____
 ```
 
 _____
+
 
 
 
