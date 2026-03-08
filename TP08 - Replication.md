@@ -232,8 +232,8 @@ _____
 #####            Les résultats peuvent varier du fait du choix aléatoire des tokens attribués aux VNodes répartis sur les noeuds.
 
 _____
-##### 8°) Cassandra n'a pas besoin d'avoir une partition déjà existante (donc pour une valeur de clé donnée)
-#####      pour déterminer quels nœuds stockeront quelle partition (Par contre, le keyspace et la table doivent exister)
+##### 8°) Cassandra n'a pas besoin d'avoir déjà reçu un enregistrement auparavant (donc une valeur de clé donnée déjà insérée)
+#####      pour pouvoir déterminer quels nœuds stockent une partition donné (Par contre, le keyspace et la table doivent déjà exister)
 #####      Vous pouvez ainsi essayer avec n'importe quelle valeur de clé de partition, vous saurez quel noeud en sera l'hôte.
 #####      Par exemple, essayez :
 _____
@@ -269,3 +269,4 @@ _____
 ```
 
 _____
+
