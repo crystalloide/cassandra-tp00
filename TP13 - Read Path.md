@@ -32,7 +32,6 @@ bash cassandra-stress write no-warmup n=25000 cl=one -rate threads=2 -node 192.1
 ____
 #### Faites une visite à la fontaine à eau ou à la machine à café ou machine à glace en attendant la fin...
 
-
 ____
 #### 2°) Forcer maintenant Cassandra à flusher ses memtables courantes sur disque :
 ____
@@ -42,34 +41,43 @@ ____
 nodetool flush
 ```
 
-
 ____
 #### 3°) A partir de votre session, accédez au répertoire de données de la table écrite par Cassandra-stress.
-#### cassandra-stress crée un keyspace nommé keyspace1 et une table nommée standard1.
-##
-#### Vous trouverez le répertoire comme illustré ci-dessous, 
-#### mais l'identifiant de table sera différent.
-#### Utilisez la touche de tabulation du terminal pour utiliser la complétion automatique (utile). 
-##
+```text
+cassandra-stress crée un keyspace nommé keyspace1 et une table nommée standard1.
 
+Vous trouverez le répertoire comme illustré ci-dessous, 
+mais l'identifiant de table sera différent.
+
+Tips : Utilisez la touche de tabulation du terminal pour utiliser la complétion automatique (utile). 
+```
+
+```bash
 cd /node/dse-data/data/keyspace1/
-
+```
+```bash
 ls
+```
+
 #### Affichage en retour des fichiers présents : par exemple : 
 #### counter1-a73460b0e71211ef9b6a217f067ae36e  standard1-a6d79ab1e71211ef993499ff68342f4e
-
+```bash
 cd standard1-a6d79ab1e71211ef993499ff68342f4e
+```
 
+```bash
 ls
+```
 #### Affichage en retour des fichiers présents : par exemple : 
 #### backups  bb-1-bti-CRC.db  bb-1-bti-Data.db  bb-1-bti-Digest.crc32  bb-1-bti-Filter.db  bb-1-bti-Partitions.db  bb-1-bti-Rows.db  bb-1-bti-Statistics.db  bb-1-bti-TOC.txt
-
 
 
 ____
 #### 4°) Exécuter la commande suivante pour lister les fichiers bloom filter des SSTables :
 ____
+```bash
 ls -lh *Filter.db
+```
 
 #### Affichage :
 #### [cassandra@cassandra01 standard1-a6d79ab1e71211ef993499ff68342f4e]$ ls -lh *Filter.db
@@ -86,7 +94,9 @@ ls -lh *Filter.db
 ____
 #### 5°) Exécutons la commande pour visualiser les paramètres du filtre de bloom actuel :
 ____
+```bash
 DESCRIBE keyspace keyspace1;
+```
 
 #### Exemple d'Affichage :
 #### 
@@ -143,8 +153,9 @@ ALTER TABLE keyspace1.standard1 WITH bloom_filter_fp_chance = 0.0001;
 ____
 #### 7°) Retournons donc sur la session et exécutons la commande suivante : 
 ____
+```bash
 /node/resources/cassandra/bin/nodetool upgradesstables --include-all-sstables
-
+```
 
 
 ____
@@ -173,15 +184,17 @@ ____
 ____
 #### 9°) Exécutons maintenant la commande suivante :
 ____
+```sql
 ALTER TABLE keyspace1.standard1 WITH bloom_filter_fp_chance = 1.0;
-
+```
 
 
 ____
 #### 10°) Et mettons à jour à nouveau les SSTables :
 ____
+```bash
 /node/resources/cassandra/bin/nodetool upgradesstables --include-all-sstables
-
+```
 ____
 #### Maintenant, quelle est la taille de vos fichiers de filtre de bloom ?
 #### Pourquoi? : °)
@@ -195,8 +208,9 @@ ____
 ____
 #### 11°) Exécutons maintenant la commande suivante :
 ____
+```bash
 /node/resources/cassandra/bin/nodetool cfstats keyspace1.standard1
-
+```
 ____
 #### Une partie des statistiques inclut des informations sur le filtre bloom.
 #### Puisque nous n’avons pas lu encore les tables de cassandra-stress, les valeurs sont toutes égales à zéro.
@@ -239,12 +253,8 @@ ____
 #### 		Maximum live cells per slice (last five minutes): 0
 #### 		Average tombstones per slice (last five minutes): NaN
 #### 		Maximum tombstones per slice (last five minutes): 0
-____
-
-
 
 ____
 #### Fin du TP13 : Read Path
 
 ____
-
