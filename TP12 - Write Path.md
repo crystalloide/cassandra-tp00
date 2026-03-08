@@ -430,7 +430,7 @@ docker restart cassandra01
 ###### Et recherchez "CommitLog.java" dans le nouveau fichier logs/system.log 
 
 ```bash
-docker exec -it cassandra01 cat /var/log/cassandra/system.log | grep "CommitLog.java"
+docker exec -it cassandra01 cat /var/log/cassandra/system.log
 ```
 
 ```bash
