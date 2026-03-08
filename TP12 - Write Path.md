@@ -20,7 +20,7 @@ On démonte entièrement le cluster, on va lancer un seul noeud cassandra01 en s
 
 ##### Arrêter et démonter le cluster 
 ```bash
-cd ~\/cassandra-tp00
+cd ~/cassandra-tp00
 docker compose -f Cluster_3_noeuds_2_racks_2_DC.yml down -v
 ```
 
@@ -281,5 +281,6 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
 
 
