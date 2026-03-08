@@ -109,7 +109,7 @@ services:
       - MAX_HEAP_SIZE=256m
       - HEAP_NEWSIZE=50m
       - LOCAL_JMX=no
-      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=192.168.100.152 -Dcom.sun.management.jmxremote.authenticate=false
+      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=192.168.100.153 -Dcom.sun.management.jmxremote.authenticate=false
     ports:
       - "7300:7000"
       - "9342:9042"
@@ -141,4 +141,3 @@ volumes:
       type: none
       o: bind
       device: ${PWD}/docker/cassandra03-conf
-
