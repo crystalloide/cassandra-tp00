@@ -132,7 +132,7 @@ _____
 ##### 4°) Vous allez réimporter les données des cours :  
 _____
 
-##### A partir d'un temrinal, on alimente un des noeuds (ici cassandra01) avec les fichiers que l'on va charger ensuite :
+##### A partir d'un terminal, on alimente un des noeuds (ici cassandra01) avec les fichiers que l'on va charger ensuite :
 ```bash
 cd ~/cassandra-tp00
 docker exec -it cassandra01 mkdir -p /donnees
@@ -267,4 +267,5 @@ _____
 192.168.100.152
 ```
 _____
+
 
