@@ -49,8 +49,9 @@ head -n 21 ~/cassandra-tp00/docker/cassandra01-conf/cassandra-rackdc.properties
 
 ##### On remarque les valeurs définies pour cassandra01 :
 ```bash
-dc=Nord
-rack=Winterfell
+...
+dc=dc1
+rack=rack1
 ```
 
 ##### Nous allons maintenant arrêter et relancer un cluster avec des valeurs modifiées plus intéressantes que les valeurs par défaut :
@@ -206,4 +207,5 @@ ______
 ##### Fin du TP07 : Snitches
 
 ______
+
 
