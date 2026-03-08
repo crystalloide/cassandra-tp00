@@ -131,31 +131,37 @@ rack=Winterfell
 _____
 ##### 4°) Vous allez réimporter les données des cours :  
 #####    accédez à cqlsh : 
-cqlsh 192.168.100.153
+```bash
+docker exec -it cassandra03 cqlsh
+```
+
 
 ##### Exécutez la commande CQL CREATE KEYSPACE avec le paramètre de réplication 'NetworkTopologyStrategy' 
 ##### afin de stocker un réplica par datacenter :
 
+```sql
 CREATE KEYSPACE EntrepriseFormation
 WITH replication = {
     'class': 'NetworkTopologyStrategy',
     'Nord': 1,
     'Terres-de-la-Couronne': 1
 };
-
+```
 
 
 _____
 ##### 5°) Sélectionnez le keyspace EntrepriseFormation : 
 _____
+```sql
 USE EntrepriseFormation;
-
+```
 
 
 _____
 ##### 6°) Recréez la table cours_par_theme table et réimportez les données, 
 #####     avec les commandes suivantes : A faire sur cassandra01 :  
 
+```sql
 CREATE TABLE cours_par_theme (
     theme text,
     cours_id uuid,
@@ -163,48 +169,57 @@ CREATE TABLE cours_par_theme (
     intitule text,
     PRIMARY KEY ((theme), ajout_date, cours_id))
     WITH CLUSTERING ORDER BY(ajout_date DESC, cours_id DESC);
+```
 
-
+```sql
 COPY cours_par_theme(theme, cours_id, ajout_date, intitule)
 FROM '/sources/donnees/cours-par-theme.csv'
 WITH HEADER=TRUE;
+```
 
 ##### On vérifie le bon chargement de la table : 
+```sql
 SELECT * FROM cours_par_theme;
+```
 
 ##### Et on sort : 
+```sql
 exit
-
+```
 
 
 _____
 ##### 7°) Regardez sur quels noeuds les réplicas ont été répartis et positionnés,  
 #####     avec les commandes suivantes :
-##### /node/resources/cassandra/bin/nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
-##### /node/resources/cassandra/bin/nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
-##### Sur cassandra01 : 
-nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
-nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
 
+##### nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
+##### nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
+
+##### Sur cassandra03 : 
+```bash
+docker exec -it cassandra03 nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
+docker exec -it cassandra03 nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
+```
 
 _____
 ##### NOTE : nodetool retourne l'adresse IP des noeuds contenant les données
 _____
 
-##### Affichage en retour : /node/resources/cassandra/bin/nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
+##### Affichage en retour : nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
+```text
 192.168.100.153
 192.168.100.152
+```
 
-##### Affichage en retour : /node/resources/cassandra/bin/nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
+##### Affichage en retour : nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
+```text
 192.168.100.151
 192.168.100.152
+```
 
 _____
 ##### Remarque : Cassandra stocke chaque réplica deux fois et sur un datacenter distinct. 
 #####            Les résultats peuvent varier du fait du choix aléatoire des tokens attribués aux VNodes répartis sur les noeuds.
-_____
-
-
 
 _____
 ##### 8°) Cassandra n'a pas besoin d'avoir une partition déjà existante (donc pour une valeur de clé donnée)
@@ -212,26 +227,34 @@ _____
 #####      Vous pouvez ainsi essayer avec n'importe quelle valeur de clé de partition, vous saurez quel noeud en sera l'hôte.
 #####      Par exemple, essayez :
 _____
-nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
-nodetool getendpoints entrepriseformation cours_par_theme 'wing_suit'
-nodetool getendpoints entrepriseformation cours_par_theme 'Dark_Vador'
-##
-_____
-#####  
-##### Affichage du résultat :
-##### 
-##### [cassandra@cassandra03 ~]$ nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
-##### 192.168.100.153
-##### 192.168.100.152
-##### 
-##### 
-##### [cassandra@cassandra03 ~]$ nodetool getendpoints entrepriseformation cours_par_theme 'wing_suit'
-##### 192.168.100.152
-##### 192.168.100.151
-##
-##### [cassandra@cassandra03 ~]$ nodetool getendpoints entrepriseformation cours_par_theme 'Dark_Vador'
-##### 192.168.100.151
-##### 192.168.100.152
-##
+```bash
+docker exec -it cnodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
+```
+```bash
+docker exec -it cnodetool getendpoints entrepriseformation cours_par_theme 'wing_suit'
+```
+```bash
+docker exec -it cnodetool getendpoints entrepriseformation cours_par_theme 'Dark_Vador'
+```
 
+_____
+##### Affichage du résultat :
+
+##### nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
+```text
+192.168.100.153
+192.168.100.152
+```
+
+##### nodetool getendpoints entrepriseformation cours_par_theme 'wing_suit'
+```text
+192.168.100.152
+192.168.100.151
+```
+
+##### nodetool getendpoints entrepriseformation cours_par_theme 'Dark_Vador'
+```text
+192.168.100.151
+192.168.100.152
+```
 _____
