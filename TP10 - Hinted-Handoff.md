@@ -87,12 +87,11 @@ VALUES ('cassandra', '2016-02-11',uuid(), 'Cassandra, Je veux rentrer chez moi')
 ##### Le seul et unique noeud restant du cluster stocke les écritures sous forme de hints
 ##### à destination des deux noeuds portant les réplicas, jusqu'à ce qu'ils redeviennent actifs.
 
-
 ```sql
 EXIT;
 ```
+
 ___
-_
 
 ##### 7°) Vous pouvez vérifier que le seul noeud restant (encore actif) a bien stocké un hint,
 #####     en allant dans le répertoire de ce noeud : /node/dse-data/hints/ 
@@ -273,3 +272,4 @@ ____
 ##### Fin du TP10 : Hinted-handoff
 
 ____
+
