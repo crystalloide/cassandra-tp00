@@ -295,7 +295,7 @@ END
 ##### - Vous pouvez voir apparaître des fichiers de commitlog supplémentaires (si le benchmark a été assez poussé)
 
 ____
-##### 4°) Quand l'outil cassandra-stress a fini, sortez de la fenêtre en faisant "CTRL-C"
+##### 4°) Quand l'outil cassandra-stress a fini, sortez de la fenêtre de watch sur les fichiers commitlog en faisant "CTRL-C"
 ____
 
 ##### 5°) Lancez la commande suivante "nodetool tablestats xxxxx" :
@@ -411,6 +411,7 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
 
 
 
