@@ -22,7 +22,7 @@ services:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra03
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
-      - CASSANDRA_DATACENTER=Nord
+      - CASSANDRA_DC=Nord
       - CASSANDRA_RACK=Winterfell
       - CASSANDRA_BROADCAST_RPC_ADDRESS=192.168.100.151
       - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
@@ -62,7 +62,7 @@ services:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra03
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
-      - CASSANDRA_DATACENTER=Terres-de-la-Couronne
+      - CASSANDRA_DC=Terres-de-la-Couronne
       - CASSANDRA_RACK=Port-Real
       - CASSANDRA_BROADCAST_RPC_ADDRESS=192.168.100.152
       - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
@@ -95,3 +95,4 @@ volumes:
       type: none
       o: bind
       device: ${PWD}/docker/cassandra02-conf
+
