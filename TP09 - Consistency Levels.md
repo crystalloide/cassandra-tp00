@@ -210,7 +210,6 @@ WHERE theme = 'cassandra';
 ##### 
 ##### La requête réussit car il y a bien au moins un réplica disponible pour pouvoir apporter une réponse.
 ##### 
-____
 
 ____
 ##### 13°) Ramenez le niveau de consistance à 'TWO':
@@ -228,7 +227,6 @@ VALUES ('cassandra', '2016-2-8', uuid(), 'J adore Cassandra');
 ```
 
 ##### Remarquez que l'écriture va échouer car il n'est pas possible d'apporter le niveau de cohérence demandé (2).
-
 
 ____
 ##### 15°) Ramenez le niveau de consistance à 'ONE':
@@ -458,6 +456,7 @@ ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 
 ____
+
 
 
 
