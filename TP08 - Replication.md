@@ -4,7 +4,8 @@ _____
      Dans cet exercice, vous allez comprendre le mécanisme de la réplication,
      et comprendre pourquoi la réplication contribue à la fiabilité et résilience de Cassandra
      
- Contexte: 
+ Contexte : 
+ 
      Cassandra permet la scalabilité et la tolérance aux pannes.
      La réplication est l'ingrédient magique qui permet cela.
      Dans cet exercice, nous allons ajouter un troisième noeud à notre cluster,
@@ -273,4 +274,5 @@ _____
 ```
 
 _____
+
 
