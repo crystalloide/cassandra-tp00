@@ -134,18 +134,16 @@ Datacenter: Nord
 ================
 Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving
---  Address    Load       Tokens       Owns    Host ID                               Rack
-UN  192.168.100.151  155.52 KB  128       ?      2af9fc78-9f44-4f63-a800-067096dd4b13  WinterFell
-UN  192.168.100.153  165.35 KB  128       ?      ec317393-882b-434f-bc34-c33199440c12  WinterFell
+--  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
+UN  192.168.100.151  96.17 KiB   16      48.8%             4a19a534-f295-430d-911b-49697d61709e  Winterfell
+UN  192.168.100.153  108.39 KiB  16      51.2%             b18bc462-22d2-45d8-8109-9354978f68a8  Winterfell
 
 Datacenter: Terres-de-la-Couronne
 =================================
 Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving
---  Address    Load       Tokens       Owns    Host ID                               Rack
-DN  192.168.100.152  158.04 KB  128       ?      fd570d0c-02bd-47e8-b65e-ffdc3357c2fc  Port-Real
-(ou DS si DSE)
-Note: Non-system keyspaces don't have the same replication settings, effective ownership information is meaningless
+--  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
+DN  192.168.100.152  108.4 KiB   16      100.0%            0d049785-4093-43df-958e-b9f7d1fd9200  Port-Real
 
 On voit bien le statut 'DN' de l'adresse IP 192.168.100.152, le noeud 2 est donc "Down" avec une situation "Normale". 
 On peut retrouver le statut 'DS' si le statut est Down Stopped (sur Cassandra DSE)
@@ -459,5 +457,6 @@ ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 
 ____
+
 
 
