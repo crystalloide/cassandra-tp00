@@ -138,7 +138,6 @@ ls -l /home/user/cassandra-tp00/docker/cassandra03/hints/
 ____
 
 
-
 ##### On se connecte en CQLSH sur le noeud restant : 192.168.100.15z
 
 ```bash
@@ -166,19 +165,21 @@ SELECT * FROM EntrepriseFormation.cours_par_theme;
 ##### La requête échoue du fait que même si un noeud est actif, 
 ##### ce noeud ne couvre pas entièrement la plage de tokens à lui tout seul.
 ##### Avec un niveau de cohérence à "ONE", Cassandra ne peut donc pas garantir que tous les enregistrements lui seront fournis .
-____
 
+```sql
+exit;
+```
 
 ____
 ##### 11°) Remettez en service un des noeuds contenant un réplica :  
 ____
+
 ##### sur cassandra02 ici : 
 ```bash
 docker start cassandra02
 ```
 
 ##### Attendez le message "state jump to normal" avant de poursuivre. 
-
 
 ##### sur cassandra01 :
 ##### Allez dans le répertoire contenant les hints :  
@@ -188,14 +189,12 @@ docker exec -it cassandra01 ls -l /opt/cassandra/data/hints
 ```
 
 ##### vous allez constater que l'un des fichiers de hint a disparu.
-
-##### ls -l /node/dse-data/hints/
-##### total 4
-##### -rw-r--r-- 1 root root 163 Nov  1 22:11 b56bb884-fb3d-4256-9e36-d...a-1478038274217-1.hints
-____
+```text
+total 4
+-rw-r--r-- 1 cassandra cassandra 178 Mar  8 16:23 b18bc462-22d2-45d8-8109-9354978f68a8-1772987009163-2.hints
+```
 
 ##### Cela est dû au fait que le noeud actif a envoyé les hints en attente lors de la relance du noeud.
-
 
 ____
 ##### 12°) Relancez la requête de SELECT à nouveau : 
@@ -274,6 +273,7 @@ ____
 ##### Fin du TP10 : Hinted-handoff
 
 ____
+
 
 
 
