@@ -175,8 +175,6 @@ Notez que bloom_filter_fp_chance est 0.01, ce qui signifie une probabilité de 1
 C’est très bien, mais si nous voulons baisser encore ce taux, 
 nous pouvons renoncer à un peu d'espace pour cela.
 ```
-____
-
 
 ____
 #### 6°) Executons la commande suivante :
@@ -325,3 +323,4 @@ Keyspace: keyspace1
 ____
 #### Fin du TP13 : Read Path
 ____
+
