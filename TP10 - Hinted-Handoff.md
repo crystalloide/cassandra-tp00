@@ -209,12 +209,15 @@ docker exec -it cassandra01 cqlsh
 USE EntrepriseFormation;
 ```
 
-
 ```sql
 SELECT * FROM EntrepriseFormation.cours_par_theme;
 ```
 
 ##### => La requête réussit cette fois et vous retourne l'enregistrement attendu.
+
+```sql
+exit;
+```
 
 ____
 ##### 13°) Relancez enfin le dernier noeud inactif. Attendez le message "state jump to normal" avant de pursuivre.
@@ -224,7 +227,6 @@ ____
 docker start cassandra03
 ```
 
-
 ##### A nouveau, vous allez constater de l'activité dans le répertoire Hints, et ensuite que ce répertoire s'est vidé.
 
 ##### sur cassandra01 : 
@@ -233,11 +235,17 @@ docker start cassandra03
 docker exec -it cassandra01 ls -l /opt/cassandra/data/hints
 ```
 
-##### Affichage en retour : 
+##### Affichage en retour : (bref)
 ```text
-
+total 8
+-rw-r--r-- 1 cassandra cassandra   8 Mar  8 17:01 b18bc462-22d2-45d8-8109-9354978f68a8-1772987009163-2.crc32
+-rw-r--r-- 1 cassandra cassandra 178 Mar  8 16:23 b18bc462-22d2-45d8-8109-9354978f68a8-1772987009163-2.hints
 ```
 
+##### Affichage en retour : (une fois le process hinted handoff terminé)
+```text
+total 0
+```
 
 ##### Les deux noeuds chargés des réplicas ont bien récupérés les enregistrements "hints" en attente.
 
@@ -273,6 +281,7 @@ ____
 ##### Fin du TP10 : Hinted-handoff
 
 ____
+
 
 
 
