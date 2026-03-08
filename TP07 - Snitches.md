@@ -96,6 +96,23 @@ sleep 60
 ```bash
 docker exec -it cassandra01 nodetool status
 ```
+##### Affichage en retour quand le cluster est bien lancé et opérationnel : 
+```bash
+Datacenter: Nord
+================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
+UN  192.168.100.151  119.84 KiB  16      100.0%            3aa6222b-2507-44a2-a0da-cdab4704f6ef  Winterfell
+
+Datacenter: Terres-de-la-Couronne
+=================================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
+UN  192.168.100.152  85.12 KiB   16      100.0%            646d0ad2-b6e3-46f1-9f4b-4b240f772566  Port-Real
+
+```
 
 ##### Précision dit le pramètre 'prefer_local=true' : 
 ```bash
@@ -230,6 +247,7 @@ ______
 ##### Fin du TP07 : Snitches
 
 ______
+
 
 
 
