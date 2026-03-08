@@ -39,8 +39,8 @@ mkdir -p ~/cassandra-tp00/docker/cassandra01-conf ~/cassandra-tp00/docker/cassan
 ```bash
 ls ~/cassandra-tp00/docker
 ```
-___
-_____
+
+________
 ##### 2°) On relance le nouveau cluster à 3 noeuds : 
 ________
 
@@ -267,4 +267,5 @@ _____
 ##### 192.168.100.151
 ##### 192.168.100.152
 ##
+
 _____
