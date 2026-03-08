@@ -89,7 +89,7 @@ docker exec -it cassandra01 cat /opt/cassandra/conf/cassandra.yaml | grep "num_t
 ##### Pour voir la configuration sur cassandra03 :
 
 ```bash
-docker exec -it cassandra03 cat /opt/cassandra/conf/cassandra.yaml | grep "cluster_namme"
+docker exec -it cassandra03 cat /opt/cassandra/conf/cassandra.yaml | grep "cluster_name"
 ```
 
 
@@ -270,5 +270,6 @@ _____
 ##
 
 _____
+
 
 
