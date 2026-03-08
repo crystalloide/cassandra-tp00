@@ -122,8 +122,7 @@ total 8
 ##### Il y a deux fichiers, un fichier stockant tous les hints pour un noeud donné.
 
 ____
-##### 8°) Vous pouvez vérifier également dans les répertoires des autres noeuds arrêtés,
-#####      qu'il n'y a aucun hint stocké.
+##### 8°) Vous pouvez vérifier également que, dans les répertoires des 2 autres noeuds arrêtés, qu'il n'y a aucun hint stocké.
 ____
 ##### sur cassandra02 :
 ```bash
@@ -275,6 +274,7 @@ ____
 ##### Fin du TP10 : Hinted-handoff
 
 ____
+
 
 
 
