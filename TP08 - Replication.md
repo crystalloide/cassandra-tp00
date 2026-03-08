@@ -232,10 +232,12 @@ _____
 #####            Les résultats peuvent varier du fait du choix aléatoire des tokens attribués aux VNodes répartis sur les noeuds.
 
 _____
-##### 8°) Cassandra n'a pas besoin d'avoir déjà reçu un enregistrement auparavant (donc une valeur de clé donnée déjà insérée)
-#####      pour pouvoir déterminer quels nœuds stockent une partition donné (Par contre, le keyspace et la table doivent déjà exister)
-#####      Vous pouvez ainsi essayer avec n'importe quelle valeur de clé de partition, vous saurez quel noeud en sera l'hôte.
-#####      Par exemple, essayez :
+##### 8°) Pour une clé de parition donnée,  Cassandra n'a pas besoin d'avoir déjà reçu un enregistrement avec cette clé pour savoir quels nœuds sont responsable de stocker les informations de cette partition.
+
+    Remarque : Par contre, le keyspace et la table doivent déjà exister.
+    Vous pouvez ainsi essayer avec n'importe quelle valeur de clé de partition, vous saurez quel noeud en sera l'hôte.
+    
+##### Par exemple, essayez :
 _____
 ```bash
 docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
@@ -269,4 +271,3 @@ _____
 ```
 
 _____
-
