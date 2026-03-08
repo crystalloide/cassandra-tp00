@@ -94,7 +94,7 @@ sleep 60
 ```
 
 ```bash
-docker exec -it cassandra01 n,odetool status
+docker exec -it cassandra01 nodetool status
 ```
 
 
@@ -223,5 +223,6 @@ ______
 ##### Fin du TP07 : Snitches
 
 ______
+
 
 
