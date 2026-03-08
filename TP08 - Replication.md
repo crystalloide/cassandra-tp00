@@ -238,13 +238,13 @@ _____
 #####      Par exemple, essayez :
 _____
 ```bash
-docker exec -it cnodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
+docker exec -it nodetool getendpoints entrepriseformation cours_par_theme 'cuisine'
 ```
 ```bash
-docker exec -it cnodetool getendpoints entrepriseformation cours_par_theme 'wing_suit'
+docker exec -it nodetool getendpoints entrepriseformation cours_par_theme 'wing_suit'
 ```
 ```bash
-docker exec -it cnodetool getendpoints entrepriseformation cours_par_theme 'Dark_Vador'
+docker exec -it nodetool getendpoints entrepriseformation cours_par_theme 'Dark_Vador'
 ```
 
 _____
@@ -268,3 +268,4 @@ _____
 192.168.100.152
 ```
 _____
+
