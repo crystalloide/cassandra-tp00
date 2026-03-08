@@ -75,7 +75,7 @@ ________
 ```bash
 cd ~/cassandra-tp00
 # Démarrer le cluster en arrière-plan
-docker compose -f Cluster_2_noeuds_2_racks_1_DC.yml up  -d
+docker compose -f Cluster_2_noeuds_1_rack_1_DC.yml up  -d
 ```
 
 ________
@@ -160,13 +160,3 @@ _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
-
-
-
-
-
-
-
-
-
-
