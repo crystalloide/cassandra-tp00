@@ -140,7 +140,6 @@ docker cp ./donnees/cours.csv cassandra01:/donnees/cours.csv
 docker cp ./donnees/cours-par-theme.csv cassandra01:/donnees/cours-par-theme.csv
 docker exec -it cassandra01 chmod 775 -Rf /donnees
 docker exec -it cassandra01 ls /donnees
-docker exec -it cassandra01 cqlsh
 ```
 
 ##### Accédez à cqlsh à partir du noeud qui a les données en local (cassandra01 donc) : 
@@ -267,5 +266,3 @@ _____
 192.168.100.152
 ```
 _____
-
-
