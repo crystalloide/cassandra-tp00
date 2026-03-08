@@ -101,20 +101,26 @@ ____
 ##### 2°) Investiguons dans le répertoire "commitlog" :
 ____
 ```bash
-docker exec -it cassandra01 ls -lh ~/cassandra-tp00/docker/cassandra01commitlog
+docker exec -it cassandra01 ls -lh /opt/cassandra/data/commitlog
+```
+##### ou : 
+```bash
+ls -lh ~/cassandra-tp00/docker/cassandra01/commitlog/
 ```
 
+##### Affichage en retour : 
+```text
+total 128K
+-rw-r--r-- 1 999 systemd-journal 32M Mar  8 19:46 CommitLog-7-1772995254101.log
+-rw-r--r-- 1 999 systemd-journal 32M Mar  8 19:40 CommitLog-7-1772995254102.log
+```
 
-##### [cassandra@cassandra01 data]$ docker exec -if cassandra01 ls -lh ~/cassandra-tp00/docker/cassandra01commitlog
-##### total 216K
-##### -rw-rw-r-- 1 cassandra cassandra 32M  3 déc.  11:49 CommitLog-6-1512298071579.log
-##### -rw-rw-r-- 1 cassandra cassandra 32M  3 déc.  11:47 CommitLog-6-1512298071580.log
-##### 
-##### 
-##### Bien que chaque fragment est alloué par block de 32 Mo, 
-##### Cela ne signifie pas qu'il y a effectivement 32 Mo de données écrites
-##### Notez que le total indiqué sur la première ligne de résultat correspond à la taille réelle des fichiers.
+##### Remarque :
+```text
+Bien que chaque fragment est alloué par block de 32 Mo, cela ne signifie pas qu'il y a effectivement 32 Mo de données écrites
 
+Notez que le total indiqué sur la première ligne de résultat correspond à la taille réelle des fichiers.
+```
 
 ____
 ##### 6°) Regardez le répertoire pour voir comment il est modifié quand on écrit des données dans Cassandra. 
@@ -278,3 +284,4 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
