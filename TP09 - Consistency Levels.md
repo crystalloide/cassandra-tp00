@@ -2,7 +2,6 @@ ____
 ##### TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 ____
 
-____
 ##### Dans cet exercice, vous allez comprendre : 
     - les différences entre la notion de consistance (cohérence) et le facteur de réplication
     - les différences entre la notion de consistance en Lecture vs en mise à jour
@@ -457,4 +456,5 @@ ____
 
 ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
+
 ____
