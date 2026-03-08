@@ -27,7 +27,7 @@ ________
 ##### 2°) On nettoie tout l'environnement : 
 ________
 ```bash
-docker compose down -v
+docker compose -f Cluster_4_noeuds_4_racks_1_DC.yml down -v
 ```
 
 ```bash
@@ -160,3 +160,4 @@ _______
 ##### Fin du TP05 : VNodes : Comprendre comment est gérée la distribution par partitionnement avec les Vnodes
 
 _______
+
