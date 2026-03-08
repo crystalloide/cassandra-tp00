@@ -1,8 +1,6 @@
 ____
 #### TP13 : Read Path
 ____
-
-____
 #### Dans cet exercice, vous allez comprendre le read path ou chemin de lecture de Cassandra.
 ____
 #### Contexte: Dans cet exercice, nous examinerons les filtres de bloom et les caches de clés.
@@ -248,4 +246,5 @@ ____
 
 ____
 #### Fin du TP13 : Read Path
+
 ____
