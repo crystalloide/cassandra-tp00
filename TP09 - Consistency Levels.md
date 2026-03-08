@@ -498,10 +498,8 @@ cqlsh> SELECT * FROM EntrepriseFormation.cours_par_theme WHERE theme = 'cassandr
 
 (4 rows)
 
-```sql
-
+```
 
 ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 ____
-
