@@ -455,7 +455,7 @@ Si Cassandra trouve un ou plusieurs fichiers commit log :
 **INFO  [main] 2026-03-08 19:09:49,899 CommitLog.java:210 - Log replay complete, 0 replayed mutations in 185 ms**
 
 ____
-##### 10°) On démonte notre cluster mono-noeud une fois le TP terminé :
+##### 10°) Si on veut démonter notre cluster mono-noeud une fois le TP terminé : (mais on en a encore besoin au TP suivant)
 ____
 
 ##### Arrêt et démontage  du cluster et des volumes :
