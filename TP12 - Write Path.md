@@ -440,9 +440,12 @@ docker exec -it cassandra01 cat /var/log/cassandra/system.log | grep "CommitLog.
 ##### Vous devriez voir apparaître des lignes d'information sur le rejeu de commitlog au démarrage.
 
 ```text
-S'il n'y a pas de commit log trouvé lors du redémarrage, aucun rejeu ne sera effectué. 
-Exemple : **INFO  [main] 2026-03-08 18:41:01,695 CommitLog.java:201 - No commitlog files found; skipping replay**
+S'il n'y a pas de commit log trouvé lors du redémarrage, aucun rejeu ne sera effectué.
+```
+##### Exemple de redémarrage sans rejeu de commitlog : 
+**INFO  [main] 2026-03-08 18:41:01,695 CommitLog.java:201 - No commitlog files found; skipping replay**
 
+```text
 Si Cassandra trouve un ou plusieurs fichiers commit log :
 - Cassandra rejoue les mises à jours dans les memtables
 - puis flushe les memtables sur disque.
@@ -462,4 +465,5 @@ ____
 ##### Fin du TP12 : Write Path
 
 ____
+
 
