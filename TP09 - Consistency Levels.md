@@ -262,7 +262,7 @@ docker restart cassandra02
 ```
 
 ##### Sur cassandra01 :
-dsetool status
+
 ```bash
 docker exec -it cassandra01 nodetool status
 ```
@@ -456,6 +456,7 @@ ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 
 ____
+
 
 
 
