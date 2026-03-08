@@ -183,14 +183,17 @@ FROM EntrepriseFormation.cours_par_theme
 WHERE theme = 'cassandra';
 ```
 
-##### cqlsh:entrepriseformation> SELECT *
-#####                        ... FROM EntrepriseFormation.cours_par_theme
-#####                        ... WHERE theme = 'cassandra';
-##### NoHostAvailable:
-##### cqlsh:entrepriseformation>
-##
+##### Affichage en retour : 
+```text
+cqlsh:entrepriseformation> SELECT *
+                      ... FROM EntrepriseFormation.cours_par_theme
+                      ... WHERE theme = 'cassandra';
+NoHostAvailable:
+cqlsh:entrepriseformation>
+
+```
 ##### La requête échoue car vous ne pouvez plus obtenir le niveau de consistance 'TWO', du fait qu'un des noeuds nécessaire a été arrêté.
-____
+
 
 ____
 ##### 11°) Ramenez le niveau de consistance à 'ONE':
@@ -459,6 +462,7 @@ ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 
 ____
+
 
 
 
