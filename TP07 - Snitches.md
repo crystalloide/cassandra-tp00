@@ -97,6 +97,13 @@ sleep 60
 docker exec -it cassandra01 nodetool status
 ```
 
+##### Précision dit le pramètre 'prefer_local=true' : 
+```bash
+Quand prefer_local=true, Cassandra préfère utiliser l'adresse IP locale (interne) d'un nœud pour communiquer avec lui lorsqu'il est dans le même datacenter,
+plutôt que son adresse broadcast (qui peut être une IP externe/publique).
+- Même DC  →  utilise l'IP locale             : économie de bande passante, latence réduite
+- DC différent →  utilise l'IP broadcast      : nécessaire pour traverser le réseau
+```
 
 ______
 ##### 5°) On va maintenant s'intéresser aux modifications apportées dans cassandra.yaml :
@@ -223,6 +230,7 @@ ______
 ##### Fin du TP07 : Snitches
 
 ______
+
 
 
 
