@@ -152,8 +152,8 @@ docker exec -it cassandra01 cqlsh
 ```
 
 
-##### Exécutez la commande CQL CREATE KEYSPACE avec le paramètre de réplication 'NetworkTopologyStrategy' 
-##### afin de stocker un réplica par datacenter :
+##### On va utiliser la commande CQL CREATE KEYSPACE avec le paramètre de réplication 'NetworkTopologyStrategy' 
+##### et de façon à stocker 1 replica dans chacun des 2 Datacenters :
 
 ```sql
 CREATE KEYSPACE EntrepriseFormation
@@ -275,6 +275,7 @@ _____
 ```
 
 _____
+
 
 
 
