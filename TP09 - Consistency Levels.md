@@ -223,7 +223,7 @@ ____
 ____
 ```sql
 INSERT INTO EntrepriseFormation.cours_par_theme (theme, ajout_date, cours_id, intitule)
-VALUES ('cassandra', '2016-2-8', uuid(), 'J adore Cassandra');
+VALUES ('cassandra', '2016-02-08', uuid(), 'J adore Cassandra');
 ```
 
 ##### Remarquez que l'écriture va échouer car il n'est pas possible d'apporter le niveau de cohérence demandé (2).
@@ -241,7 +241,7 @@ ____
 
 ```sql
 INSERT INTO cours_par_theme (theme, ajout_date, cours_id, intitule)
-VALUES ('cassandra', '2016-2-8', uuid(), 'J adore Cassandra');
+VALUES ('cassandra', '2016-02-08', uuid(), 'J adore Cassandra');
 ```
 
 ##### => L'écriture réussit cette fois.
@@ -456,6 +456,7 @@ ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 
 ____
+
 
 
 
