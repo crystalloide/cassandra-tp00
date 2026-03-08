@@ -131,7 +131,6 @@ rack=Winterfell
 ```
 
 
-
 _____
 ##### 4°) Vous allez réimporter les données des cours :  
 _____
@@ -203,14 +202,18 @@ exit
 _____
 ##### 7°) Regardons sur quels noeuds les réplicas ont été répartis et positionnés, avec les commandes suivantes :
 
-    nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
+    => nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
     
-    nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
+    => nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
 
-##### Sur un des noeuds cassandra (ici cassandra03) : 
+##### Essayons donc sur un des noeuds cassandra (ici cassandra03) : 
+
+**Attention de bien être sorti de cqlsh et d'être revenu en terminal de commande**
+
 ```bash
 docker exec -it cassandra03 nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
 ```
+
 ```bash
 docker exec -it cassandra03 nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
 ```
@@ -275,6 +278,7 @@ _____
 ```
 
 _____
+
 
 
 
