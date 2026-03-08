@@ -422,21 +422,30 @@ docker stop cassandra01
 (rappel : par défaut les logs de cassandra sont dans /var/log/cassandra/system.log),
 ```
 
-##### relancez le noeud,
+##### relancez le noeud cassandra01 :
 ```bash
 docker restart cassandra01
 ```
 
+###### Et recherchez "CommitLog.java" dans le nouveau fichier logs/system.log 
+
 ```bash
-docker exec -it cassandra01 cat 
+docker exec -it cassandra01 cat /var/log/cassandra/system.log | grep "CommitLog.java"
 ```
 
-et recherchez "CommitLog.java" dans le nouveau fichier logs/system.log 
+```bash
+docker exec -it cassandra01 cat /var/log/cassandra/system.log | grep "CommitLog.java"
+```
+
 ##### Vous devriez voir apparaître des lignes d'information sur le rejeu de commitlog au démarrage.
-##### 
-##### S'il n'y a pas de commit log trouvé lors du redémarrage, aucun rejeu ne sera effectué. 
-##### Si Cassandra trouve un ou plusieurs fichiers commit log, Cassandra rejoue les mises à jours dans les memtables
-##### puis flushe les memtables sur disque.
+
+```text
+S'il n'y a pas de commit log trouvé lors du redémarrage, aucun rejeu ne sera effectué. 
+
+Si Cassandra trouve un ou plusieurs fichiers commit log :
+- Cassandra rejoue les mises à jours dans les memtables
+- puis flushe les memtables sur disque.
+```
 
 ____
 ##### 10°) On démonte notre cluster mono-noeud une fois le TP terminé :
@@ -444,6 +453,7 @@ ____
 
 ##### Arrêt et démontage  du cluster et des volumes :
 ```bash
+cd ~/cassandra-tp00/
 docker compose -f Cluster_1_noeud_1_rack_1_DC.yml down -v
 ```
 
