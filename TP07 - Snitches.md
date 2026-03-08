@@ -234,6 +234,7 @@ Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving/Stopped
 --  Address          Load       Tokens       Owns (effective)  Host ID                               Rack
 UN  192.168.100.151  128.68 KiB  24           100.0%            0ab2eea0-adc1-4338-a92d-890e4508c242  Winterfell
+
 Datacenter: Terres-de-la-Couronne
 =================================
 Status=Up/Down
@@ -247,3 +248,4 @@ ______
 ##### Fin du TP07 : Snitches
 
 ______
+
