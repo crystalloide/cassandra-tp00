@@ -148,8 +148,7 @@ DN  192.168.100.152  108.4 KiB   16      100.0%            0d049785-4093-43df-95
 On voit bien le statut 'DN' de l'adresse IP 192.168.100.152, le noeud 2 est donc "Down" avec une situation "Normale". 
 On peut retrouver le statut 'DS' si le statut est Down Stopped (sur Cassandra DSE)
 
-```text
-____
+```
 
 ____
 ##### 8°) A nouveau, retournez dans cqlsh : 
@@ -457,6 +456,7 @@ ____
 ##### Fin du TP09 : degrés ou niveaux de cohérence (Consistency Levels)
 
 ____
+
 
 
 
