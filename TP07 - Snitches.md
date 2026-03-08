@@ -221,7 +221,7 @@ ______
 ______
 ##### node/bin/dsetool status
 ```bash
-docker exec -it cassandra01 nodsetool status
+docker exec -it cassandra01 nodetool status
 ```
 
 ##### Et notez les assignations pour les différents noeuds, qui sont désormais :
