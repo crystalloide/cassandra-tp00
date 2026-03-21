@@ -160,6 +160,10 @@ ____
 ____
 
 ```bash
+docker exec -it cassandra01 bash
+```
+
+```bash
 ls -lh /opt/cassandra/data/data/entrepriseformation/cours_par_theme-*
 ```
 
