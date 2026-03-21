@@ -19,10 +19,10 @@ Machine hôte
 │
 ├── docker/medusa_sauvegarde/     ← répertoire de sauvegarde partagé (hôte)
 │   └── cassandra_backups/
-│       ├── cassandra01/
-│       ├── cassandra02/
-│       ├── cassandra03/
-│       └── cassandra04/
+│       ├── 192.168.100.151/
+│       ├── 192.168.100.152/
+│       ├── 192.168.100.153/
+│       └── 192.168.100.154/
 │
 └── Docker réseau : cassandra_network (192.168.100.0/24)
     │
