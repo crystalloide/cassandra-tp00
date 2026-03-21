@@ -935,35 +935,33 @@ EXIT;
 NODE=cassandra01
 BACKUP=sauvegarde_v2
 
-# Étape 1 — Drainer et vider le nœud proprement
-docker exec ${NODE} nodetool drain
-
-# Étape 2 — Arrêter le conteneur depuis l'hôte
-docker stop ${NODE}
-
-# Étape 3 — Lancer la restauration dans un conteneur temporaire
-# qui monte les mêmes volumes que cassandra01
 docker run --rm \
+  --name medusa-restore-${NODE} \
+  --hostname ${NODE} \
+  --ip 192.168.100.151 \
   --network cassandra-tp00_cassandra_network \
   -v ${PWD}/docker/cassandra01:/var/lib/cassandra \
   -v ${PWD}/docker/cassandra01-conf:/opt/cassandra/conf \
   -v ${PWD}/docker/medusa_sauvegarde:/medusa_sauvegarde \
-  -v /etc/medusa:/etc/medusa \
-  --entrypoint /opt/medusa-venv/bin/medusa \
+  -v ${PWD}/medusa-conf/cassandra01/medusa.ini:/etc/medusa/medusa.ini \
   cassandra:latest \
-  restore-node --backup-name=${BACKUP}
+  bash -c "
+    apt-get update -qq &&
+    apt-get install -y python3-pip python3-dev gcc -qq &&
+    pip3 install cassandra-medusa --break-system-packages -q &&
+    medusa restore-node --backup-name=${BACKUP}
+  "
 
-# Étape 4 — Redémarrer le conteneur
+docker update --restart=always ${NODE}
 docker start ${NODE}
 
-# Étape 5 — Attendre que le nœud soit opérationnel
+echo "Attente du redémarrage de ${NODE}..."
 until docker exec ${NODE} nodetool status 2>/dev/null | grep -q "^UN"; do
-  echo "En attente du nœud ${NODE}..."
+  echo -n "."
   sleep 5
 done
+echo ""
 echo "✓ ${NODE} est de nouveau opérationnel"
-
-exit
 ```
 
 Attendre que le nœud soit de nouveau opérationnel :
