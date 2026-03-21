@@ -440,7 +440,7 @@ done
 
 ##### Étape 5 — Configuration de medusa.ini sur chaque nœud
 
-Le fichier `medusa.ini` doit être créé dans `/etc/medusa/` sur **chaque conteneur**. Les paramètres clés diffèrent uniquement sur `nodetool_host` (l'IP du nœud).
+Le fichier `medusa.ini` a été monté dans `/etc/medusa/` sur **chaque conteneur**. Les paramètres clés diffèrent uniquement sur `nodetool_host` et 'fqdn' (l'IP et le nom du nœud).
 
 ##### 5.1 Configuration sur cassandra01
 
@@ -449,11 +449,12 @@ docker exec -it cassandra01 bash
 ```
 
 ```bash
-mkdir -p /etc/medusa
+cat /etc/medusa/medusa.ini
 ```
 
 ```bash
-cat > /etc/medusa/medusa.ini << 'EOF'
+docker exec -it cassandra01 bash
+root@cassandra01:/# cat /etc/medusa/medusa.ini
 [cassandra]
 ; Chemin vers cassandra.yaml (volume conf monté dans le conteneur)
 config_file = /opt/cassandra/conf/cassandra.yaml
@@ -509,12 +510,8 @@ multi_part_upload_threshold = 104857600
 enabled = 1
 file = /var/log/cassandra/medusa.log
 level = INFO
-fqdn = cassandra01
-EOF
-```
 
-```bash
-chmod 644 /etc/medusa/medusa.ini
+fqdn = cassandra01
 ```
 
 ```bash
@@ -528,37 +525,7 @@ docker exec -it cassandra02 bash
 ```
 
 ```bash
-mkdir -p /etc/medusa
-```
-
-```bash
-cat > /etc/medusa/medusa.ini << 'EOF'
-[cassandra]
-config_file = /opt/cassandra/conf/cassandra.yaml
-nodetool_host = 192.168.100.152
-nodetool_port = 7199
-check_running = nodetool version
-resolve_ip_addresses = False
-use_sudo = False
-
-[storage]
-storage_provider = local
-base_path = /medusa_sauvegarde
-bucket_name = cassandra_backups
-prefix = formation
-max_backup_age = 0
-max_backup_count = 0
-backup_grace_period_in_days = 10
-transfer_max_bandwidth = 50MB/s
-concurrent_transfers = 1
-multi_part_upload_threshold = 104857600
-
-[logging]
-enabled = 1
-file = /var/log/cassandra/medusa.log
-level = INFO
-fqdn = cassandra02
-EOF
+cat /etc/medusa/medusa.ini
 ```
 
 ```bash
@@ -572,37 +539,7 @@ docker exec -it cassandra03 bash
 ```
 
 ```bash
-mkdir -p /etc/medusa
-```
-
-```bash
-cat > /etc/medusa/medusa.ini << 'EOF'
-[cassandra]
-config_file = /opt/cassandra/conf/cassandra.yaml
-nodetool_host = 192.168.100.153
-nodetool_port = 7199
-check_running = nodetool version
-resolve_ip_addresses = False
-use_sudo = False
-
-[storage]
-storage_provider = local
-base_path = /medusa_sauvegarde
-bucket_name = cassandra_backups
-prefix = formation
-max_backup_age = 0
-max_backup_count = 0
-backup_grace_period_in_days = 10
-transfer_max_bandwidth = 50MB/s
-concurrent_transfers = 1
-multi_part_upload_threshold = 104857600
-
-[logging]
-enabled = 1
-file = /var/log/cassandra/medusa.log
-level = INFO
-fqdn = cassandra03
-EOF
+cat /etc/medusa/medusa.ini
 ```
 
 ```bash
@@ -616,37 +553,7 @@ docker exec -it cassandra04 bash
 ```
 
 ```bash
-mkdir -p /etc/medusa
-```
-
-```bash
-cat > /etc/medusa/medusa.ini << 'EOF'
-[cassandra]
-config_file = /opt/cassandra/conf/cassandra.yaml
-nodetool_host = 192.168.100.154
-nodetool_port = 7199
-check_running = nodetool version
-resolve_ip_addresses = False
-use_sudo = False
-
-[storage]
-storage_provider = local
-base_path = /medusa_sauvegarde
-bucket_name = cassandra_backups
-prefix = formation
-max_backup_age = 0
-max_backup_count = 0
-backup_grace_period_in_days = 10
-transfer_max_bandwidth = 50MB/s
-concurrent_transfers = 1
-multi_part_upload_threshold = 104857600
-
-[logging]
-enabled = 1
-file = /var/log/cassandra/medusa.log
-level = INFO
-fqdn = cassandra04
-EOF
+cat /etc/medusa/medusa.ini
 ```
 
 ```bash
