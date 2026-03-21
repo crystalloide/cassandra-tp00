@@ -143,7 +143,7 @@ SELECT * from entrepriseformation.cours_par_theme;
 ```	
 
 ____	
-##### 7°) On quitte cqlsh et on force Cassandra à flusher la memtable sur une SSTable :
+##### 7°) On quitte cqlsh et on force Cassandra à flusher la memtable sur disque : la Memtable devient ainsi une SSTable immuable :
 ____
 
 ```cql
