@@ -1,0 +1,8 @@
+FROM cassandra:latest
+RUN apt-get update && \
+    apt-get install -y python3-venv python3-dev gcc sudo && \
+    python3 -m venv /opt/medusa-venv && \
+    /opt/medusa-venv/bin/pip install --upgrade pip && \
+    /opt/medusa-venv/bin/pip install cassandra-medusa && \
+    ln -sf /opt/medusa-venv/bin/medusa /usr/local/bin/medusa && \
+    rm -rf /var/lib/apt/lists/*
