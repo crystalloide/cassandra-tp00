@@ -65,6 +65,10 @@ docker exec -it cassandra01 ls /donnees
 docker exec -it cassandra01 cqlsh
 ```
 
+```bash
+docker exec -it cassandra01 cqlsh 192.168.100.151 
+```
+
 ```sql
 USE entrepriseformation;
 COPY cours(cours_id,ajout_date,intitule)
