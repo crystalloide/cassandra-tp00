@@ -422,7 +422,10 @@ EXIT;
 
 ---
 
-##### Étape 4 — Installation de Medusa dans chaque conteneur
+##### Étape 4 — NE PAS FAIRE CETTE ETAPE : MEDUSA a été déjà installé dans l'image  : 
+#####   voici ce qu'il faudrait faire si ca n'était pas le cas :
+#####
+Installation de Medusa dans chaque conteneur
 
 > **Remarque :** L'image officielle `cassandra:latest` est basée sur Debian. On installe Medusa via pip3 directement dans chaque conteneur. Cette installation ne persiste pas au redémarrage — pour un usage production, construire une image Docker personnalisée.
 > 
@@ -445,6 +448,7 @@ for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
 done
 ```
 
+#### Reprendre ici : 
 ##### Vérifier l'installation
 medusa --version
 
