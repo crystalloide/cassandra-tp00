@@ -39,7 +39,9 @@ ____
 ##### Interroger votre table :
 ##### Une fois l'index créé, il suffit d'interroger la table et de spécifier les colonnes indexées SAI.
 
-
+```bash
+docker exec -it cassandra01 cqlsh
+```
 
 ```sql
 CREATE KEYSPACE formation WITH replication = {'class':'SimpleStrategy', 'replication_factor': 1} AND durable_writes = true;
