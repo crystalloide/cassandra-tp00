@@ -956,7 +956,7 @@ docker run --rm \
     medusa restore-node --backup-name=${BACKUP}
   "
 
-docker compose up -d cassandra01
+docker compose -f Cluster_1_noeud_1_rack_1_DC.yml up cassandra01 -d
 
 echo "Attente du redémarrage de ${NODE}..."
 until docker exec ${NODE} nodetool status 2>/dev/null | grep -q "^UN"; do
