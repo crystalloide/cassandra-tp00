@@ -321,17 +321,20 @@ Résultat attendu :
 
 ```
 Datacenter: Nord
-=================
-Status=Up/Normal
-|/ State=Normal
--- Address          Load        Tokens  Owns  Host ID  Rack
-UN 192.168.100.151  ...         256     ?     ...      Winterfell
-UN 192.168.100.153  ...         256     ?     ...      Winterfell
+================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
+UN  192.168.100.151  119.82 KiB  16      49.4%             b17400a7-f794-4846-8c88-e10456ada87a  Winterfell
+UN  192.168.100.153  80.06 KiB   16      49.6%             2591d643-2404-4335-b1f2-4d960cbe5e5b  Winterfell
 
 Datacenter: Terres-de-la-Couronne
-==================================
-UN 192.168.100.152  ...         256     ?     ...      Port-Real
-UN 192.168.100.154  ...         256     ?     ...      Winterfell
+=================================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
+UN  192.168.100.154  114.63 KiB  16      49.9%             d9198335-ffd7-429d-88c8-e990cfca3386  Port-Real
+UN  192.168.100.152  85.19 KiB   16      51.2%             bb60dc31-4bf9-47e7-b701-38d7166b05da  Port-Real
 ```
 
 ---
