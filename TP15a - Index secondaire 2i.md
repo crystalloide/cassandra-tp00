@@ -48,7 +48,9 @@ CREATE TABLE cours (
 );
 ```
 
-
+```cql
+EXIT;
+```
 
 ____
 ###### 6°) Exécutez la commande suivante pour importer les données dans la tables des Cours
