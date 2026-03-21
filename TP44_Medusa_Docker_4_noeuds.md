@@ -24,9 +24,9 @@ Machine hôte
 │
 └── Docker réseau : cassandra_network (192.168.100.0/24)
     │
-    ├── cassandra01  192.168.100.151  DC=Nord               RACK=Winterfell
+    ├── cassandra01  192.168.100.151  DC=Nord                   RACK=Winterfell
     ├── cassandra02  192.168.100.152  DC=Terres-de-la-Couronne  RACK=Port-Real
-    ├── cassandra03  192.168.100.153  DC=Nord               RACK=Winterfell
+    ├── cassandra03  192.168.100.153  DC=Nord                   RACK=Winterfell
     └── cassandra04  192.168.100.154  DC=Terres-de-la-Couronne  RACK=Port-Real
 ```
 
