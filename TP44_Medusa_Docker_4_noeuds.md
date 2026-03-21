@@ -74,11 +74,14 @@ cassandra04  cassandra04-conf
 medusa_sauvegarde
 ```
 
-### 1.3 Modification du fichier docker-compose.yml
+### 1.3 Description du fichier docker compose enrichi pour Medusa : 
 
-Ajouter le volume de sauvegarde `medusa_sauvegarde` à **chacun des 4 services** Cassandra, et déclarer le volume nommé correspondant.
+On ajoute le volume de sauvegarde `medusa_sauvegarde` à **chacun des 4 services** Cassandra
 
-Voici le fichier complet mis à jour :
+Voici le fichier complet  :
+```bash
+gedit Cluster_4_noeuds_2_racks_2_DC_Medusa.yml 
+```
 
 ```yaml
 networks:
