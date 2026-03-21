@@ -4,15 +4,18 @@ ____
 
 ##### Dans ce TP, nous allons étudier les stratégies de base pour la compaction dans Cassandra
 ____
-##### Contexte du TP : 
-##### Au fur et à mesure que les MEMTABLEs se remplissent, Cassandra les écrit sur le disque sous la forme de SSTables.
-##### Si c’était la fin de l’histoire, le nombre de fichiers de données utilisés 
-##### pour contenir des tables SSTables deviendrait très important
-##### et ralentirait les performances de lecture de Cassandra.
-##### Par conséquent, Cassandra doit consolider ces fichiers de temps en temps.
-##### Cette consolidation s'appelle la compaction.
-##### Dans cet exercice, nous observons les effets de la compaction.
+```text
+Contexte du TP :
 
+Au fur et à mesure que les MEMTABLEs se remplissent, Cassandra les écrit sur le disque sous la forme de SSTables.
+Si c’était la fin de l’histoire, le nombre de fichiers de données utilisés pour contenir des tables SSTables deviendrait très important
+... et ralentirait les performances de lecture de Cassandra.
+
+Par conséquent, Cassandra doit consolider ces fichiers de temps en temps.
+Cette consolidation s'appelle la compaction.
+
+Dans cet exercice, nous observons les effets de la compaction.
+```
 ____
 ##### Etapes : 
 
