@@ -391,60 +391,33 @@ EXIT;
 ## Étape 4 — Installation de Medusa dans chaque conteneur
 
 > **Remarque :** L'image officielle `cassandra:latest` est basée sur Debian. On installe Medusa via pip3 directement dans chaque conteneur. Cette installation ne persiste pas au redémarrage — pour un usage production, construire une image Docker personnalisée.
-
-### 4.1 Installation sur cassandra01
-
+> 
 ```bash
-docker exec -it cassandra01 bash
+for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
+  echo "=== Installation Medusa sur ${NODE} ==="
+  docker exec ${NODE} bash -c "
+    apt-get update -y -qq && \
+    apt-get install -y python3-venv python3-dev gcc -qq && \
+    python3 -m venv /opt/medusa-venv && \
+    /opt/medusa-venv/bin/pip install --upgrade pip && \
+    /opt/medusa-venv/bin/pip install cassandra-medusa
+  "
+done
 ```
-
-Dans le conteneur :
-
-```bash
-# Mettre à jour les paquets et installer pip3
-apt-get update -y && apt-get install -y python3-pip python3-dev gcc
-
-# Installer Medusa (stockage local)
-pip3 install cassandra-medusa
 
 # Vérifier l'installation
 medusa --version
+
+```bash
+for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
+  echo "=== Version installée de Medusa sur ${NODE} ==="
+  docker exec ${NODE} bash -c "
+    /opt/medusa-venv/bin/medusa --version
+  "
+done
+```
+
 # Résultat attendu : 0.24.x ou supérieur
-
-exit
-```
-
-### 4.2 Installation sur cassandra02
-
-```bash
-docker exec -it cassandra02 bash
-apt-get update -y && apt-get install -y python3-pip python3-dev gcc
-pip3 install cassandra-medusa
-medusa --version
-exit
-```
-
-### 4.3 Installation sur cassandra03
-
-```bash
-docker exec -it cassandra03 bash
-apt-get update -y && apt-get install -y python3-pip python3-dev gcc
-pip3 install cassandra-medusa
-medusa --version
-exit
-```
-
-### 4.4 Installation sur cassandra04
-
-```bash
-docker exec -it cassandra04 bash
-apt-get update -y && apt-get install -y python3-pip python3-dev gcc
-pip3 install cassandra-medusa
-medusa --version
-exit
-```
-
-> **Astuce :** Pour gagner du temps, on peut lancer les 4 installations en parallèle depuis 4 terminaux.
 
 ---
 
