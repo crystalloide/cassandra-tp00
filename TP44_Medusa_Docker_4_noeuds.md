@@ -406,6 +406,12 @@ for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
   "
 done
 ```
+###### On crée un lien symbolique dans le conteneur pour pouvoir appeler Medusa simplement ensuite :
+```bash
+for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
+  docker exec ${NODE} ln -sf /opt/medusa-venv/bin/medusa /usr/local/bin/medusa
+done
+```
 
 ##### Vérifier l'installation
 medusa --version
