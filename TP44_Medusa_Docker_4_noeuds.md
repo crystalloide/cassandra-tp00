@@ -778,37 +778,59 @@ cassandra_backups/
 ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/
 ```
 
+Résultat attendu (un répertoire pour le cluster formation) :
+
+```
+total 12
+drwxr-xr-x 3 root root 4096 Mar 21 19:17 .
+drwxrwxrwx 3 user user 4096 Mar 21 19:17 ..
+drwxr-xr-x 7 root root 4096 Mar 21 19:22 formation
+```
+
+```bash
+ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/formation/
+```
+
 Résultat attendu (un répertoire par nœud + index) :
 
 ```
-drwxr-xr-x  cassandra01/
-drwxr-xr-x  cassandra02/
-drwxr-xr-x  cassandra03/
-drwxr-xr-x  cassandra04/
-drwxr-xr-x  index/
+...
+drwxr-xr-x 4 root root 4096 Mar 21 19:18 cassandra01
+drwxr-xr-x 4 root root 4096 Mar 21 19:20 cassandra02
+drwxr-xr-x 4 root root 4096 Mar 21 19:22 cassandra03
+drwxr-xr-x 4 root root 4096 Mar 21 19:23 cassandra04
+drwxr-xr-x 4 root root 4096 Mar 21 19:18 index
 ```
 
 ##### Examiner le contenu de la sauvegarde du nœud cassandra01 :
 
 ```bash
-ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/cassandra01/
+ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/formation/cassandra01/
 ```
 
 ```
-drwxr-xr-x  sauvegarde_initiale/
-drwxr-xr-x  data/
+...
+drwxr-xr-x 6 root root 4096 Mar 21 19:18 data
+drwxr-xr-x 3 root root 4096 Mar 21 19:17 sauvegarde_initiale
 ```
 
 ```bash
-ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/cassandra01/sauvegarde_initiale/meta/
+ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/formation/cassandra01/sauvegarde_initiale/meta/
 ```
-
 ```
--rw-r--r--  differential       ← type de sauvegarde
--rw-r--r--  manifest.json      ← liste des fichiers avec leur hash MD5
--rw-r--r--  schema.cql         ← schéma CQL complet du cluster
--rw-r--r--  server_version.json
--rw-r--r--  tokenmap.json      ← répartition des tokens entre nœuds
+-rw-r--r-- 1 root root    12 Mar 21 19:17 differential
+-rw-r--r-- 1 root root 82959 Mar 21 19:18 manifest.json
+-rw-r--r-- 1 root root 71242 Mar 21 19:17 schema.cql
+-rw-r--r-- 1 root root    56 Mar 21 19:17 server_version.json
+-rw-r--r-- 1 root root   878 Mar 21 19:17 tokenmap.json
+```
+##### Explication : 
+```
+differential       ← type de sauvegarde
+manifest.json      ← liste des fichiers avec leur hash MD5
+schema.cql         ← schéma CQL complet du cluster
+server_version.json
+tokenmap.json      ← répartition des tokens entre nœuds
 ```
 
 ---
