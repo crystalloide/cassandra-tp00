@@ -598,7 +598,7 @@ exit
 
 ---
 
-##### Suppression de sauvegardes Medusa (en cas de tentatives successives pour le TP par exmple)
+##### Suppression de sauvegardes Medusa (en cas de tentatives successives pour le TP par exmeple)
 ```bash
 sudo rm -rf ${PWD}/docker/medusa_sauvegarde/cassandra_backups/formation/
 ```
