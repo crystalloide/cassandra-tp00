@@ -853,6 +853,28 @@ sauvegarde_initiale (started: 2026-03-21 HH:MM:SS, finished: 2026-03-21 HH:MM:SS
 
 > L'option `--show-all` affiche les sauvegardes de **tous les nœuds** dans le stockage, pas uniquement celles du nœud courant.
 
+
+##### Si besoin : en cas d'anomalie et après correction : Nettoyage et nouvelle sauvegarde propre : 
+```bash
+# Supprimer la sauvegarde incomplète sur tous les nœuds
+for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
+  docker exec ${NODE} medusa delete-backup \
+    --backup-grace-period-in-days=0 \
+    --backup-name=sauvegarde_initiale
+done
+```
+
+```bash
+# Relancer une sauvegarde propre
+for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
+  echo "--- Sauvegarde ${NODE} ---"
+  docker exec ${NODE} medusa backup --backup-name=sauvegarde_v2
+done
+```
+
+
+
+
 ##### 8.2 Vérifier l'intégrité d'une sauvegarde
 
 ```bash
