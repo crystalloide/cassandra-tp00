@@ -111,7 +111,7 @@ La table cours est définie ainsi :
 Nom de col :		Type :
 
 cours_id			timeuuid
-ajout_date		timestamp
+ajout_date	     	timestamp
 intitule			text
 
 Clé primaire : 	cours_id
