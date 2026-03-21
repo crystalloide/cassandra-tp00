@@ -20,7 +20,7 @@ services:
       - conf01:/opt/cassandra/conf
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
-      - CASSANDRA_SEEDS=cassandra01,cassandra03
+      - CASSANDRA_SEEDS=cassandra01,cassandra02
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
       - CASSANDRA_DC=Nord
       - CASSANDRA_RACK=Winterfell
@@ -60,7 +60,7 @@ services:
       - conf02:/opt/cassandra/conf
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
-      - CASSANDRA_SEEDS=cassandra01,cassandra03
+      - CASSANDRA_SEEDS=cassandra01,cassandra02
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
       - CASSANDRA_DC=Terres-de-la-Couronne
       - CASSANDRA_RACK=Port-Real
@@ -100,7 +100,7 @@ services:
       - conf03:/opt/cassandra/conf
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
-      - CASSANDRA_SEEDS=cassandra01,cassandra03
+      - CASSANDRA_SEEDS=cassandra01,cassandra02
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
       - CASSANDRA_DC=Nord
       - CASSANDRA_RACK=Winterfell
@@ -140,10 +140,10 @@ services:
       - conf04:/opt/cassandra/conf
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
-      - CASSANDRA_SEEDS=cassandra01,cassandra03
+      - CASSANDRA_SEEDS=cassandra01,cassandra02
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
-      - CASSANDRA_DC=Nord
-      - CASSANDRA_RACK=Winterfell
+      - CASSANDRA_DC=Terres-de-la-Couronne
+      - CASSANDRA_RACK=Port-Real
       - CASSANDRA_BROADCAST_RPC_ADDRESS=192.168.100.154
       - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
       - MAX_HEAP_SIZE=256m
