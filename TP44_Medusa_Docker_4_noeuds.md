@@ -856,11 +856,11 @@ sauvegarde_initiale (started: 2026-03-21 HH:MM:SS, finished: 2026-03-21 HH:MM:SS
 
 ##### Si besoin : en cas d'anomalie et après correction : Nettoyage et nouvelle sauvegarde propre : 
 ```bash
-# Supprimer la sauvegarde incomplète sur tous les nœuds
+# Supprimer la sauvegarde incomplète ou incorrecte sur tous les nœuds
 for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
-  docker exec ${NODE} medusa delete-backup \
+  docker exec ${NODE} medusa \
     --backup-grace-period-in-days=0 \
-    --backup-name=sauvegarde_initiale
+    delete-backup --backup-name=sauvegarde_initiale
 done
 ```
 
