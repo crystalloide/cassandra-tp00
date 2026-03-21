@@ -292,7 +292,7 @@ volumes:
 ## Étape 2 — Démarrage du cluster mis à jour
 
 ```bash
-docker compose up -d
+docker compose -f Cluster_4_noeuds_2_racks_2_DC_Medusa.yml up -d
 ```
 
 Attendre que les 4 nœuds soient healthy (peut prendre 5 à 10 minutes) :
