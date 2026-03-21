@@ -444,7 +444,9 @@ docker exec -it cassandra01 bash
 
 ```bash
 mkdir -p /etc/medusa
+```
 
+```bash
 cat > /etc/medusa/medusa.ini << 'EOF'
 [cassandra]
 ; Chemin vers cassandra.yaml (volume conf monté dans le conteneur)
@@ -502,9 +504,13 @@ enabled = 1
 file = /var/log/cassandra/medusa.log
 level = INFO
 EOF
+```
 
+```bash
 chmod 644 /etc/medusa/medusa.ini
+```
 
+```bash
 exit
 ```
 
@@ -516,7 +522,9 @@ docker exec -it cassandra02 bash
 
 ```bash
 mkdir -p /etc/medusa
+```
 
+```bash
 cat > /etc/medusa/medusa.ini << 'EOF'
 [cassandra]
 config_file = /opt/cassandra/conf/cassandra.yaml
@@ -543,7 +551,9 @@ enabled = 1
 file = /var/log/cassandra/medusa.log
 level = INFO
 EOF
+```
 
+```bash
 exit
 ```
 
@@ -555,7 +565,9 @@ docker exec -it cassandra03 bash
 
 ```bash
 mkdir -p /etc/medusa
+```
 
+```bash
 cat > /etc/medusa/medusa.ini << 'EOF'
 [cassandra]
 config_file = /opt/cassandra/conf/cassandra.yaml
@@ -582,7 +594,9 @@ enabled = 1
 file = /var/log/cassandra/medusa.log
 level = INFO
 EOF
+```
 
+```bash
 exit
 ```
 
@@ -594,7 +608,9 @@ docker exec -it cassandra04 bash
 
 ```bash
 mkdir -p /etc/medusa
+```
 
+```bash
 cat > /etc/medusa/medusa.ini << 'EOF'
 [cassandra]
 config_file = /opt/cassandra/conf/cassandra.yaml
@@ -621,7 +637,9 @@ enabled = 1
 file = /var/log/cassandra/medusa.log
 level = INFO
 EOF
+```
 
+```bash
 exit
 ```
 
