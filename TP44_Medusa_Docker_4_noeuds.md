@@ -884,7 +884,7 @@ for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
 done
 ```
 
-##### Reconstruire l'index de Medusa sur chaque noeud  (après une suppresion physique de sauvegardes dans le répertoire central par exemple)
+##### Reconstruire l'index de Medusa sur chaque noeud  (après une suppression physique de sauvegardes dans le répertoire central par exemple)
 
 ```bash
 docker exec cassandra01 medusa build-index
@@ -902,64 +902,82 @@ docker exec cassandra01 medusa build-index
 [2026-03-21 18:41:31,895] INFO: processing 192.168.100.153
 ```
 
-##### 8.2 Vérifier l'intégrité d'une sauvegarde
+##### Affichage des backups disponibles désormais : 
+```bash
+docker exec cassandra01 medusa list-backups --show-all
+```
+```text
+[2026-03-21 18:58:31,772] INFO: Resolving ip address
+[2026-03-21 18:58:31,773] INFO: ip address to resolve 192.168.100.151
+sauvegarde_v2 (started: 2026-03-21 18:55:17, finished: 2026-03-21 18:55:50)
+```
+
+##### 8.2 Vérifier l'intégrité d'une sauvegarde :
 
 ```bash
-docker exec cassandra01 medusa verify --backup-name=sauvegarde_initiale
+docker exec cassandra01 medusa verify --backup-name=sauvegarde_v2
 ```
 
-Résultat attendu :
+###### Résultat attendu :
 
 ```
-[2026-03-21 18:52:58,799] INFO: Resolving ip address
-[2026-03-21 18:52:58,799] INFO: ip address to resolve 192.168.100.151
-Validating sauvegarde_initiale ...
+[2026-03-21 18:58:17,681] INFO: Resolving ip address
+[2026-03-21 18:58:17,682] INFO: ip address to resolve 192.168.100.151
+Validating sauvegarde_v2 ...
 - Completion: OK!
 - Manifest validated: OK!!
 ```
 
 > En cas de nœud manquant dans la sauvegarde, Medusa le signalera : `Completion: Not complete!` suivi du détail des nœuds manquants.
 
-##### 8.3 Afficher le statut détaillé d'une sauvegarde
+
+
+##### 8.3 Afficher le statut détaillé d'une sauvegarde :
 
 ```bash
-docker exec cassandra01 medusa status --backup-name=sauvegarde_initiale
+docker exec cassandra01 medusa status --backup-name=sauvegarde_v2
 ```
 
-Résultat attendu :
+###### Résultat attendu :
 
-```
-sauvegarde_initiale
-- Started: 2026-03-21 HH:MM:SS, Finished: 2026-03-21 HH:MM:SS
+```text
+[2026-03-21 18:58:25,188] INFO: Resolving ip address
+[2026-03-21 18:58:25,189] INFO: ip address to resolve 192.168.100.151
+sauvegarde_v2
+- Started: 2026-03-21 18:55:17, Finished: 2026-03-21 18:55:50
 - 4 nodes completed, 0 nodes incomplete, 0 nodes missing
-- XXXX files, X.XX MB
+- 1696 files, 1.29 MB
 ```
 
 ---
 
 ##### Étape 9 — Sauvegarde complète (full)
 
-Par défaut, Medusa effectue des sauvegardes **différentielles** (seuls les fichiers nouveaux ou modifiés sont copiés). On peut forcer une sauvegarde complète avec `--mode=full`.
+```text
+Par défaut, Medusa effectue des sauvegardes **différentielles** (seuls les fichiers nouveaux ou modifiés sont copiés). 
+On peut forcer une sauvegarde complète avec `--mode=full`.
+```
 
 ```bash
-# Sur chaque nœud, sauvegarde complète
+# Sur chaque nœud, sauvegarde complète  :
 docker exec cassandra01 medusa backup --backup-name=sauvegarde_full --mode=full
 docker exec cassandra02 medusa backup --backup-name=sauvegarde_full --mode=full
 docker exec cassandra03 medusa backup --backup-name=sauvegarde_full --mode=full
 docker exec cassandra04 medusa backup --backup-name=sauvegarde_full --mode=full
 ```
 
-Vérifier que les deux sauvegardes sont présentes :
+##### Vérifier que les deux sauvegardes sont présentes :
 
 ```bash
 docker exec cassandra01 medusa list-backups --show-all
 ```
 
-Résultat attendu :
+###### Résultat attendu :
 
 ```
 sauvegarde_initiale (started: ..., finished: ...)
-sauvegarde_full     (started: ..., finished: ...)
+sauvegarde_v2 (started: 2026-03-21 18:55:17, finished: 2026-03-21 18:55:50)
+sauvegarde_full (started: 2026-03-21 19:02:50, finished: 2026-03-21 19:03:24)
 ```
 
 ---
@@ -977,46 +995,87 @@ docker exec -it cassandra01 cqlsh 192.168.100.151 9042
 ```sql
 -- Supprimer toutes les données
 TRUNCATE formation.employes;
+```
 
+```sql
 -- Vérifier que la table est vide
 SELECT * FROM formation.employes;
 -- Résultat attendu : 0 rows
+```
 
+```text
+ id | anciennete | nom | poste
+----+------------+-----+-------
+
+(0 rows)
+
+```
+
+
+```sql
 EXIT;
 ```
 
 ##### 10.2 Restauration du nœud cassandra01
 
-> **Important :** La restauration Medusa nécessite un arrêt/redémarrage de Cassandra. Dans un contexte Docker sans systemd, on gère cela manuellement.
+> **Important :** La restauration Medusa nécessite un arrêt/redémarrage de Cassandra.
+> **nodetool disablebinary** peut être utile avant le drain pour couper les connexions clients entrantes, mais il ne remplace pas l'arrêt complet du processus Cassandra nécessaire pour la restauration.
+
 
 ```bash
 docker exec -it cassandra01 bash
 ```
 
-Dans le conteneur :
+###### Dans le conteneur :
 
 ```bash
 # Étape A : arrêter Cassandra proprement
 nodetool drain
-pkill -f CassandraDaemon
+exit
+```
 
+```bash
+docker stop cassandra01
+```
+
+```bash
 # Attendre l'arrêt complet
-sleep 5
+sleep 10
+```
 
+```bash
 # Étape B : restaurer le nœud depuis la sauvegarde
-medusa restore-node \
-  --backup-name=sauvegarde_initiale \
-  --keyspace=formation
 
-# Résultat attendu :
-# [INFO] Restoring node from backup sauvegarde_initiale
-# [INFO] Downloading backup files ...
-# [INFO] Stopping Cassandra ...
-# [INFO] Moving files to Cassandra data directory ...
-# [INFO] Node restore complete
+NODE=cassandra01
+BACKUP=sauvegarde_v2
 
-# Étape C : redémarrer Cassandra
-/docker-entrypoint.sh cassandra -f &
+# Étape 1 — Drainer et vider le nœud proprement
+docker exec ${NODE} nodetool drain
+
+# Étape 2 — Arrêter le conteneur depuis l'hôte
+docker stop ${NODE}
+
+# Étape 3 — Lancer la restauration dans un conteneur temporaire
+# qui monte les mêmes volumes que cassandra01
+docker run --rm \
+  --network cassandra-tp00_cassandra_network \
+  -v ${PWD}/docker/cassandra01:/var/lib/cassandra \
+  -v ${PWD}/docker/cassandra01-conf:/opt/cassandra/conf \
+  -v ${PWD}/docker/medusa_sauvegarde:/medusa_sauvegarde \
+  -v /etc/medusa:/etc/medusa \
+  --entrypoint /opt/medusa-venv/bin/medusa \
+  cassandra:latest \
+  restore-node --backup-name=${BACKUP}
+
+# Étape 4 — Redémarrer le conteneur
+docker start ${NODE}
+
+# Étape 5 — Attendre que le nœud soit opérationnel
+until docker exec ${NODE} nodetool status 2>/dev/null | grep -q "^UN"; do
+  echo "En attente du nœud ${NODE}..."
+  sleep 5
+done
+echo "✓ ${NODE} est de nouveau opérationnel"
 
 exit
 ```
