@@ -332,7 +332,7 @@ docker compose -f Cluster_4_noeuds_2_racks_2_DC_Medusa.yml up -d
 Attendre que les 4 nœuds soient healthy (peut prendre 5 à 10 minutes) :
 
 ```bash
-docker compose ps
+docker compose -f Cluster_4_noeuds_2_racks_2_DC_Medusa.yml ps
 ```
 
 Résultat attendu — tous les statuts doivent être `healthy` :
