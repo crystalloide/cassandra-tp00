@@ -69,7 +69,6 @@ docker compose -f Cluster_1_noeud_1_rack_1_DC.yml up  -d
 cd ~/cassandra-tp00
 docker compose -f Cluster_1_noeud_1_rack_1_DC.yml logs
 ```
-##### Faire **\<CTRL>+\<C>** pour sortir
 
 ##### Dans un autre terminal, pour suivre  :
 ```bash
