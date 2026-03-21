@@ -363,18 +363,18 @@ CREATE TABLE IF NOT EXISTS formation.employes (
   id   UUID PRIMARY KEY,
   nom  TEXT,
   poste TEXT,
-  dc    TEXT
+  anciennete    TEXT
 );
 
 -- Insérer des données
+INSERT INTO formation.employes (id, nom, poste, anciennete)
+  VALUES (uuid(), 'Alice Martin',   'DBA',      '10 ans');
 INSERT INTO formation.employes (id, nom, poste, dc)
-  VALUES (uuid(), 'Alice Martin',   'DBA',      'Nord');
+  VALUES (uuid(), 'Bob Dupont',     'DevOps',   '20 ans');
 INSERT INTO formation.employes (id, nom, poste, dc)
-  VALUES (uuid(), 'Bob Dupont',     'DevOps',   'Terres-de-la-Couronne');
+  VALUES (uuid(), 'Claire Durand',  'Dev',      '6 mois');
 INSERT INTO formation.employes (id, nom, poste, dc)
-  VALUES (uuid(), 'Claire Durand',  'Dev',      'Nord');
-INSERT INTO formation.employes (id, nom, poste, dc)
-  VALUES (uuid(), 'David Lemaire',  'SRE',      'Nord');
+  VALUES (uuid(), 'David Lemaire',  'SRE',      '2 ans');
 
 -- Vérifier
 SELECT * FROM formation.employes;
