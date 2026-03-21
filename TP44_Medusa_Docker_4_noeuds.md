@@ -63,10 +63,13 @@ docker build -t cassandra-medusa:latest -f Dockerfile-cassandra-medusa .
 
 ##### Étape 1 — Arrêt du cluster et mise à jour du docker-compose.yml
 
-##### 1.1 Arrêt propre du cluster existant (exemple)
+##### 1.1 Arrêt propre du cluster existant (exemples)
 
 ```bash
 docker compose -f Cluster_1_noeud_1_rack_1_DC.yml down -v
+```
+```bash
+docker compose -f Cluster_4_noeuds_2_racks_2_DC.yml down -v
 ```
 ##### Recréation des répertoires pour les volumes persistés :
 ```bash
