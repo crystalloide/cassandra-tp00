@@ -1,4 +1,4 @@
-### TP44 - Installation et utilisation de Medusa sur cluster Cassandra - environnement docker 4 nœuds (2 racks / 2 DC)
+#### TP44 - Installation et utilisation de Medusa sur cluster Cassandra - environnement docker 4 nœuds (2 racks / 2 DC)
 
 ---
 
