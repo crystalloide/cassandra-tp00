@@ -8,7 +8,8 @@ ____
 Contexte du TP :
 
 Au fur et à mesure que les MEMTABLEs se remplissent, Cassandra les écrit sur le disque sous la forme de SSTables.
-Si c’était la fin de l’histoire, le nombre de fichiers de données utilisés pour contenir des tables SSTables deviendrait très important
+Si c’était la fin de l’histoire,
+le nombre de fichiers de données utilisés pour contenir des tables SSTables deviendrait très important
 ... et ralentirait les performances de lecture de Cassandra.
 
 Par conséquent, Cassandra doit consolider ces fichiers de temps en temps.
