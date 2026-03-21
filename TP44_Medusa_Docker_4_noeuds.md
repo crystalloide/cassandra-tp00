@@ -54,21 +54,24 @@ mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02
 mkdir -p ~/cassandra-tp00/docker/cassandra01-conf ~/cassandra-tp00/docker/cassandra02-conf ~/cassandra-tp00/docker/cassandra03-conf ~/cassandra-tp00/docker/cassandra04-conf
 ```
 
+### 1.2 Création du répertoire de sauvegarde sur l'hôte
+
+```bash
+mkdir -p ${PWD}/docker/medusa_sauvegarde
+chmod 777 ${PWD}/docker/medusa_sauvegarde
+```
+
 #### On affiche les répertoires créés :
 ```bash
 ls ~/cassandra-tp00/docker
 ```
 ##### Affichage : 
 ```bash
-     cassandra01       cassandra02       cassandra03       cassandra04
-     assandra01-conf  cassandra02-conf  cassandra03-conf  cassandra04-conf
-```
-
-### 1.2 Création du répertoire de sauvegarde sur l'hôte
-
-```bash
-mkdir -p ${PWD}/docker/medusa_sauvegarde
-chmod 777 ${PWD}/docker/medusa_sauvegarde
+cassandra01  cassandra01-conf
+cassandra02  cassandra02-conf
+cassandra03  cassandra03-conf
+cassandra04  cassandra04-conf
+medusa_sauvegarde
 ```
 
 ### 1.3 Modification du fichier docker-compose.yml
