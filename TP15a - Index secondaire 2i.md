@@ -20,7 +20,7 @@ ____
 ____
 
 ```cql
-DROP IF EXISTS KEYSPACE EntrepriseFormation;
+DROP KEYSPACE EntrepriseFormation;
 ```
 
 ```cql
