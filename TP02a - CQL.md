@@ -152,9 +152,14 @@ _____________
      Connected to formation at localhost:9142
      [cqlsh 6.2.1 | Cassandra 5.0.6 | CQL spec 3.4.7 | Native protocol v5]
      Use HELP for help.
-     cqlsh> exit
-  
 
+	 
+```sql  
+SHOW VERSION;
+```
+```text  
+[cqlsh 6.2.0 | Cassandra 5.0.6 | CQL spec 3.4.7 | Native protocol v5]
+```
 _____________
 ####  3°) Dans cqlsh, nous allons créer un keyspace nommé **EntrepriseFormation** 
 _____________
