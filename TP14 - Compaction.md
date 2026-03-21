@@ -199,10 +199,14 @@ exit
 ____	
 ##### 10°) Flushez cette seconde memtable sur disque :
 ____
+
+```bash
+docker exec -it cassandra01 bash 
+```
+
 ```bash
 nodetool flush
 ```
-
 
 ____
 ##### 11°) Regardez à nouveau le répertoire "data" pour voir les fichiers associés avec les deux SSTables :
@@ -216,9 +220,6 @@ ____
 ##### 12°) Créez une 3ème SSTable en insérant la ligne suivante : 
 ____
 
-```bash
-docker exec -it cassandra01 bash
-```
 
 ```bash
 cqlsh -e "INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule)VALUES ('cassandra', toTimestamp(now()), uuid(), 'Cassandra Wizard');"
