@@ -39,10 +39,10 @@ Machine hôte
 
 ## Étape 1 — Arrêt du cluster et mise à jour du docker-compose.yml
 
-### 1.1 Arrêt propre du cluster existant
+### 1.1 Arrêt propre du cluster existant (exemple)
 
 ```bash
-docker compose down
+docker compose -f Cluster_1_noeud_1_rack_1_DC.yml down -v
 ```
 #### Recréation des répertoires pour les volumes persistés :
 ```bash
