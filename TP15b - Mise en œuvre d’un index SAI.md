@@ -1,9 +1,7 @@
 ____
 ##### TP15b - Mise en œuvre d’index SAI
 ____
-
 ##### Temps estimé : 10 minutes
-
 ____
 ##### La fonctionnalité Storage-Attached Indexing (SAI) permet de créer un ou plusieurs index secondaires sur la même table de base de données, 
 ##### chaque index SAI étant basé sur n'importe quelle colonne. 
@@ -12,13 +10,9 @@ ____
 ##### est plus rapide en écriture par rapport à n'importe quel index de recherche Cassandra ou DSE 
 ##### et utilise beaucoup moins d'espace disque.
 ____
-
-____
 ##### Dans ce TP, nous allons :
 ##### 	- Créer des index SAI sur des colonnes
 ##### 	- Effectuer des requêtes SELECT basées sur des colonnes indexées
-____
-
 ____
 ##### Quand utiliser SAI :
 ```text
