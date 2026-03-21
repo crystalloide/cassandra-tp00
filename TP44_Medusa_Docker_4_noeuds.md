@@ -1023,28 +1023,7 @@ EXIT;
 
 
 ```bash
-docker exec -it cassandra01 bash
-```
-
-###### Dans le conteneur :
-
-```bash
-# Étape A : arrêter Cassandra proprement
-nodetool drain
-exit
-```
-
-```bash
-docker stop cassandra01
-```
-
-```bash
-# Attendre l'arrêt complet
-sleep 10
-```
-
-```bash
-# Étape B : restaurer le nœud depuis la sauvegarde
+# Restaurer le nœud depuis la sauvegarde
 
 NODE=cassandra01
 BACKUP=sauvegarde_v2
