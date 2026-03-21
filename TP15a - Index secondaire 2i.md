@@ -35,7 +35,6 @@ ____
 USE EntrepriseFormation;
 ```
 
-
 ____
 ###### 5°) Créez une table simple nommée "cours" avec la structure indiquée ci-dessus. "cours_id" sera la clé primaire.
 ____
@@ -75,7 +74,6 @@ COPY cours(cours_id,ajout_date,intitule)
 FROM '/donnees/cours.csv'
 WITH HEADER=TRUE;
 ```
-
 
 
 ____
@@ -118,7 +116,7 @@ intitule			text
 
 Clé primaire : 	cours_id
 
-```text
+```
 
 ____
 
