@@ -154,6 +154,16 @@ CREATE TABLE entrepriseformation.cours (
 ```
 
 
+```sql
+SELECT * FROM entrepriseformation. cours WHERE intitule = 'Qui sommes-nous?';
+```
+##### Sans clé de partition indiquée, cette requête échoue !
+
+```sql
+SELECT * FROM entrepriseformation. cours WHERE intitule = 'Qui sommes-nous?' ALLOW FILTERING;
+```
+##### Sans clé de partition indiquée, mais avec "ALLOW FILTERING" cette requête réussit mais c'est absolument à bannir !
+
 ____
 ###### 9°) Creation d'un index 
 ____
@@ -165,8 +175,14 @@ Ici, on va donc créer un index pour pouvoir utiliser la clause WHERE en recherc
 ```
 
 ```cql
+DROP INDEX IF EXISTS index_intitule_cours;
+```
+
+```cql
 CREATE INDEX index_intitule_cours on cours (intitule);
 ```
+
+
 
 ____
 ###### 10°) Regardons l'effet de la creation de l'index 
