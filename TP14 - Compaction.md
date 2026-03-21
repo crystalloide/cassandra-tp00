@@ -136,9 +136,11 @@ ____
 ```cql
 INSERT INTO cours_par_theme (theme, ajout_date, cours_id, intitule)
 VALUES ('cassandra', toTimestamp(now()), uuid(), 'Cassandra Master');
+```
+
+```cql	
+SELECT * from entrepriseformation.cours_par_theme;
 ```	
-	
-	
 ____	
 ##### 7°) On quitte cqlsh et on force Cassandra à flusher la memtable sur une SSTable :
 ____
