@@ -97,6 +97,13 @@ CONSISTENCY LOCAL_QUORUM
 Consistency level set to LOCAL_QUORUM.
 ```
 
+```cql
+TRUNCATE products;
+```
+
+```cql
+SELECT * FROM products;
+```
 
 ##### Contenu de products.cql :
 ```cql
