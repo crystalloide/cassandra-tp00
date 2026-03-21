@@ -662,20 +662,76 @@ docker exec cassandra01 medusa backup --backup-name=sauvegarde_initiale
 Résultat attendu :
 
 ```
-[INFO] Resolving ip address
-[INFO] ip address to resolve 192.168.100.151
-[INFO] Registered backup id sauvegarde_initiale
-[INFO] Monitoring provider is noop
-[INFO] Starting backup using Stagger: None Mode: differential Name: sauvegarde_initiale
-[INFO] Saving tokenmap and schema
-[INFO] Creating snapshot
-[INFO] Backing up system_schema.keyspaces-...
-[INFO] Backing up formation.employes-...
-[INFO] Updating backup index
-[INFO] Backup done
-[INFO] - Started: 2026-03-21 HH:MM:SS
-[INFO] - Finished: 2026-03-21 HH:MM:SS
-[INFO] - X files, X.XX KB
+[2026-03-21 18:17:56,539] INFO: Resolving ip address
+[2026-03-21 18:17:56,539] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 18:17:56,541] INFO: Registered backup id sauvegarde_initiale
+[2026-03-21 18:17:56,541] INFO: Monitoring provider is noop
+[2026-03-21 18:17:56,736] INFO: Starting backup using Stagger: None Mode: differential Name: sauvegarde_initiale
+[2026-03-21 18:17:56,737] INFO: Saving tokenmap and schema
+[2026-03-21 18:17:56,845] INFO: Resolving ip address 192.168.100.151
+[2026-03-21 18:17:56,845] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 18:17:56,845] INFO: Resolving ip address 192.168.100.151
+[2026-03-21 18:17:56,845] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 18:17:56,846] INFO: Resolving ip address 192.168.100.153
+[2026-03-21 18:17:56,846] INFO: ip address to resolve 192.168.100.153
+[2026-03-21 18:17:56,935] INFO: Saving server version
+[2026-03-21 18:18:00,792] INFO: Listing already backed up files for node cassandra01
+[2026-03-21 18:18:00,795] INFO: Backing up system.peers_v2-c4325fbb8e5e3bafbd070f9250ed818e
+[2026-03-21 18:18:00,863] INFO: Backing up system.paxos-b7b7f0c2fd0a34108c053ef614bb7c2d
+[2026-03-21 18:18:00,863] INFO: Backing up system.peers-37f71aca7dc2383ba70672528af04d4f
+[2026-03-21 18:18:00,939] INFO: Backing up system.paxos_repair_history-ecb8666740b23316bb91e612c8047457
+[2026-03-21 18:18:00,939] INFO: Backing up system.sstable_activity-5a1ff267ace03f128563cfae6103c65e
+[2026-03-21 18:18:00,974] INFO: Backing up system.peer_events-59dfeaea8db2334191ef109974d81484
+[2026-03-21 18:18:00,974] INFO: Backing up system.sstable_activity_v2-62efe31f3be8310c8d298963439c1288
+[2026-03-21 18:18:01,049] INFO: Backing up system.transferred_ranges-6cad20f7d4f53af2b6e20da33c6c1f83
+[2026-03-21 18:18:01,049] INFO: Backing up system.built_views-4b3c50a9ea873d7691016dbc9c38494a
+[2026-03-21 18:18:01,049] INFO: Backing up system.available_ranges_v2-4224a0882ac93d0c889dfbb5f0facda0
+[2026-03-21 18:18:01,049] INFO: Backing up system.compaction_history-b4dbb7b4dc493fb5b3bfce6e434832ca
+[2026-03-21 18:18:01,083] INFO: Backing up system.repairs-a3d277d1cfaf36f5a2a738d5eea9ad6a
+[2026-03-21 18:18:01,083] INFO: Backing up system.peer_events_v2-0e65065fe40138ed9507b9213fae8d11
+[2026-03-21 18:18:01,084] INFO: Backing up system.local-7ad54392bcdd35a684174e047860b377
+[2026-03-21 18:18:01,168] INFO: Backing up system.table_estimates-176c39cdb93d33a5a2188eb06a56f66e
+[2026-03-21 18:18:01,244] INFO: Backing up system.IndexInfo-9f5c6374d48532299a0a5094af9ad1e3
+[2026-03-21 18:18:01,244] INFO: Backing up system.top_partitions-7e5a361c317c351fb15fffd8afd3dd4b
+[2026-03-21 18:18:01,244] INFO: Backing up system.available_ranges-c539fcabd65a31d18133d25605643ee3
+[2026-03-21 18:18:01,245] INFO: Backing up system.prepared_statements-18a9c2576a0c3841ba718cd529849fef
+[2026-03-21 18:18:01,245] INFO: Backing up system.batches-919a4bc57a333573b03e13fc3f68b465
+[2026-03-21 18:18:01,245] INFO: Backing up system.size_estimates-618f817b005f3678b8a453f3930b8e86
+[2026-03-21 18:18:01,278] INFO: Backing up system.transferred_ranges_v2-1ff78f1a7df13a2aa9986f4932270af5
+[2026-03-21 18:18:01,279] INFO: Backing up system.view_builds_in_progress-6c22df66c3bd3df6b74d21179c6a9fe9
+[2026-03-21 18:18:01,279] INFO: Backing up system_auth.roles-5bc52802de2535edaeab188eecebb090
+[2026-03-21 18:18:01,334] INFO: Backing up system_auth.cidr_groups-9c48af0013f63059bb0e8fcabba6eecb
+[2026-03-21 18:18:01,334] INFO: Backing up system_auth.cidr_permissions-b8b43d5fd6c0331c8f7d765ea658f4c4
+[2026-03-21 18:18:01,334] INFO: Backing up system_auth.resource_role_permissons_index-5f2fbdad91f13946bd25d5da3a5c35ec
+[2026-03-21 18:18:01,334] INFO: Backing up system_auth.network_permissions-d46780c22f1c3db9b4c1b8d9fbc0cc23
+[2026-03-21 18:18:01,335] INFO: Backing up system_auth.role_members-0ecdaa87f8fb3e6088d174fb36fe5c0d
+[2026-03-21 18:18:01,335] INFO: Backing up system_auth.identity_to_role-0bd47a48d6ba3c8eb4420f6349329bda
+[2026-03-21 18:18:01,335] INFO: Backing up system_auth.role_permissions-3afbe79f219431a7add7f5ab90d8ec9c
+[2026-03-21 18:18:01,335] INFO: Backing up system_schema.columns-24101c25a2ae3af787c1b40ee1aca33f
+[2026-03-21 18:18:01,359] INFO: Backing up system_schema.indexes-0feb57ac311f382fba6d9024d305702f
+[2026-03-21 18:18:01,435] INFO: Backing up system_schema.dropped_columns-5e7583b5f3f43af19a39b7e1d6f5f11f
+[2026-03-21 18:18:01,471] INFO: Backing up system_schema.types-5a8b1ca866023f77a0459273d308917a
+[2026-03-21 18:18:01,545] INFO: Backing up system_schema.keyspaces-abac5682dea631c5b535b3d6cffd0fb6
+[2026-03-21 18:18:01,568] INFO: Backing up system_schema.triggers-4df70b666b05325195a132b54005fd48
+[2026-03-21 18:18:01,644] INFO: Backing up system_schema.column_masks-738cc5ed01683268b9d1853d4bc278af
+[2026-03-21 18:18:01,681] INFO: Backing up system_schema.views-9786ac1cdd583201a7cdad556410c985
+[2026-03-21 18:18:01,755] INFO: Backing up system_schema.functions-96489b7980be3e14a70166a0b9159450
+[2026-03-21 18:18:01,790] INFO: Backing up system_schema.tables-afddfb9dbc1e30688056eed6c302ba09
+[2026-03-21 18:18:01,852] INFO: Backing up system_schema.aggregates-924c55872e3a345bb10c12f37c1ba895
+[2026-03-21 18:18:01,885] INFO: Backing up system_distributed.view_build_status-5582b59f8e4e35e1b9133acada51eb04
+[2026-03-21 18:18:01,886] INFO: Backing up system_distributed.repair_history-759fffad624b318180eefa9a52d1f627
+[2026-03-21 18:18:01,886] INFO: Backing up system_distributed.parent_repair_history-deabd734b99d3b9c92e5fd92eb5abf14
+[2026-03-21 18:18:01,886] INFO: Backing up system_distributed.partition_denylist-d6123acc864934969d4ef3fe39a6018b
+[2026-03-21 18:18:01,886] INFO: Backing up formation.employes-9f4f57d0254e11f1b81807c0385d8785
+[2026-03-21 18:18:04,765] INFO: Updating backup index
+[2026-03-21 18:18:04,831] INFO: Backup done
+[2026-03-21 18:18:04,832] INFO: - Started: 2026-03-21 18:17:56
+                        - Started extracting data: 2026-03-21 18:17:57
+                        - Finished: 2026-03-21 18:18:04
+[2026-03-21 18:18:04,832] INFO: - Real duration: 0:00:07.771908 (excludes time waiting for other nodes)
+[2026-03-21 18:18:04,832] INFO: - 456 files, 356.00 KB
+[2026-03-21 18:18:04,832] INFO: - 456 files copied from host (456 new, 0 reuploaded)
+[2026-03-21 18:18:04,833] INFO: - 0 kept from previous backup (sauvegarde_initiale)
 ```
 
 ##### 6.2 Sauvegarde sur cassandra02
