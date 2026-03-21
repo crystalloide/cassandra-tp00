@@ -876,8 +876,23 @@ for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
 done
 ```
 
+##### Reconstruire l'index de Medusa (après une suppresion physique de sauvegardes dans le répertoire central par exemple)
 
-
+```bash
+docker exec cassandra01 medusa build-index
+```
+```bash
+[2026-03-21 18:41:31,392] INFO: Resolving ip address
+[2026-03-21 18:41:31,393] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 18:41:31,779] INFO: Resolving ip address 192.168.100.151
+[2026-03-21 18:41:31,779] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 18:41:31,779] INFO: Resolving ip address 192.168.100.151
+[2026-03-21 18:41:31,779] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 18:41:31,779] INFO: Resolving ip address 192.168.100.153
+[2026-03-21 18:41:31,780] INFO: ip address to resolve 192.168.100.153
+[2026-03-21 18:41:31,781] INFO: processing 192.168.100.151
+[2026-03-21 18:41:31,895] INFO: processing 192.168.100.153
+```
 
 ##### 8.2 Vérifier l'intégrité d'une sauvegarde
 
