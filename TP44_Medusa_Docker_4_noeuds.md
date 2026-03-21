@@ -120,7 +120,7 @@ networks:
 services:
   cassandra01:
     #image: docker.io/library/cassandra:latest
-    image: image: cassandra-medusa:latest
+    image: cassandra-medusa:latest
     hostname: cassandra01
     container_name: cassandra01
     mem_limit: 1g
@@ -163,7 +163,7 @@ services:
       cassandra01:
         condition: service_healthy
     #image: docker.io/library/cassandra:latest
-    image: image: cassandra-medusa:latest
+    image: cassandra-medusa:latest
     hostname: cassandra02
     container_name: cassandra02
     mem_limit: 1g
@@ -206,7 +206,7 @@ services:
       cassandra02:
         condition: service_healthy
     #image: docker.io/library/cassandra:latest
-    image: image: cassandra-medusa:latest
+    image: cassandra-medusa:latest
     hostname: cassandra03
     container_name: cassandra03
     mem_limit: 1g
@@ -249,7 +249,7 @@ services:
       cassandra03:
         condition: service_healthy
     #image: docker.io/library/cassandra:latest
-    image: image: cassandra-medusa:latest
+    image: cassandra-medusa:latest
     hostname: cassandra04
     container_name: cassandra04
     mem_limit: 1g
