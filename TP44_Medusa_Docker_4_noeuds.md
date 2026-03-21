@@ -1,8 +1,8 @@
-# TP44 - Installation et utilisation de Medusa sur cluster Cassandra - environnement docker 4 nœuds (2 racks / 2 DC)
+##### TP44 - Installation et utilisation de Medusa sur cluster Cassandra - environnement docker 4 nœuds (2 racks / 2 DC)
 
 ---
 
-## Objectif
+##### Objectif
 
 Ajouter **Medusa** (outil de sauvegarde/restauration pour Apache Cassandra) au cluster Docker composé de 4 nœuds répartis sur 2 Data Centers et 2 racks. 
 
@@ -10,7 +10,7 @@ Les sauvegardes seront stockées dans un répertoire partagé monté depuis la m
 
 ---
 
-## Architecture cible
+##### Architecture cible
 
 ```
 Machine hôte
@@ -37,14 +37,14 @@ Machine hôte
 
 ---
 
-## Étape 1 — Arrêt du cluster et mise à jour du docker-compose.yml
+##### Étape 1 — Arrêt du cluster et mise à jour du docker-compose.yml
 
-### 1.1 Arrêt propre du cluster existant (exemple)
+##### 1.1 Arrêt propre du cluster existant (exemple)
 
 ```bash
 docker compose -f Cluster_1_noeud_1_rack_1_DC.yml down -v
 ```
-#### Recréation des répertoires pour les volumes persistés :
+##### Recréation des répertoires pour les volumes persistés :
 ```bash
 sudo rm -Rf ~/cassandra-tp00/docker/cassandra*
 mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02 ~/cassandra-tp00/docker/cassandra03 ~/cassandra-tp00/docker/cassandra04
@@ -54,14 +54,14 @@ mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02
 mkdir -p ~/cassandra-tp00/docker/cassandra01-conf ~/cassandra-tp00/docker/cassandra02-conf ~/cassandra-tp00/docker/cassandra03-conf ~/cassandra-tp00/docker/cassandra04-conf
 ```
 
-### 1.2 Création du répertoire de sauvegarde sur l'hôte
+##### 1.2 Création du répertoire de sauvegarde sur l'hôte
 
 ```bash
 mkdir -p ${PWD}/docker/medusa_sauvegarde
 chmod 777 ${PWD}/docker/medusa_sauvegarde
 ```
 
-#### On affiche les répertoires créés :
+##### On affiche les répertoires créés :
 ```bash
 ls ~/cassandra-tp00/docker
 ```
@@ -74,7 +74,7 @@ cassandra04  cassandra04-conf
 medusa_sauvegarde
 ```
 
-### 1.3 Description du fichier docker compose enrichi pour Medusa : 
+##### 1.3 Description du fichier docker compose enrichi pour Medusa : 
 
 On ajoute le volume de sauvegarde `medusa_sauvegarde` à **chacun des 4 services** Cassandra
 
@@ -289,7 +289,7 @@ volumes:
 
 ---
 
-## Étape 2 — Démarrage du cluster mis à jour
+##### Étape 2 — Démarrage du cluster mis à jour
 
 ```bash
 docker compose -f Cluster_4_noeuds_2_racks_2_DC_Medusa.yml up -d
@@ -317,7 +317,7 @@ Vérifier le cluster :
 docker exec cassandra01 nodetool status
 ```
 
-Résultat attendu :
+##### Résultat attendu :
 
 ```
 Datacenter: Nord
@@ -339,7 +339,7 @@ UN  192.168.100.152  85.19 KiB   16      51.2%             bb60dc31-4bf9-47e7-b7
 
 ---
 
-## Étape 3 — Création de données de test
+##### Étape 3 — Création de données de test
 
 Avant de configurer Medusa, on insère des données pour avoir quelque chose à sauvegarder et restaurer.
 
@@ -388,7 +388,7 @@ EXIT;
 
 ---
 
-## Étape 4 — Installation de Medusa dans chaque conteneur
+##### Étape 4 — Installation de Medusa dans chaque conteneur
 
 > **Remarque :** L'image officielle `cassandra:latest` est basée sur Debian. On installe Medusa via pip3 directement dans chaque conteneur. Cette installation ne persiste pas au redémarrage — pour un usage production, construire une image Docker personnalisée.
 > 
@@ -405,7 +405,7 @@ for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
 done
 ```
 
-# Vérifier l'installation
+##### Vérifier l'installation
 medusa --version
 
 ```bash
@@ -417,15 +417,24 @@ for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
 done
 ```
 
-# Résultat attendu : 0.24.x ou supérieur
-
+##### Résultat attendu : 
+```text
+=== Version installée de Medusa sur cassandra01 ===
+0.27.0
+=== Version installée de Medusa sur cassandra02 ===
+0.27.0
+=== Version installée de Medusa sur cassandra03 ===
+0.27.0
+=== Version installée de Medusa sur cassandra04 ===
+0.27.0
+```
 ---
 
-## Étape 5 — Configuration de medusa.ini sur chaque nœud
+##### Étape 5 — Configuration de medusa.ini sur chaque nœud
 
 Le fichier `medusa.ini` doit être créé dans `/etc/medusa/` sur **chaque conteneur**. Les paramètres clés diffèrent uniquement sur `nodetool_host` (l'IP du nœud).
 
-### 5.1 Configuration sur cassandra01
+##### 5.1 Configuration sur cassandra01
 
 ```bash
 docker exec -it cassandra01 bash
@@ -497,7 +506,7 @@ chmod 644 /etc/medusa/medusa.ini
 exit
 ```
 
-### 5.2 Configuration sur cassandra02
+##### 5.2 Configuration sur cassandra02
 
 ```bash
 docker exec -it cassandra02 bash
@@ -536,7 +545,7 @@ EOF
 exit
 ```
 
-### 5.3 Configuration sur cassandra03
+##### 5.3 Configuration sur cassandra03
 
 ```bash
 docker exec -it cassandra03 bash
@@ -575,7 +584,7 @@ EOF
 exit
 ```
 
-### 5.4 Configuration sur cassandra04
+##### 5.4 Configuration sur cassandra04
 
 ```bash
 docker exec -it cassandra04 bash
@@ -616,7 +625,7 @@ exit
 
 ---
 
-## Étape 6 — Sauvegarde différentielle de chaque nœud
+##### Étape 6 — Sauvegarde différentielle de chaque nœud
 
 On lance une sauvegarde différentielle nœud par nœud. Medusa va :
 1. Créer un snapshot via `nodetool snapshot`
@@ -624,7 +633,7 @@ On lance une sauvegarde différentielle nœud par nœud. Medusa va :
 3. Enregistrer le schéma CQL, la tokenmap et un manifeste MD5
 4. Supprimer le snapshot local
 
-### 6.1 Sauvegarde sur cassandra01
+##### 6.1 Sauvegarde sur cassandra01
 
 ```bash
 docker exec cassandra01 medusa backup --backup-name=sauvegarde_initiale
@@ -649,19 +658,19 @@ Résultat attendu :
 [INFO] - X files, X.XX KB
 ```
 
-### 6.2 Sauvegarde sur cassandra02
+##### 6.2 Sauvegarde sur cassandra02
 
 ```bash
 docker exec cassandra02 medusa backup --backup-name=sauvegarde_initiale
 ```
 
-### 6.3 Sauvegarde sur cassandra03
+##### 6.3 Sauvegarde sur cassandra03
 
 ```bash
 docker exec cassandra03 medusa backup --backup-name=sauvegarde_initiale
 ```
 
-### 6.4 Sauvegarde sur cassandra04
+##### 6.4 Sauvegarde sur cassandra04
 
 ```bash
 docker exec cassandra04 medusa backup --backup-name=sauvegarde_initiale
@@ -669,7 +678,7 @@ docker exec cassandra04 medusa backup --backup-name=sauvegarde_initiale
 
 ---
 
-## Étape 7 — Vérification des sauvegardes sur l'hôte
+##### Étape 7 — Vérification des sauvegardes sur l'hôte
 
 Depuis la machine hôte, explorer le répertoire de sauvegarde :
 
@@ -697,7 +706,7 @@ drwxr-xr-x  cassandra04/
 drwxr-xr-x  index/
 ```
 
-Examiner le contenu de la sauvegarde du nœud cassandra01 :
+##### Examiner le contenu de la sauvegarde du nœud cassandra01 :
 
 ```bash
 ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/cassandra01/
@@ -722,9 +731,9 @@ ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/cassandra01/sauvegarde_
 
 ---
 
-## Étape 8 — Lister et vérifier les sauvegardes
+##### Étape 8 — Lister et vérifier les sauvegardes
 
-### 8.1 Lister les sauvegardes disponibles
+##### 8.1 Lister les sauvegardes disponibles
 
 Depuis cassandra01, lister toutes les sauvegardes du répertoire de stockage :
 
@@ -740,7 +749,7 @@ sauvegarde_initiale (started: 2026-03-21 HH:MM:SS, finished: 2026-03-21 HH:MM:SS
 
 > L'option `--show-all` affiche les sauvegardes de **tous les nœuds** dans le stockage, pas uniquement celles du nœud courant.
 
-### 8.2 Vérifier l'intégrité d'une sauvegarde
+##### 8.2 Vérifier l'intégrité d'une sauvegarde
 
 ```bash
 docker exec cassandra01 medusa verify --backup-name=sauvegarde_initiale
@@ -756,7 +765,7 @@ Validating sauvegarde_initiale ...
 
 > En cas de nœud manquant dans la sauvegarde, Medusa le signalera : `Completion: Not complete!` suivi du détail des nœuds manquants.
 
-### 8.3 Afficher le statut détaillé d'une sauvegarde
+##### 8.3 Afficher le statut détaillé d'une sauvegarde
 
 ```bash
 docker exec cassandra01 medusa status --backup-name=sauvegarde_initiale
@@ -773,7 +782,7 @@ sauvegarde_initiale
 
 ---
 
-## Étape 9 — Sauvegarde complète (full)
+##### Étape 9 — Sauvegarde complète (full)
 
 Par défaut, Medusa effectue des sauvegardes **différentielles** (seuls les fichiers nouveaux ou modifiés sont copiés). On peut forcer une sauvegarde complète avec `--mode=full`.
 
@@ -800,9 +809,9 @@ sauvegarde_full     (started: ..., finished: ...)
 
 ---
 
-## Étape 10 — Scénario de restauration d'un nœud
+##### Étape 10 — Scénario de restauration d'un nœud
 
-### 10.1 Simulation d'une perte de données
+##### 10.1 Simulation d'une perte de données
 
 On supprime les données du keyspace `formation` pour simuler une corruption :
 
@@ -821,7 +830,7 @@ SELECT * FROM formation.employes;
 EXIT;
 ```
 
-### 10.2 Restauration du nœud cassandra01
+##### 10.2 Restauration du nœud cassandra01
 
 > **Important :** La restauration Medusa nécessite un arrêt/redémarrage de Cassandra. Dans un contexte Docker sans systemd, on gère cela manuellement.
 
@@ -863,7 +872,7 @@ Attendre que le nœud soit de nouveau opérationnel :
 docker exec cassandra01 nodetool status
 ```
 
-### 10.3 Vérification de la restauration
+##### 10.3 Vérification de la restauration
 
 ```bash
 docker exec -it cassandra01 cqlsh 192.168.100.151 9042
@@ -877,7 +886,7 @@ Résultat attendu : les 4 lignes insérées à l'étape 3 sont de nouveau prése
 
 ---
 
-## Étape 11 — Informations sur la dernière sauvegarde
+##### Étape 11 — Informations sur la dernière sauvegarde
 
 ```bash
 docker exec cassandra01 medusa report-last-backup
@@ -899,9 +908,9 @@ Résultat attendu :
 
 ---
 
-## Étape 12 — Gestion du cycle de vie des sauvegardes
+##### Étape 12 — Gestion du cycle de vie des sauvegardes
 
-### 12.1 Supprimer une sauvegarde spécifique
+##### 12.1 Supprimer une sauvegarde spécifique
 
 ```bash
 # Supprimer la sauvegarde "sauvegarde_initiale" sur le nœud courant
@@ -920,7 +929,7 @@ docker exec cassandra01 medusa \
   delete-backup --backup-name=sauvegarde_initiale
 ```
 
-### 12.2 Purger les sauvegardes obsolètes
+##### 12.2 Purger les sauvegardes obsolètes
 
 La purge supprime automatiquement les sauvegardes selon les règles `max_backup_age` et `max_backup_count` du medusa.ini.
 
@@ -930,7 +939,7 @@ docker exec cassandra01 medusa purge
 
 ---
 
-## Étape 13 — Automatisation avec cron (optionnel)
+##### Étape 13 — Automatisation avec cron (optionnel)
 
 Pour automatiser les sauvegardes quotidiennes, créer un script sur l'hôte :
 
@@ -972,7 +981,7 @@ crontab -e
 
 ---
 
-## Récapitulatif des commandes Medusa
+##### Récapitulatif des commandes Medusa
 
 | Commande | Description |
 |---|---|
@@ -989,7 +998,7 @@ crontab -e
 
 ---
 
-## Points d'attention
+##### Points d'attention
 
 **Persistance de l'installation :** L'installation pip3 dans le conteneur n'est pas persistée. Pour un environnement pérenne, créer un `Dockerfile` personnalisé basé sur `cassandra:latest` avec Medusa pré-installé.
 
