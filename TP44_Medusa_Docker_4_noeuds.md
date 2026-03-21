@@ -107,9 +107,9 @@ On ajoute le volume de sauvegarde `medusa_sauvegarde` à **chacun des 4 services
 
 Voici le fichier complet  :
 ```bash
-gedit Cluster_4_noeuds_2_racks_2_DC_Medusa.yml 
+cat Cluster_4_noeuds_2_racks_2_DC_Medusa.yml 
 ```
-
+##### Contenu : 
 ```yaml
 networks:
   cassandra_network:
@@ -992,7 +992,7 @@ docker run --rm \
     medusa restore-node --backup-name=${BACKUP}
   "
 
-docker compose -f Cluster_1_noeud_1_rack_1_DC.yml up cassandra01 -d
+docker compose -f Cluster_4_noeuds_2_racks_2_DC_Medusa.yml up cassandra01 -d
 
 echo "Attente du redémarrage de ${NODE}..."
 until docker exec ${NODE} nodetool status 2>/dev/null | grep -q "^UN"; do
