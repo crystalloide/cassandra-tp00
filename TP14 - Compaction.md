@@ -278,9 +278,9 @@ ls -lh /opt/cassandra/data/data/entrepriseformation/cours_par_theme-*
 
 ____
 ##### Notez que les fichiers des 3 précédentes SSTable ont disparu, et qu'un nouveau jeu de fichier est apparu.
-##### Notez aussi que les noms de fichiers sont passés de mc-3-big à mc-5-big. 
-##### C'est le résultat de la compaction. 
-##### Cassandra a créé la 4ème SSTable et les a ensuite compacté tous les 4 dans une 5ème SSTable unique.
+##### Notez aussi que les noms de fichiers sont passés de nb-3-big- à nb-5-big-  
+##### => C'est le résultat de la compaction. 
+##### Cassandra a créé la 4ème SSTable et a ensuite compacté les 4 SSTables existantes dans une 5ème SSTable unique.
 ____
 ```bash
 cqlsh -e "use entrepriseformation; SELECT count(*) FROM cours_par_theme;"
