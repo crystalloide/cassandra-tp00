@@ -371,11 +371,11 @@ CREATE TABLE IF NOT EXISTS formation.employes (
 -- Insérer des données
 INSERT INTO formation.employes (id, nom, poste, anciennete)
   VALUES (uuid(), 'Alice Martin',   'DBA',      '10 ans');
-INSERT INTO formation.employes (id, nom, poste, dc)
+INSERT INTO formation.employes (id, nom, poste, anciennete)
   VALUES (uuid(), 'Bob Dupont',     'DevOps',   '20 ans');
-INSERT INTO formation.employes (id, nom, poste, dc)
+INSERT INTO formation.employes (id, nom, poste, anciennete)
   VALUES (uuid(), 'Claire Durand',  'Dev',      '6 mois');
-INSERT INTO formation.employes (id, nom, poste, dc)
+INSERT INTO formation.employes (id, nom, poste, anciennete)
   VALUES (uuid(), 'David Lemaire',  'SRE',      '2 ans');
 ```
 ```sql
