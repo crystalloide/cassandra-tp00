@@ -100,15 +100,15 @@ Consistency level set to LOCAL_QUORUM.
 
 ##### Contenu de products.cql :
 ```cql
-INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb0,'Heavy Lift Arms', 'Heavy lift arms capable of lifting 1,250 lbs of weight per arm. Sold as a set.',4199.99,'2019-01-10 09:48:31.020+0040')IF NOT EXISTS;
-INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb1,'Precision Action Arms','Arms for precision activities in manufacturing or repair. Sold as a set.',12199.99,'2019-01-10 09:28:31.020+0040') IF NOT EXISTS;
-INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb2,'Medium Lift Arms','Medium lift arms capable of lifting 850 lbs of weight per arm. Sold as a set.',3199.99,'2019-01-10 09:23:31.020+0040') IF NOT EXISTS;
-INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb3,'Drill Arms','Arms for drilling into surface material. Sold as a set. Does not include drill bits.',2199.99,'2019-01-10 09:12:31.020+0040') IF NOT EXISTS;
-INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb4,'High Process AI CPU','Head processor unit for robot with heavy AI job process capabilities.',2199.99,'2019-01-10 18:48:31.020+0040') IF NOT EXISTS;
-INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb5,'Basic Task CPU','Head processor unit for robot with basic process tasks.',899.99,'2019-01-10 18:48:31.020+0040') IF NOT EXISTS;
-INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb6,'High Strength Torso','Robot body with reinforced plate to handle heavy workload and weight during jobs.',2199.99,'2019-01-10 18:48:31.020+0040') IF NOT EXISTS;
-INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb7,'Medium Strength Torso','Robot body to handle general jobs.',1999.99,'2019-01-10 18:48:31.020+0040') IF NOT EXISTS;
-INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb8,'Precision Torso','Robot torso built to handle precision jobs with extra stability and accuracy reinforcement.',8199.99,'2019-01-10 18:48:31.020+0040') IF NOT EXISTS;
+INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb0,'Heavy Lift Arms', 'Heavy lift arms capable of lifting 1,250 lbs of weight per arm. Sold as a set.',4199.99,'2026-01-10 09:48:31.020+0040')IF NOT EXISTS;
+INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb1,'Precision Action Arms','Arms for precision activities in manufacturing or repair. Sold as a set.',12199.99,'2026-01-10 09:28:31.020+0040') IF NOT EXISTS;
+INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb2,'Medium Lift Arms','Medium lift arms capable of lifting 850 lbs of weight per arm. Sold as a set.',3199.99,'2026-01-10 09:23:31.020+0040') IF NOT EXISTS;
+INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb3,'Drill Arms','Arms for drilling into surface material. Sold as a set. Does not include drill bits.',2199.99,'2026-01-10 09:12:31.020+0040') IF NOT EXISTS;
+INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb4,'High Process AI CPU','Head processor unit for robot with heavy AI job process capabilities.',2199.99,'2026-01-10 18:48:31.020+0040') IF NOT EXISTS;
+INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb5,'Basic Task CPU','Head processor unit for robot with basic process tasks.',899.99,'2026-01-10 18:48:31.020+0040') IF NOT EXISTS;
+INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb6,'High Strength Torso','Robot body with reinforced plate to handle heavy workload and weight during jobs.',2199.99,'2026-01-10 18:48:31.020+0040') IF NOT EXISTS;
+INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb7,'Medium Strength Torso','Robot body to handle general jobs.',1999.99,'2026-01-10 18:48:31.020+0040') IF NOT EXISTS;
+INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb8,'Precision Torso','Robot torso built to handle precision jobs with extra stability and accuracy reinforcement.',8199.99,'2026-01-10 18:48:31.020+0040') IF NOT EXISTS;
 ```
 
 ##### 
@@ -123,15 +123,15 @@ SELECT * FROM products;
 
 	 product_id                           | created                         | description                                                                                 | price    | product_name
 	--------------------------------------+---------------------------------+---------------------------------------------------------------------------------------------+----------+-----------------------
-	 31047029-2175-43ce-9fdd-b3d568b19bb1 | 2019-01-10 08:48:31.020000+0000 |                    Arms for precision activities in manufacturing or repair. Sold as a set. | 12199.99 | Precision Action Arms
-	 31047029-2175-43ce-9fdd-b3d568b19bb3 | 2019-01-10 08:32:31.020000+0000 |        Arms for drilling into surface material. Sold as a set. Does not include drill bits. |  2199.99 |            Drill Arms
-	 31047029-2175-43ce-9fdd-b3d568b19bb6 | 2019-01-10 18:08:31.020000+0000 |           Robot body with reinforced plate to handle heavy workload and weight during jobs. |  2199.99 |   High Strength Torso
-	 31047029-2175-43ce-9fdd-b3d568b19bb0 | 2019-01-10 09:08:31.020000+0000 |              Heavy lift arms capable of lifting 1,250 lbs of weight per arm. Sold as a set. |  4199.99 |       Heavy Lift Arms
-	 31047029-2175-43ce-9fdd-b3d568b19bb8 | 2019-01-10 18:08:31.020000+0000 | Robot torso built to handle precision jobs with extra stability and accuracy reinforcement. |  8199.99 |       Precision Torso
-	 31047029-2175-43ce-9fdd-b3d568b19bb2 | 2019-01-10 08:43:31.020000+0000 |               Medium lift arms capable of lifting 850 lbs of weight per arm. Sold as a set. |  3199.99 |      Medium Lift Arms
-	 31047029-2175-43ce-9fdd-b3d568b19bb4 | 2019-01-10 18:08:31.020000+0000 |                       Head processor unit for robot with heavy AI job process capabilities. |  2199.99 |   High Process AI CPU
-	 31047029-2175-43ce-9fdd-b3d568b19bb7 | 2019-01-10 18:08:31.020000+0000 |                                                          Robot body to handle general jobs. |  1999.99 | Medium Strength Torso
-	 31047029-2175-43ce-9fdd-b3d568b19bb5 | 2019-01-10 18:08:31.020000+0000 |                                     Head processor unit for robot with basic process tasks. |   899.99 |        Basic Task CPU
+	 31047029-2175-43ce-9fdd-b3d568b19bb1 | 2026-01-10 08:48:31.020000+0000 |                    Arms for precision activities in manufacturing or repair. Sold as a set. | 12199.99 | Precision Action Arms
+	 31047029-2175-43ce-9fdd-b3d568b19bb3 | 2026-01-10 08:32:31.020000+0000 |        Arms for drilling into surface material. Sold as a set. Does not include drill bits. |  2199.99 |            Drill Arms
+	 31047029-2175-43ce-9fdd-b3d568b19bb6 | 2026-01-10 18:08:31.020000+0000 |           Robot body with reinforced plate to handle heavy workload and weight during jobs. |  2199.99 |   High Strength Torso
+	 31047029-2175-43ce-9fdd-b3d568b19bb0 | 2026-01-10 09:08:31.020000+0000 |              Heavy lift arms capable of lifting 1,250 lbs of weight per arm. Sold as a set. |  4199.99 |       Heavy Lift Arms
+	 31047029-2175-43ce-9fdd-b3d568b19bb8 | 2026-01-10 18:08:31.020000+0000 | Robot torso built to handle precision jobs with extra stability and accuracy reinforcement. |  8199.99 |       Precision Torso
+	 31047029-2175-43ce-9fdd-b3d568b19bb2 | 2026-01-10 08:43:31.020000+0000 |               Medium lift arms capable of lifting 850 lbs of weight per arm. Sold as a set. |  3199.99 |      Medium Lift Arms
+	 31047029-2175-43ce-9fdd-b3d568b19bb4 | 2026-01-10 18:08:31.020000+0000 |                       Head processor unit for robot with heavy AI job process capabilities. |  2199.99 |   High Process AI CPU
+	 31047029-2175-43ce-9fdd-b3d568b19bb7 | 2026-01-10 18:08:31.020000+0000 |                                                          Robot body to handle general jobs. |  1999.99 | Medium Strength Torso
+	 31047029-2175-43ce-9fdd-b3d568b19bb5 | 2026-01-10 18:08:31.020000+0000 |                                     Head processor unit for robot with basic process tasks. |   899.99 |        Basic Task CPU
 
 	(9 rows)
 ```
@@ -216,18 +216,18 @@ CREATE CUSTOM INDEX products_created_idx ON products (created) USING 'StorageAtt
 
 ##### Essayez maintenant de sélectionner les produits qui ont été créés à un moment précis : 
 ```cql
-SELECT * FROM products WHERE created = '2019-01-10 18:48:31.020+0040';
+SELECT * FROM products WHERE created = '2026-01-10 18:48:31.020+0040';
 ```
 
-##### Ensuite, nous sélectionnerons dans products ce qui a été créé entre deux heures différentes de la journée le 2019-01-10 :
+##### Ensuite, nous sélectionnerons dans products ce qui a été créé entre deux heures différentes de la journée le 2026-01-10 :
 ```cql
-SELECT * FROM products WHERE created >= '2019-01-10 09:12:31.020+0040' AND created <= '2019-01-10 18:48:31.020+0040';
+SELECT * FROM products WHERE created >= '2026-01-10 09:12:31.020+0040' AND created <= '2026-01-10 18:48:31.020+0040';
 ```
-##### Tous les produits créés entre 2019-01-10 09:12:31.020+0040 et 2019-01-10 18:48:31.020+0040 sont bien retournés.
+##### Tous les produits créés entre 2026-01-10 09:12:31.020+0040 et 2026-01-10 18:48:31.020+0040 sont bien retournés.
 
 ##### Enfin, essayez de sélectionner un produit créé à un moment précis, avec un certain nom de produit : 
 ```cql
-SELECT * FROM products WHERE created = '2019-01-10 18:48:31.020+0040' AND product_name = 'Precision Torso';
+SELECT * FROM products WHERE created = '2026-01-10 18:48:31.020+0040' AND product_name = 'Precision Torso';
 ```
 
 ##### Si jamais vous devez supprimer un index, utilisez la commande DROP INDEX : 
