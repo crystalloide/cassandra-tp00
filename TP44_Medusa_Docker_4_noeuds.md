@@ -470,7 +470,7 @@ nodetool_port = 7199
 check_running = nodetool version
 
 ; Résolution des adresses IP
-resolve_ip_addresses = True
+resolve_ip_addresses = False
 
 ; Pas besoin de sudo dans le conteneur (on est root)
 use_sudo = False
@@ -509,6 +509,7 @@ multi_part_upload_threshold = 104857600
 enabled = 1
 file = /var/log/cassandra/medusa.log
 level = INFO
+fqdn = cassandra01
 EOF
 ```
 
@@ -537,7 +538,7 @@ config_file = /opt/cassandra/conf/cassandra.yaml
 nodetool_host = 192.168.100.152
 nodetool_port = 7199
 check_running = nodetool version
-resolve_ip_addresses = True
+resolve_ip_addresses = False
 use_sudo = False
 
 [storage]
@@ -556,6 +557,7 @@ multi_part_upload_threshold = 104857600
 enabled = 1
 file = /var/log/cassandra/medusa.log
 level = INFO
+fqdn = cassandra02
 EOF
 ```
 
@@ -580,7 +582,7 @@ config_file = /opt/cassandra/conf/cassandra.yaml
 nodetool_host = 192.168.100.153
 nodetool_port = 7199
 check_running = nodetool version
-resolve_ip_addresses = True
+resolve_ip_addresses = False
 use_sudo = False
 
 [storage]
@@ -599,6 +601,7 @@ multi_part_upload_threshold = 104857600
 enabled = 1
 file = /var/log/cassandra/medusa.log
 level = INFO
+fqdn = cassandra03
 EOF
 ```
 
@@ -623,7 +626,7 @@ config_file = /opt/cassandra/conf/cassandra.yaml
 nodetool_host = 192.168.100.154
 nodetool_port = 7199
 check_running = nodetool version
-resolve_ip_addresses = True
+resolve_ip_addresses = False
 use_sudo = False
 
 [storage]
@@ -642,6 +645,7 @@ multi_part_upload_threshold = 104857600
 enabled = 1
 file = /var/log/cassandra/medusa.log
 level = INFO
+fqdn = cassandra04
 EOF
 ```
 
