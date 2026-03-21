@@ -141,9 +141,11 @@ VALUES ('cassandra', toTimestamp(now()), uuid(), 'Cassandra Master');
 ```cql	
 SELECT * from entrepriseformation.cours_par_theme;
 ```	
+
 ____	
 ##### 7°) On quitte cqlsh et on force Cassandra à flusher la memtable sur une SSTable :
 ____
+
 ```cql
 exit 
 ```
@@ -154,7 +156,7 @@ docker exec -it cassandra01 nodetool flush
 
 
 ____
-##### 8°) Investiguez sur la SSTable dans le répertoire /data du noeud. 
+##### 8°) Investiguons sur la SSTable dans le répertoire /data du noeud : 
 #####    Rappelez-vous que le nom actuel du répertoire est une valeur aléatoire unique 
 #####    dans /opt/cassandra/data/data/entrepriseformation/  :
 ____
@@ -167,12 +169,10 @@ docker exec -it cassandra01 bash
 ls -lh /opt/cassandra/data/data/entrepriseformation/cours_par_theme-*
 ```
 
-##### Vous noterez plusieurs fichiers dont les noms commencent ici par "bb-1-bti-"
-##### Attention, les noms de fichier varient : 
-##### Dans votre cas, cela sera un autre préfixe (ce préfixe varie suivant la version de cassandra) 
+##### Vous noterez plusieurs fichiers dont les noms commencent ici par "nb-1-big-"
+##### Attention, les noms de fichier varient selon les versions de cassandra : 
+##### Dans votre cas, cela sera ce même préfixe **nb-1-big-** ou un autre si la version de cassandra a évolué. 
 ##### Ce sont les fichiers associés avec la 1ère SSTable.
-____
-
 
 
 ____
