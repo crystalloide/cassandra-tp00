@@ -269,7 +269,7 @@ ____
 ##### 15°) Flushez puis investiguez dans le répertoire data à nouveau :
 ____
 ```bash
-docker exec -it cassandra01 nodetool flush
+nodetool flush
 ```
 
 ```bash
