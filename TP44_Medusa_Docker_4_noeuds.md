@@ -935,6 +935,10 @@ EXIT;
 NODE=cassandra01
 BACKUP=sauvegarde_v2
 
+docker exec ${NODE} nodetool drain
+docker stop ${NODE}
+docker rm ${NODE}
+
 docker run --rm \
   --name medusa-restore-${NODE} \
   --hostname ${NODE} \
@@ -947,13 +951,12 @@ docker run --rm \
   cassandra:latest \
   bash -c "
     apt-get update -qq &&
-    apt-get install -y python3-pip python3-dev gcc -qq &&
+    apt-get install -y python3-pip python3-dev gcc sudo -qq &&
     pip3 install cassandra-medusa --break-system-packages -q &&
     medusa restore-node --backup-name=${BACKUP}
   "
 
-docker update --restart=always ${NODE}
-docker start ${NODE}
+docker compose up -d cassandra01
 
 echo "Attente du redémarrage de ${NODE}..."
 until docker exec ${NODE} nodetool status 2>/dev/null | grep -q "^UN"; do
