@@ -134,8 +134,8 @@ ____
 ##### 6°) Insertion d'un simple enregistrement dans la table :
 ____
 ```cql
-INSERT INTO cours_par_theme (theme,ajout_date,cours_id,intitule)
-    VALUES ('cassandra', dateof(now()), uuid(), 'Cassandra Master');
+INSERT INTO cours_par_theme (theme, ajout_date, cours_id, intitule)
+VALUES ('cassandra', toTimestamp(now()), uuid(), 'Cassandra Master');
 ```	
 	
 	
@@ -175,7 +175,7 @@ ____
 
 ```cql
 INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule)
-    VALUES ('cassandra', dateof(now()), uuid(), 'Cassandra Genius');
+    VALUES ('cassandra', toTimestamp(now()), uuid(), 'Cassandra Genius');
 	
 ```
 
@@ -208,7 +208,7 @@ docker exec -it cassandra01 bash
 ```
 
 ```bash
-cqlsh -e "INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule)VALUES ('cassandra', dateof(now()), uuid(), 'Cassandra Wizard');"
+cqlsh -e "INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule)VALUES ('cassandra', toTimestamp(now()), uuid(), 'Cassandra Wizard');"
 ```
 
 ```bash
@@ -243,11 +243,11 @@ ____
 ##### 14°) Insérez une 4ème ligne :
 ____
 ```bash
-cqlsh -e "tracing on; INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule) VALUES ('cassandra', dateof(now()), uuid(), 'Cassandra Ninja');"
+cqlsh -e "tracing on; INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule) VALUES ('cassandra', toTimestamp(now()), uuid(), 'Cassandra Ninja');"
 ```
 
 ```bash
-cqlsh -e "tracing on; INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule) VALUES ('cassandra', dateof(now()), uuid(), 'Cassandra NinjaPlus');"
+cqlsh -e "tracing on; INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule) VALUES ('cassandra', toTimestamp(now()), uuid(), 'Cassandra NinjaPlus');"
 ```
 
 
@@ -285,11 +285,11 @@ ls -lh /opt/cassandra/data/data/entrepriseformation/cours_par_theme-*
 ```
 
 ```bash
-cqlsh -e "tracing on; INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule) VALUES ('cassandra', dateof(now()), uuid(), 'Cassandra Ninja2');"
+cqlsh -e "tracing on; INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule) VALUES ('cassandra', toTimestamp(now()), uuid(), 'Cassandra Ninja2');"
 ```
 
 ```bash
-cqlsh -e "tracing on; INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule) VALUES ('cassandra', dateof(now()), uuid(), 'Cassandra Ninja3');"
+cqlsh -e "tracing on; INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule) VALUES ('cassandra', toTimestamp(now()), uuid(), 'Cassandra Ninja3');"
 ```
 
 ```bash
