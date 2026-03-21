@@ -179,10 +179,17 @@ ____
 ##### 9°) Création d'une seconde SSTable. Pour cela,  on ajoute un second enregistrement avant de flusher  : 
 ____
 
+```bash
+exit
+```
+
+```bash
+docker exec -it cassandra01 cqlsh
+```
+
 ```cql
 INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule)
     VALUES ('cassandra', toTimestamp(now()), uuid(), 'Cassandra Genius');
-	
 ```
 
 ```cql	
