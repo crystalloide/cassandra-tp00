@@ -984,7 +984,7 @@ docker run --rm \
   -v ${PWD}/docker/cassandra01-conf:/opt/cassandra/conf \
   -v ${PWD}/docker/medusa_sauvegarde:/medusa_sauvegarde \
   -v ${PWD}/medusa-conf/cassandra01/medusa.ini:/etc/medusa/medusa.ini \
-  cassandra:latest \
+  cassandra-medusa:latest \
   bash -c "
     apt-get update -qq &&
     apt-get install -y python3-pip python3-dev gcc sudo -qq &&
