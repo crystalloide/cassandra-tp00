@@ -1042,15 +1042,20 @@ docker exec cassandra01 medusa report-last-backup
 Résultat attendu :
 
 ```
-[INFO] Latest node backup finished XXXXX seconds ago
-[INFO] Latest complete backup:
-[INFO] - Name: sauvegarde_full
-[INFO] - Finished: XXXXX seconds ago
-[INFO] Latest backup:
-[INFO] - Name: sauvegarde_full
-[INFO] - Complete backup: 4 nodes have completed the backup
-[INFO] - Total size: X.XX MB
-[INFO] - Total files: XXXX
+[2026-03-21 21:22:35,586] INFO: Resolving ip address
+[2026-03-21 21:22:35,586] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 21:22:35,587] INFO: Monitoring provider is noop
+[2026-03-21 21:22:35,669] INFO: Latest node backup finished 689 seconds ago
+[2026-03-21 21:22:35,671] INFO: Latest complete backup:
+[2026-03-21 21:22:35,671] INFO: - Name: sauvegarde_full
+[2026-03-21 21:22:35,672] INFO: - Finished: 663 seconds ago
+[2026-03-21 21:22:35,672] INFO: Latest backup:
+[2026-03-21 21:22:35,673] INFO: - Name: sauvegarde_full
+[2026-03-21 21:22:35,673] INFO: - Finished: True
+[2026-03-21 21:22:35,673] INFO: - Details - Node counts
+[2026-03-21 21:22:35,673] INFO: - Complete backup: 4 nodes have completed the backup
+[2026-03-21 21:22:35,678] INFO: - Total size: 707.70 KiB
+[2026-03-21 21:22:35,679] INFO: - Total files: 848
 ```
 
 ---
@@ -1060,20 +1065,24 @@ Résultat attendu :
 ##### 12.1 Supprimer une sauvegarde spécifique
 
 ```bash
+docker exec cassandra01 medusa list-backups --show-all
+```
+
+```bash
 # Supprimer la sauvegarde "sauvegarde_initiale" sur le nœud courant
-docker exec cassandra01 medusa delete-backup --backup-name=sauvegarde_initiale
+docker exec cassandra01 medusa delete-backup --backup-name=sauvegarde_full
 
 # Répéter sur chaque nœud pour une suppression globale
-docker exec cassandra02 medusa delete-backup --backup-name=sauvegarde_initiale
-docker exec cassandra03 medusa delete-backup --backup-name=sauvegarde_initiale
-docker exec cassandra04 medusa delete-backup --backup-name=sauvegarde_initiale
+docker exec cassandra02 medusa delete-backup --backup-name=sauvegarde_full
+docker exec cassandra03 medusa delete-backup --backup-name=sauvegarde_full
+docker exec cassandra04 medusa delete-backup --backup-name=sauvegarde_full
 ```
 
 > Pour forcer la suppression immédiate des fichiers (sans attendre le délai de grâce de 10 jours) :
 ```bash
 docker exec cassandra01 medusa \
   --backup-grace-period-in-days=0 \
-  delete-backup --backup-name=sauvegarde_initiale
+  delete-backup --backup-name=sauvegarde_v2
 ```
 
 ##### 12.2 Purger les sauvegardes obsolètes
