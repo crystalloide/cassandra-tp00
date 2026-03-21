@@ -804,17 +804,17 @@ Résultat attendu (un répertoire par nœud + index) :
 
 ```
 ...
-drwxr-xr-x 4 root root 4096 Mar 21 19:18 cassandra01
-drwxr-xr-x 4 root root 4096 Mar 21 19:20 cassandra02
-drwxr-xr-x 4 root root 4096 Mar 21 19:22 cassandra03
-drwxr-xr-x 4 root root 4096 Mar 21 19:23 cassandra04
-drwxr-xr-x 4 root root 4096 Mar 21 19:18 index
+drwxr-xr-x 4 root root 4096 Mar 21 19:49 192.168.100.151
+drwxr-xr-x 4 root root 4096 Mar 21 19:49 192.168.100.152
+drwxr-xr-x 4 root root 4096 Mar 21 19:49 192.168.100.153
+drwxr-xr-x 4 root root 4096 Mar 21 19:49 192.168.100.154
+drwxr-xr-x 4 root root 4096 Mar 21 19:49 index
 ```
 
 ##### Examiner le contenu de la sauvegarde du nœud cassandra01 :
 
 ```bash
-ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/formation/cassandra01/
+ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/formation/192.168.100.151/
 ```
 
 ```
@@ -824,7 +824,7 @@ drwxr-xr-x 3 root root 4096 Mar 21 19:17 sauvegarde_initiale
 ```
 
 ```bash
-ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/formation/cassandra01/sauvegarde_initiale/meta/
+ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/formation/192.168.100.151/sauvegarde_initiale/meta/
 ```
 ```
 -rw-r--r-- 1 root root    12 Mar 21 19:17 differential
@@ -857,10 +857,13 @@ docker exec cassandra01 medusa list-backups --show-all
 Résultat attendu :
 
 ```
-sauvegarde_initiale (started: 2026-03-21 HH:MM:SS, finished: 2026-03-21 HH:MM:SS)
+[2026-03-21 18:51:25,651] INFO: Resolving ip address
+[2026-03-21 18:51:25,651] INFO: ip address to resolve 192.168.100.151
+sauvegarde_initiale (started: 2026-03-21 18:49:06, finished: 2026-03-21 18:49:58)
 ```
 
 > L'option `--show-all` affiche les sauvegardes de **tous les nœuds** dans le stockage, pas uniquement celles du nœud courant.
+> Mais dans notre cas, Medusa est installé sur chaque noeud : il ne voit que les sauvegardes du noeud en question 
 
 
 ##### Si besoin : en cas d'anomalie et après correction : Nettoyage et nouvelle sauvegarde propre : 
@@ -881,7 +884,7 @@ for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
 done
 ```
 
-##### Reconstruire l'index de Medusa (après une suppresion physique de sauvegardes dans le répertoire central par exemple)
+##### Reconstruire l'index de Medusa sur chaque noeud  (après une suppresion physique de sauvegardes dans le répertoire central par exemple)
 
 ```bash
 docker exec cassandra01 medusa build-index
@@ -908,6 +911,8 @@ docker exec cassandra01 medusa verify --backup-name=sauvegarde_initiale
 Résultat attendu :
 
 ```
+[2026-03-21 18:52:58,799] INFO: Resolving ip address
+[2026-03-21 18:52:58,799] INFO: ip address to resolve 192.168.100.151
 Validating sauvegarde_initiale ...
 - Completion: OK!
 - Manifest validated: OK!!
