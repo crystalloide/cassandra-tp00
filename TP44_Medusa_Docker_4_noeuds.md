@@ -8,7 +8,7 @@ Ajouter Medusa (outil de sauvegarde/restauration pour Apache Cassandra) au clust
 composé de 4 nœuds répartis sur 2 Data Centers et 2 racks. 
 
 Les sauvegardes seront stockées dans un répertoire partagé monté depuis la machine hôte :
-`${PWD}/docker/medusa_sauvegarde`.
+${PWD}/docker/medusa_sauvegarde
 ```
 ---
 
