@@ -248,7 +248,7 @@ Utilisation sur des colonnes à faible cardinalité :
 Exemple : 
 - Sur une grande quantité de livres, mais répartis en quelques genres seulement (12 types : thriller, policier ,etc)
 - Permet de rechercher tous les livres d'un certain genre :
-  => requête potentiellement très coûteuse car susceptible de retourner un grand nombre de résultat)
+  => requête potentiellement très coûteuse (car susceptible de retourner un grand nombre de résultat)
 
 => A utiliser sur des petits jeux de données ou pour du prototypage
 
