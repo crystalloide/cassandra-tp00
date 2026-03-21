@@ -1156,7 +1156,7 @@ crontab -e
 
 ##### Points d'attention
 
-**Persistance de l'installation :** L'installation pip3 dans le conteneur n'est pas persistée. Pour un environnement pérenne, créer un `Dockerfile` personnalisé basé sur `cassandra:latest` avec Medusa pré-installé.
+**Persistance de l'installation :** L'installation pip3 dans le conteneur n'est pas persistée. Pour un environnement pérenne, on a créé un `Dockerfile` personnalisé basé sur `cassandra:latest` avec Medusa pré-installé.
 
 **JMX et LOCAL_JMX=no :** Le cluster est configuré en mode JMX distant. Medusa se connecte via `nodetool_host` (l'IP du conteneur) et `nodetool_port = 7199`. Si nodetool ne répond pas, vérifier que les ports JMX sont bien accessibles depuis l'intérieur du conteneur.
 
