@@ -39,6 +39,28 @@ Machine hôte
 
 ---
 
+##### Pré-requis — Construction d'une image docker Cassandra avec Medusa installé :
+```bash
+cat > Dockerfile-cassandra-medusa << 'EOF'
+FROM cassandra:latest
+RUN apt-get update && \
+    apt-get install -y python3-venv python3-dev gcc sudo && \
+    python3 -m venv /opt/medusa-venv && \
+    /opt/medusa-venv/bin/pip install --upgrade pip && \
+    /opt/medusa-venv/bin/pip install cassandra-medusa && \
+    ln -sf /opt/medusa-venv/bin/medusa /usr/local/bin/medusa && \
+    rm -rf /var/lib/apt/lists/*
+EOF
+```
+
+```bash
+docker build -t cassandra-medusa:latest -f Dockerfile-cassandra-medusa .
+```
+
+
+
+
+
 ##### Étape 1 — Arrêt du cluster et mise à jour du docker-compose.yml
 
 ##### 1.1 Arrêt propre du cluster existant (exemple)
@@ -94,7 +116,8 @@ networks:
 
 services:
   cassandra01:
-    image: docker.io/library/cassandra:latest
+    #image: docker.io/library/cassandra:latest
+    image: image: cassandra-medusa:latest
     hostname: cassandra01
     container_name: cassandra01
     mem_limit: 1g
@@ -106,7 +129,8 @@ services:
     volumes:
       - ${PWD}/docker/cassandra01:/var/lib/cassandra
       - conf01:/opt/cassandra/conf
-      - medusa_sauvegarde:/medusa_sauvegarde    # ← AJOUT
+      - medusa_sauvegarde:/medusa_sauvegarde
+      - ${PWD}/medusa-conf/cassandra01/medusa.ini:/etc/medusa/medusa.ini   # ← AJOUT
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra02
@@ -135,7 +159,8 @@ services:
     depends_on:
       cassandra01:
         condition: service_healthy
-    image: docker.io/library/cassandra:latest
+    #image: docker.io/library/cassandra:latest
+    image: image: cassandra-medusa:latest
     hostname: cassandra02
     container_name: cassandra02
     mem_limit: 1g
@@ -147,7 +172,8 @@ services:
     volumes:
       - ${PWD}/docker/cassandra02:/var/lib/cassandra
       - conf02:/opt/cassandra/conf
-      - medusa_sauvegarde:/medusa_sauvegarde    # ← AJOUT
+      - medusa_sauvegarde:/medusa_sauvegarde
+      - ${PWD}/medusa-conf/cassandra02/medusa.ini:/etc/medusa/medusa.ini   # ← AJOUT
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra02
@@ -176,7 +202,8 @@ services:
     depends_on:
       cassandra02:
         condition: service_healthy
-    image: docker.io/library/cassandra:latest
+    #image: docker.io/library/cassandra:latest
+    image: image: cassandra-medusa:latest
     hostname: cassandra03
     container_name: cassandra03
     mem_limit: 1g
@@ -188,7 +215,8 @@ services:
     volumes:
       - ${PWD}/docker/cassandra03:/var/lib/cassandra
       - conf03:/opt/cassandra/conf
-      - medusa_sauvegarde:/medusa_sauvegarde    # ← AJOUT
+      - medusa_sauvegarde:/medusa_sauvegarde
+      - ${PWD}/medusa-conf/cassandra03/medusa.ini:/etc/medusa/medusa.ini   # ← AJOUT
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra02
@@ -217,7 +245,8 @@ services:
     depends_on:
       cassandra03:
         condition: service_healthy
-    image: docker.io/library/cassandra:latest
+    #image: docker.io/library/cassandra:latest
+    image: image: cassandra-medusa:latest
     hostname: cassandra04
     container_name: cassandra04
     mem_limit: 1g
@@ -229,7 +258,8 @@ services:
     volumes:
       - ${PWD}/docker/cassandra04:/var/lib/cassandra
       - conf04:/opt/cassandra/conf
-      - medusa_sauvegarde:/medusa_sauvegarde    # ← AJOUT
+      - medusa_sauvegarde:/medusa_sauvegarde
+      - ${PWD}/medusa-conf/cassandra04/medusa.ini:/etc/medusa/medusa.ini   # ← AJOUT
     environment:
       - CASSANDRA_CLUSTER_NAME=formation
       - CASSANDRA_SEEDS=cassandra01,cassandra02
@@ -280,7 +310,6 @@ volumes:
       o: bind
       device: ${PWD}/docker/cassandra04-conf
 
-  # ← NOUVEAU VOLUME PARTAGÉ
   medusa_sauvegarde:
     driver: local
     driver_opts:
@@ -980,10 +1009,20 @@ docker exec -it cassandra01 cqlsh 192.168.100.151 9042
 ```
 
 ```sql
+-- Pour avoir la réponse en faisant le tour de tous les noeuds cassandra (1 seul a été restauré) :
+CONSISTENCY ALL
 SELECT * FROM formation.employes;
 ```
 
 Résultat attendu : les 4 lignes insérées à l'étape 3 sont de nouveau présentes.
+
+```sql
+CONSISTENCY ONE
+SELECT * FROM formation.employes;
+```
+```sql
+EXIT;
+```
 
 ---
 
