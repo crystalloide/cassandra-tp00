@@ -357,7 +357,8 @@ CREATE KEYSPACE IF NOT EXISTS formation
     'Nord': 2,
     'Terres-de-la-Couronne': 2
   };
-
+```
+```sql
 -- Créer une table
 CREATE TABLE IF NOT EXISTS formation.employes (
   id   UUID PRIMARY KEY,
@@ -365,7 +366,8 @@ CREATE TABLE IF NOT EXISTS formation.employes (
   poste TEXT,
   anciennete    TEXT
 );
-
+```
+```sql
 -- Insérer des données
 INSERT INTO formation.employes (id, nom, poste, anciennete)
   VALUES (uuid(), 'Alice Martin',   'DBA',      '10 ans');
@@ -375,10 +377,12 @@ INSERT INTO formation.employes (id, nom, poste, dc)
   VALUES (uuid(), 'Claire Durand',  'Dev',      '6 mois');
 INSERT INTO formation.employes (id, nom, poste, dc)
   VALUES (uuid(), 'David Lemaire',  'SRE',      '2 ans');
-
+```
+```sql
 -- Vérifier
 SELECT * FROM formation.employes;
-
+```
+```sql
 EXIT;
 ```
 
