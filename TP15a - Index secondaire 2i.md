@@ -24,12 +24,7 @@ DROP KEYSPACE IF EXISTS EntrepriseFormation;
 ```
 
 ```cql
-CREATE KEYSPACE EntrepriseFormation
-WITH replication = {
-    'class': 'NetworkTopologyStrategy',
-    'Nord': 1,
-    'Terres-de-la-Couronne': 1
-};
+CREATE KEYSPACE EntrepriseFormation WITH replication = {'class':'SimpleStrategy', 'replication_factor': 1};
 ```
 
 ____
