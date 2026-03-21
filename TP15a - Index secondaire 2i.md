@@ -158,13 +158,14 @@ ____
 ###### 9°) Creation d'un index 
 ____
 ```text
-Sans index,  la Clause WHERE doit permettre de préciser le noeud visé 
-et donc doit impérativement indiquer la (ou les) colonne(s) de la clé de partitionnement 
+Sans index, la clause "WHERE" doit préciser le noeud visé et donc impérativement indiquer la (ou les) colonne(s) de la clé de partitionnement 
 
-Ici on va donc créer un index pour pouvoir utiliser la clause WHERE en recherchant un intitule précis : 
-CREATE INDEX index_intitule_cours on cours (intitule);
+Ici, on va donc créer un index pour pouvoir utiliser la clause WHERE en recherchant un intitule précis :
 ```
 
+```cql
+CREATE INDEX index_intitule_cours on cours (intitule);
+```
 
 ____
 ###### 10°) Regardons l'effet de la creation de l'index 
