@@ -158,7 +158,7 @@ SELECT * FROM products WHERE product_name = 'Drill Arms';
 
 ##### Vous devriez voir un message d'erreur :
 ```text
-		token@cqlsh:formation> SELECT * FROM products WHERE product_name = 'Drill Arms';
+		cqlsh:formation> SELECT * FROM products WHERE product_name = 'Drill Arms';
 		InvalidRequest: Error from server: code=2200 [Invalid query] message="Cannot execute this query as it might involve data filtering and thus may have unpredictable performance. 
 		If you want to execute this query despite the performance unpredictability, use ALLOW FILTERING"
 ```
