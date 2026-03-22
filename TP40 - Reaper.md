@@ -257,10 +257,26 @@ INFO  [...] Reaper is ready
 ### 6.3 Vérifier que les tables ont été créées
 
 ```bash
-docker exec -it cassandra01 cqlsh -e "DESCRIBE TABLES IN reaper_db;"
+docker exec -it cassandra01 cqlsh -e "USE reaper_db; DESCRIBE TABLES;"
 ```
 
-Vous devriez voir des tables comme `cluster`, `repair_run`, `repair_schedule`, `repair_segment`, etc.
+##### Affcihage en retour :
+
+```texte
+
+Vous devriez voir des tables comme `cluster`, `repair_run`, `repair_schedule`, `repair_segment`, etc :
+
+cluster                        repair_run_by_cluster_v2                 snapshot
+diagnostic_event_subscription  repair_run_by_unit
+leader                         repair_schedule_by_cluster_and_keyspace
+node_metrics_v1                repair_schedule_v1
+node_metrics_v3                repair_unit_v1
+node_operations                running_reapers
+percent_repaired_by_schedule   running_repairs
+repair_run                     schema_migration
+repair_run_by_cluster          schema_migration_leader
+
+```
 
 ### 6.4 Test de connectivité
 
