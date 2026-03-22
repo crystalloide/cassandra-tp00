@@ -260,7 +260,7 @@ INFO  [...] Reaper is ready
 docker exec -it cassandra01 cqlsh -e "USE reaper_db; DESCRIBE TABLES;"
 ```
 
-##### Affcihage en retour :
+##### Affichage en retour :
 
 ```texte
 
@@ -391,11 +391,18 @@ EXIT;
 |---|---|
 | **Cluster** | `formation` |
 | **Keyspace** | `test_repair` |
+| **Owner** | `cassandra_test` |
+| **Cause** |  *(laisser vide)* |
 | **Tables** | *(laisser vide = toutes)* |
-| **Repair parallelism** | `DATACENTER_AWARE` |
-| **Intensity** | `0.5` |
-| **Incremental repair** | ☐ (décoché pour ce lab) |
+| **Blacklist** | *(laisser vide = aucune)* |
+| **Nodes** | *(laisser vide = tous)* |
 | **Datacenters** | `Nord, Terres-de-la-Couronne` |
+| **Segments per node** | `16` |
+| **Parallelism** | `DC_Aware` |
+| **Repair Intensity** | `0.5` |
+| **Repair type** | `Full Subrange` |
+| **Segment timeout** | `10` |
+
 
 3. Cliquez sur **"Repair"**
 
