@@ -156,45 +156,23 @@ Ajoutez le bloc suivant dans la section `services:` de votre `docker-compose.yml
     networks:
       cassandra_network:
         ipv4_address: 192.168.100.175
+    volumes:
+      - ${PWD}/monitoring/reaper/cassandra-reaper.yml:/reaper-config.yml   
+    command: ["server", "/reaper-config.yml"]                               # ← pointe sur notre fichier
     environment:
-      # ── Connexion au cluster Cassandra (backend de stockage) ──
-      - REAPER_STORAGE_TYPE=cassandra
-      - REAPER_CASS_CLUSTER_NAME=formation
-      - REAPER_CASS_CONTACT_POINTS=["192.168.100.151","192.168.100.152"]
-      - REAPER_CASS_PORT=9042
-      - REAPER_CASS_KEYSPACE=reaper_db
-      - REAPER_CASS_LOCAL_DC=Nord
-
-      # ── Authentification Cassandra (pas d'auth dans ce lab) ──
-      - REAPER_CASS_AUTH_ENABLED=false
-
-      # ── Paramètres de réparation ──
-      - REAPER_REPAIR_PARALLELISM=DATACENTER_AWARE
-      - REAPER_REPAIR_INTENSITY=0.5
-      - REAPER_SEGMENT_COUNT_PER_NODE=16
-      - REAPER_SCHEDULE_DAYS_BETWEEN=7
-
-      # ── Interface JMX ──
-      - REAPER_JMX_AUTH=false
-      - REAPER_JMX_PORTS={"192.168.100.151":7199,"192.168.100.152":7199,"192.168.100.153":7199,"192.168.100.154":7199}
-
-      # ── Sécurité UI ──
       - REAPER_AUTH_ENABLED=true
       - REAPER_AUTH_USER=admin
       - REAPER_AUTH_PASSWORD=admin
-
-      # ── Métriques Prometheus ──
-      - REAPER_METRICS_ENABLED=true
-
     ports:
-      - "8080:8080"   # Interface web Reaper
-      - "8090:8081"   # Port admin / métriques
+      - "8080:8080"
+      - "8090:8081"
     healthcheck:
       test: ["CMD-SHELL", "curl -sf http://localhost:8080/ping || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 10
       start_period: 60s
+
 ```
 
 #### Affichage du fichier complet : 
