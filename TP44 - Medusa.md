@@ -1,0 +1,1167 @@
+#### TP44 - Installation et utilisation de Medusa sur cluster Cassandra - environnement docker 4 nœuds (2 racks / 2 DC)
+
+---
+
+##### Objectif :
+```text
+Ajouter Medusa (outil de sauvegarde/restauration pour Apache Cassandra) au cluster Docker
+composé de 4 nœuds répartis sur 2 Data Centers et 2 racks. 
+
+Les sauvegardes seront stockées dans un répertoire partagé monté depuis la machine hôte :
+${PWD}/docker/medusa_sauvegarde
+```
+---
+
+##### Architecture cible :
+
+```text
+Machine hôte
+│
+├── docker/medusa_sauvegarde/     ← répertoire de sauvegarde partagé (hôte)
+│   └── cassandra_backups/
+│       ├── 192.168.100.151/
+│       ├── 192.168.100.152/
+│       ├── 192.168.100.153/
+│       └── 192.168.100.154/
+│
+└── Docker réseau : cassandra_network (192.168.100.0/24)
+    │
+    ├── cassandra01  192.168.100.151  DC=Nord                   RACK=Winterfell
+    ├── cassandra02  192.168.100.152  DC=Terres-de-la-Couronne  RACK=Port-Real
+    ├── cassandra03  192.168.100.153  DC=Nord                   RACK=Winterfell
+    └── cassandra04  192.168.100.154  DC=Terres-de-la-Couronne  RACK=Port-Real
+```
+
+**Principe de sauvegarde :**
+- Medusa est **installé dans chaque conteneur Cassandra** (via pip3).
+- Le répertoire hôte `${PWD}/docker/medusa_sauvegarde` est monté dans **chaque conteneur** sous `/medusa_sauvegarde`.
+- Les 4 nœuds écrivent leurs sauvegardes dans ce répertoire partagé, ce qui permet de tout centraliser sur l'hôte.
+
+---
+
+##### Pré-requis — Construction d'une image docker Cassandra avec Medusa installé :
+```bash
+cat > Dockerfile-cassandra-medusa << 'EOF'
+FROM cassandra:latest
+RUN apt-get update && \
+    apt-get install -y python3-venv python3-dev gcc sudo && \
+    python3 -m venv /opt/medusa-venv && \
+    /opt/medusa-venv/bin/pip install --upgrade pip && \
+    /opt/medusa-venv/bin/pip install cassandra-medusa && \
+    ln -sf /opt/medusa-venv/bin/medusa /usr/local/bin/medusa && \
+    rm -rf /var/lib/apt/lists/*
+EOF
+```
+
+```bash
+docker build -t cassandra-medusa:latest -f Dockerfile-cassandra-medusa .
+```
+
+
+
+
+
+##### Étape 1 — Arrêt du cluster et mise à jour du docker-compose.yml
+
+##### 1.1 Arrêt propre du cluster existant (exemples)
+
+```bash
+docker compose -f Cluster_1_noeud_1_rack_1_DC.yml down -v
+```
+```bash
+docker compose -f Cluster_4_noeuds_2_racks_2_DC.yml down -v
+```
+##### Recréation des répertoires pour les volumes persistés :
+```bash
+sudo rm -Rf ~/cassandra-tp00/docker/cassandra*
+mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02 ~/cassandra-tp00/docker/cassandra03 ~/cassandra-tp00/docker/cassandra04
+```
+
+```bash
+mkdir -p ~/cassandra-tp00/docker/cassandra01-conf ~/cassandra-tp00/docker/cassandra02-conf ~/cassandra-tp00/docker/cassandra03-conf ~/cassandra-tp00/docker/cassandra04-conf
+```
+
+##### 1.2 Création du répertoire de sauvegarde sur l'hôte
+
+```bash
+mkdir -p ${PWD}/docker/medusa_sauvegarde
+chmod 777 ${PWD}/docker/medusa_sauvegarde
+```
+
+##### On affiche les répertoires créés :
+```bash
+ls ~/cassandra-tp00/docker
+```
+##### Affichage : 
+```bash
+cassandra01  cassandra01-conf
+cassandra02  cassandra02-conf
+cassandra03  cassandra03-conf
+cassandra04  cassandra04-conf
+medusa_sauvegarde
+```
+
+##### 1.3 Description du fichier docker compose enrichi pour Medusa : 
+
+On ajoute le volume de sauvegarde `medusa_sauvegarde` à **chacun des 4 services** Cassandra
+
+Voici le fichier complet  :
+```bash
+cat Cluster_4_noeuds_2_racks_2_DC_Medusa.yml 
+```
+##### Contenu : 
+```yaml
+networks:
+  cassandra_network:
+    ipam:
+      config:
+        - subnet: 192.168.100.0/24
+
+services:
+  cassandra01:
+    #image: docker.io/library/cassandra:latest
+    image: cassandra-medusa:latest
+    hostname: cassandra01
+    container_name: cassandra01
+    mem_limit: 1g
+    cpus: 0.5
+    restart: always
+    networks:
+      cassandra_network:
+        ipv4_address: 192.168.100.151
+    volumes:
+      - ${PWD}/docker/cassandra01:/var/lib/cassandra
+      - conf01:/opt/cassandra/conf
+      - medusa_sauvegarde:/medusa_sauvegarde
+      - ${PWD}/medusa-conf/cassandra01/medusa.ini:/etc/medusa/medusa.ini   # ← AJOUT
+    environment:
+      - CASSANDRA_CLUSTER_NAME=formation
+      - CASSANDRA_SEEDS=cassandra01,cassandra02
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=Nord
+      - CASSANDRA_RACK=Winterfell
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=192.168.100.151
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m
+      - LOCAL_JMX=no
+      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=192.168.100.151 -Dcom.sun.management.jmxremote.authenticate=false
+    ports:
+      - "7100:7000"
+      - "9142:9042"
+      - "7199:7199"
+      - "8181:8081"
+    healthcheck:
+      test: ["CMD-SHELL", "grep -q 'Startup complete' /var/log/cassandra/system.log"]
+      interval: 15s
+      timeout: 10s
+      retries: 50
+      start_period: 180s
+
+  cassandra02:
+    depends_on:
+      cassandra01:
+        condition: service_healthy
+    #image: docker.io/library/cassandra:latest
+    image: cassandra-medusa:latest
+    hostname: cassandra02
+    container_name: cassandra02
+    mem_limit: 1g
+    cpus: 0.5
+    restart: always
+    networks:
+      cassandra_network:
+        ipv4_address: 192.168.100.152
+    volumes:
+      - ${PWD}/docker/cassandra02:/var/lib/cassandra
+      - conf02:/opt/cassandra/conf
+      - medusa_sauvegarde:/medusa_sauvegarde
+      - ${PWD}/medusa-conf/cassandra02/medusa.ini:/etc/medusa/medusa.ini   # ← AJOUT
+    environment:
+      - CASSANDRA_CLUSTER_NAME=formation
+      - CASSANDRA_SEEDS=cassandra01,cassandra02
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=Terres-de-la-Couronne
+      - CASSANDRA_RACK=Port-Real
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=192.168.100.152
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m
+      - LOCAL_JMX=no
+      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=192.168.100.152 -Dcom.sun.management.jmxremote.authenticate=false
+    ports:
+      - "7200:7000"
+      - "9242:9042"
+      - "7299:7199"
+      - "8281:8081"
+    healthcheck:
+      test: ["CMD-SHELL", "grep -q 'Startup complete' /var/log/cassandra/system.log"]
+      interval: 15s
+      timeout: 10s
+      retries: 50
+      start_period: 180s
+
+  cassandra03:
+    depends_on:
+      cassandra02:
+        condition: service_healthy
+    #image: docker.io/library/cassandra:latest
+    image: cassandra-medusa:latest
+    hostname: cassandra03
+    container_name: cassandra03
+    mem_limit: 1g
+    cpus: 0.5
+    restart: always
+    networks:
+      cassandra_network:
+        ipv4_address: 192.168.100.153
+    volumes:
+      - ${PWD}/docker/cassandra03:/var/lib/cassandra
+      - conf03:/opt/cassandra/conf
+      - medusa_sauvegarde:/medusa_sauvegarde
+      - ${PWD}/medusa-conf/cassandra03/medusa.ini:/etc/medusa/medusa.ini   # ← AJOUT
+    environment:
+      - CASSANDRA_CLUSTER_NAME=formation
+      - CASSANDRA_SEEDS=cassandra01,cassandra02
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=Nord
+      - CASSANDRA_RACK=Winterfell
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=192.168.100.153
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m
+      - LOCAL_JMX=no
+      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=192.168.100.153 -Dcom.sun.management.jmxremote.authenticate=false
+    ports:
+      - "7300:7000"
+      - "9342:9042"
+      - "7399:7199"
+      - "8381:8081"
+    healthcheck:
+      test: ["CMD-SHELL", "grep -q 'Startup complete' /var/log/cassandra/system.log"]
+      interval: 15s
+      timeout: 10s
+      retries: 50
+      start_period: 180s
+
+  cassandra04:
+    depends_on:
+      cassandra03:
+        condition: service_healthy
+    #image: docker.io/library/cassandra:latest
+    image: cassandra-medusa:latest
+    hostname: cassandra04
+    container_name: cassandra04
+    mem_limit: 1g
+    cpus: 0.5
+    restart: always
+    networks:
+      cassandra_network:
+        ipv4_address: 192.168.100.154
+    volumes:
+      - ${PWD}/docker/cassandra04:/var/lib/cassandra
+      - conf04:/opt/cassandra/conf
+      - medusa_sauvegarde:/medusa_sauvegarde
+      - ${PWD}/medusa-conf/cassandra04/medusa.ini:/etc/medusa/medusa.ini   # ← AJOUT
+    environment:
+      - CASSANDRA_CLUSTER_NAME=formation
+      - CASSANDRA_SEEDS=cassandra01,cassandra02
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=Terres-de-la-Couronne
+      - CASSANDRA_RACK=Port-Real
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=192.168.100.154
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m
+      - LOCAL_JMX=no
+      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=192.168.100.154 -Dcom.sun.management.jmxremote.authenticate=false
+    ports:
+      - "7400:7000"
+      - "9442:9042"
+      - "7499:7199"
+      - "8481:8081"
+    healthcheck:
+      test: ["CMD-SHELL", "grep -q 'Startup complete' /var/log/cassandra/system.log"]
+      interval: 15s
+      timeout: 10s
+      retries: 50
+      start_period: 180s
+
+volumes:
+  conf01:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/docker/cassandra01-conf
+  conf02:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/docker/cassandra02-conf
+  conf03:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/docker/cassandra03-conf
+  conf04:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/docker/cassandra04-conf
+
+  medusa_sauvegarde:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/docker/medusa_sauvegarde
+```
+
+---
+
+##### Étape 2 — Démarrage du cluster mis à jour
+
+```bash
+docker compose -f Cluster_4_noeuds_2_racks_2_DC_Medusa.yml up -d
+```
+
+Attendre que les 4 nœuds soient healthy (peut prendre 5 à 10 minutes) :
+
+```bash
+docker compose -f Cluster_4_noeuds_2_racks_2_DC_Medusa.yml ps
+```
+
+Résultat attendu — tous les statuts doivent être `healthy` :
+
+```
+NAME          STATUS
+cassandra01   Up X minutes (healthy)
+cassandra02   Up X minutes (healthy)
+cassandra03   Up X minutes (healthy)
+cassandra04   Up X minutes (healthy)
+```
+
+Vérifier le cluster :
+
+```bash
+docker exec cassandra01 nodetool status
+```
+
+##### Résultat attendu :
+
+```
+Datacenter: Nord
+================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
+UN  192.168.100.151  119.82 KiB  16      49.4%             b17400a7-f794-4846-8c88-e10456ada87a  Winterfell
+UN  192.168.100.153  80.06 KiB   16      49.6%             2591d643-2404-4335-b1f2-4d960cbe5e5b  Winterfell
+
+Datacenter: Terres-de-la-Couronne
+=================================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
+UN  192.168.100.154  114.63 KiB  16      49.9%             d9198335-ffd7-429d-88c8-e990cfca3386  Port-Real
+UN  192.168.100.152  85.19 KiB   16      51.2%             bb60dc31-4bf9-47e7-b701-38d7166b05da  Port-Real
+```
+
+---
+
+##### Étape 3 — Création de données de test
+
+Avant de configurer Medusa, on insère des données pour avoir quelque chose à sauvegarder et restaurer.
+
+```bash
+docker exec -it cassandra01 cqlsh 192.168.100.151 9042
+```
+
+Dans le shell CQL :
+
+```sql
+-- Créer un keyspace répliqué sur les 2 DC
+CREATE KEYSPACE IF NOT EXISTS formation
+  WITH replication = {
+    'class': 'NetworkTopologyStrategy',
+    'Nord': 2,
+    'Terres-de-la-Couronne': 2
+  };
+```
+```sql
+-- Créer une table
+CREATE TABLE IF NOT EXISTS formation.employes (
+  id   UUID PRIMARY KEY,
+  nom  TEXT,
+  poste TEXT,
+  anciennete    TEXT
+);
+```
+```sql
+-- Insérer des données
+INSERT INTO formation.employes (id, nom, poste, anciennete)
+  VALUES (uuid(), 'Alice Martin',   'DBA',      '10 ans');
+INSERT INTO formation.employes (id, nom, poste, anciennete)
+  VALUES (uuid(), 'Bob Dupont',     'DevOps',   '20 ans');
+INSERT INTO formation.employes (id, nom, poste, anciennete)
+  VALUES (uuid(), 'Claire Durand',  'Dev',      '6 mois');
+INSERT INTO formation.employes (id, nom, poste, anciennete)
+  VALUES (uuid(), 'David Lemaire',  'SRE',      '2 ans');
+```
+```sql
+-- Vérifier
+SELECT * FROM formation.employes;
+```
+```sql
+EXIT;
+```
+
+---
+
+##### Étape 4 — NE PAS FAIRE CETTE ETAPE : MEDUSA a été déjà installé dans l'image  : 
+#####   voici ce qu'il faudrait faire si ca n'était pas le cas :
+#####
+Installation de Medusa dans chaque conteneur
+
+> **Remarque :** L'image officielle `cassandra:latest` est basée sur Debian. On installe Medusa via pip3 directement dans chaque conteneur. Cette installation ne persiste pas au redémarrage — pour un usage production, construire une image Docker personnalisée.
+> 
+```bash
+for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
+  echo "=== Installation Medusa sur ${NODE} ==="
+  docker exec ${NODE} bash -c "
+    apt-get update -y -qq && \
+    apt-get install -y python3-venv python3-dev gcc -qq && \
+    python3 -m venv /opt/medusa-venv && \
+    /opt/medusa-venv/bin/pip install --upgrade pip && \
+    /opt/medusa-venv/bin/pip install cassandra-medusa
+  "
+done
+```
+###### On crée un lien symbolique dans le conteneur pour pouvoir appeler Medusa simplement ensuite :
+```bash
+for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
+  docker exec ${NODE} ln -sf /opt/medusa-venv/bin/medusa /usr/local/bin/medusa
+done
+```
+
+#### Reprendre ici : 
+##### Vérifier l'installation
+medusa --version
+
+```bash
+for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
+  echo "=== Version installée de Medusa sur ${NODE} ==="
+  docker exec ${NODE} bash -c "
+    /opt/medusa-venv/bin/medusa --version
+  "
+done
+```
+
+##### Résultat attendu : 
+```text
+=== Version installée de Medusa sur cassandra01 ===
+0.27.0
+=== Version installée de Medusa sur cassandra02 ===
+0.27.0
+=== Version installée de Medusa sur cassandra03 ===
+0.27.0
+=== Version installée de Medusa sur cassandra04 ===
+0.27.0
+```
+---
+
+##### Étape 5 — Configuration de medusa.ini sur chaque nœud
+
+Le fichier `medusa.ini` a été monté dans `/etc/medusa/` sur **chaque conteneur**. Les paramètres clés diffèrent uniquement sur `nodetool_host` et 'fqdn' (l'IP et le nom du nœud).
+
+##### 5.1 Configuration sur cassandra01
+
+```bash
+docker exec -it cassandra01 bash
+```
+
+```bash
+cat /etc/medusa/medusa.ini
+```
+
+```bash
+docker exec -it cassandra01 bash
+root@cassandra01:/# cat /etc/medusa/medusa.ini
+[cassandra]
+; Chemin vers cassandra.yaml (volume conf monté dans le conteneur)
+config_file = /opt/cassandra/conf/cassandra.yaml
+
+; Identifiants CQL (authentification désactivée par défaut)
+;cql_username = cassandra
+;cql_password = cassandra
+
+; Connexion JMX pour nodetool
+nodetool_host = 192.168.100.151
+nodetool_port = 7199
+
+; Vérification que Cassandra tourne
+check_running = nodetool version
+
+; Résolution des adresses IP
+resolve_ip_addresses = False
+
+; Pas besoin de sudo dans le conteneur (on est root)
+use_sudo = False
+
+[storage]
+; Stockage local — le volume /medusa_sauvegarde est monté depuis l'hôte
+storage_provider = local
+base_path = /medusa_sauvegarde
+bucket_name = cassandra_backups
+
+; Préfixe pour identifier ce cluster dans le répertoire de stockage
+prefix = formation
+
+; Rétention : 0 = pas de purge automatique
+max_backup_age = 0
+max_backup_count = 0
+
+; Délai de grâce avant suppression physique des fichiers (jours)
+backup_grace_period_in_days = 10
+
+; Throttling des transferts
+transfer_max_bandwidth = 50MB/s
+concurrent_transfers = 1
+multi_part_upload_threshold = 104857600
+
+[monitoring]
+;monitoring_provider = local
+
+[ssh]
+; Non utilisé en mode sauvegarde nœud par nœud
+
+[checks]
+;health_check = cql
+
+[logging]
+enabled = 1
+file = /var/log/cassandra/medusa.log
+level = INFO
+
+fqdn = cassandra01
+```
+
+```bash
+exit
+```
+
+##### 5.2 Configuration sur cassandra02
+
+```bash
+docker exec -it cassandra02 bash
+```
+
+```bash
+cat /etc/medusa/medusa.ini
+```
+
+```bash
+exit
+```
+
+##### 5.3 Configuration sur cassandra03
+
+```bash
+docker exec -it cassandra03 bash
+```
+
+```bash
+cat /etc/medusa/medusa.ini
+```
+
+```bash
+exit
+```
+
+##### 5.4 Configuration sur cassandra04
+
+```bash
+docker exec -it cassandra04 bash
+```
+
+```bash
+cat /etc/medusa/medusa.ini
+```
+
+```bash
+exit
+```
+
+---
+
+##### Suppression de sauvegardes Medusa (en cas de tentatives successives pour le TP par exmeple)
+```bash
+sudo rm -rf ${PWD}/docker/medusa_sauvegarde/cassandra_backups/formation/
+```
+
+##### Étape 6 — Sauvegarde différentielle de chaque nœud
+
+On lance une sauvegarde différentielle nœud par nœud. Medusa va :
+1. Créer un snapshot via `nodetool snapshot`
+2. Copier les SSTables vers `/medusa_sauvegarde/cassandra_backups/`
+3. Enregistrer le schéma CQL, la tokenmap et un manifeste MD5
+4. Supprimer le snapshot local
+
+##### 6.1 Sauvegarde sur cassandra01
+
+```bash
+docker exec cassandra01 medusa backup --backup-name=sauvegarde_initiale
+```
+
+Résultat attendu :
+
+```
+[2026-03-21 18:17:56,539] INFO: Resolving ip address
+[2026-03-21 18:17:56,539] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 18:17:56,541] INFO: Registered backup id sauvegarde_initiale
+[2026-03-21 18:17:56,541] INFO: Monitoring provider is noop
+[2026-03-21 18:17:56,736] INFO: Starting backup using Stagger: None Mode: differential Name: sauvegarde_initiale
+[2026-03-21 18:17:56,737] INFO: Saving tokenmap and schema
+[2026-03-21 18:17:56,845] INFO: Resolving ip address 192.168.100.151
+[2026-03-21 18:17:56,845] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 18:17:56,845] INFO: Resolving ip address 192.168.100.151
+[2026-03-21 18:17:56,845] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 18:17:56,846] INFO: Resolving ip address 192.168.100.153
+[2026-03-21 18:17:56,846] INFO: ip address to resolve 192.168.100.153
+[2026-03-21 18:17:56,935] INFO: Saving server version
+[2026-03-21 18:18:00,792] INFO: Listing already backed up files for node cassandra01
+[2026-03-21 18:18:00,795] INFO: Backing up system.peers_v2-c4325fbb8e5e3bafbd070f9250ed818e
+[2026-03-21 18:18:00,863] INFO: Backing up system.paxos-b7b7f0c2fd0a34108c053ef614bb7c2d
+[2026-03-21 18:18:00,863] INFO: Backing up system.peers-37f71aca7dc2383ba70672528af04d4f
+[2026-03-21 18:18:00,939] INFO: Backing up system.paxos_repair_history-ecb8666740b23316bb91e612c8047457
+[2026-03-21 18:18:00,939] INFO: Backing up system.sstable_activity-5a1ff267ace03f128563cfae6103c65e
+[2026-03-21 18:18:00,974] INFO: Backing up system.peer_events-59dfeaea8db2334191ef109974d81484
+[2026-03-21 18:18:00,974] INFO: Backing up system.sstable_activity_v2-62efe31f3be8310c8d298963439c1288
+[2026-03-21 18:18:01,049] INFO: Backing up system.transferred_ranges-6cad20f7d4f53af2b6e20da33c6c1f83
+[2026-03-21 18:18:01,049] INFO: Backing up system.built_views-4b3c50a9ea873d7691016dbc9c38494a
+[2026-03-21 18:18:01,049] INFO: Backing up system.available_ranges_v2-4224a0882ac93d0c889dfbb5f0facda0
+[2026-03-21 18:18:01,049] INFO: Backing up system.compaction_history-b4dbb7b4dc493fb5b3bfce6e434832ca
+[2026-03-21 18:18:01,083] INFO: Backing up system.repairs-a3d277d1cfaf36f5a2a738d5eea9ad6a
+[2026-03-21 18:18:01,083] INFO: Backing up system.peer_events_v2-0e65065fe40138ed9507b9213fae8d11
+[2026-03-21 18:18:01,084] INFO: Backing up system.local-7ad54392bcdd35a684174e047860b377
+[2026-03-21 18:18:01,168] INFO: Backing up system.table_estimates-176c39cdb93d33a5a2188eb06a56f66e
+[2026-03-21 18:18:01,244] INFO: Backing up system.IndexInfo-9f5c6374d48532299a0a5094af9ad1e3
+[2026-03-21 18:18:01,244] INFO: Backing up system.top_partitions-7e5a361c317c351fb15fffd8afd3dd4b
+[2026-03-21 18:18:01,244] INFO: Backing up system.available_ranges-c539fcabd65a31d18133d25605643ee3
+[2026-03-21 18:18:01,245] INFO: Backing up system.prepared_statements-18a9c2576a0c3841ba718cd529849fef
+[2026-03-21 18:18:01,245] INFO: Backing up system.batches-919a4bc57a333573b03e13fc3f68b465
+[2026-03-21 18:18:01,245] INFO: Backing up system.size_estimates-618f817b005f3678b8a453f3930b8e86
+[2026-03-21 18:18:01,278] INFO: Backing up system.transferred_ranges_v2-1ff78f1a7df13a2aa9986f4932270af5
+[2026-03-21 18:18:01,279] INFO: Backing up system.view_builds_in_progress-6c22df66c3bd3df6b74d21179c6a9fe9
+[2026-03-21 18:18:01,279] INFO: Backing up system_auth.roles-5bc52802de2535edaeab188eecebb090
+[2026-03-21 18:18:01,334] INFO: Backing up system_auth.cidr_groups-9c48af0013f63059bb0e8fcabba6eecb
+[2026-03-21 18:18:01,334] INFO: Backing up system_auth.cidr_permissions-b8b43d5fd6c0331c8f7d765ea658f4c4
+[2026-03-21 18:18:01,334] INFO: Backing up system_auth.resource_role_permissons_index-5f2fbdad91f13946bd25d5da3a5c35ec
+[2026-03-21 18:18:01,334] INFO: Backing up system_auth.network_permissions-d46780c22f1c3db9b4c1b8d9fbc0cc23
+[2026-03-21 18:18:01,335] INFO: Backing up system_auth.role_members-0ecdaa87f8fb3e6088d174fb36fe5c0d
+[2026-03-21 18:18:01,335] INFO: Backing up system_auth.identity_to_role-0bd47a48d6ba3c8eb4420f6349329bda
+[2026-03-21 18:18:01,335] INFO: Backing up system_auth.role_permissions-3afbe79f219431a7add7f5ab90d8ec9c
+[2026-03-21 18:18:01,335] INFO: Backing up system_schema.columns-24101c25a2ae3af787c1b40ee1aca33f
+[2026-03-21 18:18:01,359] INFO: Backing up system_schema.indexes-0feb57ac311f382fba6d9024d305702f
+[2026-03-21 18:18:01,435] INFO: Backing up system_schema.dropped_columns-5e7583b5f3f43af19a39b7e1d6f5f11f
+[2026-03-21 18:18:01,471] INFO: Backing up system_schema.types-5a8b1ca866023f77a0459273d308917a
+[2026-03-21 18:18:01,545] INFO: Backing up system_schema.keyspaces-abac5682dea631c5b535b3d6cffd0fb6
+[2026-03-21 18:18:01,568] INFO: Backing up system_schema.triggers-4df70b666b05325195a132b54005fd48
+[2026-03-21 18:18:01,644] INFO: Backing up system_schema.column_masks-738cc5ed01683268b9d1853d4bc278af
+[2026-03-21 18:18:01,681] INFO: Backing up system_schema.views-9786ac1cdd583201a7cdad556410c985
+[2026-03-21 18:18:01,755] INFO: Backing up system_schema.functions-96489b7980be3e14a70166a0b9159450
+[2026-03-21 18:18:01,790] INFO: Backing up system_schema.tables-afddfb9dbc1e30688056eed6c302ba09
+[2026-03-21 18:18:01,852] INFO: Backing up system_schema.aggregates-924c55872e3a345bb10c12f37c1ba895
+[2026-03-21 18:18:01,885] INFO: Backing up system_distributed.view_build_status-5582b59f8e4e35e1b9133acada51eb04
+[2026-03-21 18:18:01,886] INFO: Backing up system_distributed.repair_history-759fffad624b318180eefa9a52d1f627
+[2026-03-21 18:18:01,886] INFO: Backing up system_distributed.parent_repair_history-deabd734b99d3b9c92e5fd92eb5abf14
+[2026-03-21 18:18:01,886] INFO: Backing up system_distributed.partition_denylist-d6123acc864934969d4ef3fe39a6018b
+[2026-03-21 18:18:01,886] INFO: Backing up formation.employes-9f4f57d0254e11f1b81807c0385d8785
+[2026-03-21 18:18:04,765] INFO: Updating backup index
+[2026-03-21 18:18:04,831] INFO: Backup done
+[2026-03-21 18:18:04,832] INFO: - Started: 2026-03-21 18:17:56
+                        - Started extracting data: 2026-03-21 18:17:57
+                        - Finished: 2026-03-21 18:18:04
+[2026-03-21 18:18:04,832] INFO: - Real duration: 0:00:07.771908 (excludes time waiting for other nodes)
+[2026-03-21 18:18:04,832] INFO: - 456 files, 356.00 KB
+[2026-03-21 18:18:04,832] INFO: - 456 files copied from host (456 new, 0 reuploaded)
+[2026-03-21 18:18:04,833] INFO: - 0 kept from previous backup (sauvegarde_initiale)
+```
+
+##### 6.2 Sauvegarde sur cassandra02
+
+```bash
+docker exec cassandra02 medusa backup --backup-name=sauvegarde_initiale
+```
+
+##### 6.3 Sauvegarde sur cassandra03
+
+```bash
+docker exec cassandra03 medusa backup --backup-name=sauvegarde_initiale
+```
+
+##### 6.4 Sauvegarde sur cassandra04
+
+```bash
+docker exec cassandra04 medusa backup --backup-name=sauvegarde_initiale
+```
+
+---
+
+##### Étape 7 — Vérification des sauvegardes sur l'hôte
+
+Depuis la machine hôte, explorer le répertoire de sauvegarde :
+
+```bash
+ls -la ${PWD}/docker/medusa_sauvegarde/
+```
+
+Résultat attendu :
+
+```
+cassandra_backups/
+```
+
+```bash
+ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/
+```
+
+Résultat attendu (un répertoire pour le cluster formation) :
+
+```
+total 12
+drwxr-xr-x 3 root root 4096 Mar 21 19:17 .
+drwxrwxrwx 3 user user 4096 Mar 21 19:17 ..
+drwxr-xr-x 7 root root 4096 Mar 21 19:22 formation
+```
+
+```bash
+ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/formation/
+```
+
+Résultat attendu (un répertoire par nœud + index) :
+
+```
+...
+drwxr-xr-x 4 root root 4096 Mar 21 19:49 192.168.100.151
+drwxr-xr-x 4 root root 4096 Mar 21 19:49 192.168.100.152
+drwxr-xr-x 4 root root 4096 Mar 21 19:49 192.168.100.153
+drwxr-xr-x 4 root root 4096 Mar 21 19:49 192.168.100.154
+drwxr-xr-x 4 root root 4096 Mar 21 19:49 index
+```
+
+##### Examiner le contenu de la sauvegarde du nœud cassandra01 :
+
+```bash
+ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/formation/192.168.100.151/
+```
+
+```
+...
+drwxr-xr-x 6 root root 4096 Mar 21 19:18 data
+drwxr-xr-x 3 root root 4096 Mar 21 19:17 sauvegarde_initiale
+```
+
+```bash
+ls -la ${PWD}/docker/medusa_sauvegarde/cassandra_backups/formation/192.168.100.151/sauvegarde_initiale/meta/
+```
+```
+-rw-r--r-- 1 root root    12 Mar 21 19:17 differential
+-rw-r--r-- 1 root root 82959 Mar 21 19:18 manifest.json
+-rw-r--r-- 1 root root 71242 Mar 21 19:17 schema.cql
+-rw-r--r-- 1 root root    56 Mar 21 19:17 server_version.json
+-rw-r--r-- 1 root root   878 Mar 21 19:17 tokenmap.json
+```
+##### Explication : 
+```
+differential       ← type de sauvegarde
+manifest.json      ← liste des fichiers avec leur hash MD5
+schema.cql         ← schéma CQL complet du cluster
+server_version.json
+tokenmap.json      ← répartition des tokens entre nœuds
+```
+
+---
+
+##### Étape 8 — Lister et vérifier les sauvegardes
+
+##### 8.1 Lister les sauvegardes disponibles
+
+Depuis cassandra01, lister toutes les sauvegardes du répertoire de stockage :
+
+```bash
+docker exec cassandra01 medusa list-backups --show-all
+```
+
+Résultat attendu :
+
+```
+[2026-03-21 18:51:25,651] INFO: Resolving ip address
+[2026-03-21 18:51:25,651] INFO: ip address to resolve 192.168.100.151
+sauvegarde_initiale (started: 2026-03-21 18:49:06, finished: 2026-03-21 18:49:58)
+```
+
+> L'option `--show-all` affiche les sauvegardes de **tous les nœuds** dans le stockage, pas uniquement celles du nœud courant.
+> Mais dans notre cas, Medusa est installé sur chaque noeud : il ne voit que les sauvegardes du noeud en question 
+
+
+##### Si besoin : en cas d'anomalie et après correction : Nettoyage et nouvelle sauvegarde propre : 
+```bash
+# Supprimer la sauvegarde incomplète ou incorrecte sur tous les nœuds
+for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
+  docker exec ${NODE} medusa \
+    --backup-grace-period-in-days=0 \
+    delete-backup --backup-name=sauvegarde_initiale
+done
+```
+
+```bash
+# Relancer une sauvegarde propre
+for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
+  echo "--- Sauvegarde ${NODE} ---"
+  docker exec ${NODE} medusa backup --backup-name=sauvegarde_v2
+done
+```
+
+##### Reconstruire l'index de Medusa sur chaque noeud  (après une suppression physique de sauvegardes dans le répertoire central par exemple)
+
+```bash
+docker exec cassandra01 medusa build-index
+```
+```bash
+[2026-03-21 18:41:31,392] INFO: Resolving ip address
+[2026-03-21 18:41:31,393] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 18:41:31,779] INFO: Resolving ip address 192.168.100.151
+[2026-03-21 18:41:31,779] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 18:41:31,779] INFO: Resolving ip address 192.168.100.151
+[2026-03-21 18:41:31,779] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 18:41:31,779] INFO: Resolving ip address 192.168.100.153
+[2026-03-21 18:41:31,780] INFO: ip address to resolve 192.168.100.153
+[2026-03-21 18:41:31,781] INFO: processing 192.168.100.151
+[2026-03-21 18:41:31,895] INFO: processing 192.168.100.153
+```
+
+##### Affichage des backups disponibles désormais : 
+```bash
+docker exec cassandra01 medusa list-backups --show-all
+```
+```text
+[2026-03-21 18:58:31,772] INFO: Resolving ip address
+[2026-03-21 18:58:31,773] INFO: ip address to resolve 192.168.100.151
+sauvegarde_v2 (started: 2026-03-21 18:55:17, finished: 2026-03-21 18:55:50)
+```
+
+##### 8.2 Vérifier l'intégrité d'une sauvegarde :
+
+```bash
+docker exec cassandra01 medusa verify --backup-name=sauvegarde_v2
+```
+
+###### Résultat attendu :
+
+```
+[2026-03-21 18:58:17,681] INFO: Resolving ip address
+[2026-03-21 18:58:17,682] INFO: ip address to resolve 192.168.100.151
+Validating sauvegarde_v2 ...
+- Completion: OK!
+- Manifest validated: OK!!
+```
+
+> En cas de nœud manquant dans la sauvegarde, Medusa le signalera : `Completion: Not complete!` suivi du détail des nœuds manquants.
+
+
+
+##### 8.3 Afficher le statut détaillé d'une sauvegarde :
+
+```bash
+docker exec cassandra01 medusa status --backup-name=sauvegarde_v2
+```
+
+###### Résultat attendu :
+
+```text
+[2026-03-21 18:58:25,188] INFO: Resolving ip address
+[2026-03-21 18:58:25,189] INFO: ip address to resolve 192.168.100.151
+sauvegarde_v2
+- Started: 2026-03-21 18:55:17, Finished: 2026-03-21 18:55:50
+- 4 nodes completed, 0 nodes incomplete, 0 nodes missing
+- 1696 files, 1.29 MB
+```
+
+---
+
+##### Étape 9 — Sauvegarde complète (full)
+
+```text
+Par défaut, Medusa effectue des sauvegardes **différentielles** (seuls les fichiers nouveaux ou modifiés sont copiés). 
+On peut forcer une sauvegarde complète avec `--mode=full`.
+```
+
+```bash
+# Sur chaque nœud, sauvegarde complète  :
+docker exec cassandra01 medusa backup --backup-name=sauvegarde_full --mode=full
+docker exec cassandra02 medusa backup --backup-name=sauvegarde_full --mode=full
+docker exec cassandra03 medusa backup --backup-name=sauvegarde_full --mode=full
+docker exec cassandra04 medusa backup --backup-name=sauvegarde_full --mode=full
+```
+
+##### Vérifier que les deux sauvegardes sont présentes :
+
+```bash
+docker exec cassandra01 medusa list-backups --show-all
+```
+
+###### Résultat attendu :
+
+```
+sauvegarde_initiale (started: ..., finished: ...)
+sauvegarde_v2 (started: 2026-03-21 18:55:17, finished: 2026-03-21 18:55:50)
+sauvegarde_full (started: 2026-03-21 19:02:50, finished: 2026-03-21 19:03:24)
+```
+
+---
+
+##### Étape 10 — Scénario de restauration d'un nœud
+
+##### 10.1 Simulation d'une perte de données
+
+On supprime les données du keyspace `formation` pour simuler une corruption :
+
+```bash
+docker exec -it cassandra01 cqlsh 192.168.100.151 9042
+```
+
+```sql
+-- Supprimer toutes les données
+TRUNCATE formation.employes;
+```
+
+```sql
+-- Vérifier que la table est vide
+SELECT * FROM formation.employes;
+-- Résultat attendu : 0 rows
+```
+
+```text
+ id | anciennete | nom | poste
+----+------------+-----+-------
+
+(0 rows)
+
+```
+
+
+```sql
+EXIT;
+```
+
+##### 10.2 Restauration du nœud cassandra01
+
+> **Important :** La restauration Medusa nécessite un arrêt/redémarrage de Cassandra.
+> **nodetool disablebinary** peut être utile avant le drain pour couper les connexions clients entrantes, mais il ne remplace pas l'arrêt complet du processus Cassandra nécessaire pour la restauration.
+
+
+```bash
+# Restaurer le nœud depuis la sauvegarde
+
+NODE=cassandra01
+BACKUP=sauvegarde_v2
+
+docker exec ${NODE} nodetool drain
+docker stop ${NODE}
+docker rm ${NODE}
+
+docker run --rm \
+  --name medusa-restore-${NODE} \
+  --hostname ${NODE} \
+  --ip 192.168.100.151 \
+  --network cassandra-tp00_cassandra_network \
+  -v ${PWD}/docker/cassandra01:/var/lib/cassandra \
+  -v ${PWD}/docker/cassandra01-conf:/opt/cassandra/conf \
+  -v ${PWD}/docker/medusa_sauvegarde:/medusa_sauvegarde \
+  -v ${PWD}/medusa-conf/cassandra01/medusa.ini:/etc/medusa/medusa.ini \
+  cassandra-medusa:latest \
+  bash -c "
+    apt-get update -qq &&
+    apt-get install -y python3-pip python3-dev gcc sudo -qq &&
+    pip3 install cassandra-medusa --break-system-packages -q &&
+    medusa restore-node --backup-name=${BACKUP}
+  "
+
+docker compose -f Cluster_4_noeuds_2_racks_2_DC_Medusa.yml up cassandra01 -d
+
+echo "Attente du redémarrage de ${NODE}..."
+until docker exec ${NODE} nodetool status 2>/dev/null | grep -q "^UN"; do
+  echo -n "."
+  sleep 5
+done
+echo ""
+echo "✓ ${NODE} est de nouveau opérationnel"
+```
+
+Attendre que le nœud soit de nouveau opérationnel :
+
+```bash
+docker exec cassandra01 nodetool status
+```
+
+##### 10.3 Vérification de la restauration
+
+```bash
+docker exec -it cassandra01 cqlsh 192.168.100.151 9042
+```
+
+```sql
+-- Pour avoir la réponse en faisant le tour de tous les noeuds cassandra (1 seul a été restauré) :
+CONSISTENCY ALL
+SELECT * FROM formation.employes;
+```
+
+Résultat attendu : les 4 lignes insérées à l'étape 3 sont de nouveau présentes.
+
+```sql
+CONSISTENCY ONE
+SELECT * FROM formation.employes;
+```
+```sql
+EXIT;
+```
+
+---
+
+##### Étape 11 — Informations sur la dernière sauvegarde
+
+```bash
+docker exec cassandra01 medusa report-last-backup
+```
+
+Résultat attendu :
+
+```
+[2026-03-21 21:22:35,586] INFO: Resolving ip address
+[2026-03-21 21:22:35,586] INFO: ip address to resolve 192.168.100.151
+[2026-03-21 21:22:35,587] INFO: Monitoring provider is noop
+[2026-03-21 21:22:35,669] INFO: Latest node backup finished 689 seconds ago
+[2026-03-21 21:22:35,671] INFO: Latest complete backup:
+[2026-03-21 21:22:35,671] INFO: - Name: sauvegarde_full
+[2026-03-21 21:22:35,672] INFO: - Finished: 663 seconds ago
+[2026-03-21 21:22:35,672] INFO: Latest backup:
+[2026-03-21 21:22:35,673] INFO: - Name: sauvegarde_full
+[2026-03-21 21:22:35,673] INFO: - Finished: True
+[2026-03-21 21:22:35,673] INFO: - Details - Node counts
+[2026-03-21 21:22:35,673] INFO: - Complete backup: 4 nodes have completed the backup
+[2026-03-21 21:22:35,678] INFO: - Total size: 707.70 KiB
+[2026-03-21 21:22:35,679] INFO: - Total files: 848
+```
+
+---
+
+##### Étape 12 — Gestion du cycle de vie des sauvegardes
+
+##### 12.1 Supprimer une sauvegarde spécifique
+
+```bash
+docker exec cassandra01 medusa list-backups --show-all
+```
+
+```bash
+# Supprimer la sauvegarde "sauvegarde_initiale" sur le nœud courant
+docker exec cassandra01 medusa delete-backup --backup-name=sauvegarde_full
+
+# Répéter sur chaque nœud pour une suppression globale
+docker exec cassandra02 medusa delete-backup --backup-name=sauvegarde_full
+docker exec cassandra03 medusa delete-backup --backup-name=sauvegarde_full
+docker exec cassandra04 medusa delete-backup --backup-name=sauvegarde_full
+```
+
+> Pour forcer la suppression immédiate des fichiers (sans attendre le délai de grâce de 10 jours) :
+```bash
+docker exec cassandra01 medusa \
+  --backup-grace-period-in-days=0 \
+  delete-backup --backup-name=sauvegarde_v2
+```
+
+##### 12.2 Purger les sauvegardes obsolètes
+
+La purge supprime automatiquement les sauvegardes selon les règles `max_backup_age` et `max_backup_count` du medusa.ini.
+
+```bash
+docker exec cassandra01 medusa purge
+```
+
+---
+
+##### Étape 13 — Automatisation avec cron (optionnel)
+
+Pour automatiser les sauvegardes quotidiennes, créer un script sur l'hôte :
+
+```bash
+cat > ${PWD}/backup_cluster.sh << 'SCRIPT'
+#!/bin/bash
+BACKUP_NAME="backup_$(date +%Y%m%d_%H%M%S)"
+echo "=== Démarrage sauvegarde cluster : ${BACKUP_NAME} ==="
+
+for NODE in cassandra01 cassandra02 cassandra03 cassandra04; do
+  echo "--- Sauvegarde ${NODE} ---"
+  docker exec ${NODE} medusa backup --backup-name=${BACKUP_NAME}
+  if [ $? -eq 0 ]; then
+    echo "✓ ${NODE} : succès"
+  else
+    echo "✗ ${NODE} : ÉCHEC"
+  fi
+done
+
+echo "=== Vérification de la sauvegarde ==="
+docker exec cassandra01 medusa verify --backup-name=${BACKUP_NAME}
+
+echo "=== Liste des sauvegardes disponibles ==="
+docker exec cassandra01 medusa list-backups --show-all
+
+echo "=== Sauvegarde ${BACKUP_NAME} terminée ==="
+SCRIPT
+
+chmod +x ${PWD}/backup_cluster.sh
+```
+
+Ajouter une entrée cron pour une exécution quotidienne à 2h00 :
+
+```bash
+crontab -e
+# Ajouter la ligne suivante :
+# 0 2 * * * /chemin/complet/vers/backup_cluster.sh >> /var/log/cassandra_backup.log 2>&1
+```
+
+---
+
+##### Récapitulatif des commandes Medusa
+
+| Commande | Description |
+|---|---|
+| `medusa backup --backup-name=NOM` | Sauvegarde différentielle du nœud local |
+| `medusa backup --backup-name=NOM --mode=full` | Sauvegarde complète du nœud local |
+| `medusa list-backups --show-all` | Lister toutes les sauvegardes |
+| `medusa verify --backup-name=NOM` | Vérifier l'intégrité d'une sauvegarde |
+| `medusa status --backup-name=NOM` | Résumé de l'état d'une sauvegarde |
+| `medusa report-last-backup` | Informations sur la dernière sauvegarde |
+| `medusa restore-node --backup-name=NOM` | Restaurer le nœud local |
+| `medusa restore-node --backup-name=NOM --keyspace=KS` | Restaurer un keyspace spécifique |
+| `medusa delete-backup --backup-name=NOM` | Supprimer une sauvegarde sur le nœud local |
+| `medusa purge` | Purger les sauvegardes obsolètes |
+
+---
+
+##### Points d'attention
+
+**Persistance de l'installation :** L'installation pip3 dans le conteneur n'est pas persistée. Pour un environnement pérenne, on a créé un `Dockerfile` personnalisé basé sur `cassandra:latest` avec Medusa pré-installé.
+
+**JMX et LOCAL_JMX=no :** Le cluster est configuré en mode JMX distant. Medusa se connecte via `nodetool_host` (l'IP du conteneur) et `nodetool_port = 7199`. Si nodetool ne répond pas, vérifier que les ports JMX sont bien accessibles depuis l'intérieur du conteneur.
+
+**Chemin du cassandra.yaml :** Le volume `conf0X` monte la configuration Cassandra dans `/opt/cassandra/conf/`. Le paramètre `config_file` de medusa.ini doit pointer vers ce chemin.
+
+**Sauvegarde cluster complète :** La commande `medusa backup-cluster` orchestre les sauvegardes de tous les nœuds via SSH. Dans un contexte Docker sans SSH configuré entre conteneurs, on préférera appeler `medusa backup` nœud par nœud comme illustré dans ce TP, ou scripter l'appel depuis l'hôte (Étape 13).
+
+**Espace disque :** Les sauvegardes locales consomment de l'espace sur la machine hôte. Surveiller `${PWD}/docker/medusa_sauvegarde/` et configurer `max_backup_count` dans medusa.ini pour maîtriser la rétention.
