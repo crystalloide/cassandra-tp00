@@ -95,8 +95,8 @@ netstat -anl | grep 0:
 
 #### Vérifier que les 4 conteneurs sont UP sinon attendre (non listé ou encore en train de joindre : 'UJ')
 ```bash
-cd /home/user/cassandra-tp00
-docker compose ps
+cd ~/cassandra-tp00
+docker compose -f Cluster_4_noeuds_2_racks_2_DC_Prometheus_Grafana.yml ps
 ```
 
 #### Vérifier le statut du cluster via nodetool
