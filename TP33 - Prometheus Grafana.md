@@ -120,6 +120,7 @@ UN  192.168.100.153  80.03 KiB   16      50.7%             21b3ae41-1e2a-4c7d-97
 
 
 #### Accès au monitoring : 
+
 ##### Avec un navigateur, aller sur l'UI Grafana  :  login 'admin' et mot de passe 'admin' :-)
 ```bash
 http://localhost:3000
@@ -128,4 +129,13 @@ http://localhost:3000
 ##### Avec un navigateur, aller sur l'UI Prometheus  : 
 ```bash
 http://localhost:9090/query
+```
+
+```bash
+##### Métriques exposées par l'exporter
+curl http://localhost:8480/metrics | head -30
+
+##### Etat des targets dans Prometheus :
+```bash
+curl http://localhost:9090/api/v1/targets | python3 -m json.tool | grep -E "health|job|instance"
 ```
