@@ -1,34 +1,23 @@
-# Cassandra Reaper Configuration
 storageType: cassandra
 cassandra:
   type: basic
   contactPoints:
-    - host: "192.168.100.151"
+    - host: "192.168.100.151"   # cassandra01 — DC Nord  ✓
       port: 9042
-    - host: "192.168.100.152"
+    - host: "192.168.100.153"   # cassandra03 — DC Nord  ✓
       port: 9042
-    - host: "192.168.100.153"
-      port: 9042
-    - host: "192.168.100.154"
-      port: 9042
+    # .152 et .154 (Terres-de-la-Couronne) : seront découverts automatiquement
   sessionKeyspaceName: "reaper_db"
   loadBalancingPolicy:
     type: default
-    localDataCenter: Nord            # doit correspondre à CASSANDRA_DC
+    localDataCenter: Nord
 
-# Required repair settings
 hangingRepairTimeoutMins: 30
 incrementalRepair: false
 repairIntensity: 0.9
 repairParallelism: DATACENTER_AWARE
 repairRunThreadCount: 15
 
-# JMX Authentication — désactivée car authenticate=false sur les nœuds
-# jmxAuth:                           # ← commenté, sinon connexion JMX refusée
-#   username: cassandra
-#   password: cassandra
-
-# Auto-scheduling
 autoScheduling:
   enabled: true
   initialDelayPeriod: PT15S
@@ -37,11 +26,9 @@ autoScheduling:
   scheduleSpreadPeriod: PT6H
   adaptive: true
 
-# Access control
 accessControl:
   enabled: false
 
-# Server configuration
 server:
   applicationConnectors:
     - type: http
@@ -50,14 +37,12 @@ server:
     - type: http
       port: 8081
 
-# Logging
 logging:
   level: INFO
   loggers:
     io.cassandrareaper: DEBUG
     com.datastax.driver: WARN
 
-# Metrics
 metrics:
   frequency: 1 minute
   reporters:
