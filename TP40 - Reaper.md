@@ -445,10 +445,12 @@ curl -s -X POST "http://localhost:8080/repair_run" \
 | **Cluster** | `formation` |
 | **Keyspace** | `test_repair` |
 | **Owner** | `ops_team` |
-| **Days between repairs** | `7` |
-| **Repair parallelism** | `DATACENTER_AWARE` |
-| **Intensity** | `0.5` |
-| **Scheduled time** | *(heure de faible charge, ex : 02:00)* |
+| **Start time** | *(heure de faible charge, ex : 02:00)* |
+| **Interval in days** | `7` |
+| **Percent unrepaired threshold** | `laisser vide` |
+| **Adaptive** | `true` |
+
+**Avanced settings** permet d'aller plus loin dans les options (intensité, parallèlisme, ...) 
 
 3. Cliquez sur **"Add Schedule"**
 
