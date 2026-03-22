@@ -401,8 +401,8 @@ EXIT;
 | **Parallelism** | `DC_Aware` |
 | **Repair Intensity** | `0.5` |
 | **Repair type** | `Full Subrange` |
+| **Repair threads** | `2` |
 | **Segment timeout** | `10` |
-
 
 3. Cliquez sur **"Repair"**
 
