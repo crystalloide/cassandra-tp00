@@ -118,7 +118,7 @@ UN  192.168.100.153  80.03 KiB   16      50.7%             21b3ae41-1e2a-4c7d-97
 
 
 #### Accès au monitoring : 
-##### Avec un navigateur, aller sur l'UI Grafana  : 
+##### Avec un navigateur, aller sur l'UI Grafana  :  login 'admin' et mot de passe 'admin' :-)
 ```bash
 http://localhost:3000
 ```
