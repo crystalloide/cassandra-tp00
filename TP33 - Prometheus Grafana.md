@@ -8,7 +8,7 @@ Cluster Cassandra déployé via Docker Compose avec 4 nœuds sur 2 racks différ
 
 
 
-#### Démarrage du cluster
+#### 1°) Démarrage du cluster
 
 #### Étape 1 : Préparation de l'environnement
 
@@ -28,7 +28,7 @@ cd ~/cassandra-tp00
 cat Cluster_4_noeuds_2_racks_2_DC_Prometheus_Grafana.yml
 ```
 
-#### Créer les répertoires de volumes :
+#### 2°) Créer les répertoires de volumes :
 ```bash
 sudo rm -Rf ~/cassandra-tp00/docker/cassandra*
 mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02 ~/cassandra-tp00/docker/cassandra03 ~/cassandra-tp00/docker/cassandra04
@@ -46,7 +46,7 @@ ls ~/cassandra-tp00/docker
      assandra01-conf  cassandra02-conf  cassandra03-conf  cassandra04-conf
 ```
 
-#### Étape 2 : Démarrage du cluster avec Docker Compose
+#### 3°) Démarrage du cluster avec Docker Compose
 
 ```bash
 # Démarrer le cluster en arrière-plan
@@ -86,7 +86,7 @@ docker ps -a
 docker logs cassandra01
 ```
 
-#### Étape 3 : Vérification du cluster (après 5-10 minutes)
+#### 4°) Vérification du cluster (après 5-10 minutes)
 
 #### Regarder les ports à l'écoute :
 ```bash
@@ -119,7 +119,7 @@ UN  192.168.100.153  80.03 KiB   16      50.7%             21b3ae41-1e2a-4c7d-97
 ```
 
 
-#### Accès au monitoring : 
+#### 5°) Accès au monitoring : 
 
 ##### Avec un navigateur, aller sur l'UI Grafana  :  login 'admin' et mot de passe 'admin' :-)
 ```bash
@@ -138,4 +138,163 @@ curl http://localhost:8480/metrics | head -30
 ##### Etat des targets dans Prometheus :
 ```bash
 curl http://localhost:9090/api/v1/targets | python3 -m json.tool | grep -E "health|job|instance"
+```
+
+
+____
+##### 6°) Nous allons utiliser l'outil "cassandra-stress" pour générer plusieurs centaines d'écritures sur le noeud. 
+#####     Exécutez la commande suivante sur le premier terminal :
+____
+```bash
+docker exec -it cassandra01 bash 
+```
+
+```bash
+cd /opt/cassandra/tools/bin
+```
+
+##### bash cassandra-stress write n=1000 -node 192.168.100.151
+```bash
+bash cassandra-stress write no-warmup n=25000 cl=one -rate threads=1 -node 192.168.100.151
+```
+
+##### Assurez-vous que le second terminal vous reste visible pendant l'exécution de cassandra-stress.
+##### L'outil cassandra-stress va écrire 25 000 lignes sur le noeud.
+
+###### Affichage en retour du benchmark : 
+```text
+
+******************** Stress Settings ********************
+Command:
+  Type: write
+  Count: 25,000
+  No Warmup: true
+  Consistency Level: ONE
+  Target Uncertainty: not applicable
+  Key Size (bytes): 10
+  Counter Increment Distibution: add=fixed(1)
+Rate:
+  Auto: false
+  Thread Count: 1
+  OpsPer Sec: 0
+Population:
+  Sequence: 1..25000
+  Order: ARBITRARY
+  Wrap: true
+Insert:
+  Revisits: Uniform:  min=1,max=1000000
+  Visits: Fixed:  key=1
+  Row Population Ratio: Ratio: divisor=1.000000;delegate=Fixed:  key=1
+  Batch Type: not batching
+Columns:
+  Max Columns Per Key: 5
+  Column Names: [C0, C1, C2, C3, C4]
+  Comparator: AsciiType
+  Timestamp: null
+  Variable Column Count: false
+  Slice: false
+  Size Distribution: Fixed:  key=34
+  Count Distribution: Fixed:  key=5
+Errors:
+  Ignore: false
+  Tries: 10
+Log:
+  No Summary: false
+  No Settings: false
+  File: null
+  Interval Millis: 1000
+  Level: NORMAL
+Mode:
+  API: JAVA_DRIVER_NATIVE
+  Connection Style: CQL_PREPARED
+  Protocol Version: V5
+  Username: null
+  Password: null
+  Auth Provide Class: null
+  Max Pending Per Connection: 128
+  Connections Per Host: 8
+  Compression: NONE
+Node:
+  Nodes: [192.168.100.151]
+  Is White List: false
+  Datacenter: null
+Schema:
+  Keyspace: keyspace1
+  Replication Strategy: org.apache.cassandra.locator.SimpleStrategy
+  Replication Strategy Options: {replication_factor=1}
+  Table Compression: null
+  Table Compaction Strategy: null
+  Table Compaction Strategy Options: {}
+Transport:
+  Truststore: null
+  Truststore Password: null
+  Keystore: null
+  Keystore Password: null
+  SSL Protocol: TLS
+  SSL Algorithm: null
+  SSL Ciphers: TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA
+Port:
+  Native Port: 9042
+  JMX Port: 7199
+JMX:
+  Username: null
+  Password: *not set*
+Graph:
+  File: null
+  Revision: unknown
+  Title: null
+  Operation: WRITE
+TokenRange:
+  Wrap: false
+  Split Factor: 1
+Credentials file:
+  File: *not set*
+  CQL username: *not set*
+  CQL password: *not set*
+  JMX username: *not set*
+  JMX password: *not set*
+  Transport truststore password: *not set*
+  Transport keystore password: *not set*
+Reporting:
+  Output frequency: 1s
+  Header frequency: *not set*
+
+Connected to cluster: formation, max pending requests per connection 128, max connections per host 8
+Datacenter: datacenter1; Host: /192.168.100.151:9042; Rack: rack1
+Created keyspaces. Sleeping 1s for propagation.
+Sleeping 2s...
+Running WRITE with 1 threads for 25000 iteration
+
+type                                               total ops,    op/s,    pk/s,   row/s,    mean,     med,     .95,     .99,    .999,     max,   time,   stderr, errors,  gc: #,  max ms,  sum ms,  sdv ms,      mb
+WARN  18:52:05,485 Query 'com.datastax.driver.core.Statement$1@63e6389a;' generated server side warning(s): `USE <keyspace>` with prepared statements is considered to be an anti-pattern due to ambiguity in non-qualified table names. Please consider removing instances of `Session#setKeyspace(<keyspace>)`, `Session#execute("USE <keyspace>")` and `cluster.newSession(<keyspace>)` from your code, and always use fully qualified table names (e.g. <keyspace>.<table>). Keyspace used: keyspace1, statement keyspace: keyspace1, statement id: e1d2f4aa887d02751110f92a52de4f20
+total,                                                    36,      36,      36,      36,    14.0,     1.6,    90.6,    98.0,    98.0,    98.0,    1.0,  0.00000,      0,      0,       0,       0,       0,       0
+...
+....
+......
+
+total,                                                 23718,     794,     794,     794,     1.2,     0.5,     0.6,    57.1,    76.7,    76.7,   50.0,  0.07457,      0,      0,       0,       0,       0,       0
+total,                                                 24660,     942,     942,     942,     1.1,     0.4,     0.6,    54.6,    58.4,    58.4,   51.0,  0.07400,      0,      0,       0,       0,       0,       0
+total,                                                 25000,    1028,    1028,    1028,     1.0,     0.5,     0.6,     0.7,    59.1,    59.1,   51.3,  0.07521,      0,      0,       0,       0,       0,       0
+
+
+Results:
+Op rate                   :      487 op/s  [WRITE: 487 op/s]
+Partition rate            :      487 pk/s  [WRITE: 487 pk/s]
+Row rate                  :      487 row/s [WRITE: 487 row/s]
+Latency mean              :    2.0 ms [WRITE: 2.0 ms]
+Latency median            :    0.5 ms [WRITE: 0.5 ms]
+Latency 95th percentile   :    0.8 ms [WRITE: 0.8 ms]
+Latency 99th percentile   :   78.2 ms [WRITE: 78.2 ms]
+Latency 99.9th percentile :   89.3 ms [WRITE: 89.3 ms]
+Latency max               :   98.0 ms [WRITE: 98.0 ms]
+Total partitions          :     25,000 [WRITE: 25,000]
+Total errors              :          0 [WRITE: 0]
+Total GC count            : 3
+Total GC memory           : 215.107 MiB
+Total GC time             :    0.1 seconds
+Avg GC time               :   31.7 ms
+StdDev GC time            :   35.0 ms
+Total operation time      : 00:00:51
+
+END
 ```
