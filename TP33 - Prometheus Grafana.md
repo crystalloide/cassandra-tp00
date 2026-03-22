@@ -15,8 +15,10 @@ Cluster Cassandra déployé via Docker Compose avec 4 nœuds sur 2 racks différ
 ```bash
 cd ~
 sudo rm -Rf ~/cassandra-tp00
+```
 
 #### Ici, on va simplement cloner le projet :
+```bash
 git clone https://github.com/crystalloide/cassandra-tp00
 
 cd ~/cassandra-tp00
