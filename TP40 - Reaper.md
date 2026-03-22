@@ -197,6 +197,12 @@ Ajoutez le bloc suivant dans la section `services:` de votre `docker-compose.yml
       start_period: 60s
 ```
 
+#### Affichage du fichier complet : 
+```bash
+cd ~/cassandra-tp00
+cat Cluster_4_noeuds_2_racks_2_DC_Prometheus_Grafana_Reaper.yml
+```
+
 ### 4.2 Explication des paramètres clés
 
 | Paramètre | Valeur | Rôle |
@@ -251,7 +257,7 @@ EXIT;
 ### 6.1 Démarrer Reaper
 
 ```bash
-docker compose up -d reaper
+docker compose -f Cluster_4_noeuds_2_racks_2_DC_Prometheus_Grafana_Reaper.yml up -d reaper
 ```
 
 ### 6.2 Suivre les logs
