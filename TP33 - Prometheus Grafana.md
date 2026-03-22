@@ -117,96 +117,13 @@ UN  192.168.100.153  80.03 KiB   16      50.7%             21b3ae41-1e2a-4c7d-97
 ```
 
 
-#### Accès à cqlsh :
-
-#### Option 1 : Via Docker exec (recommandé)
-#### Se connecter à cqlsh sur cassandra01 :
+#### Accès au monitoring : 
+##### Avec un navigateur, aller sur l'UI Grafana  : 
 ```bash
-docker exec -it cassandra01 cqlsh
+http://localhost:3000
 ```
 
-#### Pour sortir du shell :
+##### Avec un navigateur, aller sur l'UI Prometheus  : 
 ```bash
-exit 
-```
-
-#### Ou spécifier l'adresse IP :
-```bash
-docker exec -it cassandra01 cqlsh 192.168.100.151 9042
-```
-
-#### Option 2 : Depuis l'hôte (via ports exposés)
-
-Les ports CQL sont exposés sur l'hôte :
-
-- cassandra01 : localhost:9142
-- cassandra02 : localhost:9242
-- cassandra03 : localhost:9342
-- cassandra04 : localhost:9442
-
-```bash
-# Si cqlsh est installé sur votre machine hôte
-cqlsh localhost 9142
-```
-
-#### Si on veut absolument accéder via CQLSH à partir de la machine hôte sans passer par docker :
-#### Installer pyenv si ce n'est pas déjà fait
-```bash
-curl https://pyenv.run | bash
-```
-#### Ajouter pyenv au PATH (ajouter à ~/.bashrc)
-```bash
-gedit ~/.bashrc
-```
-#### Ajouter tout à la fin : 
-```bash
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-```
-#### Sauvegarder et quitter
-
-#### Recharger le shell
-```bash
-source ~/.bashrc
-```
-#### Installer Python 3.11.7 :
-```bash
-pyenv install 3.11.7
-```
-
-#### Créer un environnement virtuel pour cqlsh :
-```bash
-pyenv virtualenv 3.11.7 cqlsh-env
-pyenv activate cqlsh-env
-```
-#### Actualisation : 
-```bash
-python -m pip install --upgrade pip
-```
-#### Installer cqlsh dans cet environnement :
-```bash
-pip install cqlsh
-```
-#### Vérification :
-```bash
-python --version
-```
-#### Affichage en retour :  
-```bash
-Python 3.11.7
-```
-#### Maintenant, on va lancer cqlsh :
-```bash
-cqlsh localhost 9142
-```
-
-#### Et pour les prochaines fois, il n'y aura besoin que de faire  : 
-#### Activer l'environnement
-```bash
-pyenv activate cqlsh-env
-```
-#### Lancer cqlsh
-```bash
-cqlsh localhost 9142
+http://localhost:9090/query
 ```
