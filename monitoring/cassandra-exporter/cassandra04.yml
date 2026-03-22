@@ -1,2 +1,10 @@
-host: cassandra04
-port: 7199
+host: cassandra04:7199
+ssl: false
+user: cassandra
+password: cassandra
+listenPort: 8080
+listenAddress: 0.0.0.0
+blacklist: []
+maxScrapFrequencyInSec:
+  50:
+    - .*
