@@ -265,8 +265,17 @@ Vous devriez voir des tables comme `cluster`, `repair_run`, `repair_schedule`, `
 ### 6.4 Test de connectivité
 
 ```bash
-curl -s http://localhost:8080/ping
-# Réponse attendue : pong
+curl -si http://localhost:8080/cluster
+```
+
+Réponse attendue : 
+
+```
+HTTP/1.1 200 OK
+Date: Sun, 22 Mar 2026 15:53:57 GMT
+Content-Type: application/json
+Vary: Accept-Encoding
+Content-Length: 2
 ```
 
 ---
