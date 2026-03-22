@@ -169,11 +169,18 @@ services:
 #  CASSANDRA EXPORTERS  (JMX → Prometheus /metrics)
 #  Image : criteord/cassandra_exporter
 #  Chaque sidecar se connecte en JMX à son nœud Cassandra.
+#
+#  Config : host + port uniquement (les deux seuls champs valides).
+#  Le chemin dans le conteneur est /cassandra_exporter/config.yml
+#  et l'entrypoint de l'image attend exactement ce fichier.
+#
+#  restart: on-failure permet les retentatives si Cassandra
+#  n'est pas encore prêt à accepter des connexions JMX.
 # ─────────────────────────────────────────────────────────────
   cassandra01-exporter:
     image: criteord/cassandra_exporter:2.3.8
     container_name: cassandra01-exporter
-    restart: always
+    restart: on-failure
     depends_on:
       cassandra01:
         condition: service_healthy
@@ -182,13 +189,14 @@ services:
         ipv4_address: 192.168.100.161
     volumes:
       - ${PWD}/monitoring/cassandra-exporter/cassandra01.yml:/cassandra_exporter/config.yml:ro
+    command: ["config.yml"]
     ports:
       - "8180:8080"
 
   cassandra02-exporter:
     image: criteord/cassandra_exporter:2.3.8
     container_name: cassandra02-exporter
-    restart: always
+    restart: on-failure
     depends_on:
       cassandra02:
         condition: service_healthy
@@ -197,13 +205,14 @@ services:
         ipv4_address: 192.168.100.162
     volumes:
       - ${PWD}/monitoring/cassandra-exporter/cassandra02.yml:/cassandra_exporter/config.yml:ro
+    command: ["config.yml"]
     ports:
       - "8280:8080"
 
   cassandra03-exporter:
     image: criteord/cassandra_exporter:2.3.8
     container_name: cassandra03-exporter
-    restart: always
+    restart: on-failure
     depends_on:
       cassandra03:
         condition: service_healthy
@@ -212,13 +221,14 @@ services:
         ipv4_address: 192.168.100.163
     volumes:
       - ${PWD}/monitoring/cassandra-exporter/cassandra03.yml:/cassandra_exporter/config.yml:ro
+    command: ["config.yml"]
     ports:
       - "8380:8080"
 
   cassandra04-exporter:
     image: criteord/cassandra_exporter:2.3.8
     container_name: cassandra04-exporter
-    restart: always
+    restart: on-failure
     depends_on:
       cassandra04:
         condition: service_healthy
@@ -227,6 +237,7 @@ services:
         ipv4_address: 192.168.100.164
     volumes:
       - ${PWD}/monitoring/cassandra-exporter/cassandra04.yml:/cassandra_exporter/config.yml:ro
+    command: ["config.yml"]
     ports:
       - "8480:8080"
 
