@@ -554,7 +554,8 @@ Créez un fichier `monitoring/grafana/dashboards/reaper.json` avec les panneaux 
 ```bash
 # 1. Arrêter cassandra03 temporairement
 docker stop cassandra03
-
+```
+```bash
 # 2. Insérer des données pendant son absence
 docker exec -it cassandra01 cqlsh -e "
 USE test_repair;
@@ -563,17 +564,27 @@ VALUES (uuid(), 'Arya Stark', 'arya@braavos.essos', toTimestamp(now()));
 INSERT INTO users (id, name, email, created_at)
 VALUES (uuid(), 'Sansa Stark', 'sansa@vale.moon', toTimestamp(now()));
 "
+```
 
+```bash
 # 3. Redémarrer cassandra03
 docker start cassandra03
+```
 
+```bash
 # 4. Vérifier le hint handoff (données manquées récupérées automatiquement si < 3h)
 docker exec -it cassandra03 nodetool tpstats | grep -A3 "HintedHandoff"
+```
 
+```bash
 # 5. Compter les données sur cassandra03 (peut différer de cassandra01)
-docker exec -it cassandra03 nodetool cfstats test_repair.users | grep "Number of partitions"
-docker exec -it cassandra01 nodetool cfstats test_repair.users | grep "Number of partitions"
+docker exec -it cassandra03 nodetool tablestats test_repair.users | grep "Number of partitions"
+```
+```bash
+docker exec -it cassandra01 nodetool tablestats test_repair.users | grep "Number of partitions"
+```
 
+```bash
 # 6. Lancer une réparation depuis Reaper et observer la synchronisation
 ```
 
@@ -613,11 +624,15 @@ curl -s -X POST "http://localhost:8080/repair_run" \
 # Lister les réparations en cours
 curl -s "http://localhost:8080/repair_run?cluster=formation&state=RUNNING" \
   -H "Authorization: Bearer $TOKEN" | jq '.[].id'
+```
 
+```bash
 # Mettre en pause (remplacer <RUN_ID> par l'ID obtenu)
 curl -s -X PUT "http://localhost:8080/repair_run/<RUN_ID>/state/PAUSED" \
   -H "Authorization: Bearer $TOKEN"
+```
 
+```bash
 # Reprendre
 curl -s -X PUT "http://localhost:8080/repair_run/<RUN_ID>/state/RUNNING" \
   -H "Authorization: Bearer $TOKEN"
@@ -634,10 +649,14 @@ curl -s -X PUT "http://localhost:8080/repair_run/<RUN_ID>/state/RUNNING" \
 # Supprimer le service Reaper
 docker compose stop reaper
 docker compose rm -f reaper
+```
 
+```bash
 # Supprimer le keyspace de backend (optionnel)
 docker exec -it cassandra01 cqlsh -e "DROP KEYSPACE IF EXISTS reaper_db;"
+```
 
+```bash
 # Supprimer le keyspace de test
 docker exec -it cassandra01 cqlsh -e "DROP KEYSPACE IF EXISTS test_repair;"
 ```
@@ -701,7 +720,7 @@ docker inspect --format='{{.State.Health.Status}}' reaper
 docker logs -f reaper 2>&1 | grep -E "(INFO|WARN|ERROR)"
 
 # Test de l'API sans authentification
-curl http://localhost:8080/ping
+curl http://localhost:8080/webui
 
 # Lister les clusters enregistrés
 curl -u admin:admin http://localhost:8080/cluster
@@ -709,6 +728,6 @@ curl -u admin:admin http://localhost:8080/cluster
 # Lister les réparations
 curl -u admin:admin "http://localhost:8080/repair_run?cluster=formation"
 
-# Lister les plannings
+# Lister les jobs de planifications de repair :
 curl -u admin:admin "http://localhost:8080/repair_schedule?cluster=formation"
 ```
