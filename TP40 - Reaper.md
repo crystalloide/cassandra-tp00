@@ -473,15 +473,15 @@ curl -s -X POST "http://localhost:8080/repair_schedule" \
 ### 9.3 Bonnes pratiques de planification
 
 ```
-┌─────────────────────────────────────────────────────────────────────┐
-│                  Stratégie de réparation recommandée                │
-├─────────────────┬───────────────────────────────────────────────────┤
-│ gc_grace_seconds│ Valeur par défaut Cassandra : 864 000 s (10 jours) │
-│ Fréquence       │ Réparer TOUS les nœuds en < 10 jours              │
-│ Horaire         │ Nuit / week-end (faible charge)                    │
-│ Intensité       │ 0.2-0.5 en production, 0.8 en lab                 │
-│ Parallélisme    │ DATACENTER_AWARE (jamais PARALLEL en prod)        │
-└─────────────────┴───────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────┐
+│                  Stratégie de réparation recommandée                   │
+├─────────────────┬──────────────────────────────────────────────────────┤
+│ gc_grace_seconds│ Valeur par défaut Cassandra : 864 000 s (10 jours)   │
+│ Fréquence       │ Réparer TOUS les nœuds en < 10 jours                 │
+│ Horaire         │ Nuit / week-end (faible charge)                      │
+│ Intensité       │ 0.2-0.5 en production, 0.8 en lab                    │
+│ Parallélisme    │ DATACENTER_AWARE (jamais PARALLEL en prod)           │
+└─────────────────┴──────────────────────────────────────────────────────┘
 ```
 
 > **Règle d'or** : La fréquence des réparations doit être **inférieure à `gc_grace_seconds`**.
