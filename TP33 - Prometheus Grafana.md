@@ -53,9 +53,8 @@ docker compose -f Cluster_4_noeuds_2_racks_2_DC_Prometheus_Grafana.yml up  -d
 #### Suivre les logs pour vérifier le démarrage (dans un autre terminal si besoin)
 ```bash
 cd ~/cassandra-tp00
-docker compose logs -f
+docker compose -f Cluster_4_noeuds_2_racks_2_DC_Prometheus_Grafana.yml logs
 ```
-##### Faire **\<CTRL>+\<C>** pour sortir
 
 #### Dans un autre terminal, pour suivre  :
 ```bash
