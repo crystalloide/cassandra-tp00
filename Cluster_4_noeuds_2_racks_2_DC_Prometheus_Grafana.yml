@@ -181,7 +181,7 @@ services:
       cassandra_network:
         ipv4_address: 192.168.100.161
     volumes:
-      - ${PWD}/monitoring/cassandra-exporter/cassandra01.yml:/cassandra_exporter/config.yml:ro
+      - ${PWD}/monitoring/cassandra-exporter/cassandra01.yml:/etc/cassandra_exporter/config.yml:ro
     ports:
       - "8180:8080"
 
@@ -196,7 +196,7 @@ services:
       cassandra_network:
         ipv4_address: 192.168.100.162
     volumes:
-      - ${PWD}/monitoring/cassandra-exporter/cassandra02.yml:/cassandra_exporter/config.yml:ro
+      - ${PWD}/monitoring/cassandra-exporter/cassandra02.yml:/etc/cassandra_exporter/config.yml:ro
     ports:
       - "8280:8080"
 
@@ -211,7 +211,7 @@ services:
       cassandra_network:
         ipv4_address: 192.168.100.163
     volumes:
-      - ${PWD}/monitoring/cassandra-exporter/cassandra03.yml:/cassandra_exporter/config.yml:ro
+      - ${PWD}/monitoring/cassandra-exporter/cassandra03.yml:/etc/cassandra_exporter/config.yml:ro
     ports:
       - "8380:8080"
 
@@ -226,7 +226,7 @@ services:
       cassandra_network:
         ipv4_address: 192.168.100.164
     volumes:
-      - ${PWD}/monitoring/cassandra-exporter/cassandra04.yml:/cassandra_exporter/config.yml:ro
+      - ${PWD}/monitoring/cassandra-exporter/cassandra04.yml:/etc/cassandra_exporter/config.yml:ro
     ports:
       - "8480:8080"
 
