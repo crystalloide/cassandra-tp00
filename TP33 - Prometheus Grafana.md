@@ -298,3 +298,8 @@ Total operation time      : 00:00:51
 
 END
 ```
+
+##### Observers les métriques ici : 
+```text
+http://localhost:3000/d/PbhrxMuiz/cassandra-dashboard?orgId=1&from=now-5m&to=now&timezone=browser&var-cluster=formation&var-datacenter=$__all&refresh=5s
+```
