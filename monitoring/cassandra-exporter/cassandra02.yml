@@ -1,0 +1,4 @@
+host: cassandra02
+port: 7199
+listenAddress: 0.0.0.0
+listenPort: 8080
