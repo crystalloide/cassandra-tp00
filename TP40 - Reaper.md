@@ -157,8 +157,8 @@ Ajoutez le bloc suivant dans la section `services:` de votre `docker-compose.yml
       cassandra_network:
         ipv4_address: 192.168.100.175
     volumes:
-      - ${PWD}/monitoring/reaper/cassandra-reaper.yml:/reaper-config.yml   
-    command: ["server", "/reaper-config.yml"]                               # ← pointe sur notre fichier
+      - ${PWD}/monitoring/reaper/cassandra-reaper.yml:/etc/cassandra-reaper/cassandra-reaper.yml:ro
+    command: ["cassandra-reaper"]          # ← déclenche le bon bloc if dans l'entrypoint
     environment:
       - REAPER_AUTH_ENABLED=true
       - REAPER_AUTH_USER=admin
@@ -172,7 +172,6 @@ Ajoutez le bloc suivant dans la section `services:` de votre `docker-compose.yml
       timeout: 10s
       retries: 10
       start_period: 60s
-
 ```
 
 #### Affichage du fichier complet : 
