@@ -1,0 +1,41 @@
+segmentCountPerNode: 16
+repairParallelism: DATACENTER_AWARE
+repairIntensity: 0.5
+scheduleDaysBetween: 7
+repairRunThreadCount: 15
+hangingRepairTimeoutMins: 30
+storageType: cassandra
+incrementalRepair: false
+
+cassandra:
+  clusterName: "formation"
+  contactPoints:
+    - host: "192.168.100.151"
+      port: 9042
+    - host: "192.168.100.152"
+      port: 9042
+  keyspace: reaper_db
+  localDC: Nord
+  authProvider:
+    type: plainText
+    username: ""
+    password: ""
+
+jmxPorts:
+  192.168.100.151: 7199
+  192.168.100.152: 7199
+  192.168.100.153: 7199
+  192.168.100.154: 7199
+
+jmxAuth: false
+
+server:
+  type: simple
+  applicationContextPath: /
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 8080
+
+logging:
+  level: INFO
