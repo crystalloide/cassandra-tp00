@@ -107,7 +107,7 @@ docker exec cassandra04 sed -i \
   /etc/cassandra/cassandra-env.sh
 ```
 
-#### 5. Prise en compte avec le redémarrage tour à tour des 4 noeuds cassnadra :
+#### 5. Prise en compte avec le redémarrage tour à tour des 4 noeuds cassandra :
 ```bash
 ##### cassandra01 :
 docker restart cassandra01 
