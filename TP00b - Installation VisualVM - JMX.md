@@ -50,19 +50,19 @@ cd visualvm_221/bin
 
 ```bash
 > File > Add JMX connexion :
-Dans le champs "Connexion" :  cassandra01:7199
+Dans le champs "Connexion" :  192.168.100.151:7199
 Dans le champs "Display name" : cassandra01
 
 > File > Add JMX connexion :
-Dans le champs "Connexion" :  cassandra02:7199
+Dans le champs "Connexion" :  192.168.100.152:7199
 Dans le champs "Display name" : cassandra02
 
 > File > Add JMX connexion :
-Dans le champs "Connexion" :  cassandra03:7199
+Dans le champs "Connexion" :  192.168.100.153:7199
 Dans le champs "Display name" : cassandra03
 
 > File > Add JMX connexion :
-Dans le champs "Connexion" :  cassandra04:7199
+Dans le champs "Connexion" :  192.168.100.154:7199
 Dans le champs "Display name" : cassandra04
 
 ```
