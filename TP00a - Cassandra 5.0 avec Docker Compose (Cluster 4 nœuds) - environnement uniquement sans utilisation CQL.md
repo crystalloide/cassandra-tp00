@@ -32,6 +32,9 @@ Le fichier `Cluster_4_noeuds_4_racks_1_DC.yml` déploie :
 cd ~
 sudo rm -Rf ~/cassandra-tp00
 
+sudo systemctl disable ufw
+sudo systemctl stop ufw
+
 #### Ici, on va simplement cloner le projet :
 git clone https://github.com/crystalloide/cassandra-tp00
 
