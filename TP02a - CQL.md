@@ -50,7 +50,7 @@ _____________
      Connection refused to host: 127.0.0.1; nested exception is:
      java.net.ConnectException: Connection refused (Connection refused)
 	 
-#####  On peut vérifier si le noeud cassandra à bien démarré, utile si on a reçu le message "connection refused"
+#####  On peut vérifier si le noeud cassandra a bien démarré, utile si on a reçu le message "connection refused"
 ```bash
 docker exec -it cassandra01 cat /opt/cassandra/logs/system.log | grep '151:7000 state jump to'
 ```
