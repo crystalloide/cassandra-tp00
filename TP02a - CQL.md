@@ -1,5 +1,5 @@
 _____________
-####  TP N°2: CQL
+####  TP N°2 : CQL
 #####  Création d'un keyspace pour EntrepriseFormation
 #####  Création d'une table pour stocker les métadonnées des cours
 #####  Chargement des données de la table des cours à partir d'un fichier en format .csv
