@@ -106,8 +106,8 @@ ________
 ________
 ```bash
 docker start cassandra01
+sleep 40
 docker logs cassandra01 
-sleep 30
 ```
 ```bash
 docker exec -it cassandra01 cat /opt/cassandra/logs/system.log | grep 'state jump to NORMAL'
