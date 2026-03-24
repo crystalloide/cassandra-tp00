@@ -135,8 +135,8 @@ ________
 ##### 6°) Relancez le second noeud avec la commande : 
 ```bash
 docker start cassandra02
+sleep 40
 docker logs cassandra02 
-sleep 30
 ```
 ```bash
 docker exec -it cassandra02 cat /opt/cassandra/logs/system.log | grep 'state jump to NORMAL'
