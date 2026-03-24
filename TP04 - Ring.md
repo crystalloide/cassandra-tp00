@@ -406,7 +406,7 @@ docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours '245
     192.168.100.151
 
 ________
-##### 13°) Connaisance de l'emplacement des tokens, même seux pas encore utilisés :
+##### 13°) Connaisance de l'emplacement des tokens, même ceux pas encore utilisés :
     Cassandra n'a pas besoin d'avoir une partition déjà existante (donc pour une valeur de clé donnée)
     pour déterminer quels nœuds stockeront quelle partition.
 	
