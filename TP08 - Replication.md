@@ -89,7 +89,7 @@ UN  192.168.100.152  85.11 KiB   16      71.4%             6fb77427-ad69-4dc6-bd
 docker exec -it cassandra01 cat /opt/cassandra/conf/cassandra.yaml | grep "num_tokens"
 ```
 
-##### Vérifier le nom du cluster : cluster_name: 'ClusterFormation'
+##### Vérifier le nom du cluster : cluster_name: 'formation'
 ##### Pour voir la configuration sur cassandra03 :
 
 ```bash
