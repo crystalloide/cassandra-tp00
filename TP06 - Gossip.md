@@ -22,7 +22,7 @@ _____
 
 ##### 1°) Assurez-vous que les deux nœuds sont opérationnels en utilisant la commande 'nodetool status' sur les noeuds cassandra01 et cassandra02 : 
 ```bash
-docker exec -it cassandra01 docker exec -it cassandra01 nodetool status
+docker exec -it cassandra01 nodetool status
 ```
 
 ##### 2°) Exécutez la commande suivante: cassandra01 
