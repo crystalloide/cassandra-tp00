@@ -288,7 +288,7 @@ SELECT peer, data_center, host_id, preferred_ip, rack, release_version, rpc_addr
 FROM system.peers;
 ```
 
-##### Affichage : sur cassandra02, on obtient: 
+##### Affichage : sur cassandra01, on obtient: 
 ```sql
     
      peer            | data_center | host_id                              | preferred_ip | rack  | release_version | rpc_address     | schema_version
@@ -300,13 +300,16 @@ FROM system.peers;
 ```
 _____
 
+```bash
+docker exec -it cassandra01 cqlsh
+```
 
 ```sql
 SELECT peer, data_center, host_id, preferred_ip, rack, release_version, rpc_address, schema_version
 FROM system.peers;
 ```
 
-##### Affichage : sur cassandra01, on obtient: 
+##### Affichage : sur cassandra02, on obtient: 
 ```sql
     
      peer            | data_center | host_id                              | preferred_ip | rack  | release_version | rpc_address     | schema_version
@@ -320,6 +323,4 @@ FROM system.peers;
 _____
 ##### Fin du TP06 : les échanges avec le protocole Gossip
 _____
-
-
 
