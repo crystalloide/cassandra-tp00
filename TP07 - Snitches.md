@@ -217,7 +217,7 @@ rack=Port-Real
 ```
 
 ______
-##### 7°) Maintenant que notre cluster à 2 noeuds 2 DC 2 rackes est opérationnel, lancez la commande : 
+##### 7°) Maintenant que notre cluster à 2 noeuds 2 DC 2 racks est opérationnel, lancez la commande : 
 ______
 ##### node/bin/dsetool status
 ```bash
