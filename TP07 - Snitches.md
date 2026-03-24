@@ -114,7 +114,7 @@ UN  192.168.100.152  85.12 KiB   16      100.0%            646d0ad2-b6e3-46f1-9f
 
 ```
 
-##### Précision dit le pramètre 'prefer_local=true' : 
+##### Précision sur le paramètre 'prefer_local=true' : 
 ```bash
 Quand prefer_local=true, Cassandra préfère utiliser l'adresse IP locale (interne) d'un nœud pour communiquer avec lui lorsqu'il est dans le même datacenter,
 plutôt que son adresse broadcast (qui peut être une IP externe/publique).
