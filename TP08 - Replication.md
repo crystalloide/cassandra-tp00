@@ -110,7 +110,7 @@ cat ~/cassandra-tp00/docker/cassandra03-conf/cassandra.yaml | grep "endpoint_sni
 ##### Affichage en retour : 
 ```bash
 # endpoint_snitch -- Set this to a class that implements
-endpoint_snitch: SimpleSnitch
+endpoint_snitch: GossipingPropertyFileSnitch
 ```
 
 ##### Pour voir la configuration de cassandra03 :
