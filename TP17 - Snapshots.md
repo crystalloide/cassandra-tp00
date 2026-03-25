@@ -164,7 +164,7 @@ nodetool import entrepriseformation cours /node/dse-data/data/entrepriseformatio
 
 ```bash
 docker exec -it cassandra01 nodetool import entrepriseformation cours /node/dse-data/data/entrepriseformation/cours-f7f796e0d42c11ebbec0d39876a2987e/snapshots/1624458195159/
-```bash
+```
 
 ____
 ##### Fin du TP
