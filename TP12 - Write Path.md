@@ -131,6 +131,9 @@ watch -n 1 -d "ls -lh ~/cassandra-tp00/docker/cassandra01/commitlog"
 
 ##### NOTE : Pour sortir de cette commande ensuite, faites "CTRL-C"
 
+```bash
+ls -s -lh ~/cassandra-tp00/docker/cassandra01/commitlog
+```
 ____
 ##### 3°) Nous allons utiliser l'outil "cassandra-stress" pour générer plusieurs centaines d'écritures sur le noeud. 
 #####     Exécutez la commande suivante sur le premier terminal :
