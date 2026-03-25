@@ -48,18 +48,7 @@ describe keyspace formation;
 ```sql
 use formation ;
 ```
-
-```text
-cqlsh:formation> CREATE TABLE IF NOT EXISTS products (
-             ...   product_id uuid,
-             ...   product_name text,
-             ...   description text,
-             ...   price decimal,
-             ...   created timestamp,
-             ...   PRIMARY KEY (product_id)
-             ... );
-```			 
-			 
+		 
 ```sql
 CREATE TABLE formation.products (
     product_id uuid PRIMARY KEY,
