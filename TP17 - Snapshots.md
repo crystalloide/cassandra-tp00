@@ -123,7 +123,7 @@ ____
 ____
 ```bash
 docker exec -it cassandra01 nodetool snapshot entrepriseformation.cours
-```bash
+```
 
 ```text
 **Affichage :**
@@ -138,12 +138,12 @@ ____
 
 ```bash
 docker exec -it cassandra01 nodetool flush
-```bash
+```
 
 
 ```bash
 docker exec -it cassandra01 nodetool snapshot --table cours_par_theme entrepriseformation
-```bash
+```
 
 
 ```text
