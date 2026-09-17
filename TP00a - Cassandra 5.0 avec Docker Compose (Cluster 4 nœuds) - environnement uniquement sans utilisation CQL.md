@@ -368,6 +368,13 @@ cqlsh localhost 9142
 ```
 
 #### Si on veut absolument accéder via CQLSH à partir de la machine hôte sans passer par docker :
+
+##### Option 1 :
+```bash
+sudo snap install cqlsh
+```
+
+##### Option 2 :
 #### Installer pyenv si ce n'est pas déjà fait
 ```bash
 curl https://pyenv.run | bash
@@ -414,6 +421,8 @@ python --version
 ```bash
 Python 3.11.7
 ```
+##### fin option 2 :
+
 #### Maintenant, on va lancer cqlsh :
 ```bash
 cqlsh localhost 9142
