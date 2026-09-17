@@ -204,7 +204,7 @@ _____________
 ####  4°) Dans cqlsh, sélectionnez le keyspace récemment créé avec la commande USE :
 _____________
 ```sql
-USE "EntrepriseFormation";
+USE EntrepriseFormation;
 ```
 ####  L'invite de saisie de commande est changée :
       cqlsh:entrepriseformation> ....
