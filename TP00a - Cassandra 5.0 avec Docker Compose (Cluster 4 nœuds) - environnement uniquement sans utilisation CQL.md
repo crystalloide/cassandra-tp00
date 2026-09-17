@@ -421,7 +421,7 @@ python --version
 ```bash
 Python 3.11.7
 ```
-##### fin option 2 :
+
 
 #### Maintenant, on va lancer cqlsh :
 ```bash
@@ -433,6 +433,9 @@ cqlsh localhost 9142
 ```bash
 pyenv activate cqlsh-env
 ```
+
+##### fin option 2 :
+
 #### Lancer cqlsh
 ```bash
 cqlsh localhost 9142
