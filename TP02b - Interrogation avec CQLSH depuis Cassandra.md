@@ -2,6 +2,10 @@ _____________
 #### TP02b : Interrogation avec CQLSH (suite) 
 _____________
 
+```bash
+docker exec -it cassandra01 cqlsh cassandra01 9042
+```
+
 #### Commandes pratiques  
 _____________
 
