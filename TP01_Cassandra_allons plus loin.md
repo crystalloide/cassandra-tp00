@@ -18,7 +18,9 @@ Comprendre l'impact des différents niveaux de cohérence (ONE, QUORUM, ALL) sur
 ```sql
 -- Se connecter à cqlsh
 docker exec -it cassandra01 cqlsh
+```
 
+```sql
 -- Utiliser le keyspace formation
 USE formation;
 
