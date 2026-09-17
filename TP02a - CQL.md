@@ -301,7 +301,7 @@ SELECT WRITETIME(intitule) FROM cours WHERE cours_id = 245e8024-14bd-11e5-9743-8
 #### Pour rendre ce timestamp compréhensible pour un être humain :-) :
 **1772450826701836** => pour le ramener en millisecondes = /1000 =>  **1772450826701**
 
-Autre élément à savoir : Cassandra n’autorise pas d’appeler une fonction seule dans un SELECT sans clause FROM.
+Autre élément à savoir : Cassandra n’autorise pas l’appel à une fonction seule dans un SELECT sans clause FROM.
 Exemple pour minTimeuuid(), qui ne dépend d’aucune table, mais CQL impose toujours un FROM.
 Il faut utiliser une table factice, par exemple **system.local** :
 
