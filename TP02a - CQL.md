@@ -357,10 +357,9 @@ SELECT NOW() FROM cours;
 	 L'information de quand un enregistrement a été inséré/modifié (UPSERT) est déjà conservée par Cassandra.
 	 Pour stocker le timestamp d'insertion initiale dans une colonne spécifique dédiée : Exemple (à ne pas faire ici)
 ```sql
-INSERT INTO cours (cours_id, titre, created_at) 
-VALUES (uuid(), 'Cassandra', NOW());
+INSERT INTO cours (cours_id, intitule, ajout_date)  VALUES (NOW(), 'Cassandra', toTimestamp(NOW()));
 ```
-	Dans cet exemple, la valeur initiale d'insertion sera figée dans la colonne "created_at" au moment de l'écriture.
+	Dans cet exemple, la valeur initiale d'insertion sera figée dans la colonne "ajout_date" au moment de l'écriture.
 _____________
 ####  Récupération de la date courante dans un format date :  
 _____________
