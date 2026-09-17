@@ -111,7 +111,11 @@ _____________
 ##### avec le client cqlsh installé en local (attention aux versions !!!) : 
 
 ```bash
+## si besoin
 pyenv activate cqlsh-env
+```
+
+```bash
 cqlsh localhost 9142
 ```
 
