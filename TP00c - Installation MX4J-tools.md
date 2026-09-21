@@ -35,7 +35,7 @@ Le fichier `Cluster_4_noeuds_4_racks_1_DC.yml` déploie :
 	cassandra04		8081							8483
 	
 	
-#### Installation de VisualVM  :
+#### Installation de MX4J-tools :
 
 
 #### 1. Téléchargement :
