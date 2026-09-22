@@ -471,6 +471,9 @@ docker exec -it cassandra01 ls /donnees
 docker exec -it cassandra01 cqlsh
 ```
 
+##### Pour en savoir plus sur l'outil cqlsh COPY :
+
+https://docs.datastax.com/en/cql-oss/3.x/cql/cql_reference/cqlshCopy.html
 
 ```sql
 USE entrepriseformation;
