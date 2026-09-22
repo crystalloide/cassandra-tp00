@@ -460,7 +460,7 @@ EXIT;
 _____________
 ####  10°) Pour importer les données dans la table "cours" à partir d'un fichier cette fois : 
 _____________
-##### A partir d'un temrinal Linux, on alimente un des noeuds (ici cassandra01) avec les fichiers que l'on va charger ensuite :
+##### A partir d'un terminal Linux, on alimente un des noeuds (ici cassandra01) avec les fichiers que l'on va charger ensuite :
 ```bash
 cd ~/cassandra-tp00
 docker exec -it cassandra01 mkdir -p /donnees
