@@ -108,7 +108,7 @@ UN  192.168.100.151  114.72 KiB  16      100.0%            c4d56bcd-1a2e-49c6-a9
 
 
 ____
-##### 5°) Lancer cqlsh et recréation du KeySpace entrepriseformation et la table cours_par_theme :
+##### 3°) Lancer cqlsh et recréation du KeySpace entrepriseformation et la table cours_par_theme :
 ____
 
 ```bash
@@ -131,7 +131,7 @@ CREATE TABLE entrepriseformation.cours_par_theme (
 ```
 
 ____
-##### 6°) Insertion d'un simple enregistrement dans la table :
+##### 4°) Insertion d'un simple enregistrement dans la table :
 ____
 ```cql
 INSERT INTO cours_par_theme (theme, ajout_date, cours_id, intitule)
@@ -143,7 +143,7 @@ SELECT * from entrepriseformation.cours_par_theme;
 ```	
 
 ____	
-##### 7°) On quitte cqlsh et on force Cassandra à flusher la memtable sur disque : la Memtable devient ainsi une SSTable immuable :
+##### 5°) On quitte cqlsh et on force Cassandra à flusher la memtable sur disque : la Memtable devient ainsi une SSTable immuable :
 ____
 
 ```cql
@@ -156,7 +156,7 @@ docker exec -it cassandra01 nodetool flush
 
 
 ____
-##### 8°) Investiguons sur la SSTable dans le répertoire /data du noeud : 
+##### 6°) Investiguons sur la SSTable dans le répertoire /data du noeud : 
 #####    Rappelez-vous que le nom actuel du répertoire est une valeur aléatoire unique 
 #####    dans /opt/cassandra/data/data/entrepriseformation/  :
 ____
@@ -176,7 +176,7 @@ ls -lh /opt/cassandra/data/data/entrepriseformation/cours_par_theme-*
 
 
 ____
-##### 9°) Création d'une seconde SSTable. Pour cela,  on ajoute un second enregistrement avant de flusher  : 
+##### 7°) Création d'une seconde SSTable. Pour cela,  on ajoute un second enregistrement avant de flusher  : 
 ____
 
 ```bash
@@ -197,7 +197,7 @@ exit
 ```
 
 ____	
-##### 10°) Flushez cette seconde memtable sur disque :
+##### 8°) Flushez cette seconde memtable sur disque :
 ____
 
 ```bash
@@ -209,7 +209,7 @@ nodetool flush
 ```
 
 ____
-##### 11°) Regardez à nouveau le répertoire "data" pour voir les fichiers associés avec les deux SSTables :
+##### 9°) Regardez à nouveau le répertoire "data" pour voir les fichiers associés avec les deux SSTables :
 ____
 ```bash
 ls -lh /opt/cassandra/data/data/entrepriseformation/cours_par_theme-*
@@ -217,7 +217,7 @@ ls -lh /opt/cassandra/data/data/entrepriseformation/cours_par_theme-*
 
 
 ____
-##### 12°) Créez une 3ème SSTable en insérant la ligne suivante : 
+##### 10°) Créez une 3ème SSTable en insérant la ligne suivante : 
 ____
 
 
@@ -239,7 +239,7 @@ cqlsh -e "use entrepriseformation; tracing on; SELECT * FROM cours_par_theme LIM
 	
 	
 ____
-##### 13°) A nouveau, flushez la memtable sur disque et investiguez dans le répertoire : 
+##### 11°) A nouveau, flushez la memtable sur disque et investiguez dans le répertoire : 
 ____
 
 ```bash
@@ -254,7 +254,7 @@ ls -lh /opt/cassandra/data/data/entrepriseformation/cours_par_theme-*
 
 
 ____
-##### 14°) Insérez une 4ème ligne :
+##### 12°) Insérez une 4ème ligne :
 ____
 ```bash
 cqlsh -e "tracing on; INSERT INTO entrepriseformation.cours_par_theme (theme,ajout_date,cours_id,intitule) VALUES ('cassandra', toTimestamp(now()), uuid(), 'Cassandra Ninja');"
@@ -266,7 +266,7 @@ cqlsh -e "tracing on; INSERT INTO entrepriseformation.cours_par_theme (theme,ajo
 
 
 ____	
-##### 15°) Flushez puis investiguez dans le répertoire data à nouveau :
+##### 13°) Flushez puis investiguez dans le répertoire data à nouveau :
 ____
 ```bash
 nodetool flush
