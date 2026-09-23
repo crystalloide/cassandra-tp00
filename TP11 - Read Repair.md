@@ -13,8 +13,9 @@ Cette résolution s'appuie sur le principe du "Read-Repair".
 ```
 ____ 
 
-```text
 https://cassandra.apache.org/doc/latest/cassandra/managing/operating/read_repair.html
+
+```text
 La réparation de lecture consiste à réparer les réplicas de données lors d'une requête de lecture. 
 Si tous les réplicas impliqués dans une requête de lecture sont cohérents au niveau de cohérence donné, 
 les données sont renvoyées au client et aucune réparation n'est nécessaire. 
