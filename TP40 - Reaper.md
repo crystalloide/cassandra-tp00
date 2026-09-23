@@ -92,6 +92,59 @@ avec ses voisins ; les différences sont réconciliées.
 
 ## 3. Prérequis
 
+Arrêt lancement précédent si besoin 
+
+```bash
+docker compose -f Cluster_4_noeuds_2_racks_2_DC_Prometheus_Grafana.yml down -v
+```
+
+#### 1°) Démarrage du cluster
+
+#### Étape 1 : Préparation de l'environnement
+
+```bash
+cd ~
+sudo rm -Rf ~/cassandra-tp00
+```
+
+#### Ici, on va simplement cloner le projet :
+```bash
+git clone https://github.com/crystalloide/cassandra-tp00
+
+cd ~/cassandra-tp00
+```
+#### Vérifier le contenu ou créer le fichier docker compose de notre cluster 4 noeuds cassandra :
+```bash
+cat Cluster_4_noeuds_2_racks_2_DC_Prometheus_Grafana_Reaper.yml
+```
+
+#### 2°) Créer les répertoires de volumes :
+```bash
+sudo rm -Rf ~/cassandra-tp00/docker/cassandra*
+mkdir -p ~/cassandra-tp00/docker/cassandra01 ~/cassandra-tp00/docker/cassandra02 ~/cassandra-tp00/docker/cassandra03 ~/cassandra-tp00/docker/cassandra04
+```
+
+```bash
+mkdir -p ~/cassandra-tp00/docker/cassandra01-conf ~/cassandra-tp00/docker/cassandra02-conf ~/cassandra-tp00/docker/cassandra03-conf ~/cassandra-tp00/docker/cassandra04-conf
+```
+
+#### On affiche les répertoires créés :
+```bash
+ls ~/cassandra-tp00/docker
+```
+##### Affichage : 
+```bash
+     cassandra01       cassandra02       cassandra03       cassandra04
+     assandra01-conf  cassandra02-conf  cassandra03-conf  cassandra04-conf
+```
+
+#### 3°) Démarrage du cluster avec Docker Compose
+
+```bash
+# Démarrer le cluster en arrière-plan
+docker compose -f Cluster_4_noeuds_2_racks_2_DC_Prometheus_Grafana_Reaper.yml up  -d
+```
+
 ### 3.1 Vérifier que le cluster est opérationnel
 
 ```bash
