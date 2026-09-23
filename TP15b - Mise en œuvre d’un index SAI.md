@@ -94,7 +94,7 @@ TRUNCATE products;
 SELECT * FROM products;
 ```
 
-##### Contenu de products.cql :
+##### Insertion des enregistrements :
 ```cql
 INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb0,'Heavy Lift Arms', 'Heavy lift arms capable of lifting 1,250 lbs of weight per arm. Sold as a set.',4199.99,'2026-01-10 09:48:31.020+0040')IF NOT EXISTS;
 INSERT INTO products ( product_id , product_name , description, price, created ) VALUES (31047029-2175-43ce-9fdd-b3d568b19bb1,'Precision Action Arms','Arms for precision activities in manufacturing or repair. Sold as a set.',12199.99,'2026-01-10 09:28:31.020+0040') IF NOT EXISTS;
