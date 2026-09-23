@@ -148,13 +148,12 @@ Requested creating snapshot(s) for [entrepriseformation] with snapshot name [154
 Snapshot directory: 1548371680166
 ```
 
-##### 9°) Ancienne méthode de restauration dépréciée : 
-```text
-A noter : l'ancienne méthode qui a été dépréciée :
-**nodetool refresh entrepriseformation cours**
-```
+##### 10°) Ancienne méthode de restauration dépréciée : 
 
-##### 10°) Nouvelle méthode de restauration à utilser : 
+**nodetool refresh entrepriseformation cours**
+
+
+##### 11°) Nouvelle méthode de restauration à utilser : 
 nodetool import entrepriseformation cours /node/dse-data/data/entrepriseformation/cours-f7f796e0d42c11ebbec0d39876a2987e/snapshots/1624458195159/
 
 ```bash
