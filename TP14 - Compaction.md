@@ -20,6 +20,7 @@ Dans cet exercice, nous observons les effets de la compaction.
 ____
 ##### Etapes : 
 
+Si vous avez un cluster déjà opérationnel, aller à l'étape 3°)  directement.
 ____
 ##### 1°) Réinitialisation : 
 
