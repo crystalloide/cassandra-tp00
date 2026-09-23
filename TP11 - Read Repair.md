@@ -339,7 +339,7 @@ SELECT * FROM EntrepriseFormation.cours_par_theme WHERE theme = 'cassandra';
 
 ##### Remarque :
     Cette fois-ci, les données proviennent exclusivement du noeud qui a été "réparé",
-    du fait de la précédente requête qui avait déclenché un ""read repair".
+    du fait de la précédente requête qui avait déclenché un "read repair".
 
 ____ 
 ##### Fin du TP11 : Read Repair
