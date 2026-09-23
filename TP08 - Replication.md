@@ -202,9 +202,13 @@ exit
 _____
 ##### 7°) Regardons sur quels noeuds les réplicas ont été répartis et positionnés, avec les commandes suivantes :
 
-    => nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
-    
-    => nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
+```sql
+nodetool getendpoints entrepriseformation cours_par_theme 'cassandra'
+```
+
+```sql  
+nodetool getendpoints entrepriseformation cours_par_theme '1FORM@'
+```
 
 ##### Essayons donc sur un des noeuds cassandra (ici cassandra03) : 
 
