@@ -134,6 +134,7 @@ http://localhost:9090/query
 ```bash
 ##### Métriques exposées par l'exporter
 curl http://localhost:8480/metrics | head -30
+```
 
 ##### Etat des targets dans Prometheus :
 ```bash
