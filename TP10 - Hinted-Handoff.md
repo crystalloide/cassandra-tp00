@@ -35,6 +35,9 @@ docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours_par_
 192.168.100.152
 ```
 
+** Attention, la suite du TP implique de personnaliser les commandes car les noeuds cassandra concernés vont dépendre de votre situation 
+d'où les "variabilisations x,y,z utilisées : il convient de remplacer xx,y,z par le numéro du noeud cassandra constaté dans votre cas réel.
+
 ____
 ##### 3°) Stoppez les deux noeuds gérant la clé de partition "cassandra" ( x et y). 
 #####     Attendez bien leur arrêt avant de poursuivre.
