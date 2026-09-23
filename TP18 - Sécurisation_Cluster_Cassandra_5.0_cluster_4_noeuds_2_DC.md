@@ -123,6 +123,10 @@ INSERT INTO westeros.personnages (maison, nom, titre, email, telephone) VALUES (
 INSERT INTO westeros.personnages (maison, nom, titre, email, telephone) VALUES ('Targaryen', 'Daenerys Targaryen', 'Mère des dragons', 'dany@dragonstone.sea', '06 00 00 00 05');
 ```
 
+```cqlsh
+EXIT;
+```
+
 ### 0.4 État des lieux : tout est ouvert
 
 Exécutez les contrôles suivants et notez les résultats : vous les comparerez à ceux de la partie 7.
