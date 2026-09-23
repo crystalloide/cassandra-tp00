@@ -268,7 +268,10 @@ Les rôles, mots de passe (hachés en bcrypt) et permissions sont stockés dans 
 On corrige **avant** d'activer l'authentification : ainsi, le rôle par défaut `cassandra` et les comptes créés ensuite sont immédiatement répliqués.
 
 ```bash
-docker exec -i cassandra01 cqlsh <<'EOF'
+docker exec -it cassandra01 cqlsh
+```
+
+```cqlsh
 ALTER KEYSPACE system_auth
   WITH replication = {'class': 'NetworkTopologyStrategy', 'Nord': 2, 'Terres-de-la-Couronne': 2};
 -- Recommandé aussi pour les autres keyspaces système répliqués d'un cluster multi-DC :
@@ -277,8 +280,10 @@ ALTER KEYSPACE system_distributed
 ALTER KEYSPACE system_traces
   WITH replication = {'class': 'NetworkTopologyStrategy', 'Nord': 2, 'Terres-de-la-Couronne': 2};
 DESCRIBE KEYSPACE system_auth;
-EOF
+EXIT;
+```
 
+```bash
 # Propager les données existantes vers les nouveaux réplicas.
 # Depuis Cassandra 4.0, « nodetool repair » est INCRÉMENTAL par défaut : on force une réparation complète.
 for n in cassandra01 cassandra02 cassandra03 cassandra04; do
