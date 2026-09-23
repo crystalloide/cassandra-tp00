@@ -96,7 +96,10 @@ Résultat attendu : 4 lignes `UN` réparties dans `Datacenter: Nord` et `Datacen
 ### 0.3 Créer le jeu de données
 
 ```bash
-docker exec -i cassandra01 cqlsh <<'EOF'
+docker exec -i cassandra01 cqlsh
+```
+
+```cqlsh
 CREATE KEYSPACE IF NOT EXISTS westeros
   WITH replication = {'class': 'NetworkTopologyStrategy', 'Nord': 2, 'Terres-de-la-Couronne': 2};
 
@@ -118,7 +121,6 @@ INSERT INTO westeros.personnages (maison, nom, titre, email, telephone) VALUES (
 INSERT INTO westeros.personnages (maison, nom, titre, email, telephone) VALUES ('Lannister', 'Cersei Lannister', 'Reine', 'cersei@portreal.crown', '06 00 00 00 03');
 INSERT INTO westeros.personnages (maison, nom, titre, email, telephone) VALUES ('Lannister', 'Tyrion Lannister', 'Main du Roi', 'tyrion@portreal.crown', '06 00 00 00 04');
 INSERT INTO westeros.personnages (maison, nom, titre, email, telephone) VALUES ('Targaryen', 'Daenerys Targaryen', 'Mère des dragons', 'dany@dragonstone.sea', '06 00 00 00 05');
-EOF
 ```
 
 ### 0.4 État des lieux : tout est ouvert
