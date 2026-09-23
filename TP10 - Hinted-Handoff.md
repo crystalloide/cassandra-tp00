@@ -35,7 +35,7 @@ docker exec -it cassandra01 nodetool getendpoints entrepriseformation cours_par_
 192.168.100.152
 ```
 
-** Attention, la suite du TP implique de personnaliser les commandes car les noeuds cassandra concernés vont dépendre de votre situation 
+**Attention, la suite du TP implique de personnaliser les commandes car les noeuds cassandra concernés vont dépendre de votre situation 
 d'où les "variabilisations x,y,z utilisées : il convient de remplacer xx,y,z par le numéro du nœud cassandra constaté dans votre cas réel.**
 
 ____
