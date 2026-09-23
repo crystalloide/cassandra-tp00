@@ -96,7 +96,7 @@ Résultat attendu : 4 lignes `UN` réparties dans `Datacenter: Nord` et `Datacen
 ### 0.3 Créer le jeu de données
 
 ```bash
-docker exec -i cassandra01 cqlsh
+docker exec -it cassandra01 cqlsh
 ```
 
 ```cqlsh
