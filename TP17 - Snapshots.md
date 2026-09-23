@@ -64,9 +64,7 @@ docker exec -it cassandra01 chmod 775 -Rf /donnees
 docker exec -it cassandra01 ls /donnees
 ```
 
-```text
 **On retourne dans une session CQLSH ou on ouvre une nouvelle session CQLSH :**  
-```
 
 ```bash
 docker exec -it cassandra01 cqlsh 
