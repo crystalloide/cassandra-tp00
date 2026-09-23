@@ -9,9 +9,7 @@ avec le paramètre de réplication 'NetworkTopologyStrategy'
 afin de stocker 1 réplica sur chacun des 2 datacenters :
 ```
 
-```text
 **On ouvre une session CQLSH :**  
-```
 
 ```bash
 docker exec -it cassandra01 cqlsh 
