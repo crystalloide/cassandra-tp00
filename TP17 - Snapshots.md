@@ -150,12 +150,13 @@ Snapshot directory: 1548371680166
 
 ##### 10°) Ancienne méthode de restauration dépréciée : 
 
-**nodetool refresh entrepriseformation cours**
-
+```bash
+# Ne plus utiliser !
+nodetool refresh entrepriseformation cours
+```
 
 ##### 11°) Nouvelle méthode de restauration à utilser :
 ```bash
-# Ne plus utiliser !
 nodetool import entrepriseformation cours /node/dse-data/data/entrepriseformation/cours-f7f796e0d42c11ebbec0d39876a2987e/snapshots/1624458195159/
 ```
 
